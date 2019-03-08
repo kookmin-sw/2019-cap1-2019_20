@@ -81,8 +81,9 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 
 ## 3. 팀 소개
 
+<img src =./pic/이민석교수님.jpg width="20%" height="20%">
+
 -지도교수 : 이민석 교수님
-<img src =./pic/이민석교수님.jpg width="100" height="100">
 ````
 * 역할: 
 * Email: minsuk@kookmin.ac.kr
@@ -90,40 +91,41 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 
 
 
--백장현
 <img src =./pic/장현.jpg width="20%" height="20%">
+
+-백장현
 ````
 * 역할: 팀장, 
 * Email: qorwkdgus93@gmail.com
 ````
 
+<img src =./pic/용훈.jpg width="20%" height="20%">
 
 -장용훈
-<img src =./pic/용훈.jpg width="20%" height="20%">
 ````
 * 역할: 
 * Email: 
 ````
 
+<img src =./pic/양제.jpg width="20%" height="20%">
 
 -고양제
-<img src =./pic/양제.jpg width="20%" height="20%">
 ````
 * 역할: 
 * Email: 
 ````
 
+<img src =./pic/효준.jpg width="20%" height="20%">
 
 -이효준
-<img src =./pic/효준.jpg width="20%" height="20%">
 ````
 * 역할: 
 * Email: 
 ````
 
+<img src =./pic/지선.jpg width="20%" height="20%">
 
 -박지선
-<img src =./pic/지선.jpg width="20%" height="20%">
 ````
 * 역할: 
 * Email: 
