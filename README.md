@@ -85,7 +85,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 [이메일](minsuk@kookmin.ac.kr)
 
 -백장현
-<img src=./pic/.jpg width="20%" height="20%">
+<img 2019-cap1-2019_20/pic/장현.jpg width="20%" height="20%">
 ````
 * 역할: 팀장, 
 * Email: qorwkdgus93@gmail.com
