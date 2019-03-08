@@ -82,6 +82,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 ## 3. 팀 소개
 
 -지도교수 : 이민석 교수님
+<img src =./pic/이민석교수님.jpg width="100" height="100">
 ````
 * 역할: 
 * Email: minsuk@kookmin.ac.kr
