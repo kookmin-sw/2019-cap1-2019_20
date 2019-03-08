@@ -84,6 +84,13 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 -지도교수 : 이민석 교수님
 [이메일](minsuk@kookmin.ac.kr)
 
+-백장현
+<img src=./pic/.jpg width="20%" height="20%">
+````
+* 역할: 팀장, 
+* Email: qorwkdgus93@gmail.com
+````
+
 # 4. 사용법
 
 # 5. 기타
