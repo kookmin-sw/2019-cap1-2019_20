@@ -72,7 +72,8 @@ If you look at the profile picture or SNS of a friend who has been on a trip, yo
 
 ## 4. 소개영상
 
-[![Video Label](/pic/표지.PNG)](https://youtu.be/PR_88WqhLVE)
+[![Video Label](http://img.youtu.be/PR_88WqhLVE/0.jpg)](https://youtu.be/PR_88WqhLVE)
+
 
 
 
