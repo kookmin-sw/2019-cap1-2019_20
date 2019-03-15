@@ -1,11 +1,13 @@
 #2019 캡스톤 20조 [같이 가자!]
 =================
 
-## 1. 프로젝트 소개
-나만 알고 있던 장소들, 함께 같이 즐기고 싶은 장소들 , 그리고 뜻 깊은 장소들 찾아가서 방문에 대한 인증을 합니다. 이때 혼자가 아닌 익명 혹은 친구들과 함께 즐길 수 있게 하기 위해 만들었습니다. 방문을 인증한 사람들은 그 장소에 관하여 이야기를 나눌 수도 있고, 혹은 장소에 관한 이벤트를 개최할 수 있습니다
-## 2. 소개영상
+## 1. 프로젝트 개요
 
-## 3. 팀 소개
+<img src =./pic/같이가자.jpg widrh ="50%" height="50%">
+
+여행에 다녀온 친구의 프로필사진이나 SNS를 보면 맛집, 특별한 장소, 또는 여행지의 멋진 풍경을 배경으로 찍은 사진들을 쉽게 찾아 볼 수 있다. 즐거운 여행을 다녀온 뒤에  주변 지인에게 자랑을하고 좋은 곳이니 꼭 한번 가보라고 권유해본 모습 또한 익숙할 것이다. 인간에게는 훌륭한 장소에 방문하는 등 좋은 경험을 주변사람들과 공유하고 싶어하는 욕구가 있다. 우리 팀은 이러한 점에 착안하여 어플리케이션을 개발해 개인이 친구들에게 자신만의 장소를 공유하고 이와 관련된 미션을 부여하거나 이벤트를 열 수 있는 플랫폼을 구성해보기로 하였다.
+
+## 2. 팀 소개
 
 <img src =./pic/이민석교수님.jpg width="20%" height="20%">
 
@@ -30,7 +32,7 @@
 -장용훈
 ````
 * 역할: 
-* Email: 
+* Email: qudaoalq@naver.com
 ````
 
 <img src =./pic/양제.jpg width="20%" height="20%">
@@ -38,7 +40,7 @@
 -고양제
 ````
 * 역할: 
-* Email: 
+* Email: coyyjj7@naver.com
 ````
 
 <img src =./pic/효준.jpg width="20%" height="20%">
@@ -46,7 +48,7 @@
 -이효준
 ````
 * 역할: 
-* Email: 
+* Email: leehj8896@naver.com
 ````
 
 <img src =./pic/지선.jpg width="20%" height="20%">
@@ -54,8 +56,18 @@
 -박지선
 ````
 * 역할: 
-* Email: 
+* Email: plm7234@naver.com
 ````
+
+## 3. Abstract
+
+If you look at the profile picture or SNS of a friend who has been on a trip, you can easily find the pictures taken with the background of the wonderful scenery, a good restaurant or special place. You will also be familiar with the way people who has been on a pleasant trip bragged about it and encouraged you to visit there because it's a good place. Humans have a desire to share good experiences with people around them, such as visiting great places. In view of this, our team decided to develop an application to create a platform where individuals can share their own places with friends and give them missions or hold events.
+
+## 4. 소개영상
+
+[![Video Label](./pic/표지.PNG)](https://youtu.be/PR_88WqhLVE)
+
+
 
 
 
