@@ -3,13 +3,13 @@
 
 ## 1. 프로젝트 개요
 
-![Alt text](/pic/같이가자.jpg =400x400)
+![Alt text](/pic/같이가자.jpg)
 
 여행에 다녀온 친구의 프로필사진이나 SNS를 보면 맛집, 특별한 장소, 또는 여행지의 멋진 풍경을 배경으로 찍은 사진들을 쉽게 찾아 볼 수 있다. 즐거운 여행을 다녀온 뒤에  주변 지인에게 자랑을하고 좋은 곳이니 꼭 한번 가보라고 권유해본 모습 또한 익숙할 것이다. 인간에게는 훌륭한 장소에 방문하는 등 좋은 경험을 주변사람들과 공유하고 싶어하는 욕구가 있다. 우리 팀은 이러한 점에 착안하여 어플리케이션을 개발해 개인이 친구들에게 자신만의 장소를 공유하고 이와 관련된 미션을 부여하거나 이벤트를 열 수 있는 플랫폼을 구성해보기로 하였다.
 
 ## 2. 팀 소개
 
-![Alt text](/pic/이민석교수님.jpg =300x400)
+![Alt text](/pic/이민석교수님.jpg)
 
 ### 지도교수 
 
@@ -22,7 +22,7 @@
 
 ### 팀원
 
-![Alt text](/pic/장현.jpg =300x400)
+![Alt text](/pic/장현.jpg)
 
 - 백장현
 ````
@@ -30,7 +30,7 @@
 * Email: qorwkdgus93@gmail.com
 ````
 
-![Alt text](/pic/용훈.jpg =300x400)
+![Alt text](/pic/용훈.jpg)
 
 - 장용훈
 
@@ -39,7 +39,7 @@
 * Email: qudaoalq@naver.com
 ````
 
-![Alt text](/pic/양제.jpg =300x400)
+![Alt text](/pic/양제.jpg)
 
 - 고양제
 
@@ -48,7 +48,7 @@
 * Email: coyyjj7@naver.com
 ````
 
-![Alt text](/pic/효준.jpg =300x400)
+![Alt text](/pic/효준.jpg)
 
 - 이효준
 
@@ -57,7 +57,7 @@
 * Email: leehj8896@naver.com
 ````
 
-![Alt text](/pic/지선.jpg =300x400)
+![Alt text](/pic/지선.jpg)
 
 - 박지선
 
