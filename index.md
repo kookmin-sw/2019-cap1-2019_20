@@ -25,6 +25,7 @@
 ![Alt text](/pic/장현.jpg)
 
 - 백장현
+
 ````
 * 역할: 팀장, 위치 검색, 지도 표시 및 길안내 
 * Email: qorwkdgus93@gmail.com
