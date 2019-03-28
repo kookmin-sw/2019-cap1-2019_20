@@ -16,8 +16,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
-    private  Button read_qr;
-    private Button next_page;
+    private  Button read_qr, make_qr, next_page;
     private TextView textview;
     private Intent intent;
 
@@ -31,9 +30,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         textview = (TextView) findViewById(R.id.textView);
 
-        next_page = (Button) findViewById(R.id.next_page);
+        next_page = (Button) findViewById(R.id.db_page);
         next_page.setOnClickListener(this);
 
+        make_qr = (Button) findViewById(R.id.make_qr);
+        make_qr.setOnClickListener(this);
     }
 
     @Override
@@ -42,11 +43,15 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         if(view.getId() == R.id.read_qr)
             new IntentIntegrator(this).initiateScan();
 
-        if(view.getId() == R.id.next_page){
+        if(view.getId() == R.id.db_page){
             intent = new Intent(MainActivity.this, Main2Activity.class);
             startActivity(intent);
         }
 
+        if(view.getId() == R.id.make_qr){
+            intent = new Intent(MainActivity.this, Make_QR_Activity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
