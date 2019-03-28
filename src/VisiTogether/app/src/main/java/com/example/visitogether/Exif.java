@@ -2,12 +2,9 @@ package com.example.visitogether;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -20,26 +17,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.media.ExifInterface;
 import android.widget.Button;
 import android.widget.TextView;
-import java.io.InputStream;
-import java.net.URL;
 import android.os.Environment;
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.example.visitogether.util.ImageResizeUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class Exif extends AppCompatActivity {
 
     private static final String TAG = "yangje";
 
@@ -56,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_exif);
 
-        TextView txtImgName = (TextView) findViewById(R.id.jpgname);
+        TextView txtImgName = (TextView) findViewById(R.id.dlgImageName);
         ImageView jpgView = (ImageView) findViewById(R.id.imageVeiew);
 
 
@@ -81,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            String path = Environment.getExternalStorageDirectory() + "/DCIM/Camera";
+            String path = Environment.getExternalStorageDirectory() + "/DCIM/Camera" + R.id.dlgImageName + ".jpg";
 
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 2;

@@ -42,11 +42,4 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/jpgname"
-        android:layout_width="413dp"
-        android:layout_height="36dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="443dp" />
-
 </android.support.constraint.ConstraintLayout>
