@@ -1,4 +1,4 @@
-package com.example.real_visittogether.;
+package com.example.real_visittogether;
 
 import java.io.File;
 import java.io.IOException;
