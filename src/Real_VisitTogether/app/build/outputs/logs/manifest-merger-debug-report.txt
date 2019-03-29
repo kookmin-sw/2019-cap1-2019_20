@@ -1,0 +1,166 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+MERGED from [com.android.support:design:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\fb92904189bc9d021febf69f6dd135f8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\48c009cd56be2d695a13943f00ad62bb\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\fdbdffb3d027d76706fbce93f2f95609\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\ff22e9e6067653bffa841b37fcd356ee\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\d5a5e97926c6f0a1e0f76814eac2c57f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\4774ffc6a11f0234c3953d16f3b8beaf\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\3a5b2f9d04ccfc9d2175d0016574e7d8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\b0df029e1642bc23ce4ab61f8f1792f0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b2ab2fc8ab43ae9b40f7dbb75f9a9abd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\8c26ce4965b9ab63af0778e0e4d38076\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3930247f75438e64f2ba8e10869caee4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\4b7feefb72db3f236b01bb8bff34d954\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b481d7e50ae0f65f62f7a5996eacb2af\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\698f16e96d2d1287470f641e09264bf9\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\ba4331a1b75cf00d0505fcf41fd4e767\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\2a3aa99d36cdfc919a6343c2dcee7408\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\125e0d5210b3c06b5f02a6a80ac359a8\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+	package
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:3:5-45
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:1-46:12
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:5:5-81
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:5:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:6:22-76
+uses-permission#android.permission.INTERNET
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:7:5-67
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:7:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:8:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:9:5-80
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:9:22-77
+uses-permission#android.permission.CAMERA
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:10:5-65
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:10:22-62
+application
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:12:5-44:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\fdbdffb3d027d76706fbce93f2f95609\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\fdbdffb3d027d76706fbce93f2f95609\AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:16:9-35
+	android:label
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:15:9-41
+	android:icon
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:14:9-43
+	android:allowBackup
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:13:9-35
+	android:theme
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:17:9-40
+activity#com.example.real_visittogether.SplashActivity
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:18:9-28:20
+	android:screenOrientation
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:20:13-49
+	android:theme
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:19:13-47
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:18:19-49
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:22:13-26:29
+action#android.intent.action.MAIN
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:23:17-69
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:23:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:25:17-77
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:25:27-74
+activity#com.example.real_visittogether.MainActivity
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:29:9-32:20
+	android:label
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:30:13-46
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:29:19-47
+provider#android.support.v4.content.FileProvider
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:34:9-42:20
+	android:grantUriPermissions
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:38:13-47
+	android:authorities
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:36:13-74
+	android:exported
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:37:13-37
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:35:13-67
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:39:13-41:58
+	android:resource
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:41:17-55
+	android:name
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml:40:17-67
+uses-sdk
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:design:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\fb92904189bc9d021febf69f6dd135f8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\fb92904189bc9d021febf69f6dd135f8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\48c009cd56be2d695a13943f00ad62bb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\48c009cd56be2d695a13943f00ad62bb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\fdbdffb3d027d76706fbce93f2f95609\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\fdbdffb3d027d76706fbce93f2f95609\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\ff22e9e6067653bffa841b37fcd356ee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\ff22e9e6067653bffa841b37fcd356ee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\d5a5e97926c6f0a1e0f76814eac2c57f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\d5a5e97926c6f0a1e0f76814eac2c57f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\4774ffc6a11f0234c3953d16f3b8beaf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\4774ffc6a11f0234c3953d16f3b8beaf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\3a5b2f9d04ccfc9d2175d0016574e7d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\3a5b2f9d04ccfc9d2175d0016574e7d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\b0df029e1642bc23ce4ab61f8f1792f0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\b0df029e1642bc23ce4ab61f8f1792f0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b2ab2fc8ab43ae9b40f7dbb75f9a9abd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b2ab2fc8ab43ae9b40f7dbb75f9a9abd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\8c26ce4965b9ab63af0778e0e4d38076\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\8c26ce4965b9ab63af0778e0e4d38076\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3930247f75438e64f2ba8e10869caee4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\3930247f75438e64f2ba8e10869caee4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\4b7feefb72db3f236b01bb8bff34d954\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\4b7feefb72db3f236b01bb8bff34d954\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b481d7e50ae0f65f62f7a5996eacb2af\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b481d7e50ae0f65f62f7a5996eacb2af\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\698f16e96d2d1287470f641e09264bf9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\698f16e96d2d1287470f641e09264bf9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\ba4331a1b75cf00d0505fcf41fd4e767\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\ba4331a1b75cf00d0505fcf41fd4e767\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\2a3aa99d36cdfc919a6343c2dcee7408\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\2a3aa99d36cdfc919a6343c2dcee7408\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\125e0d5210b3c06b5f02a6a80ac359a8\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\qorwk\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\125e0d5210b3c06b5f02a6a80ac359a8\AndroidManifest.xml:20:5-44
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+		ADDED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
+		INJECTED from C:\2019-cap1-2019_20\src\Real_VisitTogether\app\src\main\AndroidManifest.xml
