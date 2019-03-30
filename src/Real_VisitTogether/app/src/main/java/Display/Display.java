@@ -1,9 +1,15 @@
-package com.example.real_visittogether;
+package Display;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+
+import com.example.real_visittogether.R;
+
+import Event.Event1;
+import Event.Event2;
 
 public class Display extends AppCompatActivity {
 
@@ -32,26 +38,6 @@ public class Display extends AppCompatActivity {
             intent = new Intent(Display.this, Event2.class);
             startActivity(intent);
         }
-
-
-
-
-
-        /* 버튼의 id를 가져온다.
-        switch(view.getId())
-        {
-            case button1:
-
-            // btn1을 눌렀을 때 처리
-                break;
-
-            case button2:
-                break;
-
-            case button3:
-                break;
-        }
-        */
 
 
 

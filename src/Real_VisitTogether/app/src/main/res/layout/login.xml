@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#207725"
-    tools:context="com.example.real_visittogether.login">
+    tools:context="com.example.real_visittogether.Login.login">
 
     <LinearLayout
         android:layout_width="fill_parent"

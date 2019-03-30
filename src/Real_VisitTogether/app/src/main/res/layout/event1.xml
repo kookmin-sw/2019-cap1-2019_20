@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Event1">
+    tools:context="Event.Event1">
 
     <ImageView
         android:id="@+id/imageView"
@@ -21,7 +21,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/drink" />
+        app:srcCompat="@drawable/drink"
+        android:onClick="onClickEvent1"
+        />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -36,7 +38,9 @@
         app:layout_constraintEnd_toStartOf="@+id/taste2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sabal" />
+        app:srcCompat="@drawable/sabal"
+        android:onClick="onClickEvent1"
+        />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -52,7 +56,9 @@
         app:layout_constraintEnd_toStartOf="@+id/taste3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/oven" />
+        app:srcCompat="@drawable/oven"
+        android:onClick="onClickEvent1"
+        />
 
     <TextView
         android:id="@+id/taste1"

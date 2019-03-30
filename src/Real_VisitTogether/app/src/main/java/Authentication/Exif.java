@@ -1,4 +1,4 @@
-package com.example.real_visittogether;
+package Authentication;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +26,8 @@ import android.os.Environment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.example.real_visittogether.R;
 import com.example.visitogether.util.ImageResizeUtils;
 
 public class Exif extends AppCompatActivity {

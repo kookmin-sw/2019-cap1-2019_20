@@ -1,4 +1,4 @@
-package com.example.real_visittogether;
+package Login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Display.Display;
+import com.example.real_visittogether.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -83,13 +85,13 @@ public class login extends AppCompatActivity {
         boolean checkNaver =mOAuthLoginInstance.getAccessToken(mContext)==null;
         //토큰을 가지고있으면(로그인 유지시) 로그인 하지않고 메뉴에 접근가능
         if(isLoggedIn || !checkNaver) {
-            startActivity(new Intent(login.this,Display.class));
+            startActivity(new Intent(login.this, Display.class));
         }
         final Button sign_in = (Button)findViewById(R.id.sign);
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(login.this,Sign_in.class),Sign_in);
+                startActivityForResult(new Intent(login.this, Login.Sign_in.class),Sign_in);
 
             }
         });
