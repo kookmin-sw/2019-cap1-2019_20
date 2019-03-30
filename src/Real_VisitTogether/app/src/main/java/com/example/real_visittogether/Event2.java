@@ -1,15 +1,15 @@
-package com.example.capston1;
+package com.example.real_visittogether;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-public class detail3 extends AppCompatActivity {
+public class Event2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail3);
+        setContentView(R.layout.event2);
 
         ImageView image1 = (ImageView) findViewById(R.id.image1) ;
         image1.setImageResource(R.drawable.southdoor) ;

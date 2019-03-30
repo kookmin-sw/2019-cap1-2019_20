@@ -260,7 +260,7 @@ public class Exif extends AppCompatActivity {
                 Context mContext = this;
                 dlg = new Dialog(mContext);
 
-                dlg.setContentView(R.layout.selectimage);
+                dlg.setContentView(R.layout.select_image);
                 content = (TextView) dlg.findViewById(R.id.dlgImageName);
                 content.setText(exifAttribute);
 

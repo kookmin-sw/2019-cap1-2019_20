@@ -5,35 +5,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import static com.example.capston1.R.id.button1;
-import static com.example.capston1.R.id.button2;
-import static com.example.capston1.R.id.button3;
-
-public class MainActivity extends AppCompatActivity {
+public class Display extends AppCompatActivity {
 
     private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.display);
     }
 
     public void onClick(View view) {
 
 
         if(view.getId() == R.id.button1){
-            intent = new Intent(MainActivity.this, detail1.class);
+            intent = new Intent(Display.this, Menu.class);
             startActivity(intent);
         }
 
         if(view.getId() == R.id.button2){
-            intent = new Intent(MainActivity.this, detail2.class);
+            intent = new Intent(Display.this, Event1.class);
             startActivity(intent);
         }
 
         if(view.getId() == R.id.button3){
-            intent = new Intent(MainActivity.this, detail3.class);
+            intent = new Intent(Display.this, Event2.class);
             startActivity(intent);
         }
 

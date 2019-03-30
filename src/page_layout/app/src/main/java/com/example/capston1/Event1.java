@@ -4,12 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-public class detail2 extends AppCompatActivity {
+public class Event1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail2);
+        setContentView(R.layout.Event1);
 
 
         ImageView image1 = (ImageView) findViewById(R.id.imageView) ;
