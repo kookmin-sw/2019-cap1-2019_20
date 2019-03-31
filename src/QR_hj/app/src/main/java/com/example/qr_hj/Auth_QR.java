@@ -14,7 +14,7 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
+public class Auth_QR extends AppCompatActivity implements Button.OnClickListener {
 
     private  Button read_qr, make_qr, next_page;
     private TextView textview;
@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             new IntentIntegrator(this).initiateScan();
 
         if(view.getId() == R.id.db_page){
-            intent = new Intent(MainActivity.this, Main2Activity.class);
+            intent = new Intent(Auth_QR.this, DB_Access.class);
             startActivity(intent);
         }
 
         if(view.getId() == R.id.make_qr){
-            intent = new Intent(MainActivity.this, Make_QR_Activity.class);
+            intent = new Intent(Auth_QR.this, Make_QR_Activity.class);
             startActivity(intent);
         }
     }
@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         if(result != null){
             //QR코드가 없을 경우
             if(result.getContents() == null) {
-                Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Auth_QR.this, "취소", Toast.LENGTH_SHORT).show();
             }
             //QR코드가 있을 경우
             else {
-                Toast.makeText(MainActivity.this, "스캔완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Auth_QR.this, "스캔완료", Toast.LENGTH_SHORT).show();
                 //json코드
                 try{
                     JSONObject obj = new JSONObject(result.getContents());

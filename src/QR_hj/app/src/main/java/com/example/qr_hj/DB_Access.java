@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.os.AsyncTask;
 
-public class Main2Activity extends AppCompatActivity {
+public class DB_Access extends AppCompatActivity {
 
     private String url = "http://9404802d.ngrok.io/phpinfo.php";
     private TextView json_text;

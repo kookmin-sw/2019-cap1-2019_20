@@ -11,6 +11,7 @@ import Display.Menu;
 import com.example.real_visittogether.R;
 
 public class Event1 extends AppCompatActivity {
+   private int place;
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,23 +30,25 @@ public class Event1 extends AppCompatActivity {
     }
     public void onClickEvent1(View view) {
 
-
+       place = view.getId();
         if(view.getId() == R.id.imageView){
             intent = new Intent(Event1.this, Authentication.SelectAuth.class);
-            startActivity(intent);
+            intent.putExtra("place",place);
+           startActivity(intent);
         }
 
         if(view.getId() == R.id.imageView2){
             intent = new Intent(Event1.this, Authentication.SelectAuth.class);
-            startActivity(intent);
+            intent.putExtra("place",place);
+           startActivity(intent);
         }
 
         if(view.getId() == R.id.imageView3){
             intent = new Intent(Event1.this, Authentication.SelectAuth.class);
-            startActivity(intent);
+            intent.putExtra("place",place);
+           startActivity(intent);
         }
 
-
-
     }
+
 }
