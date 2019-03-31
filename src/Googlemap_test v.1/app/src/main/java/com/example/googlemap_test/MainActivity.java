@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         map.addMarker(markerOptions);
 
         map.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        map.animateCamera(CameraUpdateFactory.zoomTo(10));
+        map.animateCamera(CameraUpdateFactory.zoomTo(14));
     }
 
 }
