@@ -38,14 +38,33 @@ public class SelectAuth extends AppCompatActivity {
             startActivity(intent);
         }
         else if(v.getId() == R.id.auth_qr){
-            intent = new Intent(SelectAuth.this, Auth_QR.class);
-            startActivity(intent);
+            new IntentIntegrator(SelectAuth.this).initiateScan();
 
         }else if(v.getId() == R.id.auth_bicorn){
             intent = new Intent(SelectAuth.this, Auth_Exif.class);
             startActivity(intent);
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //QR코드가 없을 경우
+            if (result.getContents() == null) {
+                Toast.makeText(SelectAuth.this, "취소", Toast.LENGTH_SHORT).show();
+            }
+            //QR코드가 있을 경우
+            else {
+                     QR_Info = result.getContents();
+                    place = getIntent().getStringExtra("place");
+                    Toast.makeText(SelectAuth.this, place.toString(), Toast.LENGTH_SHORT).show();
+                    if(QR_Info.equals(place) )
+                        Toast.makeText(SelectAuth.this, "인증성공", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(SelectAuth.this, "인증실패", Toast.LENGTH_SHORT).show();
 
+            }
+        }
+    }
 
 }

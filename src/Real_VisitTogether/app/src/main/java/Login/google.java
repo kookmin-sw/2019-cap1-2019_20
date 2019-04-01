@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import Display.Display;
 
 public class google extends AppCompatActivity {
     // 구글로그인 result 상수
@@ -89,6 +92,7 @@ public class google extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 로그인 성공
                             Toast.makeText(google.this, R.string.success_login, Toast.LENGTH_SHORT).show();
+                            Log.v("google","성공");
                         } else {
                             // 로그인 실패
                             Toast.makeText(google.this, R.string.failed_login, Toast.LENGTH_SHORT).show();

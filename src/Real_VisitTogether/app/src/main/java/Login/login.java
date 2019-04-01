@@ -24,6 +24,7 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.common.SignInButton;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
@@ -73,6 +74,14 @@ public class login extends AppCompatActivity {
         mContext = this;
         Button faceBook = (LoginButton) findViewById(R.id.login_button);
         OAuthLoginButton naver = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
+        SignInButton  buttonGoogle = findViewById(R.id.btn_googleSignIn);
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login.this, google.class));
+
+            }
+        });
         if(faceBook.isClickable()) init(); //로그인버튼을 클릭하면 facebook 로그인
         if(naver.isClickable()){
             initData();

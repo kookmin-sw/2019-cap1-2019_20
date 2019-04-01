@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import Authentication.SelectAuth;
 import Display.Menu;
 import com.example.real_visittogether.R;
 
 public class Event1 extends AppCompatActivity {
-   private int place;
+   private String place;
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,21 +31,27 @@ public class Event1 extends AppCompatActivity {
     }
     public void onClickEvent1(View view) {
 
-       place = view.getId();
+        TextView t;
         if(view.getId() == R.id.imageView){
             intent = new Intent(Event1.this, Authentication.SelectAuth.class);
+            t =(TextView)findViewById(R.id.taste1);
+            place = t.getText().toString();
             intent.putExtra("place",place);
            startActivity(intent);
         }
 
         if(view.getId() == R.id.imageView2){
             intent = new Intent(Event1.this, Authentication.SelectAuth.class);
+            t =(TextView)findViewById(R.id.taste2);
+            place = t.getText().toString();
             intent.putExtra("place",place);
            startActivity(intent);
         }
 
         if(view.getId() == R.id.imageView3){
             intent = new Intent(Event1.this, Authentication.SelectAuth.class);
+            t =(TextView)findViewById(R.id.taste3);
+            place = t.getText().toString();
             intent.putExtra("place",place);
            startActivity(intent);
         }

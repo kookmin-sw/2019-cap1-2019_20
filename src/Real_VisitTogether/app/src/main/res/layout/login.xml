@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#207725"
-    tools:context="com.example.real_visittogether.Login.login">
+    >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -145,12 +144,16 @@
             <Button
                 android:id="@+id/buttonRefresh"
                 style="@style/Button.Menu"
-                android:text="토큰다시받기" />
+                android:text="토큰다시받기"
+                android:visibility="invisible"
+                />
 
             <Button
                 android:id="@+id/buttonVerifier"
                 style="@style/Button.Menu"
-                android:text="API호출" />
+                android:text="API호출"
+                android:visibility="invisible"
+                />
 
         </LinearLayout>
 
@@ -191,6 +194,14 @@
                 android:text="회원가입"
 
                 />
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_googleSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                >
+
+            </com.google.android.gms.common.SignInButton>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
