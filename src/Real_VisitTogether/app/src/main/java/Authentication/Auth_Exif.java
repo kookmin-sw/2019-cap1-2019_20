@@ -1,4 +1,4 @@
-package com.example.real_visittogether;
+package Authentication;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,12 +26,15 @@ import android.widget.TextView;
 import android.os.Environment;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import com.example.real_visittogether.R;
 import com.example.visitogether.util.ImageResizeUtils;
 
-public class Exif extends AppCompatActivity {
+public class Auth_Exif extends AppCompatActivity {
 
     private static final String TAG = "VisiTogether";
 
@@ -58,23 +61,15 @@ public class Exif extends AppCompatActivity {
         PermissionListener permissionlistener = new PermissionListener() {
 
             @Override
-
             public void onPermissionGranted() {
-
-                Toast.makeText(Exif.this, "Permission Granted", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(Auth_Exif.this, "Permission Granted", Toast.LENGTH_SHORT).show();
             }
 
 
             @Override
-
             public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-
-                Toast.makeText(Exif.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(Auth_Exif.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
             }
-
-
         };
 
 
@@ -87,8 +82,6 @@ public class Exif extends AppCompatActivity {
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
 
                 .check();
-
-
 
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -298,7 +291,7 @@ public class Exif extends AppCompatActivity {
                 Context mContext = this;
                 dlg = new Dialog(mContext);
 
-                dlg.setContentView(R.layout.selectimage);
+                dlg.setContentView(R.layout.select_image);
                 content = (TextView) dlg.findViewById(R.id.dlgImageName);
                 content.setText(exifAttribute);
 
@@ -320,7 +313,7 @@ public class Exif extends AppCompatActivity {
 
 
     /**
-     *  Exif 정보 불러오기
+     *  사진 정보 불러오기
      */
     private String getExif(ExifInterface exif) {
         String myAttribute = "";
