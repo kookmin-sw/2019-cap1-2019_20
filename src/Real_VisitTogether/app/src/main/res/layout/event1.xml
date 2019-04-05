@@ -6,70 +6,56 @@
     android:layout_height="match_parent"
     tools:context="Event.Event1">
 
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="154dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginRight="54dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/taste1"
+        android:layout_marginEnd="295dp"
+        android:onClick="onClickEvent1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/drink"
-        android:onClick="onClickEvent1"
-        />
+        app:srcCompat="@drawable/drink" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="274dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginRight="54dp"
-        android:layout_marginBottom="27dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/taste2"
+        android:layout_width="97dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="117dp"
+        android:layout_marginEnd="298dp"
+        android:onClick="onClickEvent1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sabal"
-        android:onClick="onClickEvent1"
-        />
+        app:srcCompat="@drawable/sabal" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginRight="55dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/taste3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/oven"
+        android:layout_width="97dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="242dp"
+        android:layout_marginEnd="298dp"
         android:onClick="onClickEvent1"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/oven" />
 
     <TextView
         android:id="@+id/taste1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="117dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="71dp"
-        android:layout_marginRight="71dp"
         android:text="주당끼리"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,12 +64,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="57dp"
-        android:layout_marginRight="57dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginBottom="28dp"
         android:text="사발떡볶이"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toEndOf="@+id/imageView2" />
 
     <TextView
@@ -91,12 +77,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="69dp"
-        android:layout_marginRight="69dp"
         android:text="오븐마루"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.663"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.448" />
+
+<!--
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="377dp"
+        android:layout_height="225dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="360dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    -->
+
+    <fragment
+        android:id="@+id/mapView"
+        class="com.google.android.gms.maps.MapFragment"
+        android:layout_width="377dp"
+        android:layout_height="225dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="336dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
