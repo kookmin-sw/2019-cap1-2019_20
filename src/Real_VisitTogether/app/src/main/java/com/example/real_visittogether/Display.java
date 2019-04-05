@@ -11,7 +11,7 @@ public class Display extends AppCompatActivity implements Button.OnClickListener
 
     //임시버튼
     Button temp_hj;
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
