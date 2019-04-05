@@ -18,5 +18,15 @@
     <string name="signup">회원가입</string>
     <string name="success_signup">회원가입 성공</string>
     <string name="failed_signup">회원가입 실패</string>
-
+    <string name="title_activity_b4">b4</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_b3">b3</string>
+    <string name="title_activity_b5">b5</string>
+    <string name="title_activity_detail1">detail1</string>
+    <string name="title_activity_detail2">detail2</string>
 </resources>

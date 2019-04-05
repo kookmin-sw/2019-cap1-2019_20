@@ -1,4 +1,4 @@
-package com.example.real_visittogether;
+package Login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Display.Display;
+import com.example.real_visittogether.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -22,6 +24,7 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.common.SignInButton;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
@@ -71,6 +74,14 @@ public class login extends AppCompatActivity {
         mContext = this;
         Button faceBook = (LoginButton) findViewById(R.id.login_button);
         OAuthLoginButton naver = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
+        SignInButton  buttonGoogle = findViewById(R.id.btn_googleSignIn);
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login.this, google.class));
+
+            }
+        });
         if(faceBook.isClickable()) init(); //로그인버튼을 클릭하면 facebook 로그인
         if(naver.isClickable()){
             initData();
@@ -83,13 +94,13 @@ public class login extends AppCompatActivity {
         boolean checkNaver =mOAuthLoginInstance.getAccessToken(mContext)==null;
         //토큰을 가지고있으면(로그인 유지시) 로그인 하지않고 메뉴에 접근가능
         if(isLoggedIn || !checkNaver) {
-            startActivity(new Intent(login.this,Display.class));
+            startActivity(new Intent(login.this, Display.class));
         }
         final Button sign_in = (Button)findViewById(R.id.sign);
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(login.this,Sign_in.class),Sign_in);
+                startActivityForResult(new Intent(login.this, Login.Sign_in.class),Sign_in);
 
             }
         });
