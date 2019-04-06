@@ -43,6 +43,9 @@ public class SelectAuth extends AppCompatActivity {
         }else if(v.getId() == R.id.auth_bicorn){
             intent = new Intent(SelectAuth.this, Auth_Exif.class);
             startActivity(intent);
+        }else if(v.getId() == R.id.auth_gps){
+            intent = new Intent(SelectAuth.this, Auth_Gps.class);
+            startActivity(intent);
         }
     }
     @Override

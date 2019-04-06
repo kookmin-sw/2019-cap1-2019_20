@@ -211,7 +211,7 @@ public class Event1 extends AppCompatActivity
 
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
-        //지도의 초기위치를 서울로 이동
+        //지도의 초기위치로 이동
         setDefaultLocation();
 
         //mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
@@ -451,8 +451,8 @@ public class Event1 extends AppCompatActivity
         mMoveMapByUser = false;
 
 
-        //디폴트 위치, Seoul
-        LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
+        //디폴트 위치, 국민대학교
+        LatLng DEFAULT_LOCATION = new LatLng(37.611099, 126.997182);
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 
