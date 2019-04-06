@@ -11,27 +11,44 @@
         android:id="@+id/event1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="161dp"
         android:text="이벤트1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/event2"
+        app:layout_constraintEnd_toEndOf="@+id/event2"
+        app:layout_constraintStart_toStartOf="@+id/event2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/event2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
+        android:layout_marginBottom="1dp"
         android:text="이벤트2"
-        app:layout_constraintStart_toStartOf="@+id/event1"
+        app:layout_constraintBottom_toTopOf="@+id/event3"
+        app:layout_constraintEnd_toEndOf="@+id/event3"
+        app:layout_constraintStart_toStartOf="@+id/event3"
         app:layout_constraintTop_toBottomOf="@+id/event1" />
 
     <Button
         android:id="@+id/event3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginBottom="26dp"
         android:text="이벤트3"
-        app:layout_constraintStart_toStartOf="@+id/event2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event2" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="36dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+
 </android.support.constraint.ConstraintLayout>
