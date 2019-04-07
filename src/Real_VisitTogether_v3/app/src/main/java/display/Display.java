@@ -1,4 +1,4 @@
-package Display;
+package display;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.View;
 
 import com.example.real_visittogether.R;
 
-import Event.Event1;
-import Event.Event2;
+import event.Event1;
+import event.Event2;
 
 public class Display extends AppCompatActivity {
 

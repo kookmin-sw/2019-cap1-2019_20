@@ -1,4 +1,4 @@
-package Display;
+package display;
 
 import android.content.Intent;
 import android.os.Bundle;

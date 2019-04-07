@@ -1,4 +1,4 @@
-package Display;
+package display;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

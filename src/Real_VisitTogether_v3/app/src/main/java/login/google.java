@@ -1,4 +1,4 @@
-package Login;
+package login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,8 +22,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import Display.Display;
 
 public class google extends AppCompatActivity {
     // 구글로그인 result 상수
