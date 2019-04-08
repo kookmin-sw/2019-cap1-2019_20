@@ -53,7 +53,7 @@ public class URLConnector {
             conn = (HttpURLConnection) url.openConnection();
 
             // [2-1]. conn 설정.
-            conn.setRequestMethod("POST"); // URL 요청에 대한 메소드 설정 : POST.
+            conn.setRequestMethod("GET"); // URL 요청에 대한 메소드 설정 : POST.
             conn.setRequestProperty("Accept-Charset", "UTF-8"); // Accept-Charset 설정.
             conn.setRequestProperty("Context_Type", "application/x-www-form-urlencoded;cahrset=UTF-8");
 
