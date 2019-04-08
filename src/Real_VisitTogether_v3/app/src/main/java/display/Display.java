@@ -1,4 +1,4 @@
-package Display;
+package display;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.View;
 
 import com.example.real_visittogether.R;
 
-import Event.Event1;
-import Event.Event2;
+import event.Event1;
+import event.Event2;
 
 public class Display extends AppCompatActivity {
 
@@ -36,7 +36,6 @@ public class Display extends AppCompatActivity {
 
     public void onClick(View view) {
 
-
 //        if(view.getId() == R.id.button1){
 //            intent = new Intent(Display.this, Menu.class);
 //            startActivity(intent);
@@ -51,10 +50,8 @@ public class Display extends AppCompatActivity {
             intent = new Intent(Display.this, Event2.class);
             startActivity(intent);
         }
-
-
-
     }
+
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_1, menu);

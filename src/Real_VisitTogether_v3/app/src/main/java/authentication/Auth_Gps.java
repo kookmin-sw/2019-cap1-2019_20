@@ -1,4 +1,4 @@
-package Authentication;
+package authentication;
 
 import android.content.Context;
 import android.content.pm.PackageManager;

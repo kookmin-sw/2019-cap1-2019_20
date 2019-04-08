@@ -1,4 +1,4 @@
-package Event;
+package event;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -117,7 +117,7 @@ public class Event1 extends AppCompatActivity
 
         TextView t;
         if (view.getId() == R.id.imageView) {
-            intent = new Intent(Event1.this, Authentication.SelectAuth.class);
+            intent = new Intent(Event1.this, authentication.SelectAuth.class);
             t = (TextView) findViewById(R.id.taste1);
             place = t.getText().toString();
             intent.putExtra("place", place);
@@ -125,7 +125,7 @@ public class Event1 extends AppCompatActivity
         }
 
         if (view.getId() == R.id.imageView2) {
-            intent = new Intent(Event1.this, Authentication.SelectAuth.class);
+            intent = new Intent(Event1.this, authentication.SelectAuth.class);
             t = (TextView) findViewById(R.id.taste2);
             place = t.getText().toString();
             intent.putExtra("place", place);
@@ -133,7 +133,7 @@ public class Event1 extends AppCompatActivity
         }
 
         if (view.getId() == R.id.imageView3) {
-            intent = new Intent(Event1.this, Authentication.SelectAuth.class);
+            intent = new Intent(Event1.this, authentication.SelectAuth.class);
             t = (TextView) findViewById(R.id.taste3);
             place = t.getText().toString();
             intent.putExtra("place", place);
