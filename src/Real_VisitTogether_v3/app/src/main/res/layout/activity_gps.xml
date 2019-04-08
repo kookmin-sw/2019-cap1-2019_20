@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="authentication.Auth_Gps">
+
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="429dp"
+        android:layout_marginEnd="5dp"
+        android:text="내 위치정보 가져오기/인증"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="313dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="489dp"
+        android:layout_marginEnd="36dp"
+        android:text="위치정보 :GPS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
