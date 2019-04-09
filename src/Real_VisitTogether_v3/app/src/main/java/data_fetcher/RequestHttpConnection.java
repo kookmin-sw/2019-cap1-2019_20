@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class RequestHttpConnection {
 
-    private String strURL = "http://13.209.255.93:59334/";
+    private String strURL = "http://13.124.144.8:54638/";
     private String strCookie;
     private String result;
 

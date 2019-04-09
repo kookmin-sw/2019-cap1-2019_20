@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     final private String url = "";
     private Intent intent;
     private NetworkTask networkTask;
-    private Button temp_btn1, temp_btn2;
+    private Button[] temp_btn;
     private FloatingActionButton actionButton;
 
     @Override
@@ -31,12 +30,13 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display);
 
-        temp_btn1 = (Button) findViewById(R.id.temp_btn1);
-        temp_btn2 = (Button) findViewById(R.id.temp_btn2);
+        temp_btn = new Button[2];
+        temp_btn[0] = (Button) findViewById(R.id.temp_btn1);
+        temp_btn[1] = (Button) findViewById(R.id.temp_btn2);
         actionButton = (FloatingActionButton)findViewById(R.id.actionButton); //동그라미
 
-        temp_btn1.setOnClickListener(this);
-        temp_btn2.setOnClickListener(this);
+        temp_btn[0].setOnClickListener(this);
+        temp_btn[1].setOnClickListener(this);
         actionButton.setOnClickListener(this);
 
         networkTask = new NetworkTask(url);
@@ -68,35 +68,35 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         return true;
     }
 
+    public class NetworkTask extends AsyncTask<Void, Void, String[]> {
 
-    public class NetworkTask extends AsyncTask<Void, Void, Void> {
-
-        private String url;
-        private String result;
+        private String url, result;
         private Event event;
+        private Gson gson;
+        private String events[];
 
         public NetworkTask(String _url) {
             url = _url;
+            gson = new Gson();
+            event = new Event();
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected String[] doInBackground(Void... voids) {
             RequestHttpConnection connection = new RequestHttpConnection();
             result = connection.request(url);
-
-            Gson gson = new Gson();
-            event = new Event();
-            Log.d("제이슨메세지???", result);
-            result = "{'id': 1, 'name': '정릉맛집'}";
-            event = gson.fromJson(result, Event.class);
-
-            return null;
+            events = result.split("\n");
+            return events;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(String[] aVoid) {
             super.onPostExecute(aVoid);
-            temp_btn1.setText(event.getName());
+
+            for(int i = 0; i < events.length; i++) {
+                event = gson.fromJson(events[i], Event.class);
+                temp_btn[i].setText(event.getName());
+            }
         }
     }
 }
