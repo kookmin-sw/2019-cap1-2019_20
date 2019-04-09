@@ -1,4 +1,4 @@
-package connector;
+package data_fetcher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class RequestHttpConnection {
 
-    private String strURL = "http://13.124.201.137:50156/";
+    private String strURL = "http://13.209.255.93:59334/";
     private String strCookie;
     private String result;
 

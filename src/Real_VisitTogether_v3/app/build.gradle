@@ -46,6 +46,6 @@ dependencies {
     implementation 'gun0912.ted:tedpermission:1.0.3'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-
+    implementation 'com.google.code.gson:gson:2.8.2'
 }
 apply plugin: 'com.google.gms.google-services'
