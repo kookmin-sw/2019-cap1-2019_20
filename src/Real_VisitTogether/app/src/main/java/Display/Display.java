@@ -11,7 +11,7 @@ import com.example.real_visittogether.R;
 import Event.Event1;
 import Event.Event2;
 
-public class Display extends AppCompatActivity{
+public class Display extends AppCompatActivity {
 
     private Intent intent;
 
