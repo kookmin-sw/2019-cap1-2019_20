@@ -19,7 +19,7 @@ import vt_object.Event;
 
 public class Display extends AppCompatActivity implements View.OnClickListener {
 
-    final private String url = "";
+    final private String url = "event/";
     private Intent intent;
     private NetworkTask networkTask;
     private Button[] temp_btn;
@@ -70,10 +70,10 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
     public class NetworkTask extends AsyncTask<Void, Void, String[]> {
 
-        private String url, result;
+        private String url, event_str;
         private Event event;
         private Gson gson;
-        private String events[];
+        private String[] event_dict;
 
         public NetworkTask(String _url) {
             url = _url;
@@ -84,17 +84,17 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected String[] doInBackground(Void... voids) {
             RequestHttpConnection connection = new RequestHttpConnection();
-            result = connection.request(url);
-            events = result.split("\n");
-            return events;
+            event_str = connection.request(url);
+            event_dict = event_str.split("\n");
+            return event_dict;
         }
 
         @Override
         protected void onPostExecute(String[] aVoid) {
             super.onPostExecute(aVoid);
 
-            for(int i = 0; i < events.length; i++) {
-                event = gson.fromJson(events[i], Event.class);
+            for(int i = 0; i < event_dict.length; i++) {
+                event = gson.fromJson(event_dict[i], Event.class);
                 temp_btn[i].setText(event.getName());
             }
         }

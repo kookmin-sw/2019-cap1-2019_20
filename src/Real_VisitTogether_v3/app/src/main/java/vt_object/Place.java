@@ -1,18 +1,17 @@
 package vt_object;
 
-public class Event {
+public class Place {
 
     private int id;
     private String name;
 
-    public Event() {
+    public Place(){
         id = 0;
         name = null;
     }
 
-    public Event(int _id, String _name){
-        id = _id;
-        name = _name;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
