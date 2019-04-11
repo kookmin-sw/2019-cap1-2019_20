@@ -90,10 +90,7 @@
         <activity android:name="Authentication.SelectAuth"></activity>
         <activity android:name="Authentication.Auth_Exif"></activity>
         <activity android:name="Authentication.Auth_Gps"></activity>
-        <activity
-            android:name="Display.Menu"
-            android:label="@string/title_activity_detail1"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="Authentication.SelectImage"></activity>
         <activity android:name="Login.google">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

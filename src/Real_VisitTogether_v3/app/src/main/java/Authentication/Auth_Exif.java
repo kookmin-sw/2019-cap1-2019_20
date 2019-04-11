@@ -25,6 +25,8 @@ import android.media.ExifInterface;
 import android.widget.Button;
 import android.widget.TextView;
 import android.os.Environment;
+
+import com.google.android.gms.auth.api.Auth;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -45,7 +47,9 @@ public class Auth_Exif extends AppCompatActivity {
     private static final int PICK_FROM_CAMERA = 2;
     private static final int ID_JPGDIALOG = 0;
     private String exifAttribute;
-    private Dialog dlg;
+    private Intent intent;
+    public String currentPhotoPath;//실제 사진 파일 경로
+    public static Context context;
 
 
     private Boolean isCamera = false;
@@ -55,8 +59,8 @@ public class Auth_Exif extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exif);
-        TextView txtImgName = (TextView) findViewById(R.id.dlgImageName);
-        ImageView jpgView = (ImageView) findViewById(R.id.imageVeiew);
+
+        ImageView jpgView = (ImageView) findViewById(R.id.exif_image);
 
         tedPermission();
 
@@ -64,8 +68,9 @@ public class Auth_Exif extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
-                if(isPermission) goToAlbum();
-                else Toast.makeText(view.getContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
+                if (isPermission) goToAlbum();
+                else
+                    Toast.makeText(view.getContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -74,29 +79,20 @@ public class Auth_Exif extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
-                if(isPermission)  takePhoto();
-                else Toast.makeText(view.getContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
+                if (isPermission) takePhoto();
+                else
+                    Toast.makeText(view.getContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
 
             }
         });
 
-        findViewById(R.id.imageVeiew).setOnClickListener(popupDlgOnClickListener);
-        Intent intent = getIntent();
-        if (intent != null) {
-            String path = Environment.getExternalStorageDirectory() + "/DCIM/Camera" + R.id.dlgImageName + ".jpg";
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2;
-            Bitmap bm = BitmapFactory.decodeFile(path, options);
-            jpgView.setImageBitmap(bm);
-
-            try {
-                ExifInterface exif = new ExifInterface(path);
-                exifAttribute = getExif(exif);
-            } catch (IOException e) {
-                e.printStackTrace();
+        findViewById(R.id.exif_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Auth_Exif.this, SelectImage.class);
+                startActivity(intent);
             }
-        }
+        });
 
 
     }
@@ -106,7 +102,7 @@ public class Auth_Exif extends AppCompatActivity {
         if (resultCode != Activity.RESULT_OK) {
             Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show();
 
-            if(tempFile != null) {
+            if (tempFile != null) {
                 if (tempFile.exists()) {
                     if (tempFile.delete()) {
                         Log.e(TAG, tempFile.getAbsolutePath() + " 삭제 성공");
@@ -131,7 +127,7 @@ public class Auth_Exif extends AppCompatActivity {
                  *  Uri 스키마를
                  *  content:/// 에서 file:/// 로  변경한다.
                  */
-                String[] proj = { MediaStore.Images.Media.DATA };
+                String[] proj = {MediaStore.Images.Media.DATA};
 
                 assert photoUri != null;
                 cursor = getContentResolver().query(photoUri, proj, null, null, null);
@@ -161,7 +157,7 @@ public class Auth_Exif extends AppCompatActivity {
     }
 
     /**
-     *  앨범에서 이미지 가져오기
+     * 앨범에서 이미지 가져오기
      */
     private void goToAlbum() {
         isCamera = false;
@@ -173,7 +169,7 @@ public class Auth_Exif extends AppCompatActivity {
 
 
     /**
-     *  카메라를 이미지 가져오기
+     * 카메라를 이미지 가져오기
      */
     private void takePhoto() {
         isCamera = true;
@@ -213,15 +209,15 @@ public class Auth_Exif extends AppCompatActivity {
     }
 
     /**
-     *  폴더 및 파일 만들기
+     * 폴더 및 파일 만들기
      */
     private File createImageFile() throws IOException {
 
-        // 이미지 파일 이름 ( blackJin_{시간}_ )
+        // 이미지 파일 이름
         String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String imageFileName =  timeStamp + "_";
+        String imageFileName = timeStamp + "_";
 
-        // 이미지가 저장될 파일 주소 ( blackJin )
+        // 이미지가 저장될 파일 주소
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera");
         if (!storageDir.exists()) storageDir.mkdirs();
 
@@ -233,24 +229,26 @@ public class Auth_Exif extends AppCompatActivity {
     }
 
     /**
-     *  tempFile 을 bitmap 으로 변환 후 ImageView 에 설정한다.
+     * tempFile 을 bitmap 으로 변환 후 ImageView 에 설정한다.
      */
     private void setImage() {
 
-        ImageView imageView = findViewById(R.id.imageVeiew);
+        ImageView imageView = findViewById(R.id.exif_image);
 
         ImageResizeUtils.resizeFile(tempFile, tempFile, 1280, isCamera);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         Log.d(TAG, "setImage : " + tempFile.getAbsolutePath());
+        currentPhotoPath = tempFile.getAbsolutePath() + tempFile.toString() + ".jpg";
+        context = this;
 
         imageView.setImageBitmap(originalBm);
 
     }
 
     /**
-     *  권한 설정
+     * 권한 설정
      */
     private void tedPermission() {
 
@@ -279,65 +277,10 @@ public class Auth_Exif extends AppCompatActivity {
 
     }
 
-    View.OnClickListener popupDlgOnClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            createdDialog(ID_JPGDIALOG).show(); // Instead of showDialog(0);
+    public void onClickAuth(View view) {
+        if (view.getId() == R.id.exif_image) {
+            intent = new Intent(Auth_Exif.this, SelectImage.class);
+            startActivity(intent);
         }
-    };
-    protected Dialog createdDialog(int id) {
-        dlg = null;
-        TextView content;
-
-        switch (id) {
-            case ID_JPGDIALOG:
-
-                Context mContext = this;
-                dlg = new Dialog(mContext);
-
-                dlg.setContentView(R.layout.select_image);
-                content = (TextView) dlg.findViewById(R.id.dlgImageName);
-                content.setText(exifAttribute);
-
-                Button okDialogButton = (Button) dlg.findViewById(R.id.btnOk);
-                okDialogButton.setOnClickListener(okDialogButtonOnClickListener);
-
-                break;
-            default:
-                break;
-        }
-        return dlg;
     }
-    private Button.OnClickListener okDialogButtonOnClickListener =
-            new Button.OnClickListener() {
-                public void onClick(View v) {
-                    dlg.dismiss();
-                }
-            };
-
-
-    /**
-     *  사진 정보 불러오기
-     */
-    private String getExif(ExifInterface exif) {
-        String myAttribute = "";
-        myAttribute += getTagString(ExifInterface.TAG_DATETIME, exif);
-        myAttribute += getTagString(ExifInterface.TAG_FLASH, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE_REF, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE_REF, exif);
-        myAttribute += getTagString(ExifInterface.TAG_IMAGE_LENGTH, exif);
-        myAttribute += getTagString(ExifInterface.TAG_IMAGE_WIDTH, exif);
-        myAttribute += getTagString(ExifInterface.TAG_MAKE, exif);
-        myAttribute += getTagString(ExifInterface.TAG_MODEL, exif);
-        myAttribute += getTagString(ExifInterface.TAG_ORIENTATION, exif);
-        myAttribute += getTagString(ExifInterface.TAG_WHITE_BALANCE, exif);
-        return myAttribute;
-    }
-
-    private String getTagString(String tag, ExifInterface exif) {
-        return (tag + " : " + exif.getAttribute(tag) + "\n");
-    }
-
-
 }
