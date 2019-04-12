@@ -1,6 +1,7 @@
 package Authentication;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,8 @@ public class SelectImage extends AppCompatActivity {
     private boolean valid = false;
     private String exifAttribute;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +40,21 @@ public class SelectImage extends AppCompatActivity {
         photo_gps = (TextView) findViewById(R.id.photo_gps);
         db_gps = (TextView) findViewById(R.id.db_gps);
 
-        photo_gps.setText(exifAttribute);
-
-        String path =((Auth_Exif)Auth_Exif.context).currentPhotoPath;
+        String path = ((Auth_Exif)Auth_Exif.context).currentPhotoPath;
 
         try {
             ExifInterface exif = new ExifInterface(path);
             exifAttribute = getExif(exif);
+
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(SelectImage.this, "Error", Toast.LENGTH_SHORT).show();
         }
+
+        photo_gps.setText(exifAttribute);
+        db_gps.setText("db gps값");
     }
+
 
 
     public void onClickBack(View view) {
@@ -71,6 +77,7 @@ public class SelectImage extends AppCompatActivity {
         }
 
     }
+
     private String getExif(ExifInterface exif) {
         String myAttribute = "";
         myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE, exif);

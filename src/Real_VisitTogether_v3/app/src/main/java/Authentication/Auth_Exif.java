@@ -95,6 +95,8 @@ public class Auth_Exif extends AppCompatActivity {
         });
 
 
+
+
     }
 
     @Override
@@ -214,8 +216,9 @@ public class Auth_Exif extends AppCompatActivity {
     private File createImageFile() throws IOException {
 
         // 이미지 파일 이름
-        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String imageFileName = timeStamp + "_";
+        String timeStamp_day = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String timeStamp_time = new SimpleDateFormat("HHmmss").format(new Date());
+        String imageFileName = timeStamp_day + "_" + timeStamp_time;
 
         // 이미지가 저장될 파일 주소
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera");
@@ -235,13 +238,11 @@ public class Auth_Exif extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.exif_image);
 
-        ImageResizeUtils.resizeFile(tempFile, tempFile, 1280, isCamera);
-
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         Log.d(TAG, "setImage : " + tempFile.getAbsolutePath());
-        currentPhotoPath = tempFile.getAbsolutePath() + tempFile.toString() + ".jpg";
-        context = this;
+        currentPhotoPath = tempFile.getAbsolutePath();
+        context = Auth_Exif.this;
 
         imageView.setImageBitmap(originalBm);
 
@@ -283,4 +284,5 @@ public class Auth_Exif extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
 }
