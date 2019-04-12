@@ -27,9 +27,7 @@ public class SelectImage extends AppCompatActivity {
     private TextView photo_gps;
     private TextView db_gps;
     private boolean valid = false;
-    private String latitude, longitude, db_latitude, db_longtitude;
-
-
+    private String exifAttribute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +37,17 @@ public class SelectImage extends AppCompatActivity {
         photo_gps = (TextView) findViewById(R.id.photo_gps);
         db_gps = (TextView) findViewById(R.id.db_gps);
 
-        photo_gps.setText(
-                "위도 : " + longitude + "\n" +
-                        "경도 : " + latitude + "\n");
+        photo_gps.setText(exifAttribute);
 
-        String imagePath =((Auth_Exif)Auth_Exif.context).currentPhotoPath;
-        ExifInterface exif = null;
+        String path =((Auth_Exif)Auth_Exif.context).currentPhotoPath;
+
         try {
-            exif = new ExifInterface(imagePath);
+            ExifInterface exif = new ExifInterface(path);
+            exifAttribute = getExif(exif);
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(SelectImage.this, "Error", Toast.LENGTH_SHORT).show();
         }
-
-        latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-        longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
-
     }
 
 
@@ -68,7 +62,7 @@ public class SelectImage extends AppCompatActivity {
     public void onClickAuth(View view) {
 
         if (view.getId() == R.id.btnAuth) {
-            if ((latitude == db_latitude) && (longitude == db_longtitude)) {
+            if (photo_gps == db_gps) {
                 Toast.makeText(SelectImage.this, "인증성공", Toast.LENGTH_SHORT).show();
             }
             else {
@@ -77,4 +71,15 @@ public class SelectImage extends AppCompatActivity {
         }
 
     }
+    private String getExif(ExifInterface exif) {
+        String myAttribute = "";
+        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE, exif);
+        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE, exif);
+        return myAttribute;
+    }
+
+    private String getTagString(String tag, ExifInterface exif) {
+        return (tag + " : " + exif.getAttribute(tag) + "\n");
+    }
+
 }
