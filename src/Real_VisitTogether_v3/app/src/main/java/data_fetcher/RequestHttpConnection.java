@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class RequestHttpConnection {
 
-    private String strURL = "http://13.125.243.153:50999/";
+    private String strURL = "http://ec2-13-209-22-178.ap-northeast-2.compute.amazonaws.com:8888/";
     private String strCookie;
     private String result;
 
@@ -21,7 +21,7 @@ public class RequestHttpConnection {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("GET");
-            conn.setDoOutput(true);
+            //conn.setDoOutput(true);
             conn.setDoInput(true);
             conn.setUseCaches(false);
             conn.setDefaultUseCaches(false);

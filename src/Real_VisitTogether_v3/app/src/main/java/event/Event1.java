@@ -59,7 +59,7 @@ public class Event1 extends AppCompatActivity
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    final private String url = "place/";
+
     private NetworkTask networkTask;
 
     private TextView[] place_text;
@@ -124,7 +124,7 @@ public class Event1 extends AppCompatActivity
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
 
-        networkTask = new NetworkTask(url);
+        networkTask = new NetworkTask();
         networkTask.execute();
     }
 
@@ -613,7 +613,10 @@ public class Event1 extends AppCompatActivity
 
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
 
-        private String url, place_str, relation_str;
+        final private String url_p = "place/";
+        final private String url_ehp = "event_has_place/";
+
+        private String place_str, relation_str;
         private String[] place_dict, relation_dict;
 
         private Place temp_place;
@@ -625,8 +628,9 @@ public class Event1 extends AppCompatActivity
 
         private Gson gson;
 
-        public NetworkTask(String _url) {
-            url = _url;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
             gson = new Gson();
             temp_ehp = new EventHasPlace();
             places = new Vector<Place>();
@@ -637,10 +641,10 @@ public class Event1 extends AppCompatActivity
         protected Void doInBackground(Void... voids) {
             RequestHttpConnection connection = new RequestHttpConnection();
 
-            place_str = connection.request(url);
+            place_str = connection.request(url_p);
             place_dict = place_str.split("\n");
 
-            relation_str = connection.request("event_has_place/");
+            relation_str = connection.request(url_ehp);
             relation_dict = relation_str.split("\n");
 
             return null;
