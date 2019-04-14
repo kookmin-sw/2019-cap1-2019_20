@@ -12,33 +12,34 @@ import java.net.URL;
 public class RequestHttpConnection {
 
     private String strURL = "http://ec2-13-209-22-178.ap-northeast-2.compute.amazonaws.com:8888/";
-    private String strCookie;
     private String result;
 
     public String request(String _url){
         try{
+
+            //연결 객체
             URL url = new URL(strURL + _url);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+            //연결설정
             conn.setRequestMethod("GET");
-            //conn.setDoOutput(true);
+            conn.setDoOutput(true);
             conn.setDoInput(true);
             conn.setUseCaches(false);
             conn.setDefaultUseCaches(false);
 
-            strCookie = conn.getHeaderField("Set-Cookie");
-
+            //읽어오기
             InputStream is = conn.getInputStream();
-
             StringBuilder builder = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            String line;
 
+            String line;
             while((line = reader.readLine()) != null)
                 builder.append(line + "\n");
 
             result = builder.toString();
 
+        //URL protocol의 형식이 잘못되었다는 예외. http://를 붙여줘야 한다.
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
@@ -46,6 +47,7 @@ public class RequestHttpConnection {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return result;
     }
 }

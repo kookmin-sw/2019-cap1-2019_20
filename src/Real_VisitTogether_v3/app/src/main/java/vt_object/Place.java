@@ -1,3 +1,6 @@
+/*
+ * Place 엔티티
+ * */
 package vt_object;
 
 public class Place {

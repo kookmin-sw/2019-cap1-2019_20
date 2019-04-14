@@ -1,3 +1,6 @@
+/*
+ * Event 엔티티
+ * */
 package vt_object;
 
 public class Event {
@@ -8,11 +11,6 @@ public class Event {
     public Event() {
         id = 0;
         name = null;
-    }
-
-    public Event(int _id, String _name){
-        id = _id;
-        name = _name;
     }
 
     public String getName() {

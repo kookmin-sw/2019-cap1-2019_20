@@ -611,6 +611,8 @@ public class Event1 extends AppCompatActivity
         }
     }
 
+    // 네트워크 연결을 수행하는 이너클래스
+    // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
 
         final private String url_p = "place/";
@@ -628,6 +630,8 @@ public class Event1 extends AppCompatActivity
 
         private Gson gson;
 
+        // NetworkTask의 execute 메소드가 호출된 후 실행되는 메소드
+        // doin 메소드로 파라미터 전달
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -637,10 +641,14 @@ public class Event1 extends AppCompatActivity
             ehps = new Vector<EventHasPlace>();
         }
 
+        // 백그라운드 스레드에서 처리되는 부분
         @Override
         protected Void doInBackground(Void... voids) {
+
+            // 네트워크 연결
             RequestHttpConnection connection = new RequestHttpConnection();
 
+            // 리턴된 "{..}\n{..} ... {..}" 값들을 split
             place_str = connection.request(url_p);
             place_dict = place_str.split("\n");
 
@@ -650,16 +658,20 @@ public class Event1 extends AppCompatActivity
             return null;
         }
 
+        // 백그라운드 작업 결과 반영
+        // doin 메소드로 파라미터를 받는다
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
+            // 관계 엔티티에서 이벤트 1인 경우만 뽑아냄
             for(int i = 0; i < relation_dict.length; i++){
                 temp_ehp = gson.fromJson(relation_dict[i], EventHasPlace.class);
                 if(temp_ehp.getEvent_id() == 1)
                     ehps.add(temp_ehp);
             }
 
+            // 뽑아낸 데이터와 Place 데이터 매칭
             for(int i = 0; i < ehps.size(); i++){
                 for(int j = 0; j < place_dict.length; j++){
                     temp_place = gson.fromJson(place_dict[j], Place.class);
@@ -668,6 +680,7 @@ public class Event1 extends AppCompatActivity
                 }
             }
 
+            // 매칭된 데이터의 name으로 setText()
             for(int i = 0; i < place_text.length; i++){
                 place_text[i].setText(places.elementAt(i).getName());
             }

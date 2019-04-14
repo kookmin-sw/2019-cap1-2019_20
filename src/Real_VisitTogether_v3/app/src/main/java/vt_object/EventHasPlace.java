@@ -1,3 +1,6 @@
+/*
+* Event 엔티티와 Place 엔티티의 관계 엔티티
+* */
 package vt_object;
 
 public class EventHasPlace {

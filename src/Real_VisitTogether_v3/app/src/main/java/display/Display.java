@@ -67,14 +67,18 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         return true;
     }
 
-    public class NetworkTask extends AsyncTask<Void, Void, String[]> {
+    // 네트워크 연결을 수행하는 이너클래스
+    // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
+    public class NetworkTask extends AsyncTask<Void, Void, Void> {
 
         final private String url = "event/";
-        private String event_str;
         private Event event;
-        private Gson gson;
+        private String event_str;
         private String[] event_dict;
+        private Gson gson;
 
+        // NetworkTask의 execute 메소드가 호출된 후 실행되는 메소드
+        // doin 메소드로 파라미터 전달
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -82,18 +86,26 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             event = new Event();
         }
 
+        // 백그라운드 스레드에서 처리되는 부분
         @Override
-        protected String[] doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids) {
+
+            // 네트워크 연결
             RequestHttpConnection connection = new RequestHttpConnection();
             event_str = connection.request(url);
+
+            // 리턴된 "{..}\n{..} ... {..}" 값들을 split
             event_dict = event_str.split("\n");
-            return event_dict;
+            return null;
         }
 
+        // 백그라운드 작업 결과 반영
+        // doin 메소드로 파라미터를 받는다
         @Override
-        protected void onPostExecute(String[] aVoid) {
+        protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
+            // 배열의 원소들을 json 인코딩 후 각 버튼 setText()
             for(int i = 0; i < temp_btn.length; i++) {
                 event = gson.fromJson(event_dict[i], Event.class);
                 temp_btn[i].setText(event.getName());
