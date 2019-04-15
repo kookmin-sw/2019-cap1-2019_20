@@ -1,14 +1,11 @@
 language: android
-
 android:
   components:
-    - build-tools-19.1.0
-
-env:
-  -  TERM=dumb
-
-before_script:
-  - cd studio
-
-script:
-  - ./gradlew build
+    - build-tools-26.0.2
+    - android-26
+    - add-on
+    - extra
+  licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
