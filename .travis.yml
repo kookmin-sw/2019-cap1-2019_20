@@ -1,0 +1,14 @@
+language: android
+
+android:
+  components:
+    - build-tools-19.1.0
+
+env:
+  -  TERM=dumb
+
+before_script:
+  - cd studio
+
+script:
+  - ./gradlew build
