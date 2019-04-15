@@ -1,11 +1,23 @@
 language: android
 android:
   components:
+    - android-22
     - build-tools-26.0.2
     - android-26
     - add-on
     - extra
+    - extra-android-support
+    
   licenses:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
+
+env:
+  # TERM=dumb : For Gradle build output
+  - TERM=dumb
+
+script:
+  # Build all gradle-based Android projects
+  - cd Android
+  - ./build.sh
