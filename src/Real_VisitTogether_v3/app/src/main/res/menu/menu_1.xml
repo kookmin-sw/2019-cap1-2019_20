@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<!-- item의 아이디 변경-->
     <item android:title="로그아웃"
-        android:id="@+id/menu1"/>
+        android:id="@+id/logout"
+
+        />
     <item android:title="My-page"
-        android:id="@+id/menu2"/>
+        android:id="@+id/mypage"
+
+        />
     <item android:title="도움말"
-        android:id="@+id/menu3"/>
+        android:id="@+id/help"/>
 
 </menu>
