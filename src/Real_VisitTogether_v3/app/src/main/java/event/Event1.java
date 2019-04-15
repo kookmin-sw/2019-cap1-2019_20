@@ -439,6 +439,11 @@ public class Event1 extends AppCompatActivity
 
         //디폴트 위치, 국민대학교
         LatLng DEFAULT_LOCATION = new LatLng(37.611099, 126.997182);
+        //노가리 , 송백식당 , 주당끼리 주소 일단입력해놨음
+        LatLng Place1 = new LatLng(37.607640, 127.001356);
+        LatLng Place2 = new LatLng(37.610819, 126.994235);
+        LatLng Place3 = new LatLng(37.607918, 126.999681);
+
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 
@@ -451,6 +456,33 @@ public class Event1 extends AppCompatActivity
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         currentMarker = mGoogleMap.addMarker(markerOptions);
+
+        //event1에 나오는 미션장소3군데
+        markerOptions
+                .position(Place1)
+                .title("노가리")
+                .snippet("위도 : 37.607640 경도 :127.001356")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .alpha(0.5f);
+        mGoogleMap.addMarker(markerOptions);
+
+        markerOptions
+                .position(Place2)
+                .title("송백식당")
+                .snippet("위도 : 37.610819 경도 :126.994235")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .alpha(0.5f);
+        mGoogleMap.addMarker(markerOptions);
+
+        markerOptions
+                .position(Place3)
+                .title("주당끼리")
+                .snippet("위도 : 37.607918 경도 :126.999681")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .alpha(0.5f);
+
+        mGoogleMap.addMarker(markerOptions);
+        //여기까지 미션장소들
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mGoogleMap.moveCamera(cameraUpdate);

@@ -71,8 +71,8 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                     double altitude = location.getAltitude();
 
                     txtResult.setText("위치정보 : " + provider + "\n" +
-                            "위도 : " + longitude + "\n" +
-                            "경도 : " + latitude + "\n" +
+                            "위도 : " + latitude + "\n" +
+                            "경도 : " + longitude + "\n" +
                             "고도  : " + altitude);
 
 
@@ -127,8 +127,8 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
             double altitude = location.getAltitude();
 
             txtResult.setText("위치정보 : " + provider + "\n" +
-                    "위도 : " + longitude + "\n" +
-                    "경도 : " + latitude + "\n" +
+                    "위도 : " + latitude + "\n" +
+                    "경도 : " + longitude + "\n" +
                     "고도  : " + altitude);
 
             //현위치를 기본위치로 설정
@@ -147,7 +147,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
             markerOptions
                     .position(DEFAULT_LOCATION)
                     .title("현위치")
-                    .snippet("위도 : "+ longitude +" 경도 :" + latitude);
+                    .snippet("위도 : "+ latitude +" 경도 :" + longitude);
             mMap.addMarker(markerOptions);
 
 
