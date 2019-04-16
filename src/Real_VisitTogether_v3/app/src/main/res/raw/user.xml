@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<users>
+    <user>
+        <name>김유진
+        </name>
+        <num>13</num>
+    </user>
+    <user>
+        <name>오나라
+        </name>
+        <num>2</num>
+    </user> <user>
+    <name>김사랑
+    </name>
+    <num>30</num>
+</user>
+    <user>
+    <name>한유주
+    </name>
+    <num>2</num>
+</user>
+    <user>
+        <name>김창식
+        </name>
+        <num>1</num>
+    </user>
+</users>

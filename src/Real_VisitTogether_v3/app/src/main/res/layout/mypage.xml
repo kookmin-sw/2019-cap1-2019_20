@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:id="@+id/completedeventlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료된 이벤트 목록"
+        android:onClick="select_list"
+
+        />
+
+    <Button
+        android:id="@+id/ranking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="랭킹보기"
+
+        android:onClick="select_list"
+
+        />
+
+    <Button
+        android:id="@+id/participation_event_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="참여중인 이벤트 목록"
+
+        android:onClick="select_list"
+
+        />
+
+    <Button
+        android:id="@+id/apply_reward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="보상 요청"
+        android:onClick="select_list"
+
+        />
+</LinearLayout>

@@ -196,29 +196,16 @@ public class login extends AppCompatActivity {
     }
 
     private void initView() {
-        mApiResultText = (TextView) findViewById(R.id.api_result_text);
 
-        mOauthAT = (TextView) findViewById(R.id.oauth_access_token);
-        mOauthRT = (TextView) findViewById(R.id.oauth_refresh_token);
-        mOauthExpires = (TextView) findViewById(R.id.oauth_expires);
-        mOauthTokenType = (TextView) findViewById(R.id.oauth_type);
-        mOAuthState = (TextView) findViewById(R.id.oauth_state);
 
         mOAuthLoginButton = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
         mOAuthLoginButton.setOAuthLoginHandler(mOAuthLoginHandler);
-        updateView();
+
 
     }
 
 
-    private void updateView() {
-        mOauthAT.setText(mOAuthLoginInstance.getAccessToken(mContext));
-        mOauthRT.setText(mOAuthLoginInstance.getRefreshToken(mContext));
-        mOauthExpires.setText(String.valueOf(mOAuthLoginInstance.getExpiresAt(mContext)));
-        mOauthTokenType.setText(mOAuthLoginInstance.getTokenType(mContext));
-        mOAuthState.setText(mOAuthLoginInstance.getState(mContext).toString());
 
-    }
 
     @Override
     protected void onResume() {
@@ -238,11 +225,6 @@ public class login extends AppCompatActivity {
                 String refreshToken = mOAuthLoginInstance.getRefreshToken(mContext);
                 long expiresAt = mOAuthLoginInstance.getExpiresAt(mContext);
                 String tokenType = mOAuthLoginInstance.getTokenType(mContext);
-                mOauthAT.setText(accessToken);
-                mOauthRT.setText(refreshToken);
-                mOauthExpires.setText(String.valueOf(expiresAt));
-                mOauthTokenType.setText(tokenType);
-                mOAuthState.setText(mOAuthLoginInstance.getState(mContext).toString());
 
                 startActivity(new Intent(login.this,Display.class));
             } else {
@@ -254,33 +236,7 @@ public class login extends AppCompatActivity {
 
     };
 
-    public void onButtonClick(View v) throws Throwable {
 
-        switch (v.getId()) {
-
-            case R.id.buttonVerifier: {
-                new RequestApiTask().execute();
-                break;
-            }
-            case R.id.buttonRefresh: {
-                new RefreshTokenTask().execute();
-                startActivity(new Intent(login.this,Display.class));
-                break;
-            }
-            case R.id.buttonOAuthLogout: {
-                mOAuthLoginInstance.logout(mContext);
-                updateView();
-                break;
-            }
-            case R.id.buttonOAuthDeleteToken: {
-                new DeleteTokenTask().execute();
-                break;
-            }
-
-            default:
-                break;
-        }
-    }
 
 
     private class DeleteTokenTask extends AsyncTask<Void, Void, Void> {
@@ -298,9 +254,7 @@ public class login extends AppCompatActivity {
             return null;
         }
 
-        protected void onPostExecute(Void v) {
-            updateView();
-        }
+
     }
 
     private class RequestApiTask extends AsyncTask<Void, Void, String> {
@@ -330,11 +284,25 @@ public class login extends AppCompatActivity {
         }
 
         protected void onPostExecute(String res) {
-            updateView();
+
         }
     }
 
     //여기까지 네이버 로그인
+    public void LogOut(View v)
+    {
+        Toast.makeText(getApplicationContext(), "로그아웃 하였습니다", Toast.LENGTH_SHORT).show();
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        boolean checkNaver =mOAuthLoginInstance.getAccessToken(mContext)==null;
+        LoginManager.getInstance (). logOut ();
+        if(isLoggedIn ) {
+            LoginManager.getInstance (). logOut ();
+        }
+        else if(!checkNaver) {
+            mOAuthLoginInstance.logout(mContext);
+        }
+    }
 
 }
 

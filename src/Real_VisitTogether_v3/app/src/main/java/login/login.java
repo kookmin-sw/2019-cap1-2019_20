@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +25,18 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
@@ -44,7 +56,17 @@ public class login extends AppCompatActivity {
 
     private static OAuthLogin mOAuthLoginInstance;
     private static Context mContext;
+    // 구글로그인 result 상수
+    private static final int RC_SIGN_IN = 900;
 
+    // 구글api클라이언트
+    private GoogleSignInClient googleSignInClient;
+
+    // 파이어베이스 인증 객체 생성
+    private FirebaseAuth firebaseAuth;
+
+    // 구글  로그인 버튼
+    private SignInButton buttonGoogle;
     /**
      * UI 요소들
      */
@@ -69,32 +91,40 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        // 파이어베이스 인증 객체 선언
+        firebaseAuth = FirebaseAuth.getInstance();
+        buttonGoogle = findViewById(R.id.btn_googleSignIn);
+        // Google 로그인을 앱에 통합
+        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("179551541813-vbm83s0gi4g6fpsthopip9acf003i7ae.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = googleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
 
         mContext = this;
         Button faceBook = (LoginButton) findViewById(R.id.login_button);
         OAuthLoginButton naver = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
-        SignInButton  buttonGoogle = findViewById(R.id.btn_googleSignIn);
-        buttonGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(login.this, google.class));
 
-            }
-        });
         if(faceBook.isClickable()) init(); //로그인버튼을 클릭하면 facebook 로그인
         if(naver.isClickable()){
             initData();
             initView();
-
         }
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
         boolean checkNaver =mOAuthLoginInstance.getAccessToken(mContext)==null;
         //토큰을 가지고있으면(로그인 유지시) 로그인 하지않고 메뉴에 접근가능
-        if(isLoggedIn || !checkNaver) {
-            startActivity(new Intent(login.this, Display.class));
+        if(isLoggedIn || !checkNaver || firebaseAuth.getCurrentUser() !=null ) {
+            startActivity(new Intent(login.this, display.Display.class));
         }
         final Button sign_in = (Button)findViewById(R.id.sign);
         sign_in.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +132,14 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 startActivityForResult(new Intent(login.this, Sign_in.class),Sign_in);
 
+            }
+        });
+
+        Button loginBtn = findViewById(R.id.login_access);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login.this, Display.class));
             }
         });
     }
@@ -119,14 +157,6 @@ public class login extends AppCompatActivity {
             }
         });
 
-        logoutbtn = (Button)findViewById(R.id.logout);  //로그아웃 버튼
-        logoutbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "로그아웃 하였습니다", Toast.LENGTH_SHORT).show();
-                LoginManager.getInstance (). logOut ();
-            }
-        });
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -155,7 +185,7 @@ public class login extends AppCompatActivity {
                 request.setParameters(parameters);
                 request.executeAsync();
                 */
-                startActivity(new Intent(login.this,Display.class));
+                startActivity(new Intent(login.this,display.Display.class));
             }
 
             @Override
@@ -175,7 +205,17 @@ public class login extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // 구글 로그인 성공
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+                System.out.print("check");
+            } catch (ApiException e) {
 
+            }
+        }
     }
     ////여기까지 FACEBOOK 로그인 부분
 
@@ -196,29 +236,16 @@ public class login extends AppCompatActivity {
     }
 
     private void initView() {
-        mApiResultText = (TextView) findViewById(R.id.api_result_text);
 
-        mOauthAT = (TextView) findViewById(R.id.oauth_access_token);
-        mOauthRT = (TextView) findViewById(R.id.oauth_refresh_token);
-        mOauthExpires = (TextView) findViewById(R.id.oauth_expires);
-        mOauthTokenType = (TextView) findViewById(R.id.oauth_type);
-        mOAuthState = (TextView) findViewById(R.id.oauth_state);
 
         mOAuthLoginButton = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
         mOAuthLoginButton.setOAuthLoginHandler(mOAuthLoginHandler);
-        updateView();
+
 
     }
 
 
-    private void updateView() {
-        mOauthAT.setText(mOAuthLoginInstance.getAccessToken(mContext));
-        mOauthRT.setText(mOAuthLoginInstance.getRefreshToken(mContext));
-        mOauthExpires.setText(String.valueOf(mOAuthLoginInstance.getExpiresAt(mContext)));
-        mOauthTokenType.setText(mOAuthLoginInstance.getTokenType(mContext));
-        mOAuthState.setText(mOAuthLoginInstance.getState(mContext).toString());
 
-    }
 
     @Override
     protected void onResume() {
@@ -238,13 +265,8 @@ public class login extends AppCompatActivity {
                 String refreshToken = mOAuthLoginInstance.getRefreshToken(mContext);
                 long expiresAt = mOAuthLoginInstance.getExpiresAt(mContext);
                 String tokenType = mOAuthLoginInstance.getTokenType(mContext);
-                mOauthAT.setText(accessToken);
-                mOauthRT.setText(refreshToken);
-                mOauthExpires.setText(String.valueOf(expiresAt));
-                mOauthTokenType.setText(tokenType);
-                mOAuthState.setText(mOAuthLoginInstance.getState(mContext).toString());
 
-                startActivity(new Intent(login.this,Display.class));
+                startActivity(new Intent(login.this,display.Display.class));
             } else {
                 String errorCode = mOAuthLoginInstance.getLastErrorCode(mContext).getCode();
                 String errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext);
@@ -253,35 +275,6 @@ public class login extends AppCompatActivity {
         }
 
     };
-
-    public void onButtonClick(View v) throws Throwable {
-
-        switch (v.getId()) {
-
-            case R.id.buttonVerifier: {
-                new RequestApiTask().execute();
-                break;
-            }
-            case R.id.buttonRefresh: {
-                new RefreshTokenTask().execute();
-                startActivity(new Intent(login.this,Display.class));
-                break;
-            }
-            case R.id.buttonOAuthLogout: {
-                mOAuthLoginInstance.logout(mContext);
-                updateView();
-                break;
-            }
-            case R.id.buttonOAuthDeleteToken: {
-                new DeleteTokenTask().execute();
-                break;
-            }
-
-            default:
-                break;
-        }
-    }
-
 
     private class DeleteTokenTask extends AsyncTask<Void, Void, Void> {
         @Override
@@ -298,9 +291,7 @@ public class login extends AppCompatActivity {
             return null;
         }
 
-        protected void onPostExecute(Void v) {
-            updateView();
-        }
+
     }
 
     private class RequestApiTask extends AsyncTask<Void, Void, String> {
@@ -330,11 +321,35 @@ public class login extends AppCompatActivity {
         }
 
         protected void onPostExecute(String res) {
-            updateView();
+
         }
     }
 
     //여기까지 네이버 로그인
 
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // 로그인 성공
+                            Toast.makeText(login.this, R.string.success_login, Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(login.this,display.Display.class));
+                        } else {
+                            // 로그인 실패
+                            Toast.makeText(login.this, R.string.failed_login, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
 

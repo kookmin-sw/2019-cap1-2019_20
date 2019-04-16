@@ -7,14 +7,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import android.widget.Toast;
 import com.example.real_visittogether.R;
 import com.google.gson.Gson;
 
 import data_fetcher.RequestHttpConnection;
 import event.Event1;
 import event.Event2;
+
+import toolbar_menu.Help;
+import toolbar_menu.MyPage;
 import vt_object.Event;
 
 public class Display extends AppCompatActivity implements View.OnClickListener {
@@ -43,10 +49,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-//        if(view.getId() == R.id.button1){
-//            intent = new Intent(Display.this, Menu.class);
-//            startActivity(intent);
-//        }
+
         if(view.getId() == R.id.temp_btn1){
             intent = new Intent(Display.this, Event1.class);
             startActivity(intent);
@@ -66,6 +69,33 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         inflater.inflate(R.menu.menu_1, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.logout: {
+                Toast.makeText(this, "로그아웃 되었습니다", Toast.LENGTH_LONG).show();
+                Intent login = new Intent(getApplicationContext(), login.login.class);
+                startActivity(login);
+                return true;
+            }
+            case R.id.help: {
+                Intent help_intent = new Intent(getApplicationContext(), Help.class);
+                startActivity(help_intent);
+                return true;
+            }
+            case R.id.mypage: {
+                Intent mypage_intent = new Intent(getApplicationContext(), MyPage.class);
+                startActivity(mypage_intent);
+                return true;
+            }
+        }
+        return true;
+    }
+
+
+
 
     // 네트워크 연결을 수행하는 이너클래스
     // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
@@ -112,4 +142,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             }
         }
     }
+
 }
+
+
