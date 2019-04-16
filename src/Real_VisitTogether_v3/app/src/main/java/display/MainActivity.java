@@ -7,11 +7,6 @@ import android.os.Bundle;
 
 import com.example.real_visittogether.R;
 
-<<<<<<< HEAD:src/Real_VisitTogether_v3/app/src/main/java/Display/MainActivity.java
-import login.login;
-
-=======
->>>>>>> ff17a21a33a3794f85ea9ff086dcf4ddfeb31cac:src/Real_VisitTogether_v3/app/src/main/java/display/MainActivity.java
 public class MainActivity extends AppCompatActivity {
 
     @Override

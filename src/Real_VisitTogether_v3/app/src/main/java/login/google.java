@@ -23,11 +23,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-<<<<<<< HEAD:src/Real_VisitTogether_v3/app/src/main/java/Login/google.java
-import display.Display;
-
-=======
->>>>>>> ff17a21a33a3794f85ea9ff086dcf4ddfeb31cac:src/Real_VisitTogether_v3/app/src/main/java/login/google.java
 public class google extends AppCompatActivity {
     // 구글로그인 result 상수
     private static final int RC_SIGN_IN = 900;

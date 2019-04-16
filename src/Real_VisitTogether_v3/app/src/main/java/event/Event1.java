@@ -134,40 +134,22 @@ public class Event1 extends AppCompatActivity
 
         if (view.getId() == R.id.imageView) {
             intent = new Intent(Event1.this, authentication.SelectAuth.class);
-<<<<<<< HEAD:src/Real_VisitTogether_v3/app/src/main/java/Event/Event1.java
-            t = (TextView) findViewById(R.id.taste1);
-            place = t.getText().toString();
-            intent.putExtra("place", place);
-=======
             temp = place_text[0].getText().toString();
             intent.putExtra("place", temp);
->>>>>>> ff17a21a33a3794f85ea9ff086dcf4ddfeb31cac:src/Real_VisitTogether_v3/app/src/main/java/event/Event1.java
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView2) {
             intent = new Intent(Event1.this, authentication.SelectAuth.class);
-<<<<<<< HEAD:src/Real_VisitTogether_v3/app/src/main/java/Event/Event1.java
-            t = (TextView) findViewById(R.id.taste2);
-            place = t.getText().toString();
-            intent.putExtra("place", place);
-=======
             temp = place_text[0].getText().toString();
             intent.putExtra("place", temp);
->>>>>>> ff17a21a33a3794f85ea9ff086dcf4ddfeb31cac:src/Real_VisitTogether_v3/app/src/main/java/event/Event1.java
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView3) {
             intent = new Intent(Event1.this, authentication.SelectAuth.class);
-<<<<<<< HEAD:src/Real_VisitTogether_v3/app/src/main/java/Event/Event1.java
-            t = (TextView) findViewById(R.id.taste3);
-            place = t.getText().toString();
-            intent.putExtra("place", place);
-=======
             temp = place_text[0].getText().toString();
             intent.putExtra("place", temp);
->>>>>>> ff17a21a33a3794f85ea9ff086dcf4ddfeb31cac:src/Real_VisitTogether_v3/app/src/main/java/event/Event1.java
             startActivity(intent);
         }
     }

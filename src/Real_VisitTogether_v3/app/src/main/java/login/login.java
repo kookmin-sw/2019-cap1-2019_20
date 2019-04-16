@@ -155,7 +155,7 @@ public class login extends AppCompatActivity {
                 request.setParameters(parameters);
                 request.executeAsync();
                 */
-                startActivity(new Intent(login.this, Display.class));
+                startActivity(new Intent(login.this,Display.class));
             }
 
             @Override

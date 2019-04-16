@@ -11,14 +11,6 @@ import com.example.real_visittogether.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-<<<<<<< HEAD:src/Real_VisitTogether_v3/app/src/main/java/Authentication/SelectAuth.java
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import event.Event1;
-
-=======
->>>>>>> ff17a21a33a3794f85ea9ff086dcf4ddfeb31cac:src/Real_VisitTogether_v3/app/src/main/java/authentication/SelectAuth.java
 public class SelectAuth extends AppCompatActivity {
     //인증 성공 유무에따라 부여되는값
     private int success = 10000;
