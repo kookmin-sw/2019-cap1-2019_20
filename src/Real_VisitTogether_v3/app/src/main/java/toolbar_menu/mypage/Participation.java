@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.real_visittogether.R;
 
-public class RegistedEventList  extends AppCompatActivity {
+public class Participation extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registed_event_list);
+        setContentView(R.layout.participation);
     }
 }

@@ -3,6 +3,7 @@ package toolbar_menu.mypage;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.real_visittogether.R;
 

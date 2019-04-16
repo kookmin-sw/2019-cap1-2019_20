@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="완료된 이벤트 목록"
-
+        android:onClick="select_list"
 
         />
 
@@ -29,7 +29,7 @@
         />
 
     <Button
-        android:id="@+id/registed_event_list"
+        android:id="@+id/participation_event_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="참여중인 이벤트 목록"

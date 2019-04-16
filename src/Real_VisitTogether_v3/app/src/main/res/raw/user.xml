@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <users>
     <user>
-        <name>유저1
+        <name>김유진
         </name>
-        <num>1</num>
+        <num>13</num>
     </user>
     <user>
-        <name>유저2
+        <name>오나라
         </name>
         <num>2</num>
     </user> <user>
-    <name>유저3
+    <name>김사랑
     </name>
-    <num>3</num>
+    <num>30</num>
 </user>
     <user>
-    <name>유저4
+    <name>한유주
     </name>
-    <num>4</num>
+    <num>2</num>
 </user>
     <user>
-        <name>유저5
+        <name>김창식
         </name>
-        <num>5</num>
+        <num>1</num>
     </user>
 </users>

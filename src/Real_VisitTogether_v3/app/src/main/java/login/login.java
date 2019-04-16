@@ -134,6 +134,14 @@ public class login extends AppCompatActivity {
 
             }
         });
+
+        Button loginBtn = findViewById(R.id.login_access);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login.this, Display.class));
+            }
+        });
     }
     //여기서부터 페이스북 로그인
     private void init(){

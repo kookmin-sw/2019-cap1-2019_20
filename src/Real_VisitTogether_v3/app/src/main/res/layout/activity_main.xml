@@ -4,4 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="display.MainActivity"/>
+    tools:context="display.MainActivity"
+
+    >
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button_main"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="274dp" />
+</android.support.constraint.ConstraintLayout>

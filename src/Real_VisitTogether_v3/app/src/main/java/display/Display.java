@@ -2,12 +2,15 @@ package display;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import login.login;
@@ -25,32 +28,31 @@ import toolbar_menu.MyPage;
 public class Display extends AppCompatActivity {
 
     private Intent intent;
-
+    Button mainBtn;
+    int cnt = 1;
+    LinearLayout display_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display);
-
+        display_layout = (LinearLayout) findViewById(R.id.display_layout);
         FloatingActionButton button4 = (FloatingActionButton)findViewById(R.id.ActionButton); //동그라미
-
+/*
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Eventregistration.class);
-                startActivity(intent);
+               // startActivityForResult(intent,1000);
             }
         });
 
-
+*/
 
     }
 
     public void onClick(View view) {
 
-//        if(view.getId() == R.id.button1){
-//            intent = new Intent(Display.this, Menu.class);
-//            startActivity(intent);
-//        }
+
 
         if(view.getId() == R.id.button2){
             intent = new Intent(Display.this, Event1.class);
@@ -62,6 +64,22 @@ public class Display extends AppCompatActivity {
             startActivity(intent);
         }
 
+        if(view.getId() == R.id.ActionButton){
+
+            Button btn = new Button(getApplicationContext());
+            btn.setText("test"+ String.valueOf(cnt));
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"test"+ String.valueOf(cnt),Toast.LENGTH_LONG).show();
+                }
+            });
+
+            display_layout.addView(btn);
+
+
+            cnt++;
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

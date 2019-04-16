@@ -4,10 +4,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import user.User;
+import user.UserAdaptor;
+
 import com.example.real_visittogether.R;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -20,71 +26,106 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+
+
+
+
+
 public class Ranking extends AppCompatActivity {
-   // TextView rank = (TextView) findViewById(R.id.ranking_info);
+
+    ArrayList<User> user = new ArrayList<>();
+    ListView listView;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ranking);
-      //  rank.setText("안녕하세요");
-        //parseXML();
+
+        // Attach the adapter to a ListView
+        ListView listView = (ListView) findViewById(R.id.listView);
+
+
+        xmlParsing();
+        Collections.sort(user);
+        makeRank();
+        UserAdaptor adapter = new UserAdaptor(this, user);
+        listView = (ListView)findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+
+
     }
-    private void parseXML() {
-        XmlPullParserFactory parserFactory;
+
+    public void  xmlParsing(){
+
+        String[] data = null;
+
         try {
-            parserFactory = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = parserFactory.newPullParser();
-            InputStream is = getAssets().open("user.xml");
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-            parser.setInput(is, null);
+            InputStream is = getResources().openRawResource(R.raw.user);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-            processParsing(parser);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(is);
 
-        } catch (XmlPullParserException e) {
+            NodeList studentList = doc.getElementsByTagName("user");
+            NodeList nameList = doc.getElementsByTagName("name");
+            NodeList ageList = doc.getElementsByTagName("num");
 
-        } catch (IOException e) {
-        }
-    }
-    private void processParsing(XmlPullParser parser) throws IOException, XmlPullParserException{
-        ArrayList<User> users = new ArrayList<>();
-        int eventType = parser.getEventType();
-        User currentUser = null;
+            data = new String[studentList.getLength()];
 
-        while (eventType != XmlPullParser.END_DOCUMENT) {
-            String eltName = null;
+            for(int i = 0; i < studentList.getLength(); i++) {
+                String name = nameList.item(i).getFirstChild().getNodeValue();
+                name = name.trim();
+                int age = Integer.parseInt(ageList.item(i).getFirstChild().getNodeValue());
+                user.add(new User(name,age));
 
-            switch (eventType) {
-                case XmlPullParser.START_TAG:
-                    eltName = parser.getName();
-
-                    if ("user".equals(eltName)) {
-                        currentUser = new User();
-                       users.add(currentUser);
-                    } else if (currentUser != null) {
-                        if ("name".equals(eltName)) {
-                            currentUser.name = parser.nextText();
-                        } else if ("age".equals(eltName)) {
-                            currentUser.num = Integer.parseInt(parser.nextText());
-                        }
-                    }
-                    break;
             }
 
-            eventType = parser.next();
-        }
-
-        printUsers(users);
-    }
-
-    private void printUsers(ArrayList<User> users) {
-        StringBuilder builder = new StringBuilder();
-
-        for (User user : users) {
-            builder.append(user.name).append("\n").
-                    append(user.num).append("\n\n");
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
 
         }
 
-       // rank.setText(builder.toString());
     }
+    public void makeRank()
+    {
+        int idx = 1;
+        for(User k : user)
+        {
+            k.setName(String.valueOf(idx)+". "+k.getName()+" : ");
+            idx++;
+        }
+    }
+
+
 }

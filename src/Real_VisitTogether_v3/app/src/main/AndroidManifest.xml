@@ -111,7 +111,7 @@
         <activity android:name="toolbar_menu.mypage.CompletedEventList"></activity>
         <activity android:name="toolbar_menu.mypage.Ranking"></activity>
         <activity android:name="toolbar_menu.mypage.SelectReward"></activity>
-        <activity android:name="toolbar_menu.mypage.RegistedEventList"></activity>
+        <activity android:name="toolbar_menu.mypage.Participation"></activity>
     </application>
 
 </manifest>
