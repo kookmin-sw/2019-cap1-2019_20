@@ -20,7 +20,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        >
+
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
@@ -63,7 +66,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.real_visittogether.provider"
+            android:authorities="authentication.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -90,6 +93,7 @@
         <activity android:name="authentication.SelectAuth"></activity>
         <activity android:name="authentication.Auth_Exif"></activity>
         <activity android:name="authentication.Auth_Gps"></activity>
+        <activity android:name="authentication.SelectImage"></activity>
         <activity
             android:name="display.Menu"
             android:label="@string/title_activity_detail1"

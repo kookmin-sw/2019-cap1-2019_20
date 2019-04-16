@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,6 +25,8 @@ import android.media.ExifInterface;
 import android.widget.Button;
 import android.widget.TextView;
 import android.os.Environment;
+
+import com.google.android.gms.auth.api.Auth;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -32,17 +35,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.example.real_visittogether.R;
-import com.example.visitogether.util.ImageResizeUtils;
+
 
 public class Auth_Exif extends AppCompatActivity {
 
     private static final String TAG = "VisiTogether";
 
+    private Boolean isPermission = true;
+
     private static final int PICK_FROM_ALBUM = 1;
     private static final int PICK_FROM_CAMERA = 2;
     private static final int ID_JPGDIALOG = 0;
     private String exifAttribute;
-    private Dialog dlg;
+    private Intent intent;
+    public String currentPhotoPath;//실제 사진 파일 경로
+    public static Context context;
 
 
     private Boolean isCamera = false;
@@ -53,93 +60,57 @@ public class Auth_Exif extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exif);
 
-        TextView txtImgName = (TextView) findViewById(R.id.dlgImageName);
-        ImageView jpgView = (ImageView) findViewById(R.id.imageVeiew);
+        ImageView jpgView = (ImageView) findViewById(R.id.exif_image);
 
-        //TedPermission 라이브러리 -> 카메라 권한 획득
-
-        PermissionListener permissionlistener = new PermissionListener() {
-
-            @Override
-            public void onPermissionGranted() {
-                Toast.makeText(Auth_Exif.this, "Permission Granted", Toast.LENGTH_SHORT).show();
-            }
-
-
-            @Override
-            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-                Toast.makeText(Auth_Exif.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-            }
-        };
-
-
-        new TedPermission(this)
-
-                .setPermissionListener(permissionlistener)
-
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-
-                .check();
+        tedPermission();
 
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToAlbum();
+                // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
+                if (isPermission) goToAlbum();
+                else
+                    Toast.makeText(view.getContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
+
             }
         });
 
         findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takePhoto();
+                // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
+                if (isPermission) takePhoto();
+                else
+                    Toast.makeText(view.getContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
+
             }
         });
 
-        findViewById(R.id.imageVeiew).setOnClickListener(popupDlgOnClickListener);
-
-        Intent intent = getIntent();
-        if (intent != null) {
-            String path = Environment.getExternalStorageDirectory() + "/DCIM/Camera" + R.id.dlgImageName + ".jpg";
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2;
-            Bitmap bm = BitmapFactory.decodeFile(path, options);
-            jpgView.setImageBitmap(bm);
-
-            try {
-                ExifInterface exif = new ExifInterface(path);
-                exifAttribute = getExif(exif);
-            } catch (IOException e) {
-                e.printStackTrace();
+        findViewById(R.id.exif_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Auth_Exif.this, SelectImage.class);
+                startActivity(intent);
             }
-        }
+        });
+
+
+
 
     }
 
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK) {
+        if (resultCode != Activity.RESULT_OK) {
             Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show();
 
-            if(tempFile != null) {
-                if(tempFile.exists()) {
-                    if(tempFile.delete()) {
+            if (tempFile != null) {
+                if (tempFile.exists()) {
+                    if (tempFile.delete()) {
                         Log.e(TAG, tempFile.getAbsolutePath() + " 삭제 성공");
                         tempFile = null;
-                    } else {
-                        Log.e(TAG, "tempFile 삭제 실패");
                     }
-
-                } else {
-                    Log.e(TAG, "tempFile 존재하지 않음");
                 }
-            } else {
-                Log.e(TAG, "tempFile is null");
             }
 
             return;
@@ -158,7 +129,7 @@ public class Auth_Exif extends AppCompatActivity {
                  *  Uri 스키마를
                  *  content:/// 에서 file:/// 로  변경한다.
                  */
-                String[] proj = { MediaStore.Images.Media.DATA };
+                String[] proj = {MediaStore.Images.Media.DATA};
 
                 assert photoUri != null;
                 cursor = getContentResolver().query(photoUri, proj, null, null, null);
@@ -188,7 +159,7 @@ public class Auth_Exif extends AppCompatActivity {
     }
 
     /**
-     *  앨범에서 이미지 가져오기
+     * 앨범에서 이미지 가져오기
      */
     private void goToAlbum() {
         isCamera = false;
@@ -200,9 +171,10 @@ public class Auth_Exif extends AppCompatActivity {
 
 
     /**
-     *  카메라에서 이미지 가져오기
+     * 카메라를 이미지 가져오기
      */
     private void takePhoto() {
+        isCamera = true;
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -215,10 +187,16 @@ public class Auth_Exif extends AppCompatActivity {
         }
         if (tempFile != null) {
 
+            /**
+             *  안드로이드 OS 누가 버전 이후부터는 file:// URI 의 노출을 금지로 FileUriExposedException 발생
+             *  Uri 를 FileProvider 도 감싸 주어야 합니다.
+             *
+             *  참고 자료 http://programmar.tistory.com/4 , http://programmar.tistory.com/5
+             */
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 
                 Uri photoUri = FileProvider.getUriForFile(this,
-                        "{package name}.provider", tempFile);
+                        "authentication.provider", tempFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 startActivityForResult(intent, PICK_FROM_CAMERA);
 
@@ -233,15 +211,16 @@ public class Auth_Exif extends AppCompatActivity {
     }
 
     /**
-     *  폴더 및 파일 만들기
+     * 폴더 및 파일 만들기
      */
     private File createImageFile() throws IOException {
 
-        // 이미지 파일 이름 ( blackJin_{시간}_ )
-        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String imageFileName = timeStamp + "_";
+        // 이미지 파일 이름
+        String timeStamp_day = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String timeStamp_time = new SimpleDateFormat("HHmmss").format(new Date());
+        String imageFileName = timeStamp_day + "_" + timeStamp_time;
 
-        // 이미지가 저장될 파일 주소 ( blackJin )
+        // 이미지가 저장될 파일 주소
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera");
         if (!storageDir.exists()) storageDir.mkdirs();
 
@@ -253,88 +232,57 @@ public class Auth_Exif extends AppCompatActivity {
     }
 
     /**
-     *  tempFile 을 bitmap 으로 변환 후 ImageView 에 설정한다.
+     * tempFile 을 bitmap 으로 변환 후 ImageView 에 설정한다.
      */
     private void setImage() {
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageVeiew);
-
-        ImageResizeUtils.resizeFile(tempFile, tempFile, 1280, isCamera);
+        ImageView imageView = findViewById(R.id.exif_image);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         Log.d(TAG, "setImage : " + tempFile.getAbsolutePath());
+        currentPhotoPath = tempFile.getAbsolutePath();
+        context = Auth_Exif.this;
 
         imageView.setImageBitmap(originalBm);
 
-
-        /**
-         *  tempFile 사용 후 null 처리를 해줘야 합니다.
-         *  (resultCode != RESULT_OK) 일 때 tempFile 을 삭제하기 때문에
-         *  기존에 데이터가 남아 있게 되면 원치 않은 삭제가 이뤄집니다.
-         */
-        tempFile = null;
-
     }
-    View.OnClickListener popupDlgOnClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            createdDialog(ID_JPGDIALOG).show(); // Instead of showDialog(0);
-        }
-    };
-    protected Dialog createdDialog(int id) {
-        dlg = null;
-        TextView content;
-
-        switch (id) {
-            case ID_JPGDIALOG:
-
-                Context mContext = this;
-                dlg = new Dialog(mContext);
-
-                dlg.setContentView(R.layout.select_image);
-                content = (TextView) dlg.findViewById(R.id.dlgImageName);
-                content.setText(exifAttribute);
-
-                Button okDialogButton = (Button) dlg.findViewById(R.id.btnOk);
-                okDialogButton.setOnClickListener(okDialogButtonOnClickListener);
-
-                break;
-            default:
-                break;
-        }
-        return dlg;
-    }
-    private Button.OnClickListener okDialogButtonOnClickListener =
-            new Button.OnClickListener() {
-                public void onClick(View v) {
-                    dlg.dismiss();
-                }
-            };
-
 
     /**
-     *  사진 정보 불러오기
+     * 권한 설정
      */
-    private String getExif(ExifInterface exif) {
-        String myAttribute = "";
-        myAttribute += getTagString(ExifInterface.TAG_DATETIME, exif);
-        myAttribute += getTagString(ExifInterface.TAG_FLASH, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE_REF, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE_REF, exif);
-        myAttribute += getTagString(ExifInterface.TAG_IMAGE_LENGTH, exif);
-        myAttribute += getTagString(ExifInterface.TAG_IMAGE_WIDTH, exif);
-        myAttribute += getTagString(ExifInterface.TAG_MAKE, exif);
-        myAttribute += getTagString(ExifInterface.TAG_MODEL, exif);
-        myAttribute += getTagString(ExifInterface.TAG_ORIENTATION, exif);
-        myAttribute += getTagString(ExifInterface.TAG_WHITE_BALANCE, exif);
-        return myAttribute;
+    private void tedPermission() {
+
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                // 권한 요청 성공
+                isPermission = true;
+
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                // 권한 요청 실패
+                isPermission = false;
+
+            }
+        };
+
+        new TedPermission(this)
+                .setPermissionListener(permissionListener)
+                .setRationaleMessage(getResources().getString(R.string.permission_2))
+                .setDeniedMessage(getResources().getString(R.string.permission_1))
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .check();
+
     }
 
-    private String getTagString(String tag, ExifInterface exif) {
-        return (tag + " : " + exif.getAttribute(tag) + "\n");
+    public void onClickAuth(View view) {
+        if (view.getId() == R.id.exif_image) {
+            intent = new Intent(Auth_Exif.this, SelectImage.class);
+            startActivity(intent);
+        }
     }
-
 
 }
