@@ -90,6 +90,7 @@
         <activity android:name="authentication.SelectAuth"></activity>
         <activity android:name="authentication.Auth_Exif"></activity>
         <activity android:name="authentication.Auth_Gps"></activity>
+        <activity android:name="authentication.SelectImage"></activity>
         <activity
             android:name="display.Menu"
             android:label="@string/title_activity_detail1"
