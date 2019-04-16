@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/imageVeiew"
+        android:id="@+id/exif_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,13 +31,13 @@
             android:id="@+id/btnGallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gallery" />
+            android:text="갤러리" />
 
         <Button
             android:id="@+id/btnCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Camera" />
+            android:text="카메라" />
 
     </LinearLayout>
 

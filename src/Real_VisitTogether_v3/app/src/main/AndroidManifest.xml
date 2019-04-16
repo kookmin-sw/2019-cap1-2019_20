@@ -90,6 +90,10 @@
         <activity android:name="authentication.SelectAuth"></activity>
         <activity android:name="authentication.Auth_Exif"></activity>
         <activity android:name="authentication.Auth_Gps"></activity>
+<<<<<<< HEAD
+        <activity android:name="authentication.SelectImage"></activity>
+=======
+>>>>>>> ff17a21a33a3794f85ea9ff086dcf4ddfeb31cac
         <activity
             android:name="display.Menu"
             android:label="@string/title_activity_detail1"
