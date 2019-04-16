@@ -48,10 +48,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-//        if(view.getId() == R.id.button1){
-//            intent = new Intent(Display.this, Menu.class);
-//            startActivity(intent);
-//        }
+
         if(view.getId() == R.id.temp_btn1){
             intent = new Intent(Display.this, Event1.class);
             startActivity(intent);
