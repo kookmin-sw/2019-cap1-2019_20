@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 
 public class DB_Access extends AppCompatActivity {
 
-    private String url = "http://9404802d.ngrok.io/phpinfo.php";
+    private String url = "http://13.124.201.137:50156/";
     private TextView json_text;
 
     @Override

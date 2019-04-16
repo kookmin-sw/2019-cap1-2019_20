@@ -38,5 +38,4 @@ public class placeAdd extends AppCompatActivity {
         spinner.setAdapter(arrayAdapter);
 
     }
-
 }

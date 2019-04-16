@@ -8,13 +8,13 @@
 
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/mylocation"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
         android:layout_marginTop="429dp"
         android:layout_marginEnd="5dp"
-        android:text="내 위치정보 가져오기/인증"
+        android:text="내 위치정보 가져오기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,6 +28,33 @@
         android:layout_marginTop="489dp"
         android:layout_marginEnd="36dp"
         android:text="위치정보 :GPS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    //지도 구현
+
+    <fragment
+        android:id="@+id/mapView2"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="394dp"
+        android:layout_height="415dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="306dp"
+        android:layout_marginTop="538dp"
+        android:layout_marginEnd="17dp"
+        android:text="인증"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
