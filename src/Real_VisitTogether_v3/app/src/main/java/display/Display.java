@@ -10,22 +10,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-<<<<<<< HEAD
-import android.widget.Toast;
 
-=======
->>>>>>> master
+import android.widget.Toast;
 import com.example.real_visittogether.R;
 import com.google.gson.Gson;
 
 import data_fetcher.RequestHttpConnection;
 import event.Event1;
 import event.Event2;
-<<<<<<< HEAD
+
 import toolbar_menu.Help;
 import toolbar_menu.MyPage;
-=======
->>>>>>> master
 import vt_object.Event;
 
 public class Display extends AppCompatActivity implements View.OnClickListener {
@@ -54,14 +49,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-<<<<<<< HEAD
 
-=======
-//        if(view.getId() == R.id.button1){
-//            intent = new Intent(Display.this, Menu.class);
-//            startActivity(intent);
-//        }
->>>>>>> master
         if(view.getId() == R.id.temp_btn1){
             intent = new Intent(Display.this, Event1.class);
             startActivity(intent);
@@ -81,7 +69,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         inflater.inflate(R.menu.menu_1, menu);
         return true;
     }
-<<<<<<< HEAD
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -107,8 +95,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-=======
->>>>>>> master
+
 
     // 네트워크 연결을 수행하는 이너클래스
     // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
@@ -155,8 +142,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             }
         }
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> master
+
+

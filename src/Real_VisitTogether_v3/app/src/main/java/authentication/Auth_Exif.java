@@ -196,11 +196,7 @@ public class Auth_Exif extends AppCompatActivity {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 
                 Uri photoUri = FileProvider.getUriForFile(this,
-<<<<<<< HEAD
-                        "Authentication.provider", tempFile);
-=======
                         "authentication.provider", tempFile);
->>>>>>> master
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 startActivityForResult(intent, PICK_FROM_CAMERA);
 
@@ -289,8 +285,4 @@ public class Auth_Exif extends AppCompatActivity {
         }
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
