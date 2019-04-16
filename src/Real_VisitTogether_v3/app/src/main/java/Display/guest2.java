@@ -51,5 +51,13 @@ public class guest2 extends AppCompatActivity {
         eventreward.setText(reward);
 
 
+
+
+       // String place = intent.getStringExtra("place");
+
+        //TextView eventplace = (TextView) findViewById(R.id.eventplace);
+        //eventplace.setText(place);
+
+
     }
 }

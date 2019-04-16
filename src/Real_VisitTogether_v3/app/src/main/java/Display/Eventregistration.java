@@ -13,7 +13,7 @@ public class Eventregistration extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle("이벤트 등록");
+        setTitle("이벤트 등록");  // 타이틀바 텍스트 변경
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventregistration);
 

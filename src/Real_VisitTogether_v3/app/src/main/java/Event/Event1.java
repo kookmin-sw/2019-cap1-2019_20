@@ -87,6 +87,8 @@ public class Event1 extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.event1);
+
+        //ImageView에 출력되는 이미지를 변경,ImageView의 id를 이용하여 참조를 획득한 다음, setImageResource() 함수를 호출
         ImageView image1 = (ImageView) findViewById(R.id.imageView) ;
         image1.setImageResource(R.drawable.drink) ;
 

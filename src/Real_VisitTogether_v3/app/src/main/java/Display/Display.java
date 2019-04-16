@@ -28,8 +28,8 @@ public class Display extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Eventregistration.class);
-                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), Eventregistration.class); // 현재 화면의 제어권자 // 다음 넘어갈 클래스 지정
+                startActivity(intent); // 다음 화면으로 넘어간다
             }
         });
     }
@@ -56,8 +56,12 @@ public class Display extends AppCompatActivity {
 
     }
     public boolean onCreateOptionsMenu(Menu menu){
+        // 메뉴버튼이 처음 눌러졌을 때 실행되는 콜백메서드
+        // 메뉴버튼을 눌렀을 때 보여줄 menu 에 대해서 정의
+
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_1, menu);
+        inflater.inflate(R.menu.menu_1, menu);  //menu_1.xml 파일을 java 객체로 인플레이트(inflate)해서 menu객체에 추가
+
         return true;
     }
 }
