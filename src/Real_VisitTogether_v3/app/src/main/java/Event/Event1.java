@@ -1,4 +1,4 @@
-package Event;
+package event;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -10,6 +10,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -40,10 +41,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Vector;
+
+import data_fetcher.RequestHttpConnection;
+import vt_object.EventHasPlace;
+import vt_object.Place;
 
 
 public class Event1 extends AppCompatActivity
@@ -53,7 +60,10 @@ public class Event1 extends AppCompatActivity
         LocationListener {
 
 
-    private String place;
+    private NetworkTask networkTask;
+
+    private TextView[] place_text;
+
     Intent intent;
 
     private GoogleApiClient mGoogleApiClient = null;
@@ -79,7 +89,6 @@ public class Event1 extends AppCompatActivity
             .setInterval(UPDATE_INTERVAL_MS)
             .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +96,7 @@ public class Event1 extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.event1);
+
         ImageView image1 = (ImageView) findViewById(R.id.imageView) ;
         image1.setImageResource(R.drawable.drink) ;
 
@@ -96,10 +106,13 @@ public class Event1 extends AppCompatActivity
         ImageView image3 = (ImageView) findViewById(R.id.imageView3) ;
         image3.setImageResource(R.drawable.oven) ;
 
+        place_text = new TextView[3];
+        place_text[0] = (TextView) findViewById(R.id.place_name1);
+        place_text[1] = (TextView) findViewById(R.id.place_name2);
+        place_text[2] = (TextView) findViewById(R.id.place_name3);
 
         Log.d(TAG, "onCreate");
         mActivity = this;
-
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -107,36 +120,36 @@ public class Event1 extends AppCompatActivity
                 .addApi(LocationServices.API)
                 .build();
 
-
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
+
+        networkTask = new NetworkTask();
+        networkTask.execute();
     }
 
     public void onClickEvent1(View view) {
 
-        TextView t;
+        String temp;
+
         if (view.getId() == R.id.imageView) {
-            intent = new Intent(Event1.this, Authentication.SelectAuth.class);
-            t = (TextView) findViewById(R.id.taste1);
-            place = t.getText().toString();
-            intent.putExtra("place", place);
+            intent = new Intent(Event1.this, authentication.SelectAuth.class);
+            temp = place_text[0].getText().toString();
+            intent.putExtra("place", temp);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView2) {
-            intent = new Intent(Event1.this, Authentication.SelectAuth.class);
-            t = (TextView) findViewById(R.id.taste2);
-            place = t.getText().toString();
-            intent.putExtra("place", place);
+            intent = new Intent(Event1.this, authentication.SelectAuth.class);
+            temp = place_text[0].getText().toString();
+            intent.putExtra("place", temp);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView3) {
-            intent = new Intent(Event1.this, Authentication.SelectAuth.class);
-            t = (TextView) findViewById(R.id.taste3);
-            place = t.getText().toString();
-            intent.putExtra("place", place);
+            intent = new Intent(Event1.this, authentication.SelectAuth.class);
+            temp = place_text[0].getText().toString();
+            intent.putExtra("place", temp);
             startActivity(intent);
         }
     }
@@ -152,7 +165,6 @@ public class Event1 extends AppCompatActivity
             if (!mRequestingLocationUpdates) startLocationUpdates();
         }
 
-
         //앱 정보에서 퍼미션을 허가했는지를 다시 검사해봐야 한다.
         if (askPermissionOnceAgain) {
 
@@ -163,7 +175,6 @@ public class Event1 extends AppCompatActivity
             }
         }
     }
-
 
     private void startLocationUpdates() {
 
@@ -180,15 +191,12 @@ public class Event1 extends AppCompatActivity
                 return;
             }
 
-
             Log.d(TAG, "startLocationUpdates : call FusedLocationApi.requestLocationUpdates");
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, this);
             mRequestingLocationUpdates = true;
 
             mGoogleMap.setMyLocationEnabled(true);
-
         }
-
     }
 
 
@@ -200,15 +208,12 @@ public class Event1 extends AppCompatActivity
         mRequestingLocationUpdates = false;
     }
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         Log.d(TAG, "onMapReady :");
 
         mGoogleMap = googleMap;
-
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치로 이동
@@ -252,24 +257,20 @@ public class Event1 extends AppCompatActivity
             }
         });
 
-
         mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
 
             @Override
             public void onCameraMove() {
 
-
             }
         });
     }
-
 
     @Override
     public void onLocationChanged(Location location) {
 
         currentPosition
                 = new LatLng( location.getLatitude(), location.getLongitude());
-
 
         Log.d(TAG, "onLocationChanged : ");
 
@@ -282,7 +283,6 @@ public class Event1 extends AppCompatActivity
 
         mCurrentLocatiion = location;
     }
-
 
     @Override
     protected void onStart() {
@@ -318,7 +318,6 @@ public class Event1 extends AppCompatActivity
     @Override
     public void onConnected(Bundle connectionHint) {
 
-
         if ( mRequestingLocationUpdates == false ) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -349,14 +348,12 @@ public class Event1 extends AppCompatActivity
         }
     }
 
-
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
         Log.d(TAG, "onConnectionFailed");
         setDefaultLocation();
     }
-
 
     @Override
     public void onConnectionSuspended(int cause) {
@@ -369,7 +366,6 @@ public class Event1 extends AppCompatActivity
             Log.e(TAG, "onConnectionSuspended():  Google Play services " +
                     "connection lost.  Cause: service disconnected");
     }
-
 
     public String getCurrentAddress(LatLng latlng) {
 
@@ -394,7 +390,6 @@ public class Event1 extends AppCompatActivity
 
         }
 
-
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
@@ -403,9 +398,7 @@ public class Event1 extends AppCompatActivity
             Address address = addresses.get(0);
             return address.getAddressLine(0).toString();
         }
-
     }
-
 
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -414,14 +407,11 @@ public class Event1 extends AppCompatActivity
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
 
         mMoveMapByUser = false;
 
-
         if (currentMarker != null) currentMarker.remove();
-
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -431,9 +421,7 @@ public class Event1 extends AppCompatActivity
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
 
-
         currentMarker = mGoogleMap.addMarker(markerOptions);
-
 
         if ( mMoveMapByAPI ) {
 
@@ -445,17 +433,19 @@ public class Event1 extends AppCompatActivity
         }
     }
 
-
     public void setDefaultLocation() {
 
         mMoveMapByUser = false;
 
-
         //디폴트 위치, 국민대학교
         LatLng DEFAULT_LOCATION = new LatLng(37.611099, 126.997182);
+        //노가리 , 송백식당 , 주당끼리 주소 일단입력해놨음
+        LatLng Place1 = new LatLng(37.607640, 127.001356);
+        LatLng Place2 = new LatLng(37.610819, 126.994235);
+        LatLng Place3 = new LatLng(37.607918, 126.999681);
+
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
-
 
         if (currentMarker != null) currentMarker.remove();
 
@@ -467,11 +457,37 @@ public class Event1 extends AppCompatActivity
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
+        //event1에 나오는 미션장소3군데
+        markerOptions
+                .position(Place1)
+                .title("노가리")
+                .snippet("위도 : 37.607640 경도 :127.001356")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .alpha(0.5f);
+        mGoogleMap.addMarker(markerOptions);
+
+        markerOptions
+                .position(Place2)
+                .title("송백식당")
+                .snippet("위도 : 37.610819 경도 :126.994235")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .alpha(0.5f);
+        mGoogleMap.addMarker(markerOptions);
+
+        markerOptions
+                .position(Place3)
+                .title("주당끼리")
+                .snippet("위도 : 37.607918 경도 :126.999681")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .alpha(0.5f);
+
+        mGoogleMap.addMarker(markerOptions);
+        //여기까지 미션장소들
+
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mGoogleMap.moveCamera(cameraUpdate);
 
     }
-
 
     //여기부터는 런타임 퍼미션 처리을 위한 메소드들
     @TargetApi(Build.VERSION_CODES.M)
@@ -491,7 +507,6 @@ public class Event1 extends AppCompatActivity
             showDialogForPermissionSetting("퍼미션 거부 + Don't ask again(다시 묻지 않음) " +
                     "체크 박스를 설정한 경우로 설정에서 퍼미션 허가해야합니다.");
         } else if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED) {
-
 
             Log.d(TAG, "checkPermissions : 퍼미션 가지고 있음");
 
@@ -521,16 +536,12 @@ public class Event1 extends AppCompatActivity
                     Log.d(TAG, "onRequestPermissionsResult : mGoogleApiClient connect");
                     mGoogleApiClient.connect();
                 }
-
-
-
             } else {
 
                 checkPermissions();
             }
         }
     }
-
 
     @TargetApi(Build.VERSION_CODES.M)
     private void showDialogForPermission(String msg) {
@@ -581,7 +592,6 @@ public class Event1 extends AppCompatActivity
         builder.create().show();
     }
 
-
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {
 
@@ -607,7 +617,6 @@ public class Event1 extends AppCompatActivity
         builder.create().show();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -622,7 +631,6 @@ public class Event1 extends AppCompatActivity
 
                         Log.d(TAG, "onActivityResult : 퍼미션 가지고 있음");
 
-
                         if ( mGoogleApiClient.isConnected() == false ) {
 
                             Log.d( TAG, "onActivityResult : mGoogleApiClient connect ");
@@ -631,10 +639,83 @@ public class Event1 extends AppCompatActivity
                         return;
                     }
                 }
-
                 break;
         }
     }
 
+    // 네트워크 연결을 수행하는 이너클래스
+    // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
+    public class NetworkTask extends AsyncTask<Void, Void, Void> {
 
+        final private String url_p = "place/";
+        final private String url_ehp = "event_has_place/";
+
+        private String place_str, relation_str;
+        private String[] place_dict, relation_dict;
+
+        private Place temp_place;
+        private Vector<Place> places;
+
+        private EventHasPlace temp_ehp;
+        private Vector<EventHasPlace> ehps;
+
+
+        private Gson gson;
+
+        // NetworkTask의 execute 메소드가 호출된 후 실행되는 메소드
+        // doin 메소드로 파라미터 전달
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            gson = new Gson();
+            temp_ehp = new EventHasPlace();
+            places = new Vector<Place>();
+            ehps = new Vector<EventHasPlace>();
+        }
+
+        // 백그라운드 스레드에서 처리되는 부분
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            // 네트워크 연결
+            RequestHttpConnection connection = new RequestHttpConnection();
+
+            // 리턴된 "{..}\n{..} ... {..}" 값들을 split
+            place_str = connection.request(url_p);
+            place_dict = place_str.split("\n");
+
+            relation_str = connection.request(url_ehp);
+            relation_dict = relation_str.split("\n");
+
+            return null;
+        }
+
+        // 백그라운드 작업 결과 반영
+        // doin 메소드로 파라미터를 받는다
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            // 관계 엔티티에서 이벤트 1인 경우만 뽑아냄
+            for(int i = 0; i < relation_dict.length; i++){
+                temp_ehp = gson.fromJson(relation_dict[i], EventHasPlace.class);
+                if(temp_ehp.getEvent_id() == 1)
+                    ehps.add(temp_ehp);
+            }
+
+            // 뽑아낸 데이터와 Place 데이터 매칭
+            for(int i = 0; i < ehps.size(); i++){
+                for(int j = 0; j < place_dict.length; j++){
+                    temp_place = gson.fromJson(place_dict[j], Place.class);
+                    if(ehps.elementAt(i).getPlace_id() == temp_place.getId())
+                        places.add(temp_place);
+                }
+            }
+
+            // 매칭된 데이터의 name으로 setText()
+            for(int i = 0; i < place_text.length; i++){
+                place_text[i].setText(places.elementAt(i).getName());
+            }
+        }
+    }
 }

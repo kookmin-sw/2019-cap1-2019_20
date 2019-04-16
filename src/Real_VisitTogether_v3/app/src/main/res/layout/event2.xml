@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Event.Event1">
+    tools:context="event.Event1">
 
     <ImageView
         android:id="@+id/image1"
@@ -60,8 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="117dp"
         android:layout_marginEnd="71dp"
-        android:layout_marginRight="71dp"
-        android:text="남대문"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image1"
@@ -72,9 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="57dp"
-        android:layout_marginRight="57dp"
         android:layout_marginBottom="86dp"
-        android:text="동대문"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="@+id/image2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,8 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="69dp"
-        android:layout_marginRight="69dp"
-        android:text="서대문"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="@+id/image3"
         app:layout_constraintEnd_toEndOf="parent"

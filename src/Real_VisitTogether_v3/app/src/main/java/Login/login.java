@@ -1,4 +1,4 @@
-package Login;
+package login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import Display.Display;
+import display.Display;
 import com.example.real_visittogether.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -100,7 +100,7 @@ public class login extends AppCompatActivity {
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(login.this, Login.Sign_in.class),Sign_in);
+                startActivityForResult(new Intent(login.this, Sign_in.class),Sign_in);
 
             }
         });

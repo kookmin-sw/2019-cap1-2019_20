@@ -1,21 +1,15 @@
-package Authentication;
+package authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.real_visittogether.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import Event.Event1;
 
 public class SelectAuth extends AppCompatActivity {
     //인증 성공 유무에따라 부여되는값

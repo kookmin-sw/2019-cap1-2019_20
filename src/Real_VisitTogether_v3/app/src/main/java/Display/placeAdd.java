@@ -1,4 +1,4 @@
-package Display;
+package display;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,5 +38,4 @@ public class placeAdd extends AppCompatActivity {
         spinner.setAdapter(arrayAdapter);
 
     }
-
 }
