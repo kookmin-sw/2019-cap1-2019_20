@@ -110,9 +110,6 @@ public class Event1 extends AppCompatActivity
         ImageView image3 = (ImageView) findViewById(R.id.imageView3) ;
         image3.setImageResource(R.drawable.oven) ;
 
-        join_button = (Button) findViewById(R.id.Participation);
-
-
         place_text = new TextView[3];
         place_text[0] = (TextView) findViewById(R.id.place_name1);
         place_text[1] = (TextView) findViewById(R.id.place_name2);
@@ -184,6 +181,9 @@ public class Event1 extends AppCompatActivity
             startActivity(intent);
         }
 
+        join_button = (Button) findViewById(R.id.Participation);
+        if(view.getId() == R.id.Participation)
+            join_button.setBackgroundColor(Color.BLUE);
     }
 
     @Override
