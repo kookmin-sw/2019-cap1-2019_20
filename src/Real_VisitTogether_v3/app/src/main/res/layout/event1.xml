@@ -78,18 +78,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/Participation"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:text="참여"
-            android:onClick="onClickEvent1" />
-
-
-        <Button
             android:id="@+id/Rank"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:text="랭킹" />
+        <!--참여 버튼 우측으로 밀기위한 수단-->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/Participation"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="right"
+            android:onClick="onClickEvent1"
+            android:text="참여" />
+
+
     </LinearLayout>
 
 </LinearLayout>
