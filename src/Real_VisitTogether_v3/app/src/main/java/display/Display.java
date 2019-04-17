@@ -46,6 +46,12 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
         networkTask = new NetworkTask();
         networkTask.execute();
+        Button temp = (Button) findViewById(R.id.temp_btn3);
+        if(getIntent().getIntExtra("check",0) ==1){
+            temp.setText("7호관 447호");
+            temp.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void onClick(View view) {
@@ -62,6 +68,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             intent = new Intent(getApplicationContext(), Eventregistration.class);
             startActivity(intent);
         }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
