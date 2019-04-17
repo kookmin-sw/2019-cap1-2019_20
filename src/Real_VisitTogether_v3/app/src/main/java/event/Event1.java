@@ -52,6 +52,7 @@ import java.util.Locale;
 import java.util.Vector;
 
 import data_fetcher.RequestHttpConnection;
+import toolbar_menu.mypage.Ranking;
 import vt_object.EventHasPlace;
 import vt_object.Place;
 
@@ -181,6 +182,9 @@ public class Event1 extends AppCompatActivity
             startActivity(intent);
         }
 
+        if(view.getId() == R.id.Rank){
+            startActivity(new Intent(this, Ranking.class));
+        }
         join_button = (Button) findViewById(R.id.Participation);
         if(view.getId() == R.id.Participation)
             join_button.setBackgroundColor(Color.BLUE);

@@ -1,7 +1,9 @@
 package display;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -37,5 +39,13 @@ public class placeAdd extends AppCompatActivity {
         spinner = (Spinner)findViewById(R.id.spinner);
         spinner.setAdapter(arrayAdapter);
 
+    }
+    public void onClick(View v)
+    {
+        if(v.getId() == R.id.regist){
+            Intent display =new Intent(getApplicationContext(),Display.class);
+            display.putExtra("check",1);
+            startActivity(display);
+        }
     }
 }

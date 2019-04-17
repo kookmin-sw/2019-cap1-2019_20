@@ -31,7 +31,17 @@
         android:layout_marginBottom="20dp"
         android:layout_gravity="center"
         android:onClick="onClick" />
-
+    <Button
+        android:id="@+id/temp_btn3"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:onClick="onClick" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/actionButton"
