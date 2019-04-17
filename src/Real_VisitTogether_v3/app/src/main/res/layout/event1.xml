@@ -51,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 <<<<<<< HEAD
+<<<<<<< HEAD
         android:layout_marginEnd="69dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -87,6 +88,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 =======
+=======
+>>>>>>> master
         android:orientation="horizontal">
 
         <ImageView
@@ -102,7 +105,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     </LinearLayout>
+<<<<<<< HEAD
 >>>>>>> bab0d0a7e6b13a248fb21889b92de4869ddcc50b
+=======
+>>>>>>> master
 
     <fragment
         android:id="@+id/mapView"

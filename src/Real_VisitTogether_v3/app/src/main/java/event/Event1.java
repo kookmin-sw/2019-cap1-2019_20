@@ -179,6 +179,7 @@ public class Event1 extends AppCompatActivity
             temp = place_text[2].getText().toString();
             intent.putExtra("place", temp);
             intent.putExtra("place_num", 3);
+<<<<<<< HEAD
             startActivity(intent);
         }
 
@@ -192,6 +193,14 @@ public class Event1 extends AppCompatActivity
         if(view.getId() == R.id.Participation)
             join_button.setBackgroundColor(Color.BLUE);
 >>>>>>> bab0d0a7e6b13a248fb21889b92de4869ddcc50b
+=======
+            startActivity(intent);
+        }
+
+        join_button = (Button) findViewById(R.id.Participation);
+        if(view.getId() == R.id.Participation)
+            join_button.setBackgroundColor(Color.BLUE);
+>>>>>>> master
     }
 
     @Override
