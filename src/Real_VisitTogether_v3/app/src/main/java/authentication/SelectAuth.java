@@ -17,7 +17,11 @@ public class SelectAuth extends AppCompatActivity {
     private int fail = 10001;
     private String QR_Info;
     private String place;
-    Intent intent;
+    private Intent intent;
+
+    private Intent temp_intent;
+    private int temp_place_num;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,23 +29,27 @@ public class SelectAuth extends AppCompatActivity {
         intent = getIntent();
         place = intent.getStringExtra("place");
 
+        temp_intent = getIntent();
+        temp_place_num = temp_intent.getIntExtra("place_num", 0);
+        System.out.printf("SelectAuth 화면에서 place_num = %d 받음\n", temp_place_num);
     }
-    public void Select_Auth(View v){
-        if(v.getId() == R.id.auth_exif){
+
+    public void Select_Auth(View v) {
+        if (v.getId() == R.id.auth_exif) {
             intent = new Intent(SelectAuth.this, Auth_Exif.class);
             startActivity(intent);
-        }
-        else if(v.getId() == R.id.auth_qr){
+        } else if (v.getId() == R.id.auth_qr) {
             new IntentIntegrator(SelectAuth.this).initiateScan();
 
-        }else if(v.getId() == R.id.auth_bicorn){
+        } else if (v.getId() == R.id.auth_bicorn) {
             intent = new Intent(SelectAuth.this, Auth_Exif.class);
             startActivity(intent);
-        }else if(v.getId() == R.id.auth_gps){
+        } else if (v.getId() == R.id.auth_gps) {
             intent = new Intent(SelectAuth.this, Auth_Gps.class);
             startActivity(intent);
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -52,16 +60,21 @@ public class SelectAuth extends AppCompatActivity {
             }
             //QR코드가 있을 경우
             else {
-                     QR_Info = result.getContents();
-                    place = getIntent().getStringExtra("place");
-                    Toast.makeText(SelectAuth.this, place.toString(), Toast.LENGTH_SHORT).show();
-                    if(QR_Info.equals(place) )
-                        Toast.makeText(SelectAuth.this, "인증성공", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(SelectAuth.this, "인증실패", Toast.LENGTH_SHORT).show();
-
+                temp_intent = new Intent(this, event.Event1.class);
+                QR_Info = result.getContents();
+                place = getIntent().getStringExtra("place");
+                Toast.makeText(SelectAuth.this, place.toString(), Toast.LENGTH_SHORT).show();
+                if (QR_Info.equals(place)) {
+                    Toast.makeText(SelectAuth.this, "인증성공", Toast.LENGTH_SHORT).show();
+                    temp_intent.putExtra("authenticated", true);
+                } else {
+                    Toast.makeText(SelectAuth.this, "인증실패", Toast.LENGTH_SHORT).show();
+                    temp_intent.putExtra("authenticated", true);
+                }
+                temp_intent.putExtra("place_num", temp_place_num);
+                startActivity(temp_intent);
+                finish();
             }
         }
     }
-
 }

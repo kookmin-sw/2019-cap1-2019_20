@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,7 +23,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,12 +62,13 @@ public class Event1 extends AppCompatActivity
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-
     private NetworkTask networkTask;
 
     private TextView[] place_text;
 
-    Intent intent;
+    private Intent intent;
+
+    private Button join_button;
 
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
@@ -126,6 +130,27 @@ public class Event1 extends AppCompatActivity
 
         networkTask = new NetworkTask();
         networkTask.execute();
+
+        Intent temp_intent = getIntent();
+        int place_num = temp_intent.getIntExtra("place_num", 0);
+        System.out.printf("다시 SelectAuth 화면으로부터 place_num = %d 받음\n인증됐음? == %b", place_num, temp_intent.getBooleanExtra("authenticated", false));
+        if (temp_intent.getBooleanExtra("authenticated", false) == true) {
+            if (place_num == 1) {
+                LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout1);
+                layout.setBackgroundColor(Color.BLUE);
+                layout.setAlpha(0.8f);
+            }
+            if (place_num == 2) {
+                LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout2);
+                layout.setBackgroundColor(Color.BLUE);
+                layout.setAlpha(0.8f);
+            }
+            if (place_num == 3) {
+                LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout3);
+                layout.setBackgroundColor(Color.BLUE);
+                layout.setAlpha(0.8f);
+            }
+        }
     }
 
     public void onClickEvent1(View view) {
@@ -136,22 +161,29 @@ public class Event1 extends AppCompatActivity
             intent = new Intent(Event1.this, authentication.SelectAuth.class);
             temp = place_text[0].getText().toString();
             intent.putExtra("place", temp);
+            intent.putExtra("place_num", 1);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView2) {
             intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            temp = place_text[0].getText().toString();
+            temp = place_text[1].getText().toString();
             intent.putExtra("place", temp);
+            intent.putExtra("place_num", 2);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView3) {
             intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            temp = place_text[0].getText().toString();
+            temp = place_text[2].getText().toString();
             intent.putExtra("place", temp);
+            intent.putExtra("place_num", 3);
             startActivity(intent);
         }
+
+        join_button = (Button) findViewById(R.id.Participation);
+        if(view.getId() == R.id.Participation)
+            join_button.setBackgroundColor(Color.BLUE);
     }
 
     @Override
