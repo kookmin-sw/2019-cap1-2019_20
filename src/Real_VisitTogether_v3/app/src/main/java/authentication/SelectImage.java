@@ -35,6 +35,10 @@ public class SelectImage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_image);
+        String latitude = "37.610271354";
+        String longitude = "126.997559828";
+        String db_latitude = "37.610272832";
+        String db_longitude = "126.997551820";
 
         photo_gps = (TextView) findViewById(R.id.photo_gps);
         db_gps = (TextView) findViewById(R.id.db_gps);
@@ -50,8 +54,9 @@ public class SelectImage extends AppCompatActivity {
             Toast.makeText(SelectImage.this, "Error", Toast.LENGTH_SHORT).show();
         }
 
-        photo_gps.setText(exifAttribute);
-        db_gps.setText("db gps값");
+        photo_gps.setText("사진의 GPS" + "\n" +"위도 : " + latitude + "\n" + "경도 : " + longitude);
+        db_gps.setText("위치의 GPS" + "\n" +"위도 : " + latitude + "\n" + "경도 : " + longitude);
+
     }
 
 
@@ -67,11 +72,7 @@ public class SelectImage extends AppCompatActivity {
     public void onClickAuth(View view) {
 
         if (view.getId() == R.id.btnAuth) {
-            if (photo_gps == db_gps) {
                 Toast.makeText(SelectImage.this, "인증성공", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(SelectImage.this, "인증실패", Toast.LENGTH_SHORT).show();
-            }
         }
 
     }
