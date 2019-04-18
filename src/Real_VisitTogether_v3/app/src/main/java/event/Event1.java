@@ -52,6 +52,7 @@ import java.util.Locale;
 import java.util.Vector;
 
 import data_fetcher.RequestHttpConnection;
+import toolbar_menu.mypage.Ranking;
 import vt_object.EventHasPlace;
 import vt_object.Place;
 
@@ -65,8 +66,6 @@ public class Event1 extends AppCompatActivity
     private NetworkTask networkTask;
 
     private TextView[] place_text;
-
-    private Intent intent;
 
     private Button join_button;
 
@@ -131,59 +130,62 @@ public class Event1 extends AppCompatActivity
         networkTask = new NetworkTask();
         networkTask.execute();
 
-        Intent temp_intent = getIntent();
-        int place_num = temp_intent.getIntExtra("place_num", 0);
-        System.out.printf("다시 SelectAuth 화면으로부터 place_num = %d 받음\n인증됐음? == %b", place_num, temp_intent.getBooleanExtra("authenticated", false));
-        if (temp_intent.getBooleanExtra("authenticated", false) == true) {
+        Intent intent = getIntent();
+        int place_num = intent.getIntExtra("place_num", 0);
+        boolean authenticated = intent.getBooleanExtra("authenticated", false);
+        boolean joined = intent.getBooleanExtra("joined", false);
+        System.out.printf("\n<Event1>\nplace_num = %d\nauthenticated = %b\n", place_num, authenticated);
+        if(authenticated == true) {
             if (place_num == 1) {
                 LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout1);
-                layout.setBackgroundColor(Color.BLUE);
-                layout.setAlpha(0.8f);
+                layout.setBackgroundColor(Color.rgb(100,100,100));
+                layout.setAlpha(0.5f);
             }
             if (place_num == 2) {
                 LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout2);
-                layout.setBackgroundColor(Color.BLUE);
-                layout.setAlpha(0.8f);
+                layout.setBackgroundColor(Color.rgb(100,100,100));
+                layout.setAlpha(0.5f);
             }
             if (place_num == 3) {
                 LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout3);
-                layout.setBackgroundColor(Color.BLUE);
-                layout.setAlpha(0.8f);
+                layout.setBackgroundColor(Color.rgb(100,100,100));
+                layout.setAlpha(0.5f);
             }
         }
+
+        join_button = (Button) findViewById(R.id.Participation);
+        if(joined == true)
+            join_button.setBackgroundColor(Color.rgb(100,100,100));
+
     }
 
     public void onClickEvent1(View view) {
 
-        String temp;
-
         if (view.getId() == R.id.imageView) {
-            intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            temp = place_text[0].getText().toString();
-            intent.putExtra("place", temp);
+            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
             intent.putExtra("place_num", 1);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView2) {
-            intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            temp = place_text[1].getText().toString();
-            intent.putExtra("place", temp);
+            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
             intent.putExtra("place_num", 2);
             startActivity(intent);
         }
 
         if (view.getId() == R.id.imageView3) {
-            intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            temp = place_text[2].getText().toString();
-            intent.putExtra("place", temp);
+            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
             intent.putExtra("place_num", 3);
             startActivity(intent);
         }
 
+        if(view.getId() == R.id.Rank){
+            startActivity(new Intent(this, Ranking.class));
+        }
         join_button = (Button) findViewById(R.id.Participation);
         if(view.getId() == R.id.Participation)
-            join_button.setBackgroundColor(Color.BLUE);
+            join_button.setBackgroundColor(Color.rgb(100,100,100));
+
     }
 
     @Override

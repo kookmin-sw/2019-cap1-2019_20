@@ -89,8 +89,12 @@ public class Auth_Exif extends AppCompatActivity {
         findViewById(R.id.exif_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                intent = getIntent();
+                int place_num = intent.getIntExtra("place_num", 0);
                 intent = new Intent(Auth_Exif.this, SelectImage.class);
+                intent.putExtra("place_num", place_num);
                 startActivity(intent);
+                System.out.printf("\n<Auth_Exif>\nplace_num = %d\nauthenticated = %b\n", place_num, true);
             }
         });
 
@@ -280,8 +284,12 @@ public class Auth_Exif extends AppCompatActivity {
 
     public void onClickAuth(View view) {
         if (view.getId() == R.id.exif_image) {
+            intent = getIntent();
+            int place_num = intent.getIntExtra("place_num", 0);
             intent = new Intent(Auth_Exif.this, SelectImage.class);
+            intent.putExtra("place_num", place_num);
             startActivity(intent);
+            System.out.printf("\n<Auth_Exif>\nplace_num = %d\nauthenticated = %b\n", place_num, true);
         }
     }
 

@@ -17,6 +17,7 @@ import android.os.Environment;
 import android.widget.TextView;
 import android.widget.Toast;
 import authentication.Auth_Exif;
+import event.Event1;
 
 
 import com.example.real_visittogether.R;
@@ -72,6 +73,14 @@ public class SelectImage extends AppCompatActivity {
             } else {
                 Toast.makeText(SelectImage.this, "인증실패", Toast.LENGTH_SHORT).show();
             }
+            intent = getIntent();
+            int place_num = intent.getIntExtra("place_num", 0);
+            intent = new Intent(SelectImage.this, Event1.class);
+            intent.putExtra("place_num", place_num);
+            intent.putExtra("authenticated", true);
+            intent.putExtra("joined", true);
+            startActivity(intent);
+            System.out.printf("\n<SelectImage>\nplace_num = %d\nauthenticated = %b\n", place_num, true);
         }
 
     }

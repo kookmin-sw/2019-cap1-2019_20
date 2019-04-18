@@ -2,6 +2,7 @@ package authentication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -30,6 +31,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import event.Event1;
 
 //public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
 public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
@@ -95,10 +98,10 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int check =0;
+                boolean check = true;
 
                 //인증실패시
-                if(check == 0)
+                if(check)
                 {
                     Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();
                 }
@@ -108,6 +111,13 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                 }
 
 
+                Intent intent = getIntent();
+                int place_num = intent.getIntExtra("place_num", 0);
+                intent = new Intent(Auth_Gps.this, Event1.class);
+                intent.putExtra("place_num", place_num);
+                intent.putExtra("authenticated", check);
+                intent.putExtra("joined", true);
+                startActivity(intent);
             }
         });
 
