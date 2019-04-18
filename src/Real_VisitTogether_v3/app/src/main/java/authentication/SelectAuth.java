@@ -60,7 +60,8 @@ public class SelectAuth extends AppCompatActivity {
             //QR코드가 있을 경우
             else {
                 String QR_Info = null;
-                if (QR_Info == result.getContents()) {
+                if (true) {
+                    //if (QR_Info == result.getContents()) {
                     Toast.makeText(SelectAuth.this, "인증성공", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(SelectAuth.this, "인증실패", Toast.LENGTH_SHORT).show();

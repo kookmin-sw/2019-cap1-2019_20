@@ -107,17 +107,18 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                 }
                 else
                 {
+                    Intent intent = getIntent();
+                    int place_num = intent.getIntExtra("place_num", 0);
+                    intent = new Intent(Auth_Gps.this, Event1.class);
+                    intent.putExtra("place_num", place_num);
+                    intent.putExtra("authenticated", check);
+                    intent.putExtra("joined", true);
+                    startActivity(intent);
                     Toast.makeText(getApplicationContext(),"인증성공!" , Toast.LENGTH_SHORT).show();
                 }
 
 
-                Intent intent = getIntent();
-                int place_num = intent.getIntExtra("place_num", 0);
-                intent = new Intent(Auth_Gps.this, Event1.class);
-                intent.putExtra("place_num", place_num);
-                intent.putExtra("authenticated", check);
-                intent.putExtra("joined", true);
-                startActivity(intent);
+
             }
         });
 
