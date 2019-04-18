@@ -67,6 +67,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                             0 );
                 }
                 else{
+                    /*
                     Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     String provider = location.getProvider();
                     double longitude = location.getLongitude();
@@ -77,7 +78,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                             "위도 : " + latitude + "\n" +
                             "경도 : " + longitude + "\n" +
                             "고도  : " + altitude);
-
+                    */
 
                     //처음 버튼 누르고 시간이 100초이상 흐르거나 거리가 100m이상 차이날때 다시 좌표를 잡아줌
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
