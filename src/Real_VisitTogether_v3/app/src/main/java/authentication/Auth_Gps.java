@@ -2,6 +2,7 @@ package authentication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -30,6 +31,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import event.Event1;
 
 //public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
 public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
@@ -64,6 +67,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                             0 );
                 }
                 else{
+                    /*
                     Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     String provider = location.getProvider();
                     double longitude = location.getLongitude();
@@ -74,7 +78,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                             "위도 : " + latitude + "\n" +
                             "경도 : " + longitude + "\n" +
                             "고도  : " + altitude);
-
+                    */
 
                     //처음 버튼 누르고 시간이 100초이상 흐르거나 거리가 100m이상 차이날때 다시 좌표를 잡아줌
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -95,17 +99,25 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int check =0;
+                boolean check = true;
 
                 //인증실패시
-                if(check == 0)
+                if(check)
                 {
                     Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
+                    Intent intent = getIntent();
+                    int place_num = intent.getIntExtra("place_num", 0);
+                    intent = new Intent(Auth_Gps.this, Event1.class);
+                    intent.putExtra("place_num", place_num);
+                    intent.putExtra("authenticated", check);
+                    intent.putExtra("joined", true);
+                    startActivity(intent);
                     Toast.makeText(getApplicationContext(),"인증성공!" , Toast.LENGTH_SHORT).show();
                 }
+
 
 
             }
