@@ -40,7 +40,13 @@
         <activity android:name="display.placeAdd" />
         <activity android:name="display.Eventregistration" />
 
-        <activity android:name="display.Display"></activity>
+        <activity android:name="display.Display">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name="display.SplashActivity"
             android:theme="@style/SplashTheme"
