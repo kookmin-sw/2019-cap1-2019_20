@@ -53,7 +53,7 @@ import java.util.Vector;
 
 import data_fetcher.RequestHttpConnection;
 import toolbar_menu.mypage.Ranking;
-import vt_object.EventHasPlace;
+import vt_object.Imply;
 import vt_object.Place;
 
 
@@ -683,7 +683,7 @@ public class Event1 extends AppCompatActivity
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
 
         final private String url_p = "place/";
-        final private String url_ehp = "event_has_place/";
+        final private String url_ehp = "imply/";
 
         private String place_str, relation_str;
         private String[] place_dict, relation_dict;
@@ -691,8 +691,8 @@ public class Event1 extends AppCompatActivity
         private Place temp_place;
         private Vector<Place> places;
 
-        private EventHasPlace temp_ehp;
-        private Vector<EventHasPlace> ehps;
+        private Imply temp_ehp;
+        private Vector<Imply> ehps;
 
 
         private Gson gson;
@@ -703,9 +703,9 @@ public class Event1 extends AppCompatActivity
         protected void onPreExecute() {
             super.onPreExecute();
             gson = new Gson();
-            temp_ehp = new EventHasPlace();
+            temp_ehp = new Imply();
             places = new Vector<Place>();
-            ehps = new Vector<EventHasPlace>();
+            ehps = new Vector<Imply>();
         }
 
         // 백그라운드 스레드에서 처리되는 부분
@@ -733,7 +733,7 @@ public class Event1 extends AppCompatActivity
 
             // 관계 엔티티에서 이벤트 1인 경우만 뽑아냄
             for(int i = 0; i < relation_dict.length; i++){
-                temp_ehp = gson.fromJson(relation_dict[i], EventHasPlace.class);
+                temp_ehp = gson.fromJson(relation_dict[i], Imply.class);
                 if(temp_ehp.getEvent_id() == 1)
                     ehps.add(temp_ehp);
             }

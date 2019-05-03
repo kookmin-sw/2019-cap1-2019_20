@@ -10,10 +10,15 @@ public class Event {
     private String reward;
     private String user_ID;
 
+    public Event() {
+        event_ID = 0;
+        event_name = null;
+        reward = null;
+        user_ID = null;
+    }
+
     public String getName() {
         return event_name;
-    }
-    public  int getEvent_ID(){
-        return event_ID;
+
     }
 }

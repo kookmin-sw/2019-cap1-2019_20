@@ -44,14 +44,15 @@ public class SelectImage extends AppCompatActivity {
 
         try {
             ExifInterface exif = new ExifInterface(path);
-            exifAttribute = getExif(exif);
+            Geodegree geoDegree = new Geodegree(exif);
+            photo_gps = (TextView) findViewById(R.id.photo_gps);
+            photo_gps.setText(geoDegree.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(SelectImage.this, "Error", Toast.LENGTH_SHORT).show();
         }
 
-        photo_gps.setText(exifAttribute);
         db_gps.setText("db gps값");
     }
 
@@ -86,14 +87,4 @@ public class SelectImage extends AppCompatActivity {
 
     }
 
-    private String getExif(ExifInterface exif) {
-        String myAttribute = "";
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LATITUDE, exif);
-        myAttribute += getTagString(ExifInterface.TAG_GPS_LONGITUDE, exif);
-        return myAttribute;
-    }
-
-    private String getTagString(String tag, ExifInterface exif) {
-        return (tag + " : " + exif.getAttribute(tag) + "\n");
-    }
 }
