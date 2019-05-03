@@ -21,6 +21,7 @@ public class RequestHttpConnection {
             //연결 객체
             URL url = new URL(strURL + _url);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            System.out.printf("\n응답코드: %d\n응답메세지: %s\n", conn.getResponseCode(), conn.getResponseMessage());
 
             //연결설정
             conn.setRequestMethod("GET");

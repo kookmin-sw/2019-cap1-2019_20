@@ -40,7 +40,13 @@
         <activity android:name="display.placeAdd" />
         <activity android:name="display.Eventregistration" />
 
-        <activity android:name="display.Display"></activity>
+        <activity android:name="display.Display">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name="display.SplashActivity"
             android:theme="@style/SplashTheme"
@@ -94,10 +100,6 @@
         <activity android:name="authentication.Auth_Exif"></activity>
         <activity android:name="authentication.Auth_Gps"></activity>
         <activity android:name="authentication.SelectImage"></activity>
-        <activity
-            android:name="display.Menu"
-            android:label="@string/title_activity_detail1"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="login.google">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
