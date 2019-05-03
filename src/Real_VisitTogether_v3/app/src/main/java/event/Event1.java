@@ -157,6 +157,7 @@ public class Event1 extends AppCompatActivity
         if(joined == true)
             join_button.setBackgroundColor(Color.rgb(100,100,100));
 
+
     }
 
     public void onClickEvent1(View view) {
@@ -748,7 +749,7 @@ public class Event1 extends AppCompatActivity
 
             // 매칭된 데이터의 name으로 setText()
             for(int i = 0; i < place_text.length; i++){
-                place_text[i].setText(places.elementAt(i).getName());
+               // place_text[i].setText(places.elementAt(i).getName());
             }
         }
     }

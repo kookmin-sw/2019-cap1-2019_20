@@ -1,5 +1,6 @@
 package display;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,9 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.example.real_visittogether.R;
 import com.google.gson.Gson;
+
+import java.util.Vector;
 
 import data_fetcher.RequestHttpConnection;
 import event.Event1;
@@ -27,43 +31,31 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
     private Intent intent;
     private NetworkTask networkTask;
+    private Vector<Button> btn = new Vector<Button>();
     private Button[] temp_btn;
     private FloatingActionButton actionButton;
-
+    private int btn_idx =0;
+    LinearLayout display_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display);
-
-        temp_btn = new Button[2];
-        temp_btn[0] = (Button) findViewById(R.id.temp_btn1);
-        temp_btn[1] = (Button) findViewById(R.id.temp_btn2);
         actionButton = (FloatingActionButton)findViewById(R.id.actionButton); //동그라미
-
-        temp_btn[0].setOnClickListener(this);
-        temp_btn[1].setOnClickListener(this);
+        display_layout = (LinearLayout) findViewById(R.id.display_layout);
         actionButton.setOnClickListener(this);
-
-        networkTask = new NetworkTask();
+        networkTask = new NetworkTask(this);
         networkTask.execute();
+
+        /*
         Button temp = (Button) findViewById(R.id.temp_btn3);
         if(getIntent().getIntExtra("check",0) ==1){
             temp.setText("7호관 447호");
             temp.setVisibility(View.VISIBLE);
         }
-
+        */
     }
-
     public void onClick(View view) {
 
-        if(view.getId() == R.id.temp_btn1){
-            intent = new Intent(Display.this, Event1.class);
-            startActivity(intent);
-        }
-        if(view.getId() == R.id.temp_btn2){
-            intent = new Intent(Display.this, Event2.class);
-            startActivity(intent);
-        }
         if(view.getId() == R.id.actionButton){
             intent = new Intent(getApplicationContext(), Eventregistration.class);
             startActivity(intent);
@@ -113,6 +105,11 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         private String event_str;
         private String[] event_dict;
         private Gson gson;
+        private Context mContext;
+
+        public NetworkTask (Context context){
+            this.mContext = context;
+        }
 
         // NetworkTask의 execute 메소드가 호출된 후 실행되는 메소드
         // doin 메소드로 파라미터 전달
@@ -133,6 +130,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
             // 리턴된 "{..}\n{..} ... {..}" 값들을 split
             event_dict = event_str.split("\n");
+
             return null;
         }
 
@@ -143,9 +141,22 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             super.onPostExecute(aVoid);
 
             // 배열의 원소들을 json 인코딩 후 각 버튼 setText()
-            for(int i = 0; i < temp_btn.length; i++) {
-                event = gson.fromJson(event_dict[i], Event.class);
-                temp_btn[i].setText(event.getName());
+            for(int i = 0; i < event_dict.length; i++) {
+                btn.addElement(new event_btn(mContext));
+               event = gson.fromJson(event_dict[i], Event.class);
+
+               btn.lastElement().setText(event.getName());
+                final int event_id = event.getEvent_ID();
+                btn.lastElement().setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent event_intent = new Intent(mContext,Event1.class);
+                        event_intent.putExtra("event_ID",event_id);
+                        startActivity(event_intent);
+                    }
+                }) ;
+
+                display_layout.addView(btn.lastElement());
             }
         }
     }
