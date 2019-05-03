@@ -48,8 +48,9 @@ public class Eventregistration extends AppCompatActivity {
 
             RequestHttpConnection connection = new RequestHttpConnection();
 
-            EditText nameText = (EditText)findViewById(R.id.inputevent);
-            connection.sendData(nameText.getText().toString(), "testID");
+            EditText nameText = (EditText) findViewById(R.id.inputevent);
+            EditText rewardText = (EditText) findViewById(R.id.inputReward);
+            connection.sendData(nameText.getText().toString(), rewardText.getText().toString(), "testID");
 
             return null;
         }

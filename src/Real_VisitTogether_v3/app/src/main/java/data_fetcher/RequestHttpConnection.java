@@ -21,7 +21,7 @@ public class RequestHttpConnection {
             //연결 객체
             URL url = new URL(strURL + _url);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            System.out.printf("\n응답코드: %d\n응답메세지: %s\n", conn.getResponseCode(), conn.getResponseMessage());
+            //System.out.printf("\n응답코드: %d\n응답메세지: %s\n", conn.getResponseCode(), conn.getResponseMessage());
 
             //연결설정
             conn.setRequestMethod("GET");
@@ -53,9 +53,9 @@ public class RequestHttpConnection {
         return result;
     }
 
-    public String sendData(String event_name, String user_ID){
+    public String sendData(String event_name, String reward, String user_ID){
 
-        String postData = "event_name=" + event_name + "& user_ID=" + user_ID;
+        String postData = "event_name=" + event_name + "& reward=" + reward + "& user_ID=" + user_ID;
 
         try {
             URL url = new URL(strURL + "insert_event/");
