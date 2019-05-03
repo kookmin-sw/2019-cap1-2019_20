@@ -5,15 +5,19 @@ package vt_object;
 
 public class Event {
 
-    private int id;
-    private String name;
+    private int event_ID;
+    private String event_name;
+    private String reward;
+    private String user_ID;
 
     public Event() {
-        id = 0;
-        name = null;
+        event_ID = 0;
+        event_name = null;
+        reward = null;
+        user_ID = null;
     }
 
     public String getName() {
-        return name;
+        return event_name;
     }
 }
