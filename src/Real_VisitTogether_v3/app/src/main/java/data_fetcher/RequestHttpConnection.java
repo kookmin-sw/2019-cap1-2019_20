@@ -53,9 +53,10 @@ public class RequestHttpConnection {
         return result;
     }
 
-    public String sendData(String event_name, String reward, String user_ID){
+    public String sendData(String event_name, String reward, String user_id){
 
-        String postData = "event_name=" + event_name + "& reward=" + reward + "& user_ID=" + user_ID;
+        String postData = "event_name=" + event_name + "&" + "reward=" + reward + "&" + "user_id=" + user_id;
+        System.out.println("reward값="+ reward);
 
         try {
             URL url = new URL(strURL + "insert_event/");
@@ -72,7 +73,9 @@ public class RequestHttpConnection {
             outputStream.flush();
             outputStream.close();
 
-            String result = readStream(conn.getInputStream());
+            System.out.printf("응답코드: %d\n", conn.getResponseCode());
+
+            //String result = readStream(conn.getInputStream());
             conn.disconnect();
 
             return result;

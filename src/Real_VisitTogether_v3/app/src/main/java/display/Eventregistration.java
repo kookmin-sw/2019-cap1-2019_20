@@ -14,6 +14,10 @@ import data_fetcher.RequestHttpConnection;
 
 public class Eventregistration extends AppCompatActivity {
 
+    EditText nameText;
+    EditText rewardText;
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("이벤트 등록");
@@ -21,23 +25,30 @@ public class Eventregistration extends AppCompatActivity {
         setContentView(R.layout.activity_eventregistration);
 
         Button button5 = (Button)findViewById(R.id.place);
-
+        nameText = (EditText) findViewById(R.id.inputevent);
+        rewardText = (EditText) findViewById(R.id.inputReward);
 
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), placeAdd.class);
+                intent = new Intent(getApplicationContext(), placeAdd.class);
                 startActivity(intent);
             }
         });
+
 
         Button registerButton = (Button)findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                NetworkTask networkTask = new NetworkTask();
-                networkTask.execute();
+                if(nameText.getText().toString() != null && rewardText.getText().toString() != null){
+                    NetworkTask networkTask = new NetworkTask();
+                    networkTask.execute();
+
+                    intent = new Intent(Eventregistration.this, Display.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -47,10 +58,9 @@ public class Eventregistration extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             RequestHttpConnection connection = new RequestHttpConnection();
-
-            EditText nameText = (EditText) findViewById(R.id.inputevent);
-            EditText rewardText = (EditText) findViewById(R.id.inputReward);
-            connection.sendData(nameText.getText().toString(), rewardText.getText().toString(), "testID");
+            String result = connection.sendData(nameText.getText().toString(), rewardText.getText().toString(), "testID2");
+            System.out.println("reward값 = "+ rewardText.getText().toString());
+            System.out.println(result);
 
             return null;
         }
