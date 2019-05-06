@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.real_visittogether.R;
 
+import data_fetcher.Register;
 import data_fetcher.RequestHttpConnection;
 
 public class Eventregistration extends AppCompatActivity {
@@ -57,10 +58,8 @@ public class Eventregistration extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            RequestHttpConnection connection = new RequestHttpConnection();
-            String result = connection.sendData(nameText.getText().toString(), rewardText.getText().toString(), "testID2");
-            System.out.println("reward값 = "+ rewardText.getText().toString());
-            System.out.println(result);
+            Register connection = new Register();
+            connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), "testID2");
 
             return null;
         }
