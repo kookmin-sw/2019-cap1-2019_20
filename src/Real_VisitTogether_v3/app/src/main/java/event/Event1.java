@@ -722,6 +722,8 @@ public class Event1 extends AppCompatActivity
             relation_str = connection.request(url_ehp);
             relation_dict = relation_str.split("\n");
 
+            System.out.println(relation_dict[0]);
+
             return null;
         }
 
