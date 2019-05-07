@@ -21,4 +21,8 @@ public class Event {
         return event_name;
 
     }
+
+    public int getEvent_id(){
+        return event_id;
+    }
 }

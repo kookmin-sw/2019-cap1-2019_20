@@ -146,7 +146,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
                event = gson.fromJson(event_dict[i], Event.class);
 
                btn.lastElement().setText(event.getName());
-                final int event_id = event.getEvent_ID();
+                final int event_id = event.getEvent_id();
                 btn.lastElement().setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View view) {

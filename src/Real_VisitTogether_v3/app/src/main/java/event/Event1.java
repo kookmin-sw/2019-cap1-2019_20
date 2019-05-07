@@ -722,7 +722,7 @@ public class Event1 extends AppCompatActivity
             relation_str = connection.request(url_ehp);
             relation_dict = relation_str.split("\n");
 
-            System.out.println(relation_dict[0]);
+            System.out.printf("relation_dict[0]: %s\n",relation_dict[0]);
 
             return null;
         }
@@ -751,7 +751,7 @@ public class Event1 extends AppCompatActivity
 
             // 매칭된 데이터의 name으로 setText()
             for(int i = 0; i < place_text.length; i++){
-               // place_text[i].setText(places.elementAt(i).getName());
+                place_text[i].setText(places.elementAt(i).getName());
             }
         }
     }
