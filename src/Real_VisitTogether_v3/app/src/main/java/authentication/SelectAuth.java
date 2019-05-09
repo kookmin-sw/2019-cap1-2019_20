@@ -69,7 +69,6 @@ public class SelectAuth extends AppCompatActivity {
                 Intent intent = new Intent(SelectAuth.this, Event1.class);
                 intent.putExtra("place_num", place_num);
                 intent.putExtra("authenticated", true);
-                intent.putExtra("joined", true);
                 startActivity(intent);
             }
         }

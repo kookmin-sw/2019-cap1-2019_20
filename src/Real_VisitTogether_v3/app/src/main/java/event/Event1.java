@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
+import data_fetcher.Register;
 import data_fetcher.RequestHttpConnection;
 import toolbar_menu.mypage.Ranking;
 import vt_object.Imply;
@@ -63,11 +64,12 @@ public class Event1 extends AppCompatActivity
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    private NetworkTask networkTask;
+    private NetworkTask fetchPlaces;
+    private NetworkTask registerParticipation;
 
     private TextView[] place_text;
 
-    private Button join_button;
+    private Button participate_button;
 
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
@@ -127,36 +129,8 @@ public class Event1 extends AppCompatActivity
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
 
-        networkTask = new NetworkTask();
-        networkTask.execute();
-
-        Intent intent = getIntent();
-        int place_num = intent.getIntExtra("place_num", 0);
-        boolean authenticated = intent.getBooleanExtra("authenticated", false);
-        boolean joined = intent.getBooleanExtra("joined", false);
-        System.out.printf("\n<Event1>\nplace_num = %d\nauthenticated = %b\n", place_num, authenticated);
-        if(authenticated == true) {
-            if (place_num == 1) {
-                LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout1);
-                layout.setBackgroundColor(Color.rgb(100,100,100));
-                layout.setAlpha(0.5f);
-            }
-            if (place_num == 2) {
-                LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout2);
-                layout.setBackgroundColor(Color.rgb(100,100,100));
-                layout.setAlpha(0.5f);
-            }
-            if (place_num == 3) {
-                LinearLayout layout = (LinearLayout) findViewById(R.id.temp_layout3);
-                layout.setBackgroundColor(Color.rgb(100,100,100));
-                layout.setAlpha(0.5f);
-            }
-        }
-
-        join_button = (Button) findViewById(R.id.Participation);
-        if(joined == true)
-            join_button.setBackgroundColor(Color.rgb(100,100,100));
-
+        fetchPlaces = new NetworkTask();
+        fetchPlaces.execute("fetchPlaces");
 
     }
 
@@ -183,10 +157,12 @@ public class Event1 extends AppCompatActivity
         if(view.getId() == R.id.Rank){
             startActivity(new Intent(this, Ranking.class));
         }
-        join_button = (Button) findViewById(R.id.Participation);
-        if(view.getId() == R.id.Participation)
-            join_button.setBackgroundColor(Color.rgb(100,100,100));
 
+        participate_button = (Button) findViewById(R.id.Participation);
+        if(view.getId() == R.id.Participation){
+            registerParticipation = new NetworkTask();
+            registerParticipation.execute("participate");
+        }
     }
 
     @Override
@@ -680,10 +656,10 @@ public class Event1 extends AppCompatActivity
 
     // 네트워크 연결을 수행하는 이너클래스
     // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
-    public class NetworkTask extends AsyncTask<Void, Void, Void> {
+    public class NetworkTask extends AsyncTask<String, Void, String> {
 
         final private String url_p = "place/";
-        final private String url_ehp = "imply/";
+        final private String url_imply = "imply/";
 
         private String place_str, relation_str;
         private String[] place_dict, relation_dict;
@@ -691,8 +667,8 @@ public class Event1 extends AppCompatActivity
         private Place temp_place;
         private Vector<Place> places;
 
-        private Imply temp_ehp;
-        private Vector<Imply> ehps;
+        private Imply temp_imply;
+        private Vector<Imply> implyVector;
 
 
         private Gson gson;
@@ -703,26 +679,39 @@ public class Event1 extends AppCompatActivity
         protected void onPreExecute() {
             super.onPreExecute();
             gson = new Gson();
-            temp_ehp = new Imply();
+            temp_imply = new Imply();
             places = new Vector<Place>();
-            ehps = new Vector<Imply>();
+            implyVector = new Vector<Imply>();
         }
 
         // 백그라운드 스레드에서 처리되는 부분
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected String doInBackground(String... strings) {
 
-            // 네트워크 연결
-            RequestHttpConnection connection = new RequestHttpConnection();
+            if(strings[0] == "fetchPlaces") {
 
-            // 리턴된 "{..}\n{..} ... {..}" 값들을 split
-            place_str = connection.request(url_p);
-            place_dict = place_str.split("\n");
+                // 네트워크 연결
+                RequestHttpConnection connection = new RequestHttpConnection();
 
-            relation_str = connection.request(url_ehp);
-            relation_dict = relation_str.split("\n");
+                // 리턴된 "{..}\n{..} ... {..}" 값들을 split
+                place_str = connection.request(url_p);
+                place_dict = place_str.split("\n");
 
-            System.out.printf("relation_dict[0]: %s\n",relation_dict[0]);
+                relation_str = connection.request(url_imply);
+                relation_dict = relation_str.split("\n");
+
+                return strings[0];
+            }else if(strings[0] == "participate"){
+
+                Intent intent = getIntent();
+                int event_id = intent.getIntExtra("event_id", 0);
+                String user_id = intent.getStringExtra("user_id");
+
+                Register connection = new Register();
+                connection.participate(user_id, event_id);
+
+                return strings[0];
+            }
 
             return null;
         }
@@ -730,29 +719,32 @@ public class Event1 extends AppCompatActivity
         // 백그라운드 작업 결과 반영
         // doin 메소드로 파라미터를 받는다
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String string) {
+            super.onPostExecute(string);
 
-            // 관계 엔티티에서 이벤트 1인 경우만 뽑아냄
-            for(int i = 0; i < relation_dict.length; i++){
-                temp_ehp = gson.fromJson(relation_dict[i], Imply.class);
-                if(temp_ehp.getEvent_id() == 1)
-                    ehps.add(temp_ehp);
-            }
-
-            // 뽑아낸 데이터와 Place 데이터 매칭
-            for(int i = 0; i < ehps.size(); i++){
-                for(int j = 0; j < place_dict.length; j++){
-                    temp_place = gson.fromJson(place_dict[j], Place.class);
-                    if(ehps.elementAt(i).getPlace_id() == temp_place.getId())
-                        places.add(temp_place);
+            if(string == "fetchPlaces") {
+                // 관계 엔티티에서 이벤트 1인 경우만 뽑아냄
+                for (int i = 0; i < relation_dict.length; i++) {
+                    temp_imply = gson.fromJson(relation_dict[i], Imply.class);
+                    if (temp_imply.getEvent_id() == 1)
+                        implyVector.add(temp_imply);
                 }
-            }
 
-            // 매칭된 데이터의 name으로 setText()
-            for(int i = 0; i < place_text.length; i++){
-                place_text[i].setText(places.elementAt(i).getName());
-            }
+                // 뽑아낸 데이터와 Place 데이터 매칭
+                for (int i = 0; i < implyVector.size(); i++) {
+                    for (int j = 0; j < place_dict.length; j++) {
+                        temp_place = gson.fromJson(place_dict[j], Place.class);
+                        if (implyVector.elementAt(i).getPlace_id() == temp_place.getId())
+                            places.add(temp_place);
+                    }
+                }
+
+                // 매칭된 데이터의 name으로 setText()
+                for (int i = 0; i < place_text.length; i++) {
+                    place_text[i].setText(places.elementAt(i).getName());
+                }
+            }else if(string == "participate")
+                participate_button.setBackgroundColor(Color.rgb(100,100,100));
         }
     }
 }

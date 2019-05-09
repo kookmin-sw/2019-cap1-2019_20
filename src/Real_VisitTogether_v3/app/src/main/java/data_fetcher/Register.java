@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class Register {
 
-    private String strURL = "http://ec2-13-209-22-178.ap-northeast-2.compute.amazonaws.com:8888/";
+    final private String strURL = "http://ec2-13-209-22-178.ap-northeast-2.compute.amazonaws.com:8888/";
     private String postData;
 
     public void registerEvent(String event_name, String reward, String user_id){
@@ -24,6 +24,11 @@ public class Register {
 
         postData = "place_name=" + place_name + "&" + "address=" + address + "&" + "explanation=" + information;
         register(postData, "insert_place/");
+    }
+
+    public void participate(String user_ID, int event_ID){
+        postData = "user_id=" + user_ID + "&" + "event_id=" + event_ID;
+        register(postData, "participate_event/");
     }
 
     private String register(String postData, String _url){
