@@ -49,7 +49,7 @@ public class Auth_Beacon extends AppCompatActivity {
                     beacon_rssi = nearestBeacon.getRssi();
                     beacon_power = nearestBeacon.getMeasuredPower();
                     ratio = beacon_rssi*1.0/beacon_power;
-                    distance = (0.89976)*Math.pow(ratio,7.7095) + 0.111;
+                    distance = (0.3)*Math.pow(ratio,6);
                     rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
                 }
             }
