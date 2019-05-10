@@ -5,25 +5,25 @@ package vt_object;
 
 public class Place {
 
-    private int place_ID;
+    private int place_id;
     private String place_name;
     private String address;
     private String explanation;
-    private String QR_message;
+    private String qr_message;
     private String coordinate;
 
 
     public Place(){
-        place_ID = 0;
+        place_id = 0;
         place_name = null;
         address = null;
         explanation = null;
-        QR_message = null;
+        qr_message = null;
         coordinate = null;
     }
 
     public int getId() {
-        return place_ID;
+        return place_id;
     }
 
     public String getName() {

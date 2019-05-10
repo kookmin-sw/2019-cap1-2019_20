@@ -32,9 +32,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
     private NetworkTask networkTask;
     private Vector<Button> btn = new Vector<Button>();
-    private Button[] temp_btn;
     private FloatingActionButton actionButton;
-    private int btn_idx =0;
     LinearLayout display_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,16 +140,23 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
             // 배열의 원소들을 json 인코딩 후 각 버튼 setText()
             for(int i = 0; i < event_dict.length; i++) {
-                btn.addElement(new event_btn(mContext));
-               event = gson.fromJson(event_dict[i], Event.class);
 
-               btn.lastElement().setText(event.getName());
-                final int event_id = event.getEvent_ID();
+                btn.addElement(new event_btn(mContext));
+                event = gson.fromJson(event_dict[i], Event.class);
+
+                btn.lastElement().setText(event.getName());
+                final int event_id = event.getEvent_id();
                 btn.lastElement().setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent event_intent = new Intent(mContext,Event1.class);
-                        event_intent.putExtra("event_ID",event_id);
+                        event_intent.putExtra("event_id", event_id);
+
+                        intent = getIntent();
+                        String user_id = intent.getStringExtra("user_id");
+                        user_id = "leehyojoon";     //나중에 로그인 기능 구현되면 지워야 함
+                        event_intent.putExtra("user_id", user_id);
+
                         startActivity(event_intent);
                     }
                 }) ;
@@ -160,7 +165,6 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             }
         }
     }
-
 }
 
 

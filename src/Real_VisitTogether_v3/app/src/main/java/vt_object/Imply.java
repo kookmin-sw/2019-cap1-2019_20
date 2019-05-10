@@ -5,19 +5,19 @@ package vt_object;
 
 public class Imply {
 
-    private int event_ID;
-    private int place_ID;
+    private int event_id;
+    private int place_id;
 
     public Imply(){
-        event_ID = 0;
-        place_ID = 0;
+        event_id = 0;
+        place_id = 0;
     }
 
     public int getEvent_id() {
-        return event_ID;
+        return event_id;
     }
 
     public int getPlace_id() {
-        return place_ID;
+        return place_id;
     }
 }
