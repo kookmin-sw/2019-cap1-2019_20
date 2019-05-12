@@ -16,6 +16,7 @@
         android:layout_marginEnd="81dp"
         android:onClick="Select_Auth"
         android:text="사진으로 인증"
+
         android:backgroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
