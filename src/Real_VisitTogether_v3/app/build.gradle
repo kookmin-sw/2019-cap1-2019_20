@@ -17,6 +17,9 @@ android {
         }
     }
 }
+repositories {
+    jcenter()
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -54,6 +57,8 @@ dependencies {
 
 
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.estimote:sdk:0.10.4@aar'
+
 
 }
 apply plugin: 'com.google.gms.google-services'
