@@ -8,14 +8,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.real_visittogether.R;
 
 import java.util.ArrayList;
 
-import data_fetcher.Register;
-import data_fetcher.RequestHttpConnection;
+import login.Register;
 
 public class placeAdd extends AppCompatActivity {
 

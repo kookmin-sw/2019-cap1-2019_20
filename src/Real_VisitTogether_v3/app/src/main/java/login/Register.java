@@ -1,4 +1,4 @@
-package data_fetcher;
+package login;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +30,23 @@ public class Register {
         postData = "user_id=" + user_ID + "&" + "event_id=" + event_ID;
         register(postData, "participate_event/");
     }
+    public void registerUser(String user_id, String user_information)
+    {
 
+       postData = "user_id="+user_id+"&"+"user_information="+user_information;
+        register(postData,"insert_user/");
+    }
+    public void registerUser(String user_id,String password, String user_information)
+    {
+
+        postData = "user_id="+user_id+"&"+"user_password="+password+"&"+"user_information="+user_information;
+        register(postData,"insert_user_direct/");
+    }
+    public  void idDuplicateCheck(String user_id)
+    {
+        postData = "user_id="+user_id;
+        register(postData,"id_duplicate_check/");
+    }
     private String register(String postData, String _url){
 
         try {

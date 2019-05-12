@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +50,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
-import data_fetcher.Register;
+import login.Register;
 import data_fetcher.RequestHttpConnection;
 import toolbar_menu.mypage.Ranking;
 import vt_object.Imply;

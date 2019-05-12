@@ -15,7 +15,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.example.real_visittogether.R;
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.google.gson.Gson;
+import com.nhn.android.naverlogin.OAuthLogin;
 
 import java.util.Vector;
 
@@ -23,6 +26,7 @@ import data_fetcher.RequestHttpConnection;
 import event.Event1;
 import event.Event2;
 
+import login.login;
 import toolbar_menu.Help;
 import toolbar_menu.MyPage;
 import vt_object.Event;
@@ -51,6 +55,8 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             temp.setVisibility(View.VISIBLE);
         }
         */
+
+
     }
     public void onClick(View view) {
 
@@ -73,8 +79,17 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         switch (id) {
             case R.id.logout: {
                 Toast.makeText(this, "로그아웃 되었습니다", Toast.LENGTH_LONG).show();
-                Intent login = new Intent(getApplicationContext(), login.login.class);
-                startActivity(login);
+                AccessToken accessToken = AccessToken.getCurrentAccessToken();
+
+                boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+                boolean checkNaver =OAuthLogin.getInstance().getAccessToken(this) != null;
+                //토큰을 가지고있으면(로그인 유지시) 로그인 하지않고 메뉴에 접근가능
+                if(isLoggedIn) {
+                    LoginManager.getInstance().logOut();
+                }else if(checkNaver){
+                    OAuthLogin.getInstance().logout(this);
+                }
+                startActivity(new Intent(this, login.class));
                 return true;
             }
             case R.id.help: {
@@ -127,7 +142,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             event_str = connection.request(url);
 
             // 리턴된 "{..}\n{..} ... {..}" 값들을 split
-            event_dict = event_str.split("\n");
+           event_dict = event_str.split("\n");
 
             return null;
         }
@@ -162,7 +177,9 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
                 }) ;
 
                 display_layout.addView(btn.lastElement());
+
             }
+
         }
     }
 }

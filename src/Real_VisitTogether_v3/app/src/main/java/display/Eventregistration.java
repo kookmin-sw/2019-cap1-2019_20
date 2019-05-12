@@ -10,8 +10,7 @@ import android.widget.EditText;
 
 import com.example.real_visittogether.R;
 
-import data_fetcher.Register;
-import data_fetcher.RequestHttpConnection;
+import login.Register;
 
 public class Eventregistration extends AppCompatActivity {
 
