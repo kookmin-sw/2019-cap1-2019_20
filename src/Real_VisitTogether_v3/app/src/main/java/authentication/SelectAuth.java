@@ -37,7 +37,7 @@ public class SelectAuth extends AppCompatActivity {
             new IntentIntegrator(SelectAuth.this).initiateScan();
 
         } else if (v.getId() == R.id.auth_bicorn) {
-            Intent intent = new Intent(SelectAuth.this, Auth_Exif.class);
+            Intent intent = new Intent(SelectAuth.this, Auth_Beacon.class);
             intent.putExtra("place_num", place_num);
             startActivity(intent);
         } else if (v.getId() == R.id.auth_gps) {

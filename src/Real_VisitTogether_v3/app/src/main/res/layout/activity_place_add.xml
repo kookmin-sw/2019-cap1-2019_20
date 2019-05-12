@@ -52,6 +52,7 @@
                 android:id="@+id/FindAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorAccent"
                 android:text="주소 찾기" />
 
         </LinearLayout>
@@ -77,6 +78,7 @@
                 android:id="@+id/AddPicture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorAccent"
                 android:text="사진 등록" />
         </LinearLayout>
 
@@ -128,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:backgroundTint="@color/colorAccent"
             android:onClick="onClick"
             android:text="등록하기" />
 

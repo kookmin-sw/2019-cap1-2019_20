@@ -37,17 +37,16 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="login.Sign_in"></activity>
+        <activity android:name="login.Sign_in"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name="display.placeAdd" />
-        <activity android:name="display.Eventregistration" />
+        <activity android:name="display.placeAdd"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="display.Eventregistration"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity android:name="display.Display">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name="display.SplashActivity"
@@ -62,14 +61,11 @@
 
         </activity>
         <activity android:name="display.MainActivity"
-            android:label ="@string/app_name">
+            >
 
         </activity>
-        <activity android:name="login.login"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name="login.login"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <provider
@@ -90,25 +86,25 @@
             android:value="AIzaSyAPIbXxkW8tV59kGtwhXnfY2Q-Qcj0iEOY"/>
         <!--여기까지 지도 부분-->
 
-        <activity android:name="event.Event1">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name="event.Event1"
+            android:theme="@style/AppTheme.NoActionBar">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
-        <activity android:name="event.Event2" />
-        <activity android:name="authentication.SelectAuth"></activity>
-        <activity android:name="authentication.Auth_Exif"></activity>
-        <activity android:name="authentication.Auth_Gps"></activity>
-        <activity android:name="authentication.SelectImage"></activity>
-        <activity android:name="authentication.Auth_Beacon" />
-        <activity android:name="login.google">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name="event.Event2"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="authentication.SelectAuth"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name="authentication.Auth_Exif"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="authentication.Auth_Gps"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="authentication.SelectImage"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="authentication.Auth_Beacon"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="login.google">
 
         </activity>
         <activity android:name="toolbar_menu.MyPage"></activity>

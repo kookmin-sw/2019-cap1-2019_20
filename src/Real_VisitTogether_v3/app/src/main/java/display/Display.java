@@ -40,6 +40,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     LinearLayout display_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("같이가자!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display);
         actionButton = (FloatingActionButton)findViewById(R.id.actionButton); //동그라미
@@ -160,6 +161,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
                 event = gson.fromJson(event_dict[i], Event.class);
 
                 btn.lastElement().setText(event.getName());
+                btn.lastElement().setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 final int event_id = event.getEvent_id();
                 btn.lastElement().setOnClickListener(new Button.OnClickListener() {
                     @Override
