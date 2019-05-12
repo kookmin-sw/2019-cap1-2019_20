@@ -7,6 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical"
+    android:background="@drawable/background_3"
     >
 
     <Button
@@ -14,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="완료된 이벤트 목록"
+        android:background="@drawable/buttoncolor_5"
         android:onClick="select_list"
 
         />
@@ -21,10 +23,10 @@
     <Button
         android:id="@+id/ranking"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="랭킹보기"
-
+        android:layout_height="58dp"
+        android:background="@drawable/buttoncolor_2"
         android:onClick="select_list"
+        android:text="랭킹보기"
 
         />
 
@@ -33,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="참여중인 이벤트 목록"
-
+        android:background="@drawable/buttoncolor_4"
         android:onClick="select_list"
 
         />
@@ -41,9 +43,10 @@
     <Button
         android:id="@+id/apply_reward"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="보상 요청"
+        android:layout_height="56dp"
+        android:background="@drawable/buttoncolor_2"
         android:onClick="select_list"
+        android:text="보상 요청"
 
         />
 </LinearLayout>

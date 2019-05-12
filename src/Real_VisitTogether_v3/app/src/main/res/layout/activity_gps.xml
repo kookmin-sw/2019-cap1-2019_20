@@ -9,14 +9,15 @@
 
     <Button
         android:id="@+id/mylocation"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
+        android:layout_width="403dp"
+        android:layout_height="54dp"
         android:layout_marginStart="11dp"
-        android:layout_marginTop="429dp"
+        android:layout_marginTop="428dp"
         android:layout_marginEnd="5dp"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@drawable/buttoncolor_2"
         android:text="내 위치정보 가져오기"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,10 +27,11 @@
         android:layout_width="313dp"
         android:layout_height="82dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="489dp"
+        android:layout_marginTop="508dp"
         android:layout_marginEnd="36dp"
         android:text="위치정보 :GPS"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,11 +55,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="306dp"
-        android:layout_marginTop="538dp"
+        android:layout_marginTop="532dp"
         android:layout_marginEnd="17dp"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@drawable/buttoncolor_4"
         android:text="인증"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.796"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

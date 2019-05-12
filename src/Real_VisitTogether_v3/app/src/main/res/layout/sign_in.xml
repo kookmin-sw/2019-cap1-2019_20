@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/background_3"
    >
 
     <EditText
@@ -41,18 +42,18 @@
             android:id="@+id/btnDone"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/buttoncolor_4"
             android:text="가입" />
 
         <Button
             android:id="@+id/btnCancel"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/buttoncolor_5"
             android:text="취소" />
     </LinearLayout>
 
