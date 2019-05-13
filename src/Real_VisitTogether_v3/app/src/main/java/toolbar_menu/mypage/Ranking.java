@@ -3,6 +3,7 @@ package toolbar_menu.mypage;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -67,6 +68,9 @@ public class Ranking extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ranking);
+
+        ActionBar ab = getSupportActionBar() ;
+        ab.setTitle("랭킹") ;
 
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.listView);
