@@ -61,6 +61,7 @@
 
         </activity>
         <activity android:name="display.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             >
 
         </activity>
@@ -107,13 +108,21 @@
         <activity android:name="login.google">
 
         </activity>
-        <activity android:name="toolbar_menu.MyPage"></activity>
-        <activity android:name="toolbar_menu.Help"></activity>
-        <activity android:name="toolbar_menu.mypage.ApplyReward"></activity>
-        <activity android:name="toolbar_menu.mypage.CompletedEventList"></activity>
-        <activity android:name="toolbar_menu.mypage.Ranking"></activity>
-        <activity android:name="toolbar_menu.mypage.SelectReward"></activity>
-        <activity android:name="toolbar_menu.mypage.Participation"></activity>
+        <activity android:name="toolbar_menu.MyPage"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name="toolbar_menu.Help"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="toolbar_menu.mypage.ApplyReward"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="toolbar_menu.mypage.CompletedEventList"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="toolbar_menu.mypage.Ranking"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="toolbar_menu.mypage.SelectReward"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="toolbar_menu.mypage.Participation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
