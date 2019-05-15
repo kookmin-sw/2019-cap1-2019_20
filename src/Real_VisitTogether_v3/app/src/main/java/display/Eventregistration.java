@@ -21,7 +21,11 @@ public class Eventregistration extends AppCompatActivity {
     private EditText nameText;
     private EditText rewardText;
     private Intent intent;
-    private SharedPreferences preferences;
+    private SharedPreferences places_pref;
+    private SharedPreferences.Editor place_editor;
+    private SharedPreferences event_pref;
+    private SharedPreferences.Editor event_editor;
+    private int temp_places_size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,18 +37,32 @@ public class Eventregistration extends AppCompatActivity {
         nameText = (EditText) findViewById(R.id.inputevent);
         rewardText = (EditText) findViewById(R.id.inputReward);
 
+        event_pref = getSharedPreferences("event_info", MODE_PRIVATE);
+        event_editor = event_pref.edit();
+
+        nameText.setText(event_pref.getString("event_name", ""));
+        rewardText.setText(event_pref.getString("event_reward", ""));
+
         LinearLayout placesLayout = (LinearLayout) findViewById(R.id.placesLayout);
-        preferences = getSharedPreferences("temp_places", MODE_PRIVATE);
-        int temp_places_size = preferences.getInt("temp_places_size", 0);
+        places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
+        place_editor = places_pref.edit();
+
+        temp_places_size = places_pref.getInt("temp_places_size", 0);
         for(int i = 0; i < temp_places_size; i++){
             TextView placeText = new TextView(this);
-            placeText.setText(preferences.getString("temp_places_name" + i, ""));
+            placeText.setText(places_pref.getString("temp_places_name" + i, ""));
             placesLayout.addView(placeText);
         }
 
         addPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                System.out.printf("이벤트이름: %s\n", nameText.getText().toString());
+                event_editor.putString("event_name", nameText.getText().toString());
+                event_editor.putString("event_reward", rewardText.getText().toString());
+                event_editor.commit();
+
                 intent = new Intent(getApplicationContext(), placeAdd.class);
                 startActivity(intent);
             }
@@ -70,9 +88,13 @@ public class Eventregistration extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
-        editor.commit();
+        place_editor = places_pref.edit();
+        place_editor.clear();
+        place_editor.commit();
+
+        event_editor = event_pref.edit();
+        event_editor.clear();
+        event_editor.commit();
     }
 
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
@@ -81,6 +103,10 @@ public class Eventregistration extends AppCompatActivity {
 
             Register connection = new Register();
             connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), "testID2");
+
+            for(int i = 0; i < temp_places_size; i++) {
+                connection.registerPlace(places_pref.getString("temp_places_name" + i, ""), places_pref.getString("temp_places_address" + i, ""), places_pref.getString("temp_places_information" + i, ""));
+            }
 
             return null;
         }

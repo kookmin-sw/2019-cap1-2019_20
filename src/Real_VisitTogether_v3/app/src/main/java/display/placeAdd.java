@@ -59,10 +59,10 @@ public class placeAdd extends AppCompatActivity {
     public void onClick(View v){
         if(v.getId() == R.id.regist){
 
-            SharedPreferences preferences = getSharedPreferences("temp_places", MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
+            SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
+            SharedPreferences.Editor editor = places_pref.edit();
 
-            int temp_places_size = preferences.getInt("temp_places_size",0);
+            int temp_places_size = places_pref.getInt("temp_places_size",0);
             editor.putString("temp_places_name" + temp_places_size, placeName.getText().toString());
             editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
             editor.putString("temp_places_information" + temp_places_size, information.getText().toString());

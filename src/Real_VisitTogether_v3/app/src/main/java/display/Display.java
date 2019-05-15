@@ -91,9 +91,6 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         return true;
     }
 
-
-
-
     // 네트워크 연결을 수행하는 이너클래스
     // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
