@@ -17,12 +17,13 @@ import login.Register;
 
 public class Eventregistration extends AppCompatActivity {
 
+    private Button addPlaceButton;
     private EditText nameText;
     private EditText rewardText;
     private Intent intent;
     private SharedPreferences places_pref;
-    private SharedPreferences.Editor place_editor;
     private SharedPreferences event_pref;
+    private SharedPreferences.Editor place_editor;
     private SharedPreferences.Editor event_editor;
     private int temp_places_size;
 
@@ -32,20 +33,17 @@ public class Eventregistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventregistration);
 
-        Button addPlaceButton = (Button)findViewById(R.id.place);
+        addPlaceButton = (Button)findViewById(R.id.place);
         nameText = (EditText) findViewById(R.id.inputevent);
         rewardText = (EditText) findViewById(R.id.inputReward);
+        LinearLayout placesLayout = (LinearLayout) findViewById(R.id.placesLayout);
 
         event_pref = getSharedPreferences("event_info", MODE_PRIVATE);
-        event_editor = event_pref.edit();
-
         nameText.setText(event_pref.getString("event_name", ""));
         rewardText.setText(event_pref.getString("event_reward", ""));
 
-        LinearLayout placesLayout = (LinearLayout) findViewById(R.id.placesLayout);
-        places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
-        place_editor = places_pref.edit();
 
+        places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
         temp_places_size = places_pref.getInt("temp_places_size", 0);
         for(int i = 0; i < temp_places_size; i++){
             TextView placeText = new TextView(this);
@@ -53,6 +51,7 @@ public class Eventregistration extends AppCompatActivity {
             placesLayout.addView(placeText);
         }
 
+        event_editor = event_pref.edit();
         addPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

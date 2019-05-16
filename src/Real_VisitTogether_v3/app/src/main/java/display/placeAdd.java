@@ -42,7 +42,6 @@ public class placeAdd extends AppCompatActivity {
         arrayList.add("Beacon");
         arrayList.add("QR_Code");
 
-
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
