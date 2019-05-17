@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="display.placeAdd"
-    android:background="@drawable/background_3"
+    android:background="@drawable/background_9"
     >
 
     <LinearLayout

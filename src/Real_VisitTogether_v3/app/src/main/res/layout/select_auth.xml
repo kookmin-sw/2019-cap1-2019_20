@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_3"
+    android:background="@drawable/background_9"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="authentication.SelectAuth">
 
     <Button
         android:id="@+id/auth_exif"
         android:layout_width="256dp"
-        android:layout_height="102dp"
+        android:layout_height="100dp"
         android:layout_marginStart="74dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="81dp"
         android:background="@drawable/buttoncolor_4"
         android:onClick="Select_Auth"
@@ -25,8 +25,8 @@
 
     <Button
         android:id="@+id/auth_qr"
-        android:layout_width="256dp"
-        android:layout_height="102dp"
+        android:layout_width="264dp"
+        android:layout_height="80dp"
         android:layout_marginStart="74dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="83dp"
@@ -53,8 +53,8 @@
 
     <Button
         android:id="@+id/auth_gps"
-        android:layout_width="256dp"
-        android:layout_height="102dp"
+        android:layout_width="260dp"
+        android:layout_height="83dp"
         android:layout_marginStart="74dp"
         android:layout_marginTop="463dp"
         android:layout_marginEnd="83dp"
