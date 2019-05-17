@@ -60,6 +60,10 @@
                 android:background="@drawable/buttoncolor_2"
                 android:gravity="center"
                 android:orientation="horizontal"
+<<<<<<< HEAD
+=======
+                android:layout_marginLeft="35dp"
+>>>>>>> ab6ae63d93b05101852a67ad9d148df213b8b93e
                 android:text="회원가입" />
 
             <Button
