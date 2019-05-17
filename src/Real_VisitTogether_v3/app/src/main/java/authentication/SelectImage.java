@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import authentication.Auth_Exif;
 import event.Event1;
+import login.Register;
 
 
 import com.example.real_visittogether.R;
@@ -30,6 +31,10 @@ public class SelectImage extends AppCompatActivity {
     private TextView db_gps;
     private boolean valid = false;
     private String exifAttribute;
+    private Register Reg ;
+    private int place_id;
+    private Geodegree Geo;
+    private int auth_num;
 
 
     @Override
@@ -67,17 +72,28 @@ public class SelectImage extends AppCompatActivity {
     }
 
     public void onClickAuth(View view) {
+        float x,y;
+        // 현위치 좌표 x,y받아옴.
+        x = Geo.getLatitude();
+        y = Geo.getLongitude();
+        auth_num = 4;
+        Reg.auth_info(place_id,4,x,y);
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        //여기 아래로 DB에서 인증 성공 실패 값이 0인지 아닌지등으로 판단해서
+        //성공이면 성공이라띄우고 아님 실패라고 띄우도록 수정할예정 금방바꾸니 일단 놔둘께
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         if (view.getId() == R.id.btnAuth) {
             if (photo_gps == db_gps) {
                 intent = getIntent();
-                int place_num = intent.getIntExtra("place_num", 0);
+                int place_id = intent.getIntExtra("place_id", 0);
                 intent = new Intent(SelectImage.this, Event1.class);
-                intent.putExtra("place_num", place_num);
+                intent.putExtra("place_id", place_id);
                 intent.putExtra("authenticated", true);
                 intent.putExtra("joined", true);
                 startActivity(intent);
-                System.out.printf("\n<SelectImage>\nplace_num = %d\nauthenticated = %b\n", place_num, true);
+                System.out.printf("\n<SelectImage>\nplace_id = %d\nauthenticated = %b\n", place_id, true);
                 Toast.makeText(SelectImage.this, "인증성공", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(SelectImage.this, "인증실패", Toast.LENGTH_SHORT).show();

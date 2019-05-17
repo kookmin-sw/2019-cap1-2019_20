@@ -1,7 +1,8 @@
 package display;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,8 +13,6 @@ import android.widget.Spinner;
 import com.example.real_visittogether.R;
 
 import java.util.ArrayList;
-
-import login.Register;
 
 public class placeAdd extends AppCompatActivity {
 
@@ -43,7 +42,6 @@ public class placeAdd extends AppCompatActivity {
         arrayList.add("Beacon");
         arrayList.add("QR_Code");
 
-
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
@@ -52,27 +50,21 @@ public class placeAdd extends AppCompatActivity {
         spinner.setAdapter(arrayAdapter);
 
     }
-    public void onClick(View v)
-    {
+    public void onClick(View v){
         if(v.getId() == R.id.regist){
 
-            NetworkTask networkTask = new NetworkTask();
-            networkTask.execute();
+            SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
+            SharedPreferences.Editor editor = places_pref.edit();
 
-            Intent display =new Intent(getApplicationContext(),Display.class);
-            display.putExtra("check",1);
-            startActivity(display);
-        }
-    }
+            int temp_places_size = places_pref.getInt("temp_places_size",0);
+            editor.putString("temp_places_name" + temp_places_size, placeName.getText().toString());
+            editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
+            editor.putString("temp_places_information" + temp_places_size, information.getText().toString());
+            editor.putInt("temp_places_size", temp_places_size + 1);
+            editor.commit();
 
-    public class NetworkTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            Register connection = new Register();
-            connection.registerPlace(placeName.getText().toString(), addressText.getText().toString(), information.getText().toString());
-
-            return null;
+            Intent eventRegisteration = new Intent(getApplicationContext(), Eventregistration.class);
+            startActivity(eventRegisteration);
         }
     }
 }

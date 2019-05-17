@@ -24,6 +24,8 @@ import java.util.*;
 import com.estimote.sdk.SystemRequirementsChecker;
 import com.estimote.sdk.*;
 
+import login.Register;
+
 
 public class Auth_Beacon extends AppCompatActivity {
     private BeaconManager beaconManager;
@@ -32,6 +34,10 @@ public class Auth_Beacon extends AppCompatActivity {
     private Intent intent;
     private int beacon_rssi, beacon_power;
     private double ratio,distance;
+    private Register Reg ;
+    private int place_id;
+    private Geodegree Geo;
+    private int auth_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +86,25 @@ public class Auth_Beacon extends AppCompatActivity {
 
     }
     public void onClickAuth(View view) {
+
+
+///////////////////////////////////////////////////////////
+       //비콘부분 정보 DB로 보내기
+
+        auth_num = 2;
+        Reg.auth_info(place_id,2,distance);
+
+        //startActivityForResult 로 SelectAuth에서 짜려다가 일단 주석처리하고 다른방식으로 하는중
+        //Intent intent = new Intent();
+        //intent.putExtra("result","위도경도전달함");
+        //setResult(RESULT_OK,intent);
+        //finish();
+
+
+        //////////////////////////////////////////////////////
+        //여기 아래로 DB에서 인증 성공 실패 OK값이 0인지 아닌지등으로 판단해서
+        // 성공이면 성공이라띄우고 아님 아니라고 띄우도록 수정할예정 금방바꾸니 일단 놔둘께
+///////////////////////////////////////////////////////////////
 
         if (view.getId() == R.id.btnAuth) {
             if (distance < 5) {

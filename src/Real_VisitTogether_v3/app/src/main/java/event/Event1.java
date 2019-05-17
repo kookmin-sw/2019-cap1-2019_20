@@ -20,11 +20,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +55,7 @@ import java.util.Vector;
 import login.Register;
 import data_fetcher.RequestHttpConnection;
 import toolbar_menu.mypage.Ranking;
+import vt_object.Event;
 import vt_object.Imply;
 import vt_object.Place;
 
@@ -65,7 +68,8 @@ public class Event1 extends AppCompatActivity
 
     private NetworkTask fetchPlaces;
     private NetworkTask registerParticipation;
-
+    private String user_id;
+    private int event_id;
     private TextView[] place_text;
 
     private Button participate_button;
@@ -100,20 +104,11 @@ public class Event1 extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.event1);
-
-        ImageView image1 = (ImageView) findViewById(R.id.imageView) ;
-        image1.setImageResource(R.drawable.drink) ;
-
-        ImageView image2 = (ImageView) findViewById(R.id.imageView2) ;
-        image2.setImageResource(R.drawable.sabal) ;
-
-        ImageView image3 = (ImageView) findViewById(R.id.imageView3) ;
-        image3.setImageResource(R.drawable.oven) ;
-
-        place_text = new TextView[3];
-        place_text[0] = (TextView) findViewById(R.id.place_name1);
-        place_text[1] = (TextView) findViewById(R.id.place_name2);
-        place_text[2] = (TextView) findViewById(R.id.place_name3);
+        user_id = getIntent().getStringExtra("user_id");
+        event_id = getIntent().getIntExtra("event_id",-1);
+      // 출력 확인
+        System.out.println("user_id "+user_id);
+        System.out.println("event_id: "+event_id);
 
         Log.d(TAG, "onCreate");
         mActivity = this;
@@ -135,26 +130,10 @@ public class Event1 extends AppCompatActivity
 
     public void onClickEvent1(View view) {
 
-        if (view.getId() == R.id.imageView) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 1);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.imageView2) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 2);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.imageView3) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 3);
-            startActivity(intent);
-        }
-
         if(view.getId() == R.id.Rank){
-            startActivity(new Intent(this, Ranking.class));
+            Intent rank = new Intent(this, Ranking.class);
+            rank.putExtra("event_id",event_id);
+            startActivity(rank);
         }
 
         participate_button = (Button) findViewById(R.id.Participation);
@@ -669,8 +648,11 @@ public class Event1 extends AppCompatActivity
         private Imply temp_imply;
         private Vector<Imply> implyVector;
 
-
         private Gson gson;
+
+        private Intent intent;
+        private int event_id;
+        private String user_id;
 
         // NetworkTask의 execute 메소드가 호출된 후 실행되는 메소드
         // doin 메소드로 파라미터 전달
@@ -687,6 +669,10 @@ public class Event1 extends AppCompatActivity
         @Override
         protected String doInBackground(String... strings) {
 
+            intent = getIntent();
+            event_id = intent.getIntExtra("event_id", 0);
+            user_id = intent.getStringExtra("user_id");
+
             if(strings[0] == "fetchPlaces") {
 
                 // 네트워크 연결
@@ -701,10 +687,6 @@ public class Event1 extends AppCompatActivity
 
                 return strings[0];
             }else if(strings[0] == "participate"){
-
-                Intent intent = getIntent();
-                int event_id = intent.getIntExtra("event_id", 0);
-                String user_id = intent.getStringExtra("user_id");
 
                 Register connection = new Register();
                 connection.participate(user_id, event_id);
@@ -722,13 +704,13 @@ public class Event1 extends AppCompatActivity
             super.onPostExecute(string);
 
             if(string == "fetchPlaces") {
-                // 관계 엔티티에서 이벤트 1인 경우만 뽑아냄
+
+                // 관계 엔티티에서 이벤트 event_id 인 경우만 뽑아냄
                 for (int i = 0; i < relation_dict.length; i++) {
                     temp_imply = gson.fromJson(relation_dict[i], Imply.class);
-                    if (temp_imply.getEvent_id() == 1)
+                    if (temp_imply.getEvent_id() == event_id)
                         implyVector.add(temp_imply);
                 }
-
                 // 뽑아낸 데이터와 Place 데이터 매칭
                 for (int i = 0; i < implyVector.size(); i++) {
                     for (int j = 0; j < place_dict.length; j++) {
@@ -738,9 +720,39 @@ public class Event1 extends AppCompatActivity
                     }
                 }
 
+                LinearLayout places_layout = (LinearLayout) findViewById(R.id.places_layout);
+
                 // 매칭된 데이터의 name으로 setText()
-                for (int i = 0; i < place_text.length; i++) {
-                    place_text[i].setText(places.elementAt(i).getName());
+                for (int i = 0; i < places.size(); i++) {
+
+                    LinearLayout placeInfoLayout = new LinearLayout(getApplicationContext());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                    placeInfoLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    placeInfoLayout.setLayoutParams(layoutParams);
+
+                    ImageView placeImage = new ImageView(getApplicationContext());
+                    LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    placeImage.setImageResource(R.drawable.drink);
+                    placeImage.setLayoutParams(imageParams);
+
+                    TextView placeText = new TextView(getApplicationContext());
+                    placeText.setText(places.elementAt(i).getName());
+
+                    placeInfoLayout.addView(placeImage);
+                    placeInfoLayout.addView(placeText);
+
+                    places_layout.addView(placeInfoLayout);
+
+                    final int finalI = i;
+                    //이미지 클릭해서 인증메뉴 선택화면 넘어갈때 place_id 같이 넘겨준다
+                    placeInfoLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
+                            intent.putExtra("place_id", places.elementAt(finalI).getId());
+                            startActivity(intent);
+                        }
+                    });
                 }
             }else if(string == "participate")
                 participate_button.setBackgroundColor(Color.rgb(100,100,100));

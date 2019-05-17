@@ -1,5 +1,6 @@
 package toolbar_menu.mypage;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -7,6 +8,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+
+import login.Register;
 import user.User;
 import user.UserAdaptor;
 
@@ -63,7 +66,8 @@ public class Ranking extends AppCompatActivity {
 
     ArrayList<User> user = new ArrayList<>();
     ListView listView;
-
+    int event_id;
+    String result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +75,7 @@ public class Ranking extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("랭킹") ;
-
+        event_id = getIntent().getIntExtra("event_id",-1);
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.listView);
 
@@ -82,7 +86,7 @@ public class Ranking extends AppCompatActivity {
         UserAdaptor adapter = new UserAdaptor(this, user);
         listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(adapter);
-
+        new NetworkTask().execute();
 
     }
 
@@ -130,6 +134,21 @@ public class Ranking extends AppCompatActivity {
             idx++;
         }
     }
+    /*
+    public class NetworkTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
 
+        }
+    }
+*/
+    public class NetworkTask extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            result = new Register().ranking(event_id);
+            System.out.println(result);
+            return null;
+        }
+    }
 }

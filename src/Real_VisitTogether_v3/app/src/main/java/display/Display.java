@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.example.real_visittogether.R;
@@ -32,12 +33,14 @@ import toolbar_menu.MyPage;
 import vt_object.Event;
 
 public class Display extends AppCompatActivity implements View.OnClickListener {
-
+    String id;
     private Intent intent;
     private NetworkTask networkTask;
     private Vector<Button> btn = new Vector<Button>();
     private FloatingActionButton actionButton;
     LinearLayout display_layout;
+    String email ;
+    String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("같이가자!");
@@ -46,17 +49,9 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         actionButton = (FloatingActionButton)findViewById(R.id.actionButton); //동그라미
         display_layout = (LinearLayout) findViewById(R.id.display_layout);
         actionButton.setOnClickListener(this);
+        id = getIntent().getStringExtra("user_id");
         networkTask = new NetworkTask(this);
         networkTask.execute();
-
-        /*
-        Button temp = (Button) findViewById(R.id.temp_btn3);
-        if(getIntent().getIntExtra("check",0) ==1){
-            temp.setText("7호관 447호");
-            temp.setVisibility(View.VISIBLE);
-        }
-        */
-
 
     }
     public void onClick(View view) {
@@ -65,6 +60,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             intent = new Intent(getApplicationContext(), Eventregistration.class);
             startActivity(intent);
         }
+
 
     }
 
@@ -106,9 +102,6 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         }
         return true;
     }
-
-
-
 
     // 네트워크 연결을 수행하는 이너클래스
     // AsyncTask: 비동기로 백그라운드 작업을 할 수 있도록 도와주는 클래스
@@ -168,11 +161,8 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
                     public void onClick(View view) {
                         Intent event_intent = new Intent(mContext,Event1.class);
                         event_intent.putExtra("event_id", event_id);
-
-                        intent = getIntent();
-                        String user_id = intent.getStringExtra("user_id");
-                        user_id = "leehyojoon";     //나중에 로그인 기능 구현되면 지워야 함
-                        event_intent.putExtra("user_id", user_id);
+                        //intent = getIntent();
+                        event_intent.putExtra("user_id", id);
 
                         startActivity(event_intent);
                     }

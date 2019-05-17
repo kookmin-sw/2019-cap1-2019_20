@@ -1,13 +1,17 @@
 package login;
 
+import android.content.Intent;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class Register {
 
@@ -42,12 +46,46 @@ public class Register {
         postData = "user_id="+user_id+"&"+"user_password="+password+"&"+"user_information="+user_information;
         register(postData,"insert_user_direct/");
     }
-    public  void idDuplicateCheck(String user_id)
+    public  String idDuplicateCheck(String user_id)
     {
         postData = "user_id="+user_id;
-        register(postData,"id_duplicate_check/");
+        return register(postData,"id_duplicate_check/");
     }
-    private String register(String postData, String _url){
+    public  String login(String user_id, String password)
+    {
+        postData = "user_id="+user_id+"&user_password="+password;
+        return register(postData,"login/");
+    }
+    public String ranking(int event_id){
+        postData = "event_id"+event_id;
+        System.out.println("event id is "+String.valueOf(event_id));
+        return register(postData,"ranking/");
+    }
+
+    //인증 DB로 보내는 부분 수정 GPS / QR / Beacon
+    public String auth_info(int place_id, int auth_num, float latitude , float longitutde)
+    {
+        //auth_num 앞에 뭐라써야하나
+        postData = "place_id="+place_id +"&auth_num" +auth_num +"&latitude" +latitude +"longitude" +longitutde;
+        return register(postData,"auth/");
+    }
+
+    public String auth_info(int place_id, int auth_num, String qr_message)
+    {
+        //auth_num 앞에 뭐라써야하나
+        postData = "place_id="+place_id +"&auth_num" +auth_num +"&qr_message" +qr_message;
+        return register(postData,"auth/");
+    }
+
+    public String auth_info(int place_id, int auth_num, double Beacon_distance)
+    {
+        //auth_num 앞에 뭐라써야하나
+        postData = "place_id="+place_id +"&auth_num" +auth_num +"&Beacon_distance" +Beacon_distance;
+        return register(postData,"auth/");
+    }
+
+
+    private String register(String postData, String _url) {
 
         try {
             URL url = new URL(strURL + _url);
@@ -58,17 +96,24 @@ public class Register {
             conn.setConnectTimeout(5000);
             conn.setDoOutput(true);
             conn.setDoInput(true);
-
             OutputStream outputStream = conn.getOutputStream();
             outputStream.write(postData.getBytes("UTF-8"));
             outputStream.flush();
             outputStream.close();
 
-            System.out.printf("반응코드: %d\n", conn.getResponseCode());
+            //System.out.printf("반응코드: %d\n", conn.getResponseCode());
+            String result;
+            InputStream is = conn.getInputStream();
+            StringBuilder builder = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String line;
+            while((line = reader.readLine()) != null)
+                builder.append(line + "\n");
 
-            String result = readStream(conn.getInputStream());
+            result = builder.toString();
             conn.disconnect();
-
+            System.out.println(result);
+            result = result.trim();
             return result;
 
         } catch (MalformedURLException e) {
