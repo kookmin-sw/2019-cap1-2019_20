@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class Register {
 
@@ -42,12 +44,12 @@ public class Register {
         postData = "user_id="+user_id+"&"+"user_password="+password+"&"+"user_information="+user_information;
         register(postData,"insert_user_direct/");
     }
-    public  void idDuplicateCheck(String user_id)
+    public  String idDuplicateCheck(String user_id)
     {
         postData = "user_id="+user_id;
-        register(postData,"id_duplicate_check/");
+        return register(postData,"id_duplicate_check/");
     }
-    private String register(String postData, String _url){
+    private String register(String postData, String _url) {
 
         try {
             URL url = new URL(strURL + _url);
@@ -58,17 +60,23 @@ public class Register {
             conn.setConnectTimeout(5000);
             conn.setDoOutput(true);
             conn.setDoInput(true);
-
             OutputStream outputStream = conn.getOutputStream();
             outputStream.write(postData.getBytes("UTF-8"));
             outputStream.flush();
             outputStream.close();
 
-            System.out.printf("반응코드: %d\n", conn.getResponseCode());
+            //System.out.printf("반응코드: %d\n", conn.getResponseCode());
+            String result;
+            InputStream is = conn.getInputStream();
+            StringBuilder builder = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String line;
+            while((line = reader.readLine()) != null)
+                builder.append(line + "\n");
 
-            String result = readStream(conn.getInputStream());
+            result = builder.toString();
             conn.disconnect();
-
+            System.out.println(result);
             return result;
 
         } catch (MalformedURLException e) {

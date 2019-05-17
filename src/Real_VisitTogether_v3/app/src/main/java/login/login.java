@@ -386,7 +386,7 @@ public class login extends AppCompatActivity {
             Register connection = new Register();
             System.out.println(id);
             connection.registerUser(id,information);
-            //startActivity(new Intent(mContext,Display.class));
+            startActivity(new Intent(login.this,Display.class));
             return null;
         }
     }
