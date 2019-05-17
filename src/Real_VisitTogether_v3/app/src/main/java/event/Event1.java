@@ -68,7 +68,8 @@ public class Event1 extends AppCompatActivity
 
     private NetworkTask fetchPlaces;
     private NetworkTask registerParticipation;
-
+    private String user_id;
+    private int event_id;
     private TextView[] place_text;
 
     private Button participate_button;
@@ -103,19 +104,11 @@ public class Event1 extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.event1);
-
-        /*
-        ImageView image2 = (ImageView) findViewById(R.id.imageView2) ;
-        image2.setImageResource(R.drawable.sabal) ;
-
-        ImageView image3 = (ImageView) findViewById(R.id.imageView3) ;
-        image3.setImageResource(R.drawable.oven) ;
-
-        place_text = new TextView[3];
-        place_text[0] = (TextView) findViewById(R.id.place_name1);
-        place_text[1] = (TextView) findViewById(R.id.place_name2);
-        place_text[2] = (TextView) findViewById(R.id.place_name3);
-        */
+        user_id = getIntent().getStringExtra("user_id");
+        event_id = getIntent().getIntExtra("event_id",-1);
+      // 출력 확인
+        System.out.println("user_id "+user_id);
+        System.out.println("event_id: "+event_id);
 
         Log.d(TAG, "onCreate");
         mActivity = this;
@@ -137,28 +130,10 @@ public class Event1 extends AppCompatActivity
 
     public void onClickEvent1(View view) {
 
-        /*
-        if (view.getId() == R.id.imageView) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 1);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.imageView2) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 2);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.imageView3) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 3);
-            startActivity(intent);
-        }
-        */
-
         if(view.getId() == R.id.Rank){
-            startActivity(new Intent(this, Ranking.class));
+            Intent rank = new Intent(this, Ranking.class);
+            rank.putExtra("event_id",event_id);
+            startActivity(rank);
         }
 
         participate_button = (Button) findViewById(R.id.Participation);

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,13 +56,17 @@ public class login extends AppCompatActivity {
     /**
      * client 정보를 넣어준다.
      */
+   private EditText etEmail;
+    private EditText etPassword;
     private String id;
     private String information;
     private String email="";
+    private String email2;
+    private String password;
     private static String OAUTH_CLIENT_ID = "7siNFLSF2Xv3a3zmbtlg";
     private static String OAUTH_CLIENT_SECRET = "XZvII8lJxW";
     private static String OAUTH_CLIENT_NAME = "네이버 아이디로 로그인 테스트";
-
+    String result;
     private static OAuthLogin mOAuthLoginInstance;
     private static Context mContext;
     // 구글로그인 result 상수
@@ -134,7 +139,8 @@ public class login extends AppCompatActivity {
         boolean checkNaver =mOAuthLoginInstance.getAccessToken(mContext)==null;
         //토큰을 가지고있으면(로그인 유지시) 로그인 하지않고 메뉴에 접근가능
         if(isLoggedIn || !checkNaver || firebaseAuth.getCurrentUser() !=null ) {
-            startActivity(new Intent(login.this, display.Display.class));
+            new RequestApiTask().execute();
+            //startActivity(new Intent(login.this, display.Display.class));
         }
         final Button sign_in = (Button)findViewById(R.id.sign);
         sign_in.setOnClickListener(new View.OnClickListener() {
@@ -145,13 +151,30 @@ public class login extends AppCompatActivity {
             }
         });
 
-        Button loginBtn = findViewById(R.id.login_access);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        Button login_access = (Button)findViewById(R.id.login_access);
+        final EditText etEmail = findViewById(R.id.etEmail);
+        final EditText etPassword = findViewById(R.id.etPassword);
+        login_access.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(login.this, Display.class));
+                new direct_login().execute();
+                try {
+                    Thread.sleep(400);
+                    if(result.equals("ok")){
+                        new NetworkTask().execute();
+                    }
+                    else{
+                        Toast.makeText(mContext,"아이디 또는 비빌먼호가 일치하지 않습니다",Toast.LENGTH_LONG).show();
+                        etEmail.setText("");
+                        etPassword.setText("");
+                    }
+                }catch (Exception e){
+                    System.out.println("this is "+result);
+                }
+
             }
         });
+
     }
     //여기서부터 페이스북 로그인
     private void init(){
@@ -383,12 +406,30 @@ public class login extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            Register connection = new Register();
-            System.out.println(id);
-            connection.registerUser(id,information);
-            startActivity(new Intent(login.this,Display.class));
+            if(information !=null) {
+                Register connection = new Register();
+                connection.registerUser(id, information);
+            }
+            Intent login = new Intent(mContext,Display.class);
+            login.putExtra("user_id",id);
+            System.out.println("login : "+id);
+            startActivity(login);
             return null;
         }
     }
 
+    public class direct_login extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            etEmail = findViewById(R.id.etEmail);
+            etPassword = findViewById(R.id.etPassword);
+            email2 = etEmail.getText().toString();
+            id = email2;
+            password = etPassword.getText().toString();
+            result = new Register().login(email2,password);
+
+            return null;
+        }
+    }
 }

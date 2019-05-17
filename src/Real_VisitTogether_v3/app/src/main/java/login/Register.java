@@ -1,5 +1,7 @@
 package login;
 
+import android.content.Intent;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,6 +51,21 @@ public class Register {
         postData = "user_id="+user_id;
         return register(postData,"id_duplicate_check/");
     }
+    public  String login(String user_id, String password)
+    {
+        postData = "user_id="+user_id+"&user_password="+password;
+        return register(postData,"login/");
+    }
+    public String ranking(int event_id){
+        postData = "event_id"+event_id;
+        System.out.println("event id is "+String.valueOf(event_id));
+        return register(postData,"ranking/");
+    }
+    public String auth_info(String place_id)
+    {
+        postData = "place_id"+place_id;
+        return register(postData,"auth");
+    }
     private String register(String postData, String _url) {
 
         try {
@@ -77,6 +94,7 @@ public class Register {
             result = builder.toString();
             conn.disconnect();
             System.out.println(result);
+            result = result.trim();
             return result;
 
         } catch (MalformedURLException e) {
