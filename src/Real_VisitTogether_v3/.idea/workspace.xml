@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d352797e-3711-4db3-aa96-11fe18699740" name="Default Changelist" comment="" />
@@ -33,7 +33,7 @@
     <session id="-482765203">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.26" value="1" />
@@ -75,7 +75,7 @@
     <favorites_list name="Real_VisitTogether_v3" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -603,50 +603,52 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView">
+      <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Real_VisitTogether_v3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Real_VisitTogether_v3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Real_VisitTogether_v3" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Real_VisitTogether_v3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Real_VisitTogether_v3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Real_VisitTogether_v3" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Real_VisitTogether_v3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Real_VisitTogether_v3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Real_VisitTogether_v3" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Real_VisitTogether_v3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Real_VisitTogether_v3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Real_VisitTogether_v3" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="intermediates" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Real_VisitTogether_v3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Real_VisitTogether_v3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Real_VisitTogether_v3" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="outputs" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Real_VisitTogether_v3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Real_VisitTogether_v3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Real_VisitTogether_v3" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="tmp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="display" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -821,23 +823,23 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" sideWeight="0.5053192" side_tool="true" weight="0.32955465" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49468085" visible="true" weight="0.33522266" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49468085" visible="true" weight="0.33942765" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.50265956" side_tool="true" weight="0.32955465" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
-      <window_info anchor="bottom" id="Find" />
-      <window_info anchor="bottom" id="Run" order="0" weight="0.20284697" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.2905526" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.32976827" />
       <window_info anchor="bottom" id="TODO" order="2" visible="true" weight="0.32976827" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="5" weight="0.32976827" />
       <window_info anchor="bottom" id="Version Control" order="6" show_stripe_button="false" weight="0.32976827" />
-      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.32976827" />
+      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.32976827" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="9" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
