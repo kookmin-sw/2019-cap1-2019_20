@@ -61,6 +61,7 @@
 
         </activity>
         <activity android:name="display.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             >
 
         </activity>
@@ -107,7 +108,8 @@
         <activity android:name="login.google">
 
         </activity>
-        <activity android:name="toolbar_menu.MyPage"></activity>
+        <activity android:name="toolbar_menu.MyPage">
+        </activity>
         <activity android:name="toolbar_menu.Help"></activity>
         <activity android:name="toolbar_menu.mypage.ApplyReward"></activity>
         <activity android:name="toolbar_menu.mypage.CompletedEventList"></activity>

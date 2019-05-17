@@ -3,6 +3,7 @@ package toolbar_menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -19,6 +20,9 @@ public class MyPage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage);
+
+        ActionBar ab = getSupportActionBar() ;
+        ab.setTitle("My Page") ;
     }
     public void select_list(View v){
       int id = v.getId();
