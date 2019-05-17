@@ -9,8 +9,8 @@
 
     <Button
         android:id="@+id/mylocation"
-        android:layout_width="403dp"
-        android:layout_height="54dp"
+        android:layout_width="343dp"
+        android:layout_height="46dp"
         android:layout_marginStart="11dp"
         android:layout_marginTop="428dp"
         android:layout_marginEnd="5dp"
@@ -52,8 +52,8 @@
 
     <Button
         android:id="@+id/auth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="115dp"
+        android:layout_height="60dp"
         android:layout_marginStart="306dp"
         android:layout_marginTop="532dp"
         android:layout_marginEnd="17dp"
