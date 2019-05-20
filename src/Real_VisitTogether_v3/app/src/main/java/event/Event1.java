@@ -58,6 +58,7 @@ import toolbar_menu.mypage.Ranking;
 import vt_object.Event;
 import vt_object.Imply;
 import vt_object.Place;
+import android.graphics.Typeface;
 
 
 public class Event1 extends AppCompatActivity
@@ -734,9 +735,12 @@ public class Event1 extends AppCompatActivity
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
                     placeImage.setImageResource(R.drawable.drink);
                     placeImage.setLayoutParams(imageParams);
-
                     TextView placeText = new TextView(getApplicationContext());
-                    placeText.setText(places.elementAt(i).getName());
+                    placeText.setText("    "+ places.elementAt(i).getName());
+                    placeText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    placeText.setTextSize(40);
+                    placeText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/dogimayu_ttf.ttf"));
+
 
                     placeInfoLayout.addView(placeImage);
                     placeInfoLayout.addView(placeText);
