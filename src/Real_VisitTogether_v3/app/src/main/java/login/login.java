@@ -142,19 +142,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new direct_login().execute();
-                try {
-                    Thread.sleep(400);
-                    if(result.equals("ok")){
-                        new NetworkTask().execute();
-                    }
-                    else{
-                        Toast.makeText(mContext,"아이디 또는 비빌먼호가 일치하지 않습니다",Toast.LENGTH_LONG).show();
-                        etEmail.setText("");
-                        etPassword.setText("");
-                    }
-                }catch (Exception e){
-                    System.out.println("this is "+result);
-                }
+
 
             }
         });
@@ -403,17 +391,40 @@ public class login extends AppCompatActivity {
     }
 
     public class direct_login extends AsyncTask<Void, Void, Void> {
-
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected void onPreExecute() {
+            super.onPreExecute();
             etEmail = findViewById(R.id.etEmail);
             etPassword = findViewById(R.id.etPassword);
             email2 = etEmail.getText().toString();
             id = email2;
             password = etPassword.getText().toString();
-            result = new Register().login(email2,password);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if(etEmail.length() ==0 || etPassword.length() == 0) result = "error";
+            else result = new Register().login(email2,password);
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(result.equals("ok")){
+                        new NetworkTask().execute();
+                    }
+                    else{
+                        Toast.makeText(mContext,"아이디 또는 비빌먼호가 일치하지 않습니다",Toast.LENGTH_LONG).show();
+                        etEmail.setText("");
+                        etPassword.setText("");
+                    }
+                }
+            });
         }
     }
 }
