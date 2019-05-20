@@ -4,7 +4,7 @@ import android.media.ExifInterface;
 
 public class Geodegree {
     private boolean valid = false;
-    private Float latitude, longitude;
+    private double latitude, longitude;
 
     public Geodegree(ExifInterface exif) {
         String attrLATITUDE = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
@@ -64,11 +64,11 @@ public class Geodegree {
         return ("위도 : " + String.valueOf(latitude) + "\n" + "경도 : " + String.valueOf(longitude));
     }
 
-    public Float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public Float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
