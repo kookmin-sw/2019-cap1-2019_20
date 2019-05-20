@@ -41,12 +41,14 @@ public class SelectImage extends AppCompatActivity {
         db_gps = (TextView) findViewById(R.id.db_gps);
 
         String path = ((Auth_Exif) Auth_Exif.context).currentPhotoPath;
+        System.out.println("path = " + path);
 
         try {
             ExifInterface exif = new ExifInterface(path);
             Geodegree geoDegree = new Geodegree(exif);
             photo_gps = (TextView) findViewById(R.id.photo_gps);
             photo_gps.setText(geoDegree.toString());
+            System.out.println("위도경도: " + exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +79,6 @@ public class SelectImage extends AppCompatActivity {
                 intent.putExtra("authenticated", true);
                 intent.putExtra("joined", true);
                 startActivity(intent);
-                System.out.printf("\n<SelectImage>\nplace_num = %d\nauthenticated = %b\n", place_num, true);
                 Toast.makeText(SelectImage.this, "인증성공", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(SelectImage.this, "인증실패", Toast.LENGTH_SHORT).show();

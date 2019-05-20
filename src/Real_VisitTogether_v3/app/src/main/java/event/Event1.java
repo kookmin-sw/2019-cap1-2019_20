@@ -2,6 +2,7 @@ package event;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -130,7 +131,7 @@ public class Event1 extends AppCompatActivity
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
 
-        fetchPlaces = new NetworkTask();
+        fetchPlaces = new NetworkTask(this);
         fetchPlaces.execute("fetchPlaces");
 
     }
@@ -163,7 +164,7 @@ public class Event1 extends AppCompatActivity
 
         participate_button = (Button) findViewById(R.id.Participation);
         if(view.getId() == R.id.Participation){
-            registerParticipation = new NetworkTask();
+            registerParticipation = new NetworkTask(this);
             registerParticipation.execute("participate");
         }
     }
@@ -679,6 +680,12 @@ public class Event1 extends AppCompatActivity
         private int event_id;
         private String user_id;
 
+        private Context context;
+
+        public NetworkTask(Context context){
+            this.context = context;
+        }
+
         // NetworkTask의 execute 메소드가 호출된 후 실행되는 메소드
         // doin 메소드로 파라미터 전달
         @Override
@@ -750,17 +757,17 @@ public class Event1 extends AppCompatActivity
                 // 매칭된 데이터의 name으로 setText()
                 for (int i = 0; i < places.size(); i++) {
 
-                    LinearLayout placeInfoLayout = new LinearLayout(getApplicationContext());
+                    LinearLayout placeInfoLayout = new LinearLayout(context);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
                     placeInfoLayout.setOrientation(LinearLayout.HORIZONTAL);
                     placeInfoLayout.setLayoutParams(layoutParams);
 
-                    ImageView placeImage = new ImageView(getApplicationContext());
+                    ImageView placeImage = new ImageView(context);
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
                     placeImage.setImageResource(R.drawable.drink);
                     placeImage.setLayoutParams(imageParams);
 
-                    TextView placeText = new TextView(getApplicationContext());
+                    TextView placeText = new TextView(context);
                     placeText.setText(places.elementAt(i).getName());
 
                     placeInfoLayout.addView(placeImage);
