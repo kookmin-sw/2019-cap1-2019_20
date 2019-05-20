@@ -30,7 +30,9 @@ public class Sign_in extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.sign_in);
+
         Button confirm = (Button)findViewById(R.id.btnDone);
         Button btnCancel = (Button)findViewById(R.id.btnCancel) ;
         email = (EditText)findViewById(R.id.etEmail);
@@ -42,6 +44,7 @@ public class Sign_in extends AppCompatActivity {
 
                 password_check check =  new password_check();
                 check.execute();
+
                 try{
                     Thread.sleep(100);
                 }catch (Exception e){}

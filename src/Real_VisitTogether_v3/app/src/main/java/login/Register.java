@@ -57,14 +57,13 @@ public class Register {
         return register(postData,"login/");
     }
     public String ranking(int event_id){
-        postData = "event_id"+event_id;
-        System.out.println("event id is "+String.valueOf(event_id));
+        postData = "event_id="+String.valueOf(event_id);
         return register(postData,"ranking/");
     }
-    public String auth_info(String place_id)
+    public String auth(int place_id, int auth_num,double latitude, double longitude)
     {
-        postData = "place_id"+place_id;
-        return register(postData,"auth");
+        postData = "place_id="+place_id+"&auth_num="+auth_num+"&latitude="+latitude+"&longitude="+longitude;
+        return register(postData,"auth/");
     }
     private String register(String postData, String _url) {
 
