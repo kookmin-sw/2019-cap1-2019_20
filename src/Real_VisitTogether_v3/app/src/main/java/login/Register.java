@@ -69,19 +69,19 @@ public class Register {
     //인증 DB로 보내는 부분 수정 GPS / QR / Beacon
     public String auth_info(int place_id, int auth_num, double latitude , double longitutde)
     {
-        postData = "place_id="+place_id+"&auth_num"+auth_num+"&latitude"+latitude +"longitude"+longitutde;
+        postData = "place_id="+place_id+"&auth_num="+auth_num+"&latitude="+latitude +"&longitude="+longitutde;
         return register(postData,"auth/");
     }
 
     public String auth_info(int place_id, int auth_num, String qr_message)
     {
-        postData = "place_id="+place_id+"&auth_num"+auth_num +"&qr_message"+qr_message;
+        postData = "place_id="+place_id+"&auth_num="+auth_num +"&qr_message="+qr_message;
         return register(postData,"auth/");
     }
 
     public String auth_info(int place_id, int auth_num, double beacon_distance)
     {
-        postData = "place_id="+place_id+"&auth_num"+auth_num+"&beacon_distance"+beacon_distance;
+        postData = "place_id="+place_id+"&auth_num="+auth_num+"&beacon_distance="+beacon_distance;
         return register(postData,"auth/");
     }
 

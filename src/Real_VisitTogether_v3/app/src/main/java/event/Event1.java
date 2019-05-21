@@ -107,7 +107,7 @@ public class Event1 extends AppCompatActivity
         setContentView(R.layout.event1);
         user_id = getIntent().getStringExtra("user_id");
         event_id = getIntent().getIntExtra("event_id",-1);
-      // 출력 확인
+        // 출력 확인
         System.out.println("user_id "+user_id);
         System.out.println("event_id: "+event_id);
 
@@ -423,6 +423,7 @@ public class Event1 extends AppCompatActivity
         }
     }
 
+    //이부분 수정들어간다
     public void setDefaultLocation() {
 
         mMoveMapByUser = false;
@@ -448,6 +449,7 @@ public class Event1 extends AppCompatActivity
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
         //event1에 나오는 미션장소3군데
+        /*
         markerOptions
                 .position(Place1)
                 .title("노가리")
@@ -473,7 +475,7 @@ public class Event1 extends AppCompatActivity
 
         mGoogleMap.addMarker(markerOptions);
         //여기까지 미션장소들
-
+        */
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mGoogleMap.moveCamera(cameraUpdate);
 
@@ -712,10 +714,21 @@ public class Event1 extends AppCompatActivity
                     if (temp_imply.getEvent_id() == event_id)
                         implyVector.add(temp_imply);
                 }
+
+
+
                 // 뽑아낸 데이터와 Place 데이터 매칭
                 for (int i = 0; i < implyVector.size(); i++) {
                     for (int j = 0; j < place_dict.length; j++) {
+                        //System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + place_dict[j]);
+//                        String a;
+//                        a = places.elementAt(i).getLatitude();
+//                        //b = places.elementAt(i).getLongitude();
+//                        System.out.println(a+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+j+"@@@@@@@@@@@@@@@@@");
+
+
                         temp_place = gson.fromJson(place_dict[j], Place.class);
+
                         if (implyVector.elementAt(i).getPlace_id() == temp_place.getId())
                             places.add(temp_place);
                     }
@@ -733,9 +746,10 @@ public class Event1 extends AppCompatActivity
 
                     ImageView placeImage = new ImageView(getApplicationContext());
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    placeImage.setImageResource(R.drawable.drink);
+                    placeImage.setImageResource(R.drawable.drink);//이부분도 처리해야되는데,장소별 이미지는?
                     placeImage.setLayoutParams(imageParams);
                     TextView placeText = new TextView(getApplicationContext());
+                    //placeText.setText("    "+ places.elementAt(i).getName());
                     placeText.setText("    "+ places.elementAt(i).getName());
                     placeText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     placeText.setTextSize(40);
@@ -746,6 +760,41 @@ public class Event1 extends AppCompatActivity
                     placeInfoLayout.addView(placeText);
 
                     places_layout.addView(placeInfoLayout);
+
+                    //5/20일 수정들어간부분
+                    ////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////
+
+                    double a,b;
+                    a = Double.parseDouble(places.elementAt(i).getLatitude());
+                    b = Double.parseDouble(places.elementAt(i).getLongitude());
+
+
+                    LatLng Place = new LatLng(a,b);
+
+                    if (currentMarker != null) currentMarker.remove();
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    String markerTitle = "위치정보 가져올 수 없음";
+                    String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
+
+                    markerOptions.title(markerTitle);
+                    markerOptions.snippet(markerSnippet);
+                    markerOptions.draggable(true);
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    //currentMarker = mGoogleMap.addMarker(markerOptions);
+
+                    markerOptions
+                            .position(Place)
+                            .title(places.elementAt(i).getName())
+                            .snippet("위도 : "+places.elementAt(i).getLatitude() +"\n경도 : "+places.elementAt(i).getLongitude())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .alpha(0.5f);
+                    mGoogleMap.addMarker(markerOptions);
+
+
+                    ////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////
 
                     final int finalI = i;
                     placeInfoLayout.setOnClickListener(new View.OnClickListener() {
