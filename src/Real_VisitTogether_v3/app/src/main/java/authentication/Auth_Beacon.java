@@ -68,6 +68,7 @@ public class Auth_Beacon extends AppCompatActivity {
                 }
                 else {
                     distance = 100000;
+                }
             }
         });
 
