@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.estimote.sdk.cloud.model.analytics.Event;
 import com.example.real_visittogether.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,7 +34,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import display.MainActivity;
 import event.Event1;
+import login.Register;
 
 //public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
 public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
@@ -40,12 +44,23 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private Button button1,button2;
     private TextView txtResult;
+    private Register Reg ;
+    private int place_id;
+    private Geodegree Geo;
+    private int auth_num;
+    static double longitude,latitude;
 
+
+
+    //Register r = new Register();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
+
+        Intent intent = getIntent();
+        place_id = intent.getIntExtra("place_id", 0);
 
         SupportMapFragment mapFragment =(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView2) ;
         mapFragment.getMapAsync(this);
@@ -67,18 +82,6 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                             0 );
                 }
                 else{
-                    /*
-                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    String provider = location.getProvider();
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-                    double altitude = location.getAltitude();
-
-                    txtResult.setText("위치정보 : " + provider + "\n" +
-                            "위도 : " + latitude + "\n" +
-                            "경도 : " + longitude + "\n" +
-                            "고도  : " + altitude);
-                    */
 
                     //처음 버튼 누르고 시간이 100초이상 흐르거나 거리가 100m이상 차이날때 다시 좌표를 잡아줌
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -99,25 +102,54 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean check = true;
 
-                //인증실패시
-                if(check)
+                gps_check check = new gps_check();
+                check.execute();
+
+
+                /*
+                String check;
+                double x,y;
+                x = latitude;
+                y = longitude;
+                auth_num = 3;
+                check = Reg.auth_info(place_id,3,x,y);
+
+                if(check.equals("error"))
+                {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
+                else
+                {Toast.makeText(getApplicationContext(),"인증성공!" , Toast.LENGTH_SHORT).show();}
+
+                //////////////////////////////////////////////////여기아래 버려
+                //Correct(place_id,auth_num,x,y);
+
+                //String check ;
+                // 현위치 좌표 x,y받아옴.
+               // x = Geo.getLatitude();
+               // y = Geo.getLongitude();
+
+
+                //Reg.auth_info(place_id,3,x,y);
+               // check = Reg.auth_info(place_id,3,x,y);
+
+                if(check.equals("error"))
                 {
                     Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
+
                     Intent intent = getIntent();
-                    int place_num = intent.getIntExtra("place_num", 0);
+                    int place_id = intent.getIntExtra("place_id", 0);
                     intent = new Intent(Auth_Gps.this, Event1.class);
-                    intent.putExtra("place_num", place_num);
+                    intent.putExtra("place_id", place_id);
                     intent.putExtra("authenticated", check);
                     intent.putExtra("joined", true);
                     startActivity(intent);
+
                     Toast.makeText(getApplicationContext(),"인증성공!" , Toast.LENGTH_SHORT).show();
                 }
-
+            */
 
 
             }
@@ -125,22 +157,68 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
 
     }//end onCreate()
 
+    /////////////////////////////////////////////////////////////////////////////////
+    public class gps_check extends AsyncTask<Void, Void, Void> {
 
+        String save;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Register r = new Register();
+            double x,y;
+            x = latitude;
+            y = longitude;
+            auth_num = 3;
+            save = r.auth_info(place_id,3,x,y);
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    if("error".equals(save))
+                    {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
+                    else
+                    {Toast.makeText(getApplicationContext(),"인증성공! " , Toast.LENGTH_SHORT).show();}
+                    //{Toast.makeText(getApplicationContext(), save.toString(), Toast.LENGTH_LONG).show();}
+
+                }
+            });
+        }
+
+
+    }
 
 
 
     final LocationListener gpsLocationListener = new LocationListener() {
+
+
         public void onLocationChanged(Location location) {
 
             String provider = location.getProvider();
 
+            /*
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
             double altitude = location.getAltitude();
+            */
+           longitude = location.getLongitude();
+           latitude = location.getLatitude();
+            double altitude = location.getAltitude();
+
+
 
             txtResult.setText("위치정보 : " + provider + "\n" +
                     "위도 : " + latitude + "\n" +
                     "경도 : " + longitude + "\n" +
+                    "PLACE_ID : " + place_id +"\n" + //좀따 지울
+                    //"save값 : "+ save +"\n" + //지울것
                     "고도  : " + altitude);
 
             //현위치를 기본위치로 설정
@@ -163,7 +241,10 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
             mMap.addMarker(markerOptions);
 
 
+
         }
+
+
 
         public void onStatusChanged(String provider, int status, Bundle extras) {
         }

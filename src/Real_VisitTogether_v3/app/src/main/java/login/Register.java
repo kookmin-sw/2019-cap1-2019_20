@@ -57,15 +57,36 @@ public class Register {
         return register(postData,"login/");
     }
     public String ranking(int event_id){
-        postData = "event_id"+event_id;
-        System.out.println("event id is "+String.valueOf(event_id));
+        postData = "event_id="+String.valueOf(event_id);
         return register(postData,"ranking/");
     }
-    public String auth_info(String place_id)
+    public String auth(int place_id, int auth_num,double latitude, double longitude)
     {
-        postData = "place_id"+place_id;
-        return register(postData,"auth");
+        postData = "place_id="+place_id+"&auth_num="+auth_num+"&latitude="+latitude+"&longitude="+longitude;
+        return register(postData,"auth/");
     }
+
+    //인증 DB로 보내는 부분 수정 GPS / QR / Beacon
+    public String auth_info(int place_id, int auth_num, double latitude , double longitutde)
+    {
+        postData = "place_id="+place_id+"&auth_num"+auth_num+"&latitude"+latitude +"longitude"+longitutde;
+        return register(postData,"auth/");
+    }
+
+    public String auth_info(int place_id, int auth_num, String qr_message)
+    {
+        postData = "place_id="+place_id+"&auth_num"+auth_num +"&qr_message"+qr_message;
+        return register(postData,"auth/");
+    }
+
+    public String auth_info(int place_id, int auth_num, double beacon_distance)
+    {
+        postData = "place_id="+place_id+"&auth_num"+auth_num+"&beacon_distance"+beacon_distance;
+        return register(postData,"auth/");
+    }
+
+
+
     private String register(String postData, String _url) {
 
         try {

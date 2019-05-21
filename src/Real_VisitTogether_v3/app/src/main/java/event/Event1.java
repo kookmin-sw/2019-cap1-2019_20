@@ -752,7 +752,7 @@ public class Event1 extends AppCompatActivity
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-                            intent.putExtra("place_num", places.elementAt(finalI).getId());
+                            intent.putExtra("place_id", places.elementAt(finalI).getId());
                             startActivity(intent);
                         }
                     });
