@@ -168,8 +168,10 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
             double x,y;
             x = latitude;
             y = longitude;
+
             auth_num = 3;
             save = r.auth_info(place_id,3,x,y);
+
             return null;
         }
 
@@ -180,7 +182,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
+                    System.out.println("@@@@@@@@@@@@@@"+save );
                     if("error".equals(save))
                     {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
                     else
