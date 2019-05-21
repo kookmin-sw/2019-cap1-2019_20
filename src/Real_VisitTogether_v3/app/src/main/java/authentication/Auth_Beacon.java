@@ -66,15 +66,7 @@ public class Auth_Beacon extends AppCompatActivity {
                     distance = (0.3)*Math.pow(ratio,6);
                     rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
                 }
-<<<<<<< HEAD
-                else {
-                    distance = 100000;
-=======
-                else
-                {
-                    distance =10000;
->>>>>>> event_place_marker
-                }
+
             }
         });
 
