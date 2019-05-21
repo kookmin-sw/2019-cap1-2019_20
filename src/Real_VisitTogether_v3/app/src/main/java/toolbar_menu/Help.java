@@ -15,5 +15,6 @@ public class Help extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("도움말") ;
+
     }
 }
