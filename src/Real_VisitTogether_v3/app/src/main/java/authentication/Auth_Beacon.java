@@ -66,8 +66,14 @@ public class Auth_Beacon extends AppCompatActivity {
                     distance = (0.3)*Math.pow(ratio,6);
                     rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
                 }
+<<<<<<< HEAD
                 else {
                     distance = 100000;
+=======
+                else
+                {
+                    distance =10000;
+>>>>>>> event_place_marker
                 }
             }
         });
@@ -128,7 +134,6 @@ public class Auth_Beacon extends AppCompatActivity {
                     {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
                     else
                     {Toast.makeText(getApplicationContext(),"인증성공! " , Toast.LENGTH_SHORT).show();}
-                    //{Toast.makeText(getApplicationContext(), save.toString(), Toast.LENGTH_LONG).show();}
 
                 }
             });
@@ -143,17 +148,6 @@ public class Auth_Beacon extends AppCompatActivity {
 
         beacon_check check = new beacon_check();
         check.execute();
-
-        /*
-        if (view.getId() == R.id.btnAuth) {
-            if (distance < 5) {
-                Toast.makeText(Auth_Beacon.this, "인증성공", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(Auth_Beacon.this, "인증실패", Toast.LENGTH_SHORT).show();
-            }
-        }
-        */
 
     }
 }
