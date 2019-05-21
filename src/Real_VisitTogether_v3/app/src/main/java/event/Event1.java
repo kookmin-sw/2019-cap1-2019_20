@@ -750,9 +750,9 @@ public class Event1 extends AppCompatActivity
                     placeImage.setLayoutParams(imageParams);
                     TextView placeText = new TextView(getApplicationContext());
                     //placeText.setText("    "+ places.elementAt(i).getName());
-                    placeText.setText("    "+ places.elementAt(i).getName());
-                    placeText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    placeText.setTextSize(40);
+                    placeText.setText("<"+ places.elementAt(i).getName()+">\n"+"주소 : "+places.elementAt(i).getAddress()+"\n설명 : "+places.elementAt(i).getExplanation());
+                    placeText.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
+                    placeText.setTextSize(15);
                     placeText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/dogimayu_ttf.ttf"));
 
 
@@ -787,7 +787,7 @@ public class Event1 extends AppCompatActivity
                     markerOptions
                             .position(Place)
                             .title(places.elementAt(i).getName())
-                            .snippet("위도 : "+places.elementAt(i).getLatitude() +"\n경도 : "+places.elementAt(i).getLongitude())
+                            .snippet(places.elementAt(i).getLatitude() +"/"+places.elementAt(i).getLongitude())
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                             .alpha(0.5f);
                     mGoogleMap.addMarker(markerOptions);

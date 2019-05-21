@@ -9,7 +9,7 @@ public class Place {
     private int place_id;
     private String place_name;
     private String address;
-    private String qr_message;
+    private String explanation;
     private String latitude;
     private String longitude ;
 
@@ -19,7 +19,7 @@ public class Place {
         place_id = 0;
         place_name = null;
         address = null;
-        qr_message = null;
+        explanation = null;
         latitude = null;
         longitude = null;
 
@@ -31,6 +31,14 @@ public class Place {
 
     public String getName() {
         return place_name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getExplanation() {
+        return explanation;
     }
 
     public String getLongitude(){
