@@ -1,141 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="display.placeAdd"
+    android:layout_height="wrap_content"
     android:background="@drawable/background_3"
-    >
+    android:orientation="vertical"
+    tools:context="display.placeAdd">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/placeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장소명 :" />
+
+        <EditText
+            android:id="@+id/inputPlace"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/placeName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="장소명 :" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/inputPlace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주소 :" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="주소 :" />
-
-            <EditText
-                android:id="@+id/addressText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/FindAddress"
-                android:layout_width="124dp"
-                android:layout_height="32dp"
-                android:background="@drawable/buttoncolor_2"
-                android:text="주소 찾기" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="사진 :" />
-
-            <TextView
-                android:id="@+id/pictureName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/AddPicture"
-                android:layout_width="124dp"
-                android:layout_height="30dp"
-                android:background="@drawable/buttoncolor_2"
-                android:text="사진 등록" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="상세정보 :" />
-
-            <EditText
-                android:id="@+id/inputInformation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="인증방식 선택 :"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </Spinner>
-            </LinearLayout>
-        </LinearLayout>
+        <EditText
+            android:id="@+id/addressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <Button
-            android:id="@+id/regist"
-            android:layout_width="wrap_content"
-            android:layout_height="58dp"
-            android:layout_gravity="center"
-            android:background="@drawable/buttoncolor_4"
-            android:onClick="onClick"
-            android:text="등록하기" />
-
+            android:id="@+id/FindAddress"
+            android:layout_width="124dp"
+            android:layout_height="32dp"
+            android:background="@drawable/buttoncolor_2"
+            android:text="주소 찾기" />
 
     </LinearLayout>
-    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사진 :" />
+
+        <TextView
+            android:id="@+id/pictureName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/AddPicture"
+            android:layout_width="124dp"
+            android:layout_height="30dp"
+            android:background="@drawable/buttoncolor_2"
+            android:text="사진 등록" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상세정보 :" />
+
+        <EditText
+            android:id="@+id/inputInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인증방식 선택 :" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </Spinner>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/regist"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_gravity="center"
+        android:background="@drawable/buttoncolor_4"
+        android:onClick="onClick"
+        android:text="등록하기" />
+
+    <ImageView
+        android:id="@+id/placeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

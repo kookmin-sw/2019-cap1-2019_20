@@ -1,35 +1,24 @@
 package authentication;
 
-import java.io.File;
-import java.io.IOException;
-
-import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.content.Context;
-import android.os.Environment;
-
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 import com.example.real_visittogether.R;
+
+import java.io.File;
 
 import data_fetcher.CameraGallery;
 
@@ -56,7 +45,6 @@ public class Auth_Exif extends AppCompatActivity {
 
         imageView = findViewById(R.id.exif_image);
         cameraGallery = new CameraGallery(this);
-
         cameraGallery.tedPermission();
 
         findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
@@ -93,7 +81,6 @@ public class Auth_Exif extends AppCompatActivity {
                 intent = new Intent(Auth_Exif.this, SelectImage.class);
                 intent.putExtra("place_num", place_num);
                 startActivity(intent);
-                System.out.printf("\n<Auth_Exif>\nplace_num = %d\nauthenticated = %b\n", place_num, true);
             }
         });
     }
