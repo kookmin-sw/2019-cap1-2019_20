@@ -49,8 +49,8 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
     private Geodegree Geo;
     private int auth_num;
     static double longitude,latitude;
-
-
+    private String user_id;
+    private  int event_id;
 
     //Register r = new Register();
 
@@ -58,10 +58,10 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
-
+        user_id = getIntent().getStringExtra("user_id");
         Intent intent = getIntent();
         place_id = intent.getIntExtra("place_id", 0);
-
+        event_id = getIntent().getIntExtra("event_id",-1);
         SupportMapFragment mapFragment =(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView2) ;
         mapFragment.getMapAsync(this);
 
@@ -170,7 +170,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
             y = longitude;
 
             auth_num = 3;
-            save = r.auth_info(place_id,3,x,y);
+            save = r.auth_info(place_id,3,x,y,user_id,event_id);
 
             return null;
         }
@@ -183,12 +183,16 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                 @Override
                 public void run() {
                     System.out.println("@@@@@@@@@@@@@@"+save );
-                    if("error".equals(save))
-                    {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
-                    else
-                    {Toast.makeText(getApplicationContext(),"인증성공! " , Toast.LENGTH_SHORT).show();}
-                    //{Toast.makeText(getApplicationContext(), save.toString(), Toast.LENGTH_LONG).show();}
-
+                    try {
+                        if (save.equals("ok")) {
+                            Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e){System.out.println(e);
+                        Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

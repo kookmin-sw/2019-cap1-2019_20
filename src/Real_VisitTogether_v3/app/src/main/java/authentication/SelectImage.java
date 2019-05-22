@@ -36,7 +36,7 @@ public class SelectImage extends AppCompatActivity {
     private int place_id;
     private Register Reg;
     private int auth_num;
-
+    private String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class SelectImage extends AppCompatActivity {
 
         Intent intent = getIntent();
         place_id = intent.getIntExtra("place_id", 0);
-
+        user_id = getIntent().getStringExtra("user_id");
 
         photo_gps = (TextView) findViewById(R.id.photo_gps);
         db_gps = (TextView) findViewById(R.id.db_gps);
@@ -90,7 +90,7 @@ public class SelectImage extends AppCompatActivity {
             x = latitude;
             y = longitude;
             auth_num = 3;
-            save = r.auth_info(place_id,3,x,y);
+            save = r.auth_info(place_id,3,x,y,user_id,place_id);
             return null;
         }
 

@@ -20,8 +20,10 @@ public class SelectAuth extends AppCompatActivity {
     private int success = 10000;
     private int fail = 10001;
     private int place_id;
+    private String user_id;
     private Register Reg;
     private int auth_num;
+    private int event_id;
     static String QR_Info ;
 
     @Override
@@ -31,7 +33,8 @@ public class SelectAuth extends AppCompatActivity {
 
         Intent intent = getIntent();
         place_id = intent.getIntExtra("place_id", 0);
-
+        user_id = getIntent().getStringExtra("user_id");
+        event_id = getIntent().getIntExtra("event_id",-1);
         //place_id = intent.getIntExtra().getInt("place_id");
 
     }
@@ -40,6 +43,8 @@ public class SelectAuth extends AppCompatActivity {
         if (v.getId() == R.id.auth_exif) {
             Intent intent = new Intent(SelectAuth.this, Auth_Exif.class);
             intent.putExtra("place_id", place_id);
+            intent.putExtra("user_id",user_id);
+            intent.putExtra("event_id",event_id);
             startActivity(intent);
         } else if (v.getId() == R.id.auth_qr) {
             new IntentIntegrator(SelectAuth.this).initiateScan();
@@ -47,10 +52,14 @@ public class SelectAuth extends AppCompatActivity {
         } else if (v.getId() == R.id.auth_bicorn) {
             Intent intent = new Intent(SelectAuth.this, Auth_Beacon.class);
             intent.putExtra("place_id", place_id);
+            intent.putExtra("user_id",user_id);
+            intent.putExtra("event_id",event_id);
             startActivity(intent);
         } else if (v.getId() == R.id.auth_gps) {
             Intent intent = new Intent(SelectAuth.this, Auth_Gps.class);
             intent.putExtra("place_id", place_id);
+            intent.putExtra("user_id",user_id);
+            intent.putExtra("event_id",event_id);
             startActivity(intent);
         }
         System.out.printf("\n<SelectAuth>\nplace_id = %d\nauthenticated = %b\n", place_id, true);
@@ -69,7 +78,7 @@ public class SelectAuth extends AppCompatActivity {
             String qr;
 
             auth_num = 1;
-            save = r.auth_info(place_id, 1, QR_Info);
+            save = r.auth_info(place_id, 1, QR_Info,user_id,event_id);
             return null;
         }
 
@@ -80,13 +89,16 @@ public class SelectAuth extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
-                    if ("error".equals(save)) {
-                        Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+                    try {
+                        if (save.equals("ok")) {
+                            Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    //{Toast.makeText(getApplicationContext(), save.toString(), Toast.LENGTH_LONG).show();}
+                    catch (Exception e){System.out.println(e);
+                        Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             });

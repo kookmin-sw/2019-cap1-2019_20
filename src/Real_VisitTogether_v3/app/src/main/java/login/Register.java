@@ -67,21 +67,22 @@ public class Register {
     }
 
     //인증 DB로 보내는 부분 수정 GPS / QR / Beacon
-    public String auth_info(int place_id, int auth_num, double latitude , double longitutde)
+    public String auth_info(int place_id, int auth_num, double latitude , double longitutde, String user_id, int event_id)
     {
-        postData = "place_id="+place_id+"&auth_num="+auth_num+"&latitude="+latitude +"&longitude="+longitutde;
+        postData = "place_id="+place_id+"&auth_num="+auth_num+"&latitude="+latitude +"&longitude="+longitutde+"&user_id="+user_id+"&event_id="+event_id;
+        System.out.println(postData);
         return register(postData,"auth/");
     }
 
-    public String auth_info(int place_id, int auth_num, String qr_message)
+    public String auth_info(int place_id, int auth_num, String qr_message, String user_id, int event_id)
     {
-        postData = "place_id="+place_id+"&auth_num="+auth_num +"&qr_message="+qr_message;
+        postData = "place_id="+place_id+"&auth_num="+auth_num +"&qr_message="+qr_message+"&user_id="+user_id+"&event_id="+event_id;
         return register(postData,"auth/");
     }
 
-    public String auth_info(int place_id, int auth_num, double beacon_distance)
+    public String auth_info(int place_id, int auth_num, double beacon_distance, String user_id, int event_id)
     {
-        postData = "place_id="+place_id+"&auth_num="+auth_num+"&beacon_distance="+beacon_distance;
+        postData = "place_id="+place_id+"&auth_num="+auth_num+"&beacon_distance="+beacon_distance+"&user_id="+user_id+"&event_id="+event_id;
         return register(postData,"auth/");
     }
 

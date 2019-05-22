@@ -56,7 +56,7 @@ public class Auth_Exif extends AppCompatActivity {
     private Register Reg;
     private int auth_num;
 
-
+    private  String user_id;
     private Boolean isCamera = false;
     private File tempFile;
 
@@ -64,7 +64,7 @@ public class Auth_Exif extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exif);
-
+        user_id = getIntent().getStringExtra("user_id");
         ImageView jpgView = (ImageView) findViewById(R.id.exif_image);
 
         tedPermission();

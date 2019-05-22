@@ -802,6 +802,8 @@ public class Event1 extends AppCompatActivity
                         public void onClick(View view) {
                             Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
                             intent.putExtra("place_id", places.elementAt(finalI).getId());
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
                             startActivity(intent);
                         }
                     });

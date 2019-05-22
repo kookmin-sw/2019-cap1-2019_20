@@ -39,8 +39,8 @@ public class Auth_Beacon extends AppCompatActivity {
     private int place_id;
     private Geodegree Geo;
     private int auth_num;
-
-
+    private String user_id;
+    private int event_id;
 
 
     @Override
@@ -50,7 +50,8 @@ public class Auth_Beacon extends AppCompatActivity {
 
         Intent intent = getIntent();
         place_id = intent.getIntExtra("place_id", 0);
-
+        user_id = getIntent().getStringExtra("user_id");
+        event_id = getIntent().getIntExtra("event_id",-1);
         rssi = (TextView) findViewById(R.id.rssi);
 
         beaconManager = new BeaconManager(this);
@@ -110,7 +111,7 @@ public class Auth_Beacon extends AppCompatActivity {
             Register r = new Register();
 
             auth_num = 2;
-            save = r.auth_info(place_id,2,distance);
+            save = r.auth_info(place_id,2,distance,user_id,event_id);
             return null;
         }
 
@@ -121,12 +122,16 @@ public class Auth_Beacon extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
-                    if("error".equals(save))
-                    {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
-                    else
-                    {Toast.makeText(getApplicationContext(),"인증성공! " , Toast.LENGTH_SHORT).show();}
-
+                    try {
+                        if (save.equals("ok")) {
+                            Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e){System.out.println(e);
+                        Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
