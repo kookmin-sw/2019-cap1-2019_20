@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -23,6 +24,8 @@ public class placeAdd extends AppCompatActivity {
     private EditText placeName;
     private EditText addressText;
     private EditText information;
+    private Button addAddressButton;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class placeAdd extends AppCompatActivity {
         placeName = (EditText) findViewById(R.id.inputPlace);
         addressText = (EditText) findViewById(R.id.addressText);
         information = (EditText) findViewById(R.id.inputInformation);
+
 
         arrayList = new ArrayList<>();
         arrayList.add("사진촬영(Exif)");
@@ -49,8 +53,25 @@ public class placeAdd extends AppCompatActivity {
         spinner = (Spinner)findViewById(R.id.spinner);
         spinner.setAdapter(arrayAdapter);
 
+        Button b = (Button)findViewById(R.id.FindAddress);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), MapAddress.class);
+                //startActivity(mapAddress); // 다음 화면으로 넘어간다
+
+                startActivity(intent);
+            }
+        });
+
+
     }
+
+
+
+
     public void onClick(View v){
+
         if(v.getId() == R.id.regist){
 
             SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
