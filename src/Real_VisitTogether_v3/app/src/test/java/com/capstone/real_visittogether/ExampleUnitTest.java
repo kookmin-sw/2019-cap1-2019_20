@@ -1,4 +1,4 @@
-package com.example.real_visittogether;
+package com.capstone.real_visittogether;
 
 import org.junit.Test;
 

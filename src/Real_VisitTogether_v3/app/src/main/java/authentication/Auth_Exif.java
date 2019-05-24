@@ -19,14 +19,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.app.Dialog;
 import android.content.Context;
-import android.media.ExifInterface;
-import android.widget.Button;
-import android.widget.TextView;
 import android.os.Environment;
 
-import com.google.android.gms.auth.api.Auth;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -34,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.example.real_visittogether.R;
+import com.capstone.real_visittogether.R;
 
 import login.Register;
 

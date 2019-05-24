@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.real_visittogether.R;
+import com.capstone.real_visittogether.R;
 
 import java.util.ArrayList;
 

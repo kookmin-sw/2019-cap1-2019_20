@@ -1,4 +1,4 @@
-package com.example.visitogether.util;
+package com.capstone.visitogether.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
