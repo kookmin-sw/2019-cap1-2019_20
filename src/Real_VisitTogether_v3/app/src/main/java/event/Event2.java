@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 
 public class Event2 extends AppCompatActivity {
 

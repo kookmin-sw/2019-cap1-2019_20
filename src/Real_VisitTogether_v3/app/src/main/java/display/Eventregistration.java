@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 
 import login.Register;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.capstone.real_visittogether.display.event_btn.Button xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.real_visittogether.display.event_btn.Button xmlns:android="http://schemas.android.com/apk/res/android"
     android:textColor="#D4E9FF"
     android:textSize="30sp"
     android:layout_width="270dp"
@@ -13,4 +13,4 @@
     android:id="@+id/temp"
     >
 
-</com.capstone.real_visittogether.display.event_btn.Button>
+</com.example.real_visittogether.display.event_btn.Button>

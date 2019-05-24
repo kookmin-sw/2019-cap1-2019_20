@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 
 public class CompletedEventList extends AppCompatActivity {
     @Override

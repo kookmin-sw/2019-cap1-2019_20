@@ -1,4 +1,4 @@
-package com.capstone.real_visittogether;
+package com.example.real_visittogether;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.capstone.real_visittogether", appContext.getPackageName());
+        assertEquals("com.example.real_visittogether", appContext.getPackageName());
     }
 }

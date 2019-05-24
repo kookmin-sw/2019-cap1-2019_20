@@ -7,12 +7,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 
 import display.Display;
 import toolbar_menu.mypage.ApplyReward;
 import toolbar_menu.mypage.CompletedEventList;
 import toolbar_menu.mypage.Ranking;
+import toolbar_menu.mypage.Participation;
 
 public class MyPage extends AppCompatActivity {
     @Override

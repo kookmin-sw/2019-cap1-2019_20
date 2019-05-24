@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
+
+import data_fetcher.RequestHttpConnection;
 
 public class Sign_in extends AppCompatActivity {
     private String id;

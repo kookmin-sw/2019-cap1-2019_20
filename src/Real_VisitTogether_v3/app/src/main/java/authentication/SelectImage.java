@@ -1,20 +1,28 @@
 package authentication;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import java.io.IOException;
 
+import android.app.Activity;
 import android.media.ExifInterface;
+import android.os.Bundle;
+import android.os.Environment;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import authentication.Auth_Exif;
+import event.Event1;
 import login.Register;
 
 
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 
 
 public class SelectImage extends AppCompatActivity {

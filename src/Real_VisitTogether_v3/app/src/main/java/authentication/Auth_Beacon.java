@@ -1,14 +1,26 @@
 package authentication;
 
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.support.v4.app.ActivityCompat;
+import android.Manifest;
+import org.w3c.dom.Text;
+import android.bluetooth.*;
+import android.util.*;
 import android.content.Intent;
 import android.widget.Toast;
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.*;
 import com.estimote.sdk.SystemRequirementsChecker;
 import com.estimote.sdk.*;

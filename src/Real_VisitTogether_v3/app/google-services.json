@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:179551541813:android:7738fe742be9f442",
         "android_client_info": {
-          "package_name": "com.capstone.login"
+          "package_name": "com.example.login"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "179551541813-vbm83s0gi4g6fpsthopip9acf003i7ae.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.capstone.login",
+            "package_name": "com.example.login",
             "certificate_hash": "d4e0922b03131eb5de60864bbe06c760ccf7a68b"
           }
         },
@@ -54,7 +54,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:179551541813:android:7f2bef349020b9f8",
         "android_client_info": {
-          "package_name": "com.capstone.real_visittogether"
+          "package_name": "com.example.real_visittogether"
         }
       },
       "oauth_client": [
@@ -62,7 +62,7 @@
           "client_id": "179551541813-nid5vkpbb5kjam1cdvr929ejlfdmqt0b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.capstone.real_visittogether",
+            "package_name": "com.example.real_visittogether",
             "certificate_hash": "d4e0922b03131eb5de60864bbe06c760ccf7a68b"
           }
         },

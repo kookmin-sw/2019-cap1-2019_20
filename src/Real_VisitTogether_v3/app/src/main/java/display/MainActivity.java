@@ -1,10 +1,12 @@
 package display;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 
 public class MainActivity extends AppCompatActivity {
 

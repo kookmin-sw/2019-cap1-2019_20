@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.Toast;
-import com.capstone.real_visittogether.R;
+import com.example.real_visittogether.R;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.google.gson.Gson;
@@ -25,6 +28,7 @@ import java.util.Vector;
 
 import data_fetcher.RequestHttpConnection;
 import event.Event1;
+import event.Event2;
 
 import login.login;
 import toolbar_menu.Help;
