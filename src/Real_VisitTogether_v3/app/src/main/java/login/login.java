@@ -183,7 +183,7 @@ public class login extends AppCompatActivity {
                                 id = String.valueOf(Profile.getCurrentProfile().getId());
                                 information = "facebook";
                                 // Application code
-                                new NetworkTask().execute();
+
                             }
                         });
 
