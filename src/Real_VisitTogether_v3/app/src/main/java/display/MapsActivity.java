@@ -105,7 +105,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             .draggable(true);
 
                     mMap.addMarker(mOptions2);
-                    // 해당 좌표로 화면 줌
+                    // 해당 좌표로 화면 줌 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
 
             }
