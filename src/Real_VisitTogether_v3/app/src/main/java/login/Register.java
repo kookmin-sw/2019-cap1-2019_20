@@ -30,11 +30,9 @@ public class Register {
         register(postData, "insert_place/");
     }
 
-    public String participate(String user_ID, int event_ID){
-        String result;
+    public void participate(String user_ID, int event_ID){
         postData = "user_id=" + user_ID + "&" + "event_id=" + event_ID;
-        return register(postData, "participate_event/");
-
+        register(postData, "participate_event/");
     }
     public void registerUser(String user_id, String user_information)
     {
