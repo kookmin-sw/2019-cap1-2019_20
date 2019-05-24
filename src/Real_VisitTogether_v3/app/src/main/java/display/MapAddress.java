@@ -20,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import authentication.Geodegree;
@@ -36,6 +37,7 @@ public class MapAddress extends FragmentActivity implements OnMapReadyCallback {
     private double latitude, longitude;
 
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +118,7 @@ public class MapAddress extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onMapClick(LatLng point) {
 
-
+                //MarkerOptions.remove();
                 //////////////////////////////////////////////////////////////////
                 //if (currentMarker != null) currentMarker.remove();
 
@@ -124,6 +126,9 @@ public class MapAddress extends FragmentActivity implements OnMapReadyCallback {
                 String markerTitle = "위치정보 가져올 수 없음";
                 String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 
+                //if (markerOptions != null) markerOptions.remove();
+
+                mMap.clear();
                 markerOptions.title(markerTitle);
                 markerOptions.snippet(markerSnippet);
                 markerOptions.draggable(true);
@@ -138,11 +143,11 @@ public class MapAddress extends FragmentActivity implements OnMapReadyCallback {
                         .alpha(0.5f);
                 mMap.addMarker(markerOptions);
 
-
-
-
-
-                ///////////////////////////////////////////////////////////////
+//                Marker m = map.addMarker( MarkerOption())...  -> Marker 객체가 리턴됨
+//
+//
+//
+//                        (2) m.remove() -> (1)에서 그려진 마커가 삭제됨
 
 
 

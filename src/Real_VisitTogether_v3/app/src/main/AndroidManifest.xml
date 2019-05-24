@@ -41,6 +41,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
+        <activity android:name="display.MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="display.MapAddress"
             android:theme="@style/AppTheme.NoActionBar"/>
 

@@ -57,7 +57,7 @@ public class placeAdd extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), MapAddress.class);
+                intent = new Intent(getApplicationContext(), MapsActivity.class);
                 //startActivity(mapAddress); // 다음 화면으로 넘어간다
 
                 startActivity(intent);

@@ -106,52 +106,6 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                 gps_check check = new gps_check();
                 check.execute();
 
-
-                /*
-                String check;
-                double x,y;
-                x = latitude;
-                y = longitude;
-                auth_num = 3;
-                check = Reg.auth_info(place_id,3,x,y);
-
-                if(check.equals("error"))
-                {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
-                else
-                {Toast.makeText(getApplicationContext(),"인증성공!" , Toast.LENGTH_SHORT).show();}
-
-                //////////////////////////////////////////////////여기아래 버려
-                //Correct(place_id,auth_num,x,y);
-
-                //String check ;
-                // 현위치 좌표 x,y받아옴.
-               // x = Geo.getLatitude();
-               // y = Geo.getLongitude();
-
-
-                //Reg.auth_info(place_id,3,x,y);
-               // check = Reg.auth_info(place_id,3,x,y);
-
-                if(check.equals("error"))
-                {
-                    Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-
-                    Intent intent = getIntent();
-                    int place_id = intent.getIntExtra("place_id", 0);
-                    intent = new Intent(Auth_Gps.this, Event1.class);
-                    intent.putExtra("place_id", place_id);
-                    intent.putExtra("authenticated", check);
-                    intent.putExtra("joined", true);
-                    startActivity(intent);
-
-                    Toast.makeText(getApplicationContext(),"인증성공!" , Toast.LENGTH_SHORT).show();
-                }
-            */
-
-
             }
         });
 
@@ -182,7 +136,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("@@@@@@@@@@@@@@"+save );
+                    //System.out.println("@@@@@@@@@@@@@@"+save );//save값 제대로 나오는지 확인하는
                     try {
                         if (save.equals("ok")) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
@@ -264,6 +218,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
 
 
 //    지도부분 구현
+    //이부분은 select_auth 에서 받아온 위도경도 표시하는걸로 바꾼다
 
     @Override
     public void onMapReady(GoogleMap googleMap){
