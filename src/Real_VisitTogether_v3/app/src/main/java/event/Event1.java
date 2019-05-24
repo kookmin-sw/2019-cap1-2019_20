@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -20,7 +21,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -52,13 +52,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
-import login.Register;
 import data_fetcher.RequestHttpConnection;
+import login.Register;
 import toolbar_menu.mypage.Ranking;
-import vt_object.Event;
 import vt_object.Imply;
 import vt_object.Place;
-import android.graphics.Typeface;
+
+import com.google.android.gms.location.places.Place;
 
 
 public class Event1 extends AppCompatActivity
@@ -647,7 +647,7 @@ public class Event1 extends AppCompatActivity
         private String place_str, relation_str;
         private String[] place_dict, relation_dict;
 
-        private Place temp_place;
+        private vt_object.Place temp_place;
         private Vector<Place> places;
 
         private Imply temp_imply;
