@@ -38,6 +38,7 @@ public class Eventregistration extends AppCompatActivity {
     private int temp_places_size;
     private LinearLayout placesLayout;
     private Vector<Place> places;
+    private String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,9 @@ public class Eventregistration extends AppCompatActivity {
         placesLayout = (LinearLayout) findViewById(R.id.placesLayout);
 
         places = new Vector<Place>();
+
+        intent = getIntent();
+        user_id = intent.getStringExtra("user_id");
 
         event_pref = getSharedPreferences("event_info", MODE_PRIVATE);
         nameText.setText(event_pref.getString("event_name", ""));
@@ -133,8 +137,15 @@ public class Eventregistration extends AppCompatActivity {
 
             if(strings[0] == "register") {
                 Register connection = new Register();
-                connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), "testID2");
-
+                //connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), user_id);
+                String eventID = connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), "testID");
+                System.out.println("이벤트아이디=" + eventID);
+                System.out.println("place사이즈= " + places.size());
+                for(int i = 0; i < places.size(); i++) {
+                    //System.out.println("place아이디= " + places.elementAt(i).getId());
+                    String implyResult = connection.registerImply(Integer.parseInt(eventID), places.elementAt(i).getId());
+                    System.out.println("place아이디: " + implyResult);
+                }
             }else if(strings[0] == "fetchPlaces"){
                 System.out.println("EventRegistration fetchPlaces doInBackground!!");
                 RequestHttpConnection connection = new RequestHttpConnection();

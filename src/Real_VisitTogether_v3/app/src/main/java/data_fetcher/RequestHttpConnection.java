@@ -20,7 +20,6 @@ public class RequestHttpConnection {
             //연결 객체
             URL url = new URL(strURL + _url);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            //System.out.printf("\n응답코드: %d\n응답메세지: %s\n", conn.getResponseCode(), conn.getResponseMessage());
 
             //연결설정
             conn.setRequestMethod("GET");
@@ -39,8 +38,10 @@ public class RequestHttpConnection {
                 builder.append(line + "\n");
 
             result = builder.toString();
+            System.out.printf("\n응답코드: %d\n응답메세지: %s\n", conn.getResponseCode(), conn.getResponseMessage());
 
-        //URL protocol의 형식이 잘못되었다는 예외. http://를 붙여줘야 한다.
+
+            //URL protocol의 형식이 잘못되었다는 예외. http://를 붙여줘야 한다.
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {

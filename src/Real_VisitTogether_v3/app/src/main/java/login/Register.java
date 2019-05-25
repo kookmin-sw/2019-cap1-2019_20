@@ -14,10 +14,14 @@ public class Register {
     final private String strURL = "http://ec2-13-209-22-178.ap-northeast-2.compute.amazonaws.com:8888/";
     private String postData;
 
-    public void registerEvent(String event_name, String reward, String user_id){
+    public Register(){
+        postData = "";
+    }
+
+    public String registerEvent(String event_name, String reward, String user_id){
 
         postData = "event_name=" + event_name + "&" + "reward=" + reward + "&" + "user_id=" + user_id;
-        register(postData, "insert_event/");
+        return register(postData, "insert_event/");
     }
 
     public String registerPlace(String place_name, String address, String information){
@@ -26,8 +30,10 @@ public class Register {
         return register(postData, "insert_place/");
     }
 
-    public void registerImply(){
+    public String registerImply(int event_id, int place_id){
 
+        postData = "event_id=" + event_id + "&" + "place_id=" + place_id;
+        return register(postData, "insert_imply/");
     }
 
     public void participate(String user_ID, int event_ID){
@@ -36,7 +42,6 @@ public class Register {
     }
     public void registerUser(String user_id, String user_information)
     {
-
         postData = "user_id="+user_id+"&"+"user_information="+user_information;
         register(postData,"insert_user/");
     }
@@ -51,7 +56,7 @@ public class Register {
         postData = "user_id="+user_id;
         register(postData,"id_duplicate_check/");
     }
-    public String register(String postData, String _url){
+    private String register(String postData, String _url){
 
         try {
             URL url = new URL(strURL + _url);

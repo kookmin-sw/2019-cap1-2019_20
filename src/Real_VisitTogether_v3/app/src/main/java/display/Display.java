@@ -148,9 +148,9 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             // 네트워크 연결
             RequestHttpConnection connection = new RequestHttpConnection();
             event_str = connection.request(url);
-
+            System.out.println("웹에서 읽어온 모든 Event Json: " + event_str);
             // 리턴된 "{..}\n{..} ... {..}" 값들을 split
-           event_dict = event_str.split("\n");
+            event_dict = event_str.split("\n");
 
             return null;
         }
