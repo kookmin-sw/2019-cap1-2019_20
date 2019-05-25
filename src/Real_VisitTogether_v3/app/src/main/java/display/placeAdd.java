@@ -7,10 +7,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -24,10 +26,12 @@ import android.widget.Toast;
 
 import com.example.real_visittogether.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
 import data_fetcher.CameraGallery;
+import login.Register;
 
 public class placeAdd extends AppCompatActivity {
 
@@ -43,6 +47,8 @@ public class placeAdd extends AppCompatActivity {
     private ImageView placeImage;
 
     private CameraGallery cameraGallery;
+    private Bitmap originalBm;
+    private File tempFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +74,7 @@ public class placeAdd extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
 
-        spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(arrayAdapter);
         System.out.println("onCreate 메소드");
 
@@ -83,12 +89,12 @@ public class placeAdd extends AppCompatActivity {
 
         windowManager.width = width * 2 / 3;
         windowManager.height = height / 3;
-        addPictureButton.setOnClickListener(new View.OnClickListener(){
+        addPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("버튼 눌렀을 경우");
 
-                selectCG_dialog.setSelectCGListener(new SelectCG.SelectCGListener(){
+                selectCG_dialog.setSelectCGListener(new SelectCG.SelectCGListener() {
                     @Override
                     public void onClicked(CameraGallery _cameraGallery) {
                         cameraGallery = _cameraGallery;
@@ -99,10 +105,10 @@ public class placeAdd extends AppCompatActivity {
         });
     }
 
-    public void onClick(View v){
+    public void onClick(View v) {
         System.out.println("onClick 메소드");
-        if(v.getId() == R.id.regist){
-
+        if (v.getId() == R.id.regist) {
+            /*
             SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
             SharedPreferences.Editor editor = places_pref.edit();
 
@@ -112,6 +118,9 @@ public class placeAdd extends AppCompatActivity {
             editor.putString("temp_places_information" + temp_places_size, information.getText().toString());
             editor.putInt("temp_places_size", temp_places_size + 1);
             editor.commit();
+            */
+            NetworkTask networkTask = new NetworkTask();
+            networkTask.execute();
 
             Intent eventRegisteration = new Intent(getApplicationContext(), Eventregistration.class);
             startActivity(eventRegisteration);
@@ -123,7 +132,7 @@ public class placeAdd extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("placeAdd의 onActivityResult메소드 진입");
 
-        File tempFile = cameraGallery.getTempFile();
+        tempFile = cameraGallery.getTempFile();
         final String TAG = "VisiTogether";
         final int PICK_FROM_ALBUM = 1;
         final int PICK_FROM_CAMERA = 2;
@@ -176,7 +185,44 @@ public class placeAdd extends AppCompatActivity {
     private void setImage(File tempFile) {
 
         BitmapFactory.Options options = new BitmapFactory.Options();
-        Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
+        originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         placeImage.setImageBitmap(originalBm);
+    }
+
+    public String bitmapToString(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.NO_WRAP);
+    }
+
+    public class NetworkTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            System.out.println("PlaceAdd doInbackground!!");
+
+            Register connection = new Register();
+            String result = connection.registerPlace(placeName.getText().toString(), addressText.getText().toString(), information.getText().toString());
+            if(tempFile != null){
+                connection.registerImage(bitmapToString(originalBm), "insert_picture/");
+                System.out.println("사진 string 값: " + bitmapToString(originalBm));
+            }
+            System.out.println("Register Place Result: " + result);
+
+            SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
+            SharedPreferences.Editor editor = places_pref.edit();
+
+            int temp_places_size = places_pref.getInt("temp_places_size",0);
+            System.out.println("temp_places_size = " + places_pref.getInt("temp_places_size", 0));
+
+            editor.putInt("temp_places_id" + temp_places_size, Integer.parseInt(result));
+            editor.putInt("temp_places_size", temp_places_size + 1);
+
+            editor.commit();
+            System.out.println("temp_places_size = " + places_pref.getInt("temp_places_size", 0));
+
+            return null;
+        }
     }
 }

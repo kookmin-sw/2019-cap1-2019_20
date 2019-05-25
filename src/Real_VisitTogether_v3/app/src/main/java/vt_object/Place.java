@@ -11,6 +11,7 @@ public class Place {
     private String explanation;
     private String qr_message;
     private String coordinate;
+    private String picture;
 
 
     public Place(){
@@ -20,6 +21,9 @@ public class Place {
         explanation = null;
         qr_message = null;
         coordinate = null;
+        picture = null;
+
+        System.out.println("picture = " + picture);
     }
 
     public int getId() {
@@ -29,4 +33,6 @@ public class Place {
     public String getName() {
         return place_name;
     }
+
+    public String getPicture() { return picture; }
 }

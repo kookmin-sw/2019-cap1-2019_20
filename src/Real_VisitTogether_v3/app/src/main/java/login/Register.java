@@ -20,10 +20,14 @@ public class Register {
         register(postData, "insert_event/");
     }
 
-    public void registerPlace(String place_name, String address, String information){
+    public String registerPlace(String place_name, String address, String information){
 
         postData = "place_name=" + place_name + "&" + "address=" + address + "&" + "explanation=" + information;
-        register(postData, "insert_place/");
+        return register(postData, "insert_place/");
+    }
+
+    public void registerImply(){
+
     }
 
     public void participate(String user_ID, int event_ID){
@@ -33,7 +37,7 @@ public class Register {
     public void registerUser(String user_id, String user_information)
     {
 
-       postData = "user_id="+user_id+"&"+"user_information="+user_information;
+        postData = "user_id="+user_id+"&"+"user_information="+user_information;
         register(postData,"insert_user/");
     }
     public void registerUser(String user_id,String password, String user_information)
@@ -47,7 +51,7 @@ public class Register {
         postData = "user_id="+user_id;
         register(postData,"id_duplicate_check/");
     }
-    private String register(String postData, String _url){
+    public String register(String postData, String _url){
 
         try {
             URL url = new URL(strURL + _url);
@@ -61,6 +65,41 @@ public class Register {
 
             OutputStream outputStream = conn.getOutputStream();
             outputStream.write(postData.getBytes("UTF-8"));
+            outputStream.flush();
+            outputStream.close();
+
+            System.out.printf("반응코드: %d\n", conn.getResponseCode());
+
+            String result = readStream(conn.getInputStream());
+            conn.disconnect();
+
+            //System.out.println("Register Result: " + result);
+
+            return result;
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public String registerImage(String postData, String _url){
+
+        try {
+            URL url = new URL(strURL + _url);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestMethod("POST");
+            conn.setConnectTimeout(5000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+
+            OutputStream outputStream = conn.getOutputStream();
+            outputStream.write(("picture=" + postData).getBytes("UTF-8"));
             outputStream.flush();
             outputStream.close();
 

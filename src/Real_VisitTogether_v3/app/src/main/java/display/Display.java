@@ -2,6 +2,7 @@ package display;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,9 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import com.example.real_visittogether.R;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
@@ -24,8 +25,6 @@ import java.util.Vector;
 
 import data_fetcher.RequestHttpConnection;
 import event.Event1;
-import event.Event2;
-
 import login.login;
 import toolbar_menu.Help;
 import toolbar_menu.MyPage;
@@ -37,7 +36,8 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     private NetworkTask networkTask;
     private Vector<Button> btn = new Vector<Button>();
     private FloatingActionButton actionButton;
-    LinearLayout display_layout;
+    private LinearLayout display_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("같이가자!");
@@ -57,7 +57,17 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         }
         */
 
-
+        //임시저장한 데이터 지워지지 않았을 경우 대비
+        SharedPreferences places_pref, event_pref;
+        SharedPreferences.Editor place_editor, event_editor;
+        places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
+        event_pref = getSharedPreferences("event_info", MODE_PRIVATE);
+        place_editor = places_pref.edit();
+        place_editor.clear();
+        place_editor.commit();
+        event_editor = event_pref.edit();
+        event_editor.clear();
+        event_editor.commit();
     }
     public void onClick(View view) {
 
