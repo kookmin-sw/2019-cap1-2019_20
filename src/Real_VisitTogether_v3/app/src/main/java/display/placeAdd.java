@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.real_visittogether.R;
 
@@ -26,6 +27,10 @@ public class placeAdd extends AppCompatActivity {
     private EditText information;
     private Button addAddressButton;
     private Intent intent;
+    //DB로 넘기기위한 파라미터들
+    private double latitude,longitude;
+    private String address ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +39,27 @@ public class placeAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_add);
 
+        //////////////////////////////////////////////////////////////////////////////
+        //효준아 이부분에 위도 경도 주소 넣어둘테니깐 DB로 넘길때 참고해서 해줘
+        address =getIntent().getStringExtra("address");
+        latitude = getIntent().getDoubleExtra("latitude", 0);
+        longitude = getIntent().getDoubleExtra("longitude", 0);
+        //////////////////////////////////////////////////////////////////////////////
+
+
         placeName = (EditText) findViewById(R.id.inputPlace);
         addressText = (EditText) findViewById(R.id.addressText);
         information = (EditText) findViewById(R.id.inputInformation);
+        addressText.setHint("[주소찾기]버튼을 클릭하면 자동으로 입력됩니다.");
+
+        //EditText editText =(EditText)findViewById(R.id.editText);
+//        if(address.length() == 0)
+//            {addressText.setHint("[주소찾기]버튼을 클릭하면 자동으로 입력됩니다.");}
+//        else
+            addressText.setText(address);
+
+
+
 
 
         arrayList = new ArrayList<>();
@@ -79,7 +102,7 @@ public class placeAdd extends AppCompatActivity {
 
             int temp_places_size = places_pref.getInt("temp_places_size",0);
             editor.putString("temp_places_name" + temp_places_size, placeName.getText().toString());
-            editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
+            //editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
             editor.putString("temp_places_information" + temp_places_size, information.getText().toString());
             editor.putInt("temp_places_size", temp_places_size + 1);
             editor.commit();

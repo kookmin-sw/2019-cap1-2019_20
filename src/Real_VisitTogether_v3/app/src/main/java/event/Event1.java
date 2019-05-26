@@ -58,7 +58,7 @@ import toolbar_menu.mypage.Ranking;
 import vt_object.Imply;
 import vt_object.Place;
 
-import com.google.android.gms.location.places.Place;
+//import com.google.android.gms.location.places.Place;
 
 
 public class Event1 extends AppCompatActivity

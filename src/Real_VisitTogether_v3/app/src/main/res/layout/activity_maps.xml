@@ -7,30 +7,46 @@
     android:orientation="vertical"
     android:weightSum="10">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_weight="8">
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="장소를 입력하세요"
-            android:textColorHint="#1441CA"
             android:textColor="#0F0F0F"
+            android:textColorHint="#1441CA"
 
-        />
+            map:layout_constraintBottom_toTopOf="@+id/search"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/search"
+            android:layout_width="150dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="35dp"
             android:background="@drawable/buttoncolor_4"
-            android:text="Search" />
+            android:text="검색"
+            map:layout_constraintStart_toStartOf="@+id/editText"
+            map:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/regist"
+            android:layout_width="150dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/buttoncolor_4"
+            android:text="완료/등록"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
