@@ -11,9 +11,8 @@ public class Place {
     private String explanation;
     private String qr_message;
     private String coordinate;
-    //private byte[] picture;
     private String picture;
-    //private Blob picture;
+    //private int event_id;
 
 
     public Place(){
@@ -24,6 +23,7 @@ public class Place {
         qr_message = null;
         coordinate = null;
         picture = null;
+        //event_id = 0;
     }
 
     public int getId() {

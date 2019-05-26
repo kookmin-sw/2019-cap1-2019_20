@@ -46,13 +46,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
-import data_fetcher.RequestHttpConnection;
 import display.ImageConverter;
 import login.Register;
 import toolbar_menu.mypage.Ranking;
@@ -104,6 +105,7 @@ public class Event1 extends AppCompatActivity
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.event1);
 
+        System.out.println("Event1 페이지 진입");
         /*
         ImageView image2 = (ImageView) findViewById(R.id.imageView2) ;
         image2.setImageResource(R.drawable.sabal) ;
@@ -691,6 +693,7 @@ public class Event1 extends AppCompatActivity
         protected void onPreExecute() {
             super.onPreExecute();
             gson = new Gson();
+            temp_place = new Place();
             temp_imply = new Imply();
             places = new Vector<Place>();
             implyVector = new Vector<Imply>();
@@ -706,6 +709,11 @@ public class Event1 extends AppCompatActivity
 
             if(strings[0] == "fetchPlaces") {
 
+                Register conn = new Register();
+                place_str = conn.requestPlaces(event_id);
+                System.out.println("place_str!!!: "+ place_str + "\nevent_id!!!:" + event_id);
+                place_dict = place_str.split("%%%");
+                /*
                 // 네트워크 연결
                 RequestHttpConnection connection = new RequestHttpConnection();
 
@@ -715,7 +723,7 @@ public class Event1 extends AppCompatActivity
 
                 relation_str = connection.request(url_imply);
                 relation_dict = relation_str.split("\n");
-
+                */
                 return strings[0];
             }else if(strings[0] == "participate"){
 
@@ -736,6 +744,7 @@ public class Event1 extends AppCompatActivity
 
             if(string == "fetchPlaces") {
 
+                /*
                 // 관계 엔티티에서 이벤트 event_id 인 경우만 뽑아냄
                 for (int i = 0; i < relation_dict.length; i++) {
                     temp_imply = gson.fromJson(relation_dict[i], Imply.class);
@@ -750,11 +759,16 @@ public class Event1 extends AppCompatActivity
                             places.add(temp_place);
                     }
                 }
+                // 매칭된 데이터의 name으로 setText()
+                */
 
                 LinearLayout places_layout = (LinearLayout) findViewById(R.id.places_layout);
 
-                // 매칭된 데이터의 name으로 setText()
-                for (int i = 0; i < places.size(); i++) {
+                for (int i = 0; i < place_dict.length; i++) {
+                    JsonReader jsonReader = new JsonReader(new StringReader(place_dict[i]));
+                    jsonReader.setLenient(true);
+                    //temp_place = gson.fromJson(place_dict[i], Place.class);
+                    temp_place = gson.fromJson(jsonReader, Place.class);
 
                     LinearLayout placeInfoLayout = new LinearLayout(context);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
@@ -764,20 +778,20 @@ public class Event1 extends AppCompatActivity
                     ImageView placeImage = new ImageView(context);
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                    if(places.elementAt(i).getPicture().contains("None")){
+                    if(temp_place.getPicture().contains("None")){
                         System.out.println("장소 이미지가 null");
                         placeImage.setImageResource(R.drawable.rabbit);
                     }else {
                         System.out.println("장소 이미지가 null이 아님");
-                        System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
+                        //System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
                         ImageConverter imageConverter = new ImageConverter();
-                        placeImage.setImageBitmap(imageConverter.stringToBitmap(places.elementAt(i).getPicture()));
+                        placeImage.setImageBitmap(imageConverter.stringToBitmap(temp_place.getPicture()));
                     }
 
                     placeImage.setLayoutParams(imageParams);
 
                     TextView placeText = new TextView(context);
-                    placeText.setText(places.elementAt(i).getName());
+                    placeText.setText(temp_place.getName());
 
                     placeInfoLayout.addView(placeImage);
                     placeInfoLayout.addView(placeText);
@@ -789,7 +803,7 @@ public class Event1 extends AppCompatActivity
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-                            intent.putExtra("place_num", places.elementAt(finalI).getId());
+                            intent.putExtra("place_num", temp_place.getId());
                             startActivity(intent);
                         }
                     });

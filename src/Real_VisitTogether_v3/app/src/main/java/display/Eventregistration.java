@@ -15,10 +15,11 @@ import android.widget.TextView;
 
 import com.example.real_visittogether.R;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.util.Vector;
 
-import data_fetcher.RequestHttpConnection;
 import login.Register;
 import vt_object.Place;
 
@@ -61,10 +62,11 @@ public class Eventregistration extends AppCompatActivity {
 
 
         places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
-
-        NetworkTask registerTask = new NetworkTask(this);
-        registerTask.execute("fetchPlaces");
-
+        temp_places_size = places_pref.getInt("temp_places_size", 0);
+        if(temp_places_size > 0) {
+            NetworkTask registerTask = new NetworkTask(this);
+            registerTask.execute("fetchPlaces");
+        }
 
         event_editor = event_pref.edit();
         addPlaceButton.setOnClickListener(new View.OnClickListener() {
@@ -144,9 +146,16 @@ public class Eventregistration extends AppCompatActivity {
                 }
             }else if(strings[0] == "fetchPlaces"){
                 System.out.println("EventRegistration fetchPlaces doInBackground!!");
-                RequestHttpConnection connection = new RequestHttpConnection();
-                place_str = connection.request(url_p);
-                place_dict = place_str.split("\n");
+
+                int[] tempPlaces = new int[places_pref.getInt("temp_places_size", 0)];
+                for(int i = 0; i < tempPlaces.length; i++)
+                    tempPlaces[i] = places_pref.getInt("temp_places_id" + i, 0);
+
+                Register register = new Register();
+                place_str = register.requestPlaces(tempPlaces);
+                place_dict = place_str.split("%%%");
+                System.out.println("tempPlaces_str: " + place_str);
+                System.out.println("place_dict 길이: " + place_dict.length);
 
                 return strings[0];
             }
@@ -161,55 +170,13 @@ public class Eventregistration extends AppCompatActivity {
             if(string == "fetchPlaces") {
                 System.out.println("EventRegistration fetchPlaces onPostExecute!!");
 
-                /*
-                int len = place_dict.length;
-                int[] ids = new int[len];
-                Bitmap[] bitmaps = new Bitmap[len];
-                //System.out.println("place_str: " + place_str);
-                System.out.println("JSON데이터의 오브젝트 길이 = " + len);
-                for(int i = 0; i < len; i++){
-
-                    JsonParser jsonParser = new JsonParser();
-                    JsonElement jsonElement = jsonParser.parse(place_dict[i]);
-                    ids[i] = jsonElement.getAsJsonObject().get("place_id").getAsInt();
-                    temp_place.setPlace_id(ids[i]);
-
-
-                    JSONObject jsonObject = new JSONObject(place_dict[i]);
-                    ids[i] = jsonObject.getInt("place_id");
-                    bitmaps[i] = stringToBitmap(jsonObject.getString("picture"));
-                    temp_place.setPlace_id(ids[i]);
-                    temp_place.setPicture(jsonObject.getString("picture"));
-
-                    for(int j = 0; j < temp_places_size; j++){
-                        System.out.println("현재 placeID = " + temp_place.getId() + "\ttempPlaceID = " + places_pref.getInt("temp_places_id" + j, 0));
-                        if(temp_place.getId() == places_pref.getInt("temp_places_id" + j, 0)){
-                            places.add(temp_place);
-                        }
-                    }
-                }
-                */
                 temp_places_size = places_pref.getInt("temp_places_size", 0);
-                System.out.println("place_dict.length = " + place_dict.length);
+                //System.out.println("place_dict.length = " + place_dict.length);
                 System.out.println("temp_places_size = " + temp_places_size);
                 for(int i = 0; i < place_dict.length; i++){
-
-                    //JsonReader jsonReader = new JsonReader(new StringReader(place_dict[i]));
-                    //jsonReader.setLenient(true);
-                    temp_place = gson.fromJson(place_dict[i], Place.class);
-                    //temp_place = gson.fromJson(String.valueOf(jsonReader), Place.class);
-
-
-                    for(int j = 0; j < temp_places_size; j++){
-                        System.out.println("현재 placeID = " + temp_place.getId() + "\ttempPlaceID = " + places_pref.getInt("temp_places_id" + j, 0));
-                        if(temp_place.getId() == places_pref.getInt("temp_places_id" + j, 0)){
-                            places.add(temp_place);
-                        }
-                    }
-
-                }
-                System.out.println("임시 place 개수 = " + places.size());
-                for (int i = 0; i < places.size(); i++) {
+                    JsonReader jsonReader = new JsonReader(new StringReader(place_dict[i]));
+                    jsonReader.setLenient(true);
+                    temp_place = gson.fromJson(jsonReader, Place.class);
 
                     LinearLayout placeInfoLayout = new LinearLayout(context);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
@@ -219,23 +186,21 @@ public class Eventregistration extends AppCompatActivity {
                     ImageView placeImage = new ImageView(context);
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                    //if(places.elementAt(i).getPicture() != null){
-                    //    if(places.elementAt(i).getPicture().contains("None"))
-                    if(places.elementAt(i).getPicture().contains("None")){
+                    System.out.println("getPicture(): " + temp_place.getPicture());
+                    if(temp_place.getPicture() == null || temp_place.getPicture().contains("None")){
                         System.out.println("장소 이미지가 null");
                         placeImage.setImageResource(R.drawable.rabbit);
                     }else {
                         System.out.println("장소 이미지가 null이 아님");
-                        System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
+                        //System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
                         ImageConverter imageConverter = new ImageConverter();
-                        placeImage.setImageBitmap(imageConverter.stringToBitmap(places.elementAt(i).getPicture()));
-                        //placeImage.setImageBitmap(byteArrayToBitmap(places.elementAt(i).getPicture()));
+                        placeImage.setImageBitmap(imageConverter.stringToBitmap(temp_place.getPicture()));
                     }
 
                     placeImage.setLayoutParams(imageParams);
 
                     TextView placeText = new TextView(context);
-                    placeText.setText(places.elementAt(i).getName());
+                    placeText.setText(temp_place.getName());
 
                     placeInfoLayout.addView(placeImage);
                     placeInfoLayout.addView(placeText);
@@ -244,7 +209,5 @@ public class Eventregistration extends AppCompatActivity {
                 }
             }
         }
-
-
     }
 }
