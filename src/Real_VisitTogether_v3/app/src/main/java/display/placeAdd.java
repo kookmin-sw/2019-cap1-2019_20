@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.real_visittogether.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -189,12 +187,7 @@ public class placeAdd extends AppCompatActivity {
         placeImage.setImageBitmap(originalBm);
     }
 
-    public String bitmapToString(Bitmap bitmap){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream);
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(bytes, Base64.NO_WRAP);
-    }
+
 
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
         @Override
@@ -205,22 +198,23 @@ public class placeAdd extends AppCompatActivity {
             Register connection = new Register();
             String result = connection.registerPlace(placeName.getText().toString(), addressText.getText().toString(), information.getText().toString());
             if(tempFile != null){
-                connection.registerImage(bitmapToString(originalBm), "insert_picture/");
-                System.out.println("사진 string 값: " + bitmapToString(originalBm));
+                ImageConverter imageConverter = new ImageConverter();
+                String result2 = connection.registerImage(imageConverter.bitmapToString(originalBm));
+                System.out.println("사진 string 값:  " + imageConverter.bitmapToString(originalBm));
+                System.out.println("Response 데이터: " + result2);
             }
-            System.out.println("Register Place Result: " + result);
+            //System.out.println("Register Place Result: " + result);
 
+            // 임시 저장 장소 개수
+            // 임시 저장 장소ID 추가하고 개수 +1
+            // 저장
             SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
             SharedPreferences.Editor editor = places_pref.edit();
-
             int temp_places_size = places_pref.getInt("temp_places_size",0);
-            System.out.println("temp_places_size = " + places_pref.getInt("temp_places_size", 0));
-
             editor.putInt("temp_places_id" + temp_places_size, Integer.parseInt(result));
             editor.putInt("temp_places_size", temp_places_size + 1);
-
             editor.commit();
-            System.out.println("temp_places_size = " + places_pref.getInt("temp_places_size", 0));
+            //System.out.println("temp_places_size = " + places_pref.getInt("temp_places_size", 0));
 
             return null;
         }

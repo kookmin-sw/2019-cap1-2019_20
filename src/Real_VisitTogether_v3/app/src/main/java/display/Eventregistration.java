@@ -3,12 +3,9 @@ package display;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,11 +61,10 @@ public class Eventregistration extends AppCompatActivity {
 
 
         places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
-        temp_places_size = places_pref.getInt("temp_places_size", 0);
-        if(temp_places_size > 0) {
-            NetworkTask registerTask = new NetworkTask(this);
-            registerTask.execute("fetchPlaces");
-        }
+
+        NetworkTask registerTask = new NetworkTask(this);
+        registerTask.execute("fetchPlaces");
+
 
         event_editor = event_pref.edit();
         addPlaceButton.setOnClickListener(new View.OnClickListener() {
@@ -154,11 +150,6 @@ public class Eventregistration extends AppCompatActivity {
 
                 return strings[0];
             }
-            /*
-            for(int i = 0; i < temp_places_size; i++) {
-                connection.registerPlace(places_pref.getString("temp_places_name" + i, ""), places_pref.getString("temp_places_address" + i, ""), places_pref.getString("temp_places_information" + i, ""));
-            }
-            */
 
             return null;
         }
@@ -170,26 +161,52 @@ public class Eventregistration extends AppCompatActivity {
             if(string == "fetchPlaces") {
                 System.out.println("EventRegistration fetchPlaces onPostExecute!!");
 
-                temp_places_size = places_pref.getInt("temp_places_size", 0);
-                System.out.println("temp_places_size = " + temp_places_size);
-                for(int j = 0; j < temp_places_size; j++){
-                    //System.out.println(j + "번째 place_id = " + places_pref.getInt("temp_places_id" + j, 0));
-                }
+                /*
+                int len = place_dict.length;
+                int[] ids = new int[len];
+                Bitmap[] bitmaps = new Bitmap[len];
+                //System.out.println("place_str: " + place_str);
+                System.out.println("JSON데이터의 오브젝트 길이 = " + len);
+                for(int i = 0; i < len; i++){
 
-                System.out.println("place_dict.length = " + place_dict.length);
-                for(int i = 0; i < place_dict.length; i++){
-                    temp_place = gson.fromJson(place_dict[i], Place.class);
+                    JsonParser jsonParser = new JsonParser();
+                    JsonElement jsonElement = jsonParser.parse(place_dict[i]);
+                    ids[i] = jsonElement.getAsJsonObject().get("place_id").getAsInt();
+                    temp_place.setPlace_id(ids[i]);
+
+
+                    JSONObject jsonObject = new JSONObject(place_dict[i]);
+                    ids[i] = jsonObject.getInt("place_id");
+                    bitmaps[i] = stringToBitmap(jsonObject.getString("picture"));
+                    temp_place.setPlace_id(ids[i]);
+                    temp_place.setPicture(jsonObject.getString("picture"));
 
                     for(int j = 0; j < temp_places_size; j++){
-
-                        System.out.println(temp_place.getId());
-                        System.out.println(places_pref.getInt("temp_places_id" + j, 0));
-
+                        System.out.println("현재 placeID = " + temp_place.getId() + "\ttempPlaceID = " + places_pref.getInt("temp_places_id" + j, 0));
                         if(temp_place.getId() == places_pref.getInt("temp_places_id" + j, 0)){
-                            System.out.println("양쪽 placeID가 모두 " + temp_place.getId() + "이므로 ");
                             places.add(temp_place);
                         }
                     }
+                }
+                */
+                temp_places_size = places_pref.getInt("temp_places_size", 0);
+                System.out.println("place_dict.length = " + place_dict.length);
+                System.out.println("temp_places_size = " + temp_places_size);
+                for(int i = 0; i < place_dict.length; i++){
+
+                    //JsonReader jsonReader = new JsonReader(new StringReader(place_dict[i]));
+                    //jsonReader.setLenient(true);
+                    temp_place = gson.fromJson(place_dict[i], Place.class);
+                    //temp_place = gson.fromJson(String.valueOf(jsonReader), Place.class);
+
+
+                    for(int j = 0; j < temp_places_size; j++){
+                        System.out.println("현재 placeID = " + temp_place.getId() + "\ttempPlaceID = " + places_pref.getInt("temp_places_id" + j, 0));
+                        if(temp_place.getId() == places_pref.getInt("temp_places_id" + j, 0)){
+                            places.add(temp_place);
+                        }
+                    }
+
                 }
                 System.out.println("임시 place 개수 = " + places.size());
                 for (int i = 0; i < places.size(); i++) {
@@ -202,15 +219,17 @@ public class Eventregistration extends AppCompatActivity {
                     ImageView placeImage = new ImageView(context);
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                    //if(places.elementAt(i).getPicture() == null || places.elementAt(i).getPicture().length() == 0 || places.elementAt(i).getPicture() == "None" || places.elementAt(i).getPicture() == "") {
+                    //if(places.elementAt(i).getPicture() != null){
+                    //    if(places.elementAt(i).getPicture().contains("None"))
                     if(places.elementAt(i).getPicture().contains("None")){
                         System.out.println("장소 이미지가 null");
                         placeImage.setImageResource(R.drawable.rabbit);
                     }else {
-                        System.out.println("");
                         System.out.println("장소 이미지가 null이 아님");
                         System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
-                        placeImage.setImageBitmap(stringToBitmap(places.elementAt(i).getPicture()));
+                        ImageConverter imageConverter = new ImageConverter();
+                        placeImage.setImageBitmap(imageConverter.stringToBitmap(places.elementAt(i).getPicture()));
+                        //placeImage.setImageBitmap(byteArrayToBitmap(places.elementAt(i).getPicture()));
                     }
 
                     placeImage.setLayoutParams(imageParams);
@@ -226,10 +245,6 @@ public class Eventregistration extends AppCompatActivity {
             }
         }
 
-        public Bitmap stringToBitmap(String imageString){
-            byte[] bytes = Base64.decode(imageString, Base64.NO_WRAP);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            return bitmap;
-        }
+
     }
 }

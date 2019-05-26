@@ -56,6 +56,46 @@ public class Register {
         postData = "user_id="+user_id;
         register(postData,"id_duplicate_check/");
     }
+
+    public String registerImage(String imageString){
+        postData = "picture=" + imageString;
+        //return register(postData, "insert_picture/");
+
+        try {
+            URL url = new URL(strURL + "insert_picture/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestMethod("POST");
+            conn.setConnectTimeout(5000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+
+            OutputStream outputStream = conn.getOutputStream();
+            outputStream.write(postData.getBytes("UTF-8"));
+            outputStream.flush();
+            outputStream.close();
+
+            System.out.printf("반응코드: %d\n", conn.getResponseCode());
+            //System.out.println("바이트코드로 변환: " + imageString.getBytes());
+            //System.out.println("다시 스트링으로 변환: " + (imageString.getBytes()).toString());
+
+            String result = readStream(conn.getInputStream());
+            conn.disconnect();
+
+            //System.out.println("Register Result: " + result);
+
+            return result;
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     private String register(String postData, String _url){
 
         try {
@@ -79,39 +119,6 @@ public class Register {
             conn.disconnect();
 
             //System.out.println("Register Result: " + result);
-
-            return result;
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public String registerImage(String postData, String _url){
-
-        try {
-            URL url = new URL(strURL + _url);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestMethod("POST");
-            conn.setConnectTimeout(5000);
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-
-            OutputStream outputStream = conn.getOutputStream();
-            outputStream.write(("picture=" + postData).getBytes("UTF-8"));
-            outputStream.flush();
-            outputStream.close();
-
-            System.out.printf("반응코드: %d\n", conn.getResponseCode());
-
-            String result = readStream(conn.getInputStream());
-            conn.disconnect();
 
             return result;
 

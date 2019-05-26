@@ -21,7 +21,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -53,10 +52,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
-import login.Register;
 import data_fetcher.RequestHttpConnection;
+import display.ImageConverter;
+import login.Register;
 import toolbar_menu.mypage.Ranking;
-import vt_object.Event;
 import vt_object.Imply;
 import vt_object.Place;
 
@@ -764,7 +763,17 @@ public class Event1 extends AppCompatActivity
 
                     ImageView placeImage = new ImageView(context);
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    placeImage.setImageResource(R.drawable.drink);
+
+                    if(places.elementAt(i).getPicture().contains("None")){
+                        System.out.println("장소 이미지가 null");
+                        placeImage.setImageResource(R.drawable.rabbit);
+                    }else {
+                        System.out.println("장소 이미지가 null이 아님");
+                        System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
+                        ImageConverter imageConverter = new ImageConverter();
+                        placeImage.setImageBitmap(imageConverter.stringToBitmap(places.elementAt(i).getPicture()));
+                    }
+
                     placeImage.setLayoutParams(imageParams);
 
                     TextView placeText = new TextView(context);

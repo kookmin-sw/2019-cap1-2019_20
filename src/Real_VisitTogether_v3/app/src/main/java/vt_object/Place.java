@@ -11,7 +11,9 @@ public class Place {
     private String explanation;
     private String qr_message;
     private String coordinate;
+    //private byte[] picture;
     private String picture;
+    //private Blob picture;
 
 
     public Place(){
@@ -22,8 +24,6 @@ public class Place {
         qr_message = null;
         coordinate = null;
         picture = null;
-
-        System.out.println("picture = " + picture);
     }
 
     public int getId() {
@@ -34,5 +34,11 @@ public class Place {
         return place_name;
     }
 
+    //public byte[] getPicture() { return picture; }
     public String getPicture() { return picture; }
+    //public Blob getPicture() { return picture; }
+
+    public void setPlace_id(int place_id) { this.place_id = place_id; }
+
+    public void setPicture(String picture) { this.picture = picture; }
 }
