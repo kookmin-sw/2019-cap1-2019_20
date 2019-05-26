@@ -23,7 +23,7 @@ public class placeAdd extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
 
     private EditText placeName;
-    private EditText addressText;
+    private TextView addressText;
     private EditText information;
     private Button addAddressButton;
     private Intent intent;
@@ -48,7 +48,7 @@ public class placeAdd extends AppCompatActivity {
 
 
         placeName = (EditText) findViewById(R.id.inputPlace);
-        addressText = (EditText) findViewById(R.id.addressText);
+        addressText = (TextView) findViewById(R.id.addressText);
         information = (EditText) findViewById(R.id.inputInformation);
         addressText.setHint("[주소찾기]버튼을 클릭하면 자동으로 입력됩니다.");
 
