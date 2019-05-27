@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:background="@drawable/background_9"
+    >
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button_reward"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="204dp" />
-</android.support.constraint.ConstraintLayout>
+
+
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="323dp"
+        android:text="관리자에게 문의하세요.\n\nqorwkdgus93@gmail.com \n010-4850-0960\n"
+        android:textSize="30sp"
+        android:textColor = "#2196F3"
+        android:textStyle = "bold"/>
+</LinearLayout>

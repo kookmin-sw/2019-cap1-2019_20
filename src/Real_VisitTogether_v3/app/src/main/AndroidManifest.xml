@@ -40,6 +40,12 @@
         <activity android:name="login.Sign_in"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+
+        <activity android:name="display.MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="display.MapAddress"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name="display.placeAdd"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="display.Eventregistration"

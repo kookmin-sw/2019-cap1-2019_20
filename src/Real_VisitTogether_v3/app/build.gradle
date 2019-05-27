@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'gun0912.ted:tedpermission:1.0.3'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-places:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
 
 

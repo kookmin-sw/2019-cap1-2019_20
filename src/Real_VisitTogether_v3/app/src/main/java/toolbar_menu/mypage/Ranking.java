@@ -1,16 +1,29 @@
 package toolbar_menu.mypage;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import data_fetcher.RequestHttpConnection;
+import display.event_btn;
+import event.Event1;
+import login.Register;
 import user.User;
 import user.UserAdaptor;
+import user.UserRanking;
+import vt_object.Event;
 
 import com.example.real_visittogether.R;
+import com.google.gson.Gson;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -61,72 +74,95 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class Ranking extends AppCompatActivity {
 
-    ArrayList<User> user = new ArrayList<>();
+    ArrayList<UserRanking> userRanking = new ArrayList<>();
+    private Context mcontext;
     ListView listView;
-
+    int event_id;
+    String result;
+    String parse = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ranking);
-
+        mcontext = this;
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("랭킹") ;
-
-        // Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.listView);
-
-
-        xmlParsing();
-        Collections.sort(user);
-        makeRank();
-        UserAdaptor adapter = new UserAdaptor(this, user);
-        listView = (ListView)findViewById(R.id.listView);
-        listView.setAdapter(adapter);
-
+        event_id = getIntent().getIntExtra("event_id",-1);
+        NetworkTask end = new NetworkTask();
+        end.execute();
 
     }
 
-    public void  xmlParsing(){
+    public class NetworkTask extends AsyncTask<Void, Void, Void> {
 
-        String[] data = null;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            result = new Register().ranking(event_id);
+            return null;
+        }
 
-        try {
-            InputStream is = getResources().openRawResource(R.raw.user);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            new Parsing_Rank().execute();
+        }
+    }
+    public class Parsing_Rank extends AsyncTask<Void, Void, Void> {
 
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(is);
+        final private String url = "event/";
+        private UserRanking user;
+        private String event_str;
+        private String[] event_dict;
+        private Gson gson;
+        private Context mContext;
 
-            NodeList studentList = doc.getElementsByTagName("user");
-            NodeList nameList = doc.getElementsByTagName("name");
-            NodeList ageList = doc.getElementsByTagName("num");
 
-            data = new String[studentList.getLength()];
 
-            for(int i = 0; i < studentList.getLength(); i++) {
-                String name = nameList.item(i).getFirstChild().getNodeValue();
-                name = name.trim();
-                int age = Integer.parseInt(ageList.item(i).getFirstChild().getNodeValue());
-                user.add(new User(name,age));
+        // NetworkTask의 execute 메소드가 호출된 후 실행되는 메소드
+        // doin 메소드로 파라미터 전달
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            gson = new Gson();
+
+        }
+        // 백그라운드 스레드에서 처리되는 부분
+        @Override
+        protected Void doInBackground(Void... voids) {
+            event_dict = result.split("\n");
+            // 배열의 원소들을 json 인코딩 후 각 버튼 setText()
+            for(int i = 0; i < event_dict.length; i++) {
+                user = gson.fromJson(event_dict[i], UserRanking.class);
+                userRanking.add(user);
 
             }
+            return null;
+        }
 
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-
+        // 백그라운드 작업 결과 반영
+        // doin 메소드로 파라미터를 받는다
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            makeRank();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView textView = (TextView) findViewById(R.id.rank);
+                    textView.setText(parse);
+                }
+            });
+            //new UpdateRank().execute();
         }
 
     }
     public void makeRank()
     {
         int idx = 1;
-        for(User k : user)
+        for(UserRanking k : userRanking)
         {
-            k.setName(String.valueOf(idx)+". "+k.getName()+" : ");
+            parse += (idx+". "+k.getUser_id()+" : "+k.getNumber_of_visits()+"\n");
+
             idx++;
         }
     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background_3"
+    android:background="@drawable/background_9"
     tools:context="display.Eventregistration">
 
     <LinearLayout
@@ -24,7 +24,7 @@
         <EditText
             android:id="@+id/inputevent"
             android:layout_width="202dp"
-            android:layout_height="44dp"
+            android:layout_height="67dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="84dp"
             android:layout_marginEnd="8dp" />
@@ -32,83 +32,83 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="116dp"
+        android:layout_height="111dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/term"
             android:layout_width="56dp"
-            android:layout_height="25dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="56dp"
             android:text="기간제한:" />
 
         <EditText
             android:id="@+id/inputYear"
-            android:layout_width="49dp"
-            android:layout_height="40dp"
+            android:layout_width="55dp"
+            android:layout_height="61dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="44dp" />
 
         <TextView
             android:id="@+id/year"
-            android:layout_width="26dp"
-            android:layout_height="21dp"
+            android:layout_width="21dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="55dp"
             android:text="년" />
 
         <EditText
             android:id="@+id/inputMonth"
             android:layout_width="30dp"
-            android:layout_height="40dp"
+            android:layout_height="62dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="44dp" />
 
         <TextView
             android:id="@+id/month"
             android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="55dp"
             android:text="월" />
 
         <EditText
             android:id="@+id/inputDay"
             android:layout_width="30dp"
-            android:layout_height="40dp"
+            android:layout_height="64dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="44dp" />
 
         <TextView
             android:id="@+id/day"
-            android:layout_width="11dp"
-            android:layout_height="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="55dp"
             android:layout_marginEnd="8dp"
             android:text="일" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="77dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/Slush"
-            android:layout_width="22dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="23dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="95dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="8dp"
             android:text="/"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/Noterm"
-            android:layout_width="64dp"
-            android:layout_height="39dp"
+            android:layout_width="66dp"
+            android:layout_height="38dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="204dp"
             android:background="@drawable/buttoncolor_5"
@@ -117,28 +117,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="69dp"
+        android:layout_height="87dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/reward"
-            android:layout_width="wrap_content"
+            android:layout_width="51dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="68dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
             android:text="보상:" />
 
         <EditText
             android:id="@+id/inputReward"
-            android:layout_width="186dp"
+            android:layout_width="236dp"
             android:layout_height="41dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="250dp" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
 
         <Button
             android:id="@+id/place"

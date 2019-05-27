@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -54,11 +55,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
+
 import display.ImageConverter;
+
+import data_fetcher.RequestHttpConnection;
+
 import login.Register;
 import toolbar_menu.mypage.Ranking;
 import vt_object.Imply;
 import vt_object.Place;
+
+//import com.google.android.gms.location.places.Place;
 
 
 public class Event1 extends AppCompatActivity
@@ -69,7 +76,8 @@ public class Event1 extends AppCompatActivity
 
     private NetworkTask fetchPlaces;
     private NetworkTask registerParticipation;
-
+    private String user_id;
+    private int event_id;
     private TextView[] place_text;
 
     private Button participate_button;
@@ -119,6 +127,13 @@ public class Event1 extends AppCompatActivity
         place_text[2] = (TextView) findViewById(R.id.place_name3);
         */
 
+        user_id = getIntent().getStringExtra("user_id");
+        event_id = getIntent().getIntExtra("event_id",-1);
+        // 출력 확인
+        System.out.println("user_id "+user_id);
+        System.out.println("event_id: "+event_id);
+
+
         Log.d(TAG, "onCreate");
         mActivity = this;
 
@@ -139,28 +154,11 @@ public class Event1 extends AppCompatActivity
 
     public void onClickEvent1(View view) {
 
-        /*
-        if (view.getId() == R.id.imageView) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 1);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.imageView2) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 2);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.imageView3) {
-            Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
-            intent.putExtra("place_num", 3);
-            startActivity(intent);
-        }
-        */
-
         if(view.getId() == R.id.Rank){
-            startActivity(new Intent(this, Ranking.class));
+
+            Intent rank = new Intent(this, Ranking.class);
+            rank.putExtra("event_id",event_id);
+            startActivity(rank);
         }
 
         participate_button = (Button) findViewById(R.id.Participation);
@@ -449,6 +447,7 @@ public class Event1 extends AppCompatActivity
         }
     }
 
+    //이부분 수정들어간다
     public void setDefaultLocation() {
 
         mMoveMapByUser = false;
@@ -474,6 +473,7 @@ public class Event1 extends AppCompatActivity
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
         //event1에 나오는 미션장소3군데
+        /*
         markerOptions
                 .position(Place1)
                 .title("노가리")
@@ -499,7 +499,7 @@ public class Event1 extends AppCompatActivity
 
         mGoogleMap.addMarker(markerOptions);
         //여기까지 미션장소들
-
+        */
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mGoogleMap.moveCamera(cameraUpdate);
 
@@ -669,6 +669,7 @@ public class Event1 extends AppCompatActivity
         private String place_str, relation_str;
         private String[] place_dict, relation_dict;
 
+        //private vt_object.Place temp_place;
         private Place temp_place;
         private Vector<Place> places;
 
@@ -751,10 +752,21 @@ public class Event1 extends AppCompatActivity
                     if (temp_imply.getEvent_id() == event_id)
                         implyVector.add(temp_imply);
                 }
+
+
+
                 // 뽑아낸 데이터와 Place 데이터 매칭
                 for (int i = 0; i < implyVector.size(); i++) {
                     for (int j = 0; j < place_dict.length; j++) {
+                        //System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + place_dict[j]);
+//                        String a;
+//                        a = places.elementAt(i).getLatitude();
+//                        //b = places.elementAt(i).getLongitude();
+//                        System.out.println(a+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+j+"@@@@@@@@@@@@@@@@@");
+
+
                         temp_place = gson.fromJson(place_dict[j], Place.class);
+
                         if (implyVector.elementAt(i).getPlace_id() == temp_place.getId())
                             places.add(temp_place);
                     }
@@ -778,6 +790,7 @@ public class Event1 extends AppCompatActivity
                     ImageView placeImage = new ImageView(context);
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+
                     if(temp_place.getPicture().contains("None")){
                         System.out.println("장소 이미지가 null");
                         placeImage.setImageResource(R.drawable.rabbit);
@@ -790,20 +803,74 @@ public class Event1 extends AppCompatActivity
 
                     placeImage.setLayoutParams(imageParams);
 
+                   // TextView placeText = new TextView(context);
+                   // placeText.setText(temp_place.getName());
+
+                    placeImage.setImageResource(R.drawable.drink);//이부분도 처리해야되는데,장소별 이미지는?
+                    placeImage.setLayoutParams(imageParams);
                     TextView placeText = new TextView(context);
+                    //placeText.setText(temp_place.getName());
+
+                    //TextView placeText = new TextView(getApplicationContext());
                     placeText.setText(temp_place.getName());
+                    placeText.setText("<"+ temp_place.getName()+">\n"+"주소 : "+temp_place.getAddress()+"\n설명 : "+temp_place.getExplanation());
+                    placeText.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
+                    placeText.setTextSize(15);
+                    placeText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/dogimayu_ttf.ttf"));
+
 
                     placeInfoLayout.addView(placeImage);
                     placeInfoLayout.addView(placeText);
 
                     places_layout.addView(placeInfoLayout);
 
+                    //5/20일 수정들어간부분
+                    ////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////
+
+                    double a,b;
+                    a = Double.parseDouble(temp_place.getLatitude());
+                    b = Double.parseDouble(temp_place.getLongitude());
+
+
+                    LatLng Place = new LatLng(a,b);
+
+                    if (currentMarker != null) currentMarker.remove();
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    String markerTitle = "위치정보 가져올 수 없음";
+                    String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
+
+                    markerOptions.title(markerTitle);
+                    markerOptions.snippet(markerSnippet);
+                    markerOptions.draggable(true);
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    //currentMarker = mGoogleMap.addMarker(markerOptions);
+
+                    markerOptions
+                            .position(Place)
+                            .title(temp_place.getName())
+                            .snippet(temp_place.getLatitude() +"/"+temp_place.getLongitude())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .alpha(0.5f);
+                    mGoogleMap.addMarker(markerOptions);
+
+
+                    ////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////
+
                     final int finalI = i;
                     placeInfoLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(Event1.this, authentication.SelectAuth.class);
+
                             intent.putExtra("place_num", temp_place.getId());
+
+                            intent.putExtra("place_id", places.elementAt(finalI).getId());
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
+
                             startActivity(intent);
                         }
                     });

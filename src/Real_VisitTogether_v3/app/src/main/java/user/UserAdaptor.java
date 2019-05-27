@@ -27,15 +27,15 @@ public class UserAdaptor extends ArrayAdapter {
         }
 
         // Get the data item for this position
-        User user = (User)getItem(position);
+        UserRanking user = (UserRanking) getItem(position);
 
         // Lookup view for data population
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
         TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
         // Populate the data into the template view using the data object
 
-        tvName.setText(user.getName());
-        tvHome.setText(String.valueOf(user.getNum()));
+        tvName.setText(user.getUser_id());
+        tvHome.setText(String.valueOf(user.getNumber_of_visits()));
         // Return the completed view to render on screen
         return convertView;
     }

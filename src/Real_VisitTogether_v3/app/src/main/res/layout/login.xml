@@ -4,28 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_9"
     android:fillViewport="true">
 
 
-
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="#FFFFFF"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:background="#FFFFFF">
+        android:orientation="vertical">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="256dp"
             android:gravity="center"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="50sp" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="같이 가자"
+                    android:textAlignment="center"
+                    android:textSize="50sp"
+                    android:textColor="@color/colorAccent"
+                    />
+            </LinearLayout>
+
             <EditText
                 android:id="@+id/etEmail"
-                android:layout_width="411dp"
+                android:layout_width="316dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Email"
@@ -33,90 +58,61 @@
 
             <EditText
                 android:id="@+id/etPassword"
-                android:layout_width="match_parent"
+                android:layout_width="316dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword" />
 
-            <Button
-                android:id="@+id/login_access"
-                android:layout_width="157dp"
-                android:layout_height="58dp"
-                android:background="@drawable/buttoncolor_2"
-                android:text="로그인" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal" >
-            <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
-                android:id="@+id/buttonOAuthLoginImg"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="390dp"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_button"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:visibility="visible" />
-
-            <Button
-                android:id="@+id/logout"
-                android:layout_width="152dp"
-                android:layout_height="41dp"
-                android:background="@drawable/buttoncolor_1"
-                android:text="페이스북 로그아웃" />
-
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="364dp"
             android:layout_height="wrap_content"
-            android:gravity="center">
-
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/sign"
-                android:layout_width="144dp"
-                android:layout_height="44dp"
-                android:layout_weight="1"
+                android:layout_width="150dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/buttoncolor_2"
                 android:gravity="center"
                 android:orientation="horizontal"
-
                 android:text="회원가입" />
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_googleSignIn"
-                android:layout_width="171dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+            <Button
+                android:id="@+id/login_access"
+                android:layout_width="150dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/buttoncolor_2"
+                android:text="로그인" />
 
-            </com.google.android.gms.common.SignInButton>
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1" >
-            <TextView
-                android:id="@+id/api_result_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="vertical"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_width="368dp"
+            android:layout_height="148dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+                android:id="@+id/buttonOAuthLoginImg"
+                android:layout_width="144dp"
+                android:layout_height="55dp" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="144dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="visible" />
         </LinearLayout>
+
 
     </LinearLayout>
 </ScrollView>
