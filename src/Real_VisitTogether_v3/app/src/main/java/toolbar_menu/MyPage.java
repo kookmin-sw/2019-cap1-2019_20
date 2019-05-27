@@ -16,11 +16,12 @@ import toolbar_menu.mypage.Ranking;
 import toolbar_menu.mypage.Participation;
 
 public class MyPage extends AppCompatActivity {
+    private  String user_id;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage);
-
+       user_id = getIntent().getStringExtra("user_id");
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("My Page") ;
     }
@@ -33,7 +34,8 @@ public class MyPage extends AppCompatActivity {
               break;
           }
           case R.id.participation_event_list:{
-              Intent registed_event_list = new Intent(getApplicationContext(), Display.class);
+              Intent registed_event_list = new Intent(getApplicationContext(), Participation.class);
+              registed_event_list.putExtra("user_id",user_id);
               startActivity(registed_event_list);
               break;
           }

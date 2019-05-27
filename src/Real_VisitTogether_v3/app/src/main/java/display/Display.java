@@ -78,8 +78,8 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        switch (id) {
+
+        switch (item.getItemId()) {
             case R.id.logout: {
                 Toast.makeText(this, "로그아웃 되었습니다", Toast.LENGTH_LONG).show();
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -102,6 +102,8 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             }
             case R.id.mypage: {
                 Intent mypage_intent = new Intent(getApplicationContext(), MyPage.class);
+                mypage_intent.putExtra("user_id",id);
+
                 startActivity(mypage_intent);
                 return true;
             }
