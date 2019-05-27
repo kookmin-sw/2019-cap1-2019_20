@@ -121,8 +121,10 @@ public class placeAdd extends AppCompatActivity {
             NetworkTask networkTask = new NetworkTask();
             networkTask.execute();
 
-            Intent eventRegisteration = new Intent(getApplicationContext(), Eventregistration.class);
+            Intent eventRegisteration = new Intent(this, Eventregistration.class);
             startActivity(eventRegisteration);
+
+            finish();
         }
     }
 
@@ -184,7 +186,7 @@ public class placeAdd extends AppCompatActivity {
         System.out.println("placeAdd.setImage() 실행***************");
 
         ImageConverter imageConverter = new ImageConverter();
-        originalBm = imageConverter.resizeBitmap(this, Uri.fromFile(tempFile), 400);
+        originalBm = imageConverter.resizeBitmap(this, Uri.fromFile(tempFile), 150);
 
         /*
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -192,8 +194,6 @@ public class placeAdd extends AppCompatActivity {
         */
         placeImage.setImageBitmap(originalBm);
     }
-
-
 
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
         @Override

@@ -95,6 +95,7 @@ public class Eventregistration extends AppCompatActivity {
 
                     intent = new Intent(Eventregistration.this, Display.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -157,6 +158,7 @@ public class Eventregistration extends AppCompatActivity {
                 System.out.println("tempPlaces_str: " + place_str);
                 System.out.println("place_dict 길이: " + place_dict.length);
 
+                /*
                 // onPostExecute 에서 가져옴
                 temp_places_size = places_pref.getInt("temp_places_size", 0);
                 //System.out.println("place_dict.length = " + place_dict.length);
@@ -195,7 +197,7 @@ public class Eventregistration extends AppCompatActivity {
 
                     placesLayout.addView(placeInfoLayout);
                 }
-
+                */
 
                 return strings[0];
             }
@@ -210,7 +212,7 @@ public class Eventregistration extends AppCompatActivity {
             if(string == "fetchPlaces") {
                 System.out.println("EventRegistration fetchPlaces onPostExecute!!");
 
-                /*
+
                 temp_places_size = places_pref.getInt("temp_places_size", 0);
                 //System.out.println("place_dict.length = " + place_dict.length);
                 System.out.println("temp_places_size = " + temp_places_size);
@@ -248,7 +250,6 @@ public class Eventregistration extends AppCompatActivity {
 
                     placesLayout.addView(placeInfoLayout);
                 }
-                */
             }
         }
     }
