@@ -73,6 +73,7 @@ public class Event1 extends AppCompatActivity
     private int event_id;
     private double place_latitude , place_longitude;
     private TextView[] place_text;
+    private String participate_check;
 
     private Button participate_button;
 
@@ -108,6 +109,8 @@ public class Event1 extends AppCompatActivity
         setContentView(R.layout.event1);
         user_id = getIntent().getStringExtra("user_id");
         event_id = getIntent().getIntExtra("event_id",-1);
+        participate_button = (Button) findViewById(R.id.Participation);
+        new Participate_check().execute();
         // 출력 확인
         System.out.println("user_id "+user_id);
         System.out.println("event_id: "+event_id);
@@ -138,7 +141,7 @@ public class Event1 extends AppCompatActivity
             startActivity(rank);
         }
 
-        participate_button = (Button) findViewById(R.id.Participation);
+        //participate_button = (Button) findViewById(R.id.Participation);
         if(view.getId() == R.id.Participation){
             registerParticipation = new NetworkTask();
             registerParticipation.execute("participate");
@@ -694,8 +697,8 @@ public class Event1 extends AppCompatActivity
             }else if(strings[0] == "participate"){
 
                 Register connection = new Register();
-                connection.participate(user_id, event_id);
-
+                //connection.participate(user_id, event_id);
+                participate_check = connection.participate(user_id, event_id);
                 return strings[0];
             }
 
@@ -870,6 +873,28 @@ public class Event1 extends AppCompatActivity
                 }
             }else if(string == "participate")
                 participate_button.setBackgroundColor(Color.rgb(100,100,100));
+        }
+    }
+    public class Participate_check extends AsyncTask<Void,Void,Void>{
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Register con = new Register();
+            participate_check = con.participate(user_id,event_id);
+            ;
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    if(participate_check.equals("duplicated"))
+                        participate_button.setBackgroundColor(Color.rgb(100,100,100));
+                }
+            });
         }
     }
 }
