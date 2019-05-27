@@ -39,12 +39,11 @@ public class MyPage extends AppCompatActivity {
               startActivity(registed_event_list);
               break;
           }
-          case R.id.ranking:{
-              Intent ranking = new Intent(getApplicationContext(), Ranking.class);
-              startActivity(ranking);
-              break;
-
-          }
+//          case R.id.ranking:{
+//              Intent ranking = new Intent(getApplicationContext(), Ranking.class);
+//              startActivity(ranking);
+//              break;
+//          }
           case R.id.completedeventlist:{
             Intent completedeventlist = new Intent(getApplicationContext(), CompletedEventList.class);
             startActivity(completedeventlist);

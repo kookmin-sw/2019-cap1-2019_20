@@ -71,6 +71,7 @@ public class Event1 extends AppCompatActivity
     private NetworkTask registerParticipation;
     private String user_id;
     private int event_id;
+    private double place_latitude , place_longitude;
     private TextView[] place_text;
 
     private Button participate_button;
@@ -676,6 +677,7 @@ public class Event1 extends AppCompatActivity
             event_id = intent.getIntExtra("event_id", 0);
             user_id = intent.getStringExtra("user_id");
 
+
             if(strings[0] == "fetchPlaces") {
 
                 // 네트워크 연결
@@ -713,6 +715,7 @@ public class Event1 extends AppCompatActivity
                     temp_imply = gson.fromJson(relation_dict[i], Imply.class);
                     if (temp_imply.getEvent_id() == event_id)
                         implyVector.add(temp_imply);
+                    System.out.println("###################event_id:"+ event_id);
                 }
 
 
@@ -746,7 +749,61 @@ public class Event1 extends AppCompatActivity
 
                     ImageView placeImage = new ImageView(getApplicationContext());
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    placeImage.setImageResource(R.drawable.drink);//이부분도 처리해야되는데,장소별 이미지는?
+                    //일단 기본장소들같은경우 drawble에 넣어놓자
+                    //일단은 서울의4대문부터
+
+                    if(event_id ==1 ){
+                        if (i == 0) {
+                            placeImage.setImageResource(R.drawable.nogari);
+                        }else if (i == 1) {
+                            placeImage.setImageResource(R.drawable.songbaek);
+                        }else if (i == 2) {
+                            placeImage.setImageResource(R.drawable.jakma);
+                        }
+                    }
+
+                    else if(event_id ==2) {
+                        if (i == 0) {
+                            placeImage.setImageResource(R.drawable.westdoor);
+                        } else if (i == 1) {
+                            placeImage.setImageResource(R.drawable.southdoor);
+                        } else if (i == 2) {
+                            placeImage.setImageResource(R.drawable.eastdoor);
+                        }
+                    }
+                    else if(event_id ==3) {
+                        if (i == 0) {
+                            placeImage.setImageResource(R.drawable.seven);
+                        } else if (i == 1) {
+                            placeImage.setImageResource(R.drawable.dragon);
+                        } else if (i == 2) {
+                            placeImage.setImageResource(R.drawable.cafenamu);
+                        }else if (i == 3) {
+                            placeImage.setImageResource(R.drawable.concert);
+                        }else if (i == 4) {
+                            placeImage.setImageResource(R.drawable.momstouch);
+                        }else if (i == 5) {
+                            placeImage.setImageResource(R.drawable.gongcha);
+                        }else if (i == 6) {
+                            placeImage.setImageResource(R.drawable.sunggok);
+                        }else if (i == 7) {
+                            placeImage.setImageResource(R.drawable.chunghyang);
+                        }else if (i == 8) {
+                            placeImage.setImageResource(R.drawable.bockzi);
+                        }else if (i == 9) {
+                            placeImage.setImageResource(R.drawable.science);
+                        }else if (i == 10) {
+                            placeImage.setImageResource(R.drawable.gym);
+                        }else if (i == 11) {
+                            placeImage.setImageResource(R.drawable.gukje);
+                        }
+
+                    }
+                    else
+
+                        placeImage.setImageResource(R.drawable.plain);//이부분도 처리해야되는데,장소별 이미지는?
+
+
                     placeImage.setLayoutParams(imageParams);
                     TextView placeText = new TextView(getApplicationContext());
                     //placeText.setText("    "+ places.elementAt(i).getName());
@@ -804,6 +861,9 @@ public class Event1 extends AppCompatActivity
                             intent.putExtra("place_id", places.elementAt(finalI).getId());
                             intent.putExtra("user_id",user_id);
                             intent.putExtra("event_id",event_id);
+                            //이부분 수정
+                            //intent.putExtra("latitude", place_latitude);
+                            //intent.putExtra("longitude", place_latitude);
                             startActivity(intent);
                         }
                     });

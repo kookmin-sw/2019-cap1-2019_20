@@ -4,10 +4,22 @@
     android:layout_height="match_parent">
 
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:id="@+id/rank"
-       />
+   <!--<TextView-->
+       <!--android:layout_width="wrap_content"-->
+       <!--android:layout_height="wrap_content"-->
+       <!--android:id="@+id/rank"-->
+       <!--/>-->
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/rank"
+          android:textSize="14dp"
+          android:textColorHighlight="@color/browser_actions_bg_grey"
+          android:orientation="vertical" />
+   </ScrollView>
 
 </RelativeLayout>

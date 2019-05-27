@@ -14,11 +14,9 @@ public class UserRanking {
     public String getUser_id() {
         return user_id;
     }
-
     public String getEvent_id() {
         return event_id;
     }
-
     public String getNumber_of_visits() {
         return number_of_visits;
     }
@@ -26,4 +24,5 @@ public class UserRanking {
     {
         this.user_id = user_id;
     }
+
 }

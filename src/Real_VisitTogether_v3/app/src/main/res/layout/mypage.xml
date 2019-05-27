@@ -23,16 +23,6 @@
         />
 
     <Button
-        android:id="@+id/ranking"
-        android:layout_width="322dp"
-        android:layout_height="88dp"
-        android:background="@drawable/buttoncolor_2"
-        android:onClick="select_list"
-        android:text="랭킹보기"
-
-        />
-
-    <Button
         android:id="@+id/participation_event_list"
         android:layout_width="318dp"
         android:layout_height="113dp"
