@@ -109,6 +109,8 @@ public class Event1 extends AppCompatActivity
         setContentView(R.layout.event1);
         user_id = getIntent().getStringExtra("user_id");
         event_id = getIntent().getIntExtra("event_id",-1);
+        participate_button = (Button) findViewById(R.id.Participation);
+        new Participate_check().execute();
         // 출력 확인
         System.out.println("user_id "+user_id);
         System.out.println("event_id: "+event_id);
