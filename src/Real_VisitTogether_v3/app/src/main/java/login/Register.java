@@ -86,7 +86,10 @@ public class Register {
         return register(postData,"auth/");
     }
 
-
+    public String requestPlaces(int event_id) {
+        postData = "event_id=" + event_id;
+        return register(postData, "place/");
+    }
 
     private String register(String postData, String _url) {
 

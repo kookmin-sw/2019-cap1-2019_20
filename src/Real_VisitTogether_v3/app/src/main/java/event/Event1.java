@@ -46,8 +46,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
@@ -679,14 +681,16 @@ public class Event1 extends AppCompatActivity
             if(strings[0] == "fetchPlaces") {
 
                 // 네트워크 연결
-                RequestHttpConnection connection = new RequestHttpConnection();
+                //RequestHttpConnection connection = new RequestHttpConnection();
+                Register register = new Register();
 
                 // 리턴된 "{..}\n{..} ... {..}" 값들을 split
-                place_str = connection.request(url_p);
+                place_str = register.requestPlaces(event_id);
                 place_dict = place_str.split("\n");
-
+                /*
                 relation_str = connection.request(url_imply);
                 relation_dict = relation_str.split("\n");
+                */
 
                 return strings[0];
             }else if(strings[0] == "participate"){
@@ -707,7 +711,7 @@ public class Event1 extends AppCompatActivity
             super.onPostExecute(string);
 
             if(string == "fetchPlaces") {
-
+                /*
                 // 관계 엔티티에서 이벤트 event_id 인 경우만 뽑아냄
                 for (int i = 0; i < relation_dict.length; i++) {
                     temp_imply = gson.fromJson(relation_dict[i], Imply.class);
@@ -733,12 +737,12 @@ public class Event1 extends AppCompatActivity
                             places.add(temp_place);
                     }
                 }
-
+                */
                 LinearLayout places_layout = (LinearLayout) findViewById(R.id.places_layout);
 
                 // 매칭된 데이터의 name으로 setText()
-                for (int i = 0; i < places.size(); i++) {
-
+                for (int i = 0; i < place_dict.length; i++) {
+                    /*
                     LinearLayout placeInfoLayout = new LinearLayout(getApplicationContext());
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
                     placeInfoLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -760,6 +764,40 @@ public class Event1 extends AppCompatActivity
                     placeInfoLayout.addView(placeText);
 
                     places_layout.addView(placeInfoLayout);
+                    */
+
+                    JsonReader jsonReader = new JsonReader(new StringReader(place_dict[i]));
+                    jsonReader.setLenient(true);
+                    //temp_place = gson.fromJson(place_dict[i], Place.class);
+                    temp_place = gson.fromJson(jsonReader, Place.class);
+
+                    LinearLayout placeInfoLayout = new LinearLayout(getApplicationContext());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                    placeInfoLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    placeInfoLayout.setLayoutParams(layoutParams);
+
+                    ImageView placeImage = new ImageView(getApplicationContext());
+                    LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                    if(temp_place.getPicture().contains("None")){
+                        System.out.println("장소 이미지가 null");
+                        placeImage.setImageResource(R.drawable.rabbit);
+                    }else {
+                        System.out.println("장소 이미지가 null이 아님");
+                        //System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
+                        ImageConverter imageConverter = new ImageConverter();
+                        placeImage.setImageBitmap(imageConverter.stringToBitmap(temp_place.getPicture()));
+                    }
+
+                    placeImage.setLayoutParams(imageParams);
+
+                    TextView placeText = new TextView(context);
+                    placeText.setText(temp_place.getName());
+
+                    placeInfoLayout.addView(placeImage);
+                    placeInfoLayout.addView(placeText);
+
+                    places_layout.addView(placeInfoLayout)
 
                     //5/20일 수정들어간부분
                     ////////////////////////////////////////////////////////
