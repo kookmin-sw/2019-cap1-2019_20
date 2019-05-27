@@ -23,7 +23,6 @@ public class Place {
         qr_message = null;
         coordinate = null;
         picture = null;
-        //event_id = 0;
     }
 
     public int getId() {
@@ -34,9 +33,7 @@ public class Place {
         return place_name;
     }
 
-    //public byte[] getPicture() { return picture; }
     public String getPicture() { return picture; }
-    //public Blob getPicture() { return picture; }
 
     public void setPlace_id(int place_id) { this.place_id = place_id; }
 

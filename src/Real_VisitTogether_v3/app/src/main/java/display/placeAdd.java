@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -60,6 +59,8 @@ public class placeAdd extends AppCompatActivity {
         addressText = (EditText) findViewById(R.id.addressText);
         information = (EditText) findViewById(R.id.inputInformation);
         placeImage = (ImageView) findViewById(R.id.placeImage);
+
+        originalBm = null;
 
         arrayList = new ArrayList<>();
         arrayList.add("사진촬영(Exif)");
@@ -177,13 +178,18 @@ public class placeAdd extends AppCompatActivity {
             }
         }
         setImage(tempFile);
-
     }
 
     private void setImage(File tempFile) {
+        System.out.println("placeAdd.setImage() 실행***************");
 
+        ImageConverter imageConverter = new ImageConverter();
+        originalBm = imageConverter.resizeBitmap(this, Uri.fromFile(tempFile), 400);
+
+        /*
         BitmapFactory.Options options = new BitmapFactory.Options();
         originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
+        */
         placeImage.setImageBitmap(originalBm);
     }
 
@@ -193,15 +199,15 @@ public class placeAdd extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            System.out.println("PlaceAdd doInbackground!!");
+            System.out.println("PlaceAdd.NetworkTask.doInbackground() 실행!!");
 
             Register connection = new Register();
             String result = connection.registerPlace(placeName.getText().toString(), addressText.getText().toString(), information.getText().toString());
-            if(tempFile != null){
+            if(originalBm != null){
                 ImageConverter imageConverter = new ImageConverter();
                 String result2 = connection.registerImage(imageConverter.bitmapToString(originalBm));
-                System.out.println("사진 string 값:  " + imageConverter.bitmapToString(originalBm));
-                System.out.println("Response 데이터: " + result2);
+                //System.out.println("사진 string 값:  " + imageConverter.bitmapToString(originalBm));
+                //System.out.println("Response 데이터: " + result2);
             }
             //System.out.println("Register Place Result: " + result);
 
@@ -214,7 +220,7 @@ public class placeAdd extends AppCompatActivity {
             editor.putInt("temp_places_id" + temp_places_size, Integer.parseInt(result));
             editor.putInt("temp_places_size", temp_places_size + 1);
             editor.commit();
-            //System.out.println("temp_places_size = " + places_pref.getInt("temp_places_size", 0));
+            System.out.println("placeAdd.NetworkTask.temp_places_size = " + places_pref.getInt("temp_places_size", 0));
 
             return null;
         }

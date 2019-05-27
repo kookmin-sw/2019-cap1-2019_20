@@ -60,9 +60,9 @@ public class Eventregistration extends AppCompatActivity {
         nameText.setText(event_pref.getString("event_name", ""));
         rewardText.setText(event_pref.getString("event_reward", ""));
 
-
         places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
         temp_places_size = places_pref.getInt("temp_places_size", 0);
+        System.out.println("EventRegistration.temp_places_size = " + temp_places_size);
         if(temp_places_size > 0) {
             NetworkTask registerTask = new NetworkTask(this);
             registerTask.execute("fetchPlaces");
@@ -157,19 +157,7 @@ public class Eventregistration extends AppCompatActivity {
                 System.out.println("tempPlaces_str: " + place_str);
                 System.out.println("place_dict 길이: " + place_dict.length);
 
-                return strings[0];
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String string) {
-            super.onPostExecute(string);
-
-            if(string == "fetchPlaces") {
-                System.out.println("EventRegistration fetchPlaces onPostExecute!!");
-
+                // onPostExecute 에서 가져옴
                 temp_places_size = places_pref.getInt("temp_places_size", 0);
                 //System.out.println("place_dict.length = " + place_dict.length);
                 System.out.println("temp_places_size = " + temp_places_size);
@@ -207,6 +195,60 @@ public class Eventregistration extends AppCompatActivity {
 
                     placesLayout.addView(placeInfoLayout);
                 }
+
+
+                return strings[0];
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            super.onPostExecute(string);
+
+            if(string == "fetchPlaces") {
+                System.out.println("EventRegistration fetchPlaces onPostExecute!!");
+
+                /*
+                temp_places_size = places_pref.getInt("temp_places_size", 0);
+                //System.out.println("place_dict.length = " + place_dict.length);
+                System.out.println("temp_places_size = " + temp_places_size);
+                for(int i = 0; i < place_dict.length; i++){
+                    JsonReader jsonReader = new JsonReader(new StringReader(place_dict[i]));
+                    jsonReader.setLenient(true);
+                    temp_place = gson.fromJson(jsonReader, Place.class);
+
+                    LinearLayout placeInfoLayout = new LinearLayout(context);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+                    placeInfoLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    placeInfoLayout.setLayoutParams(layoutParams);
+
+                    ImageView placeImage = new ImageView(context);
+                    LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                    System.out.println("getPicture(): " + temp_place.getPicture());
+                    if(temp_place.getPicture() == null || temp_place.getPicture().contains("None")){
+                        System.out.println("장소 이미지가 null");
+                        placeImage.setImageResource(R.drawable.rabbit);
+                    }else {
+                        System.out.println("장소 이미지가 null이 아님");
+                        //System.out.println("getPicture() 출력: " + places.elementAt(i).getPicture());
+                        ImageConverter imageConverter = new ImageConverter();
+                        placeImage.setImageBitmap(imageConverter.stringToBitmap(temp_place.getPicture()));
+                    }
+
+                    placeImage.setLayoutParams(imageParams);
+
+                    TextView placeText = new TextView(context);
+                    placeText.setText(temp_place.getName());
+
+                    placeInfoLayout.addView(placeImage);
+                    placeInfoLayout.addView(placeText);
+
+                    placesLayout.addView(placeInfoLayout);
+                }
+                */
             }
         }
     }

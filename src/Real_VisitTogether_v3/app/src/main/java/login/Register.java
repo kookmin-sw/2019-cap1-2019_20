@@ -25,7 +25,7 @@ public class Register {
     }
 
     public String registerPlace(String place_name, String address, String information){
-
+        System.out.println("Register.registerPlace() 실행");
         postData = "place_name=" + place_name + "&" + "address=" + address + "&" + "explanation=" + information;
         return register(postData, "insert_place/");
     }
@@ -57,6 +57,7 @@ public class Register {
     }
 
     public String registerImage(String imageString){
+        System.out.println("Register.registerImage() 실행!!");
         postData = "picture=" + imageString;
         return register(postData, "insert_picture/");
     }
