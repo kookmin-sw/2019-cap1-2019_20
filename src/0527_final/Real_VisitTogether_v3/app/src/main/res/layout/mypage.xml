@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:background="@drawable/background_9"
+    >
+
+    <Button
+        android:id="@+id/completedeventlist"
+        android:layout_width="316dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/buttoncolor_5"
+        android:onClick="select_list"
+        android:text="완료된 이벤트 목록"
+
+        />
+
+    <Button
+        android:id="@+id/participation_event_list"
+        android:layout_width="318dp"
+        android:layout_height="113dp"
+        android:background="@drawable/buttoncolor_4"
+        android:onClick="select_list"
+        android:text="참여중인 이벤트 목록"
+
+        />
+
+    <Button
+        android:id="@+id/apply_reward"
+        android:layout_width="322dp"
+        android:layout_height="88dp"
+        android:background="@drawable/buttoncolor_2"
+        android:onClick="select_list"
+        android:text="보상 요청"
+
+        />
+</LinearLayout>
