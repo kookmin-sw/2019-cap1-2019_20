@@ -818,6 +818,7 @@ public class Event1 extends AppCompatActivity
 
                     placeInfoLayout.addView(placeImage);
                     placeInfoLayout.addView(placeText);
+                    placeInfoLayout.setBackgroundResource(R.drawable.button_event);
 
                     places_layout.addView(placeInfoLayout);
 
