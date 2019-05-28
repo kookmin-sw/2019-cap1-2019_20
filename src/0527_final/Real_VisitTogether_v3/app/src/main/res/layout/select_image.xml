@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_9"
+    >
+
+    <Button
+        android:id="@+id/btnOK"
+        android:layout_width="288dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/buttoncolor_2"
+        android:onClick="onClickBack"
+        android:text="OK"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/db_gps" />
+
+    <Button
+        android:id="@+id/btnAuth"
+        android:layout_width="288dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/buttoncolor_4"
+        android:onClick="onClickAuth"
+        android:text="인증"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/db_gps"
+        app:layout_constraintVertical_bias="0.32" />
+
+    <TextView
+        android:id="@+id/photo_gps"
+        android:layout_width="413dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="31dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/db_gps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/db_gps"
+        android:layout_width="411dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="131dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnOK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo_gps" />
+
+</android.support.constraint.ConstraintLayout>

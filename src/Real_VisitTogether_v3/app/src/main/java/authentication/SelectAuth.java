@@ -89,7 +89,6 @@ public class SelectAuth extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("qr check "+save);
                     try {
                         if (save.equals("ok")) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
@@ -120,7 +119,7 @@ public class SelectAuth extends AppCompatActivity {
                 else {
                     //String QR_Info = null;
                     QR_Info = result.getContents();
-
+                    System.out.println("##################################QR_INFO :"+QR_Info);
 
                     qr_check check = new qr_check();
                     check.execute();

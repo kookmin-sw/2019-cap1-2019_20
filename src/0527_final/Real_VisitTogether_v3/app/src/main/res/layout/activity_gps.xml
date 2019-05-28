@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="authentication.Auth_Gps">
+
+
+    <Button
+        android:id="@+id/mylocation"
+        android:layout_width="343dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="428dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/buttoncolor_2"
+        android:text="내 위치정보 가져오기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="313dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="508dp"
+        android:layout_marginEnd="36dp"
+        android:text="위치정보 :GPS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    //지도 구현
+
+    <fragment
+        android:id="@+id/mapView2"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="394dp"
+        android:layout_height="415dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/auth"
+        android:layout_width="115dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="306dp"
+        android:layout_marginTop="532dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/buttoncolor_4"
+        android:text="인증"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

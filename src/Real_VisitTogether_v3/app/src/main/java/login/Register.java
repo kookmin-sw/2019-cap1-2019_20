@@ -33,8 +33,8 @@ public class Register {
     public String participate(String user_ID, int event_ID){
         String result;
         postData = "user_id=" + user_ID + "&" + "event_id=" + event_ID;
+        //register(postData, "participate_event/");
         return register(postData, "participate_event/");
-
     }
     public void registerUser(String user_id, String user_information)
     {
@@ -87,7 +87,11 @@ public class Register {
         postData = "place_id="+place_id+"&auth_num="+auth_num+"&beacon_distance="+beacon_distance+"&user_id="+user_id+"&event_id="+event_id;
         return register(postData,"auth/");
     }
-
+    public String participating_event(String user_id)
+    {
+        postData = "user_id="+user_id;
+        return register(postData,"participating/");
+    }
 
 
     private String register(String postData, String _url) {

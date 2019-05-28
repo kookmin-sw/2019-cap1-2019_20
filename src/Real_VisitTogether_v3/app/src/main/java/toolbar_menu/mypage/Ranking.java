@@ -2,6 +2,8 @@ package toolbar_menu.mypage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -9,8 +11,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import data_fetcher.RequestHttpConnection;
@@ -79,7 +83,11 @@ public class Ranking extends AppCompatActivity {
     ListView listView;
     int event_id;
     String result;
+    String rank_message = "";
     String parse = "";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,24 +152,38 @@ public class Ranking extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
+
             makeRank();
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     TextView textView = (TextView) findViewById(R.id.rank);
                     textView.setText(parse);
+
                 }
             });
             //new UpdateRank().execute();
         }
 
     }
+
+
+
     public void makeRank()
     {
         int idx = 1;
+
         for(UserRanking k : userRanking)
         {
             parse += (idx+". "+k.getUser_id()+" : "+k.getNumber_of_visits()+"\n");
+
+            ////////////////////////////////////////////////
+
+
+
+            ///////////////////////////////////////////////
+
 
             idx++;
         }
