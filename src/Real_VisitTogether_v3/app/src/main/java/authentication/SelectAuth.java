@@ -79,6 +79,7 @@ public class SelectAuth extends AppCompatActivity {
 
             auth_num = 1;
             save = r.auth_info(place_id, 1, QR_Info,user_id,event_id);
+
             return null;
         }
 
@@ -86,6 +87,7 @@ public class SelectAuth extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            System.out.println("qr 확인 : "+save);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
