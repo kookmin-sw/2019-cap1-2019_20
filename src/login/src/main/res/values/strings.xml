@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">login</string>
-    <string name="facebook_app_id">2726230337393063</string> <string name="fb_login_protocol_scheme">fb2726230337393063</string>
-    <string name="kakao_app_key">dffb49b5240fab0168251a3506b8f08c</string>
-</resources>
