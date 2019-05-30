@@ -84,6 +84,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 [![Video Label](/pic/표지.png)](https://youtu.be/PR_88WqhLVE)
 
 ## 3. 팀 소개
+<img src =./pic/단체사진.jpeg>
 
 <img src =./pic/이민석교수님.jpg width="20%" height="20%">
 
@@ -99,7 +100,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 
 -백장현
 ````
-* 역할: 팀장, 위치 검색, 지도 표시 및 길안내 
+* 역할: 팀장, 지도 표시, GPS인증, DB관리
 * Email: qorwkdgus93@gmail.com
 ````
 
@@ -107,7 +108,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 
 -장용훈
 ````
-* 역할: 회원가입 및 로그인 연동
+* 역할: 회원가입 및 로그인 연동, DB관리
 * Email: qudaoalq@naver.com
 ````
 
@@ -115,7 +116,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 
 -고양제
 ````
-* 역할: 안드로이드 및 사진 GPS 연동
+* 역할: EXIF 인증, 비콘 인증, UI 디자인
 * Email: coyyjj7@naver.com
 ````
 
@@ -123,7 +124,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 
 -이효준
 ````
-* 역할: 유저 랭킹, 게시판 및 이벤트
+* 역할: QR코드 인증, DB관리
 * Email: leehj8896@naver.com
 ````
 
@@ -131,7 +132,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 
 -박지선
 ````
-* 역할: DB 관리 및 PPT 제작
+* 역할: PPT 제작 및 UI 디자인
 * Email: plm7234@naver.com
 ````
 

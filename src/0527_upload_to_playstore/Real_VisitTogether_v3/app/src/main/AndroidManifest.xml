@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.capstone.real_visittogether">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- network 상태를 미리 체크하여 연결 안된 경우 다이얼로그를 보여주려면 아래 permission 추가 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- android test 돌릴 때 화면 lock 풀어야 로그인 touch 가능 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
+        <activity android:name="com.facebook.CustomTabActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity android:name="login.Sign_in"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <activity android:name="display.MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="display.MapAddress"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name="display.placeAdd"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="display.Eventregistration"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name="display.Display">
+
+        </activity>
+
+        <activity android:name="display.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name="display.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+
+        </activity>
+        <activity android:name="login.login"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="authentication.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <!--지도구현 관련 API키 나중에 바꿔야되면 상황맞게 바꾸면될듯-->
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDUj20ItM-xP6njTk557omY5F2GoE6nxB8"/>
+        <!--여기까지 지도 부분-->
+
+        <activity android:name="event.Event1"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+        <activity android:name="event.Event2"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="authentication.SelectAuth"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name="authentication.Auth_Exif"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="authentication.Auth_Gps"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="authentication.SelectImage"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="authentication.Auth_Beacon"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="login.google">
+
+        </activity>
+        <activity android:name="toolbar_menu.MyPage">
+        </activity>
+        <activity android:name="toolbar_menu.Help"></activity>
+        <activity android:name="toolbar_menu.mypage.ApplyReward"></activity>
+        <activity android:name="toolbar_menu.mypage.CompletedEventList"></activity>
+        <activity android:name="toolbar_menu.mypage.Ranking"></activity>
+        <activity android:name="toolbar_menu.mypage.SelectReward"></activity>
+        <activity android:name="toolbar_menu.mypage.Participation"></activity>
+    </application>
+
+</manifest>

@@ -46,6 +46,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
     private TextView txtResult;
     private Register Reg ;
     private int place_id;
+    private double place_latitude , place_longitude;
     private Geodegree Geo;
     private int auth_num;
     static double longitude,latitude;
@@ -62,6 +63,9 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
         Intent intent = getIntent();
         place_id = intent.getIntExtra("place_id", 0);
         event_id = getIntent().getIntExtra("event_id",-1);
+       // place_latitude = intent.getDoubleExtra("latitude", 0);
+       // place_longitude = intent.getDoubleExtra("longitude", 0);
+
         SupportMapFragment mapFragment =(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView2) ;
         mapFragment.getMapAsync(this);
 
@@ -163,11 +167,6 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
 
             String provider = location.getProvider();
 
-            /*
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
-            double altitude = location.getAltitude();
-            */
            longitude = location.getLongitude();
            latitude = location.getLatitude();
             double altitude = location.getAltitude();
@@ -227,20 +226,13 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
         LatLng DEFAULT_LOCATION = new LatLng(37.611099, 126.997182);
 
         //노가리 , 송백식당 , 주당끼리 주소 일단입력해놨음
-        LatLng Place1 = new LatLng(37.607640, 127.001356);
+        //LatLng Place1 = new LatLng(place_latitude, place_longitude);
         LatLng Place2 = new LatLng(37.610819, 126.994235);
         LatLng Place3 = new LatLng(37.607918, 126.999681);
 
         MarkerOptions makerOptions = new MarkerOptions();
 
         /*
-        makerOptions
-                .position(DEFAULT_LOCATION)
-                .title("기본값");
-        mMap.addMarker(makerOptions);
-        */
-
-        //event1에 나오는 미션장소3군데
         makerOptions
                 .position(Place1)
                 .title("노가리")
@@ -266,6 +258,7 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
 
         mMap.addMarker(makerOptions);
         //여기까지 미션장소들
+        */
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(DEFAULT_LOCATION));
 
