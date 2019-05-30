@@ -1,17 +1,13 @@
 package login;
 
-import android.content.Intent;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 public class Register {
 
@@ -24,9 +20,13 @@ public class Register {
         register(postData, "insert_event/");
     }
 
-    public void registerPlace(String place_name, String address, String information){
+    public void registerPlace(String place_name, String address, String information, double latitude, double longitude){
 
-        postData = "place_name=" + place_name + "&" + "address=" + address + "&" + "explanation=" + information;
+        postData =  "place_name=" + place_name + "&" +
+                    "address=" + address + "&" +
+                    "explanation=" + information + "&" +
+                    "latitude=" + latitude + "&" +
+                    "longitude=" + longitude;
         register(postData, "insert_place/");
     }
 
