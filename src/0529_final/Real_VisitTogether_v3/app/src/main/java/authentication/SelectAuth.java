@@ -41,7 +41,7 @@ public class SelectAuth extends AppCompatActivity {
     private TextView rssi;
     private Intent intent;
     private int beacon_rssi, beacon_power;
-    private double ratio,distance;
+    private double ratio,distance ,ten_distance;
     private int distance_check;
 
     @Override
@@ -73,7 +73,9 @@ public class SelectAuth extends AppCompatActivity {
                     //rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
                 }
 
-                if(distance <15)
+                System.out.println("비콘거리####################################" + distance);
+                ten_distance = distance *10;
+                if(0<ten_distance&& ten_distance <150)
                     distance_check =1;
                 else
                     distance_check = -1;
