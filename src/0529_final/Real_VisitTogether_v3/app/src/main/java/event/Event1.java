@@ -802,15 +802,66 @@ public class Event1 extends AppCompatActivity
                         }
 
                     }
-                    else
+                    else if(event_id ==4) {
+                        if (i == 0) {
+                            placeImage.setImageResource(R.drawable.cap_1);
+                        } else if (i == 1) {
+                            placeImage.setImageResource(R.drawable.cap_2);
+                        } else if (i == 2) {
+                            placeImage.setImageResource(R.drawable.cap_3);
+                        }else if (i == 3) {
+                            placeImage.setImageResource(R.drawable.cap_4);
+                        }else if (i == 4) {
+                            placeImage.setImageResource(R.drawable.cap_5);
+                        }else if (i == 5) {
+                            placeImage.setImageResource(R.drawable.cap_6);
+                        }else if (i == 6) {
+                            placeImage.setImageResource(R.drawable.cap_7);
+                        }else if (i == 7) {
+                            placeImage.setImageResource(R.drawable.cap_8);
+                        }else if (i == 8) {
+                            placeImage.setImageResource(R.drawable.cap_9);
+                        }else if (i == 9) {
+                            placeImage.setImageResource(R.drawable.cap_10);
+                        }else if (i == 10) {
+                            placeImage.setImageResource(R.drawable.cap_11);
+                        }else if (i == 11) {
+                            placeImage.setImageResource(R.drawable.cap_12);
+                        }else if (i == 12) {
+                            placeImage.setImageResource(R.drawable.cap_13);
+                        }else if (i == 13) {
+                            placeImage.setImageResource(R.drawable.cap_14);
+                        }else if (i == 14) {
+                            placeImage.setImageResource(R.drawable.cap_15);
+                        }else if (i == 15) {
+                            placeImage.setImageResource(R.drawable.cap_16);
+                        }else if (i == 16) {
+                            placeImage.setImageResource(R.drawable.cap_17);
+                        }else if (i == 17) {
+                            placeImage.setImageResource(R.drawable.cap_18);
+                        }else if (i == 18) {
+                            placeImage.setImageResource(R.drawable.cap_19);
+                        }else if (i == 19) {
+                            placeImage.setImageResource(R.drawable.cap_20);
+                        }else if (i == 20) {
+                            placeImage.setImageResource(R.drawable.cap_21);
+                        }else if (i == 21) {
+                            placeImage.setImageResource(R.drawable.cap_22);
+                        }else if (i == 22) {
+                            placeImage.setImageResource(R.drawable.cap_23);
+                        }else if (i == 23) {
+                            placeImage.setImageResource(R.drawable.cap_24);
+                        }
 
+                    }
+                    else
                         placeImage.setImageResource(R.drawable.plain);//이부분도 처리해야되는데,장소별 이미지는?
 
 
                     placeImage.setLayoutParams(imageParams);
                     TextView placeText = new TextView(getApplicationContext());
                     //placeText.setText("    "+ places.elementAt(i).getName());
-                    placeText.setText("<"+ places.elementAt(i).getName()+">\n"+"주소 : "+places.elementAt(i).getAddress()+"\n설명 : "+places.elementAt(i).getExplanation());
+                    placeText.setText("< "+ places.elementAt(i).getName()+" >\n"+"주소 : "+places.elementAt(i).getAddress()+"\n설명 : "+places.elementAt(i).getExplanation());
                     placeText.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
                    // placeText.setBackgroundColor(#0);
                     placeText.setTextSize(15);

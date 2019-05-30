@@ -230,11 +230,13 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
                 textView.setText( space);
 
                 if (event_id == 1) {
-                    placeImage.setImageResource(R.drawable.nogari);
+                    placeImage.setImageResource(R.drawable.songbaek);
                 }else if (event_id == 2) {
                     placeImage.setImageResource(R.drawable.eastdoor);
                 } else if (event_id == 3) {
                     placeImage.setImageResource(R.drawable.dragon);
+                }else if (event_id == 4) {
+                    placeImage.setImageResource(R.drawable.capstone);
                 }else {
                     placeImage.setImageResource(R.drawable.rabbit);
                 }

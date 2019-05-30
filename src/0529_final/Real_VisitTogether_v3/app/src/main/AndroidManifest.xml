@@ -21,9 +21,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/plain"
+        android:label="같이가자"
+        android:roundIcon="@drawable/plain"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
