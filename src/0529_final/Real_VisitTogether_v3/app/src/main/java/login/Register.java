@@ -47,6 +47,17 @@ public class Register {
         postData = "user_id=" + user_ID + "&" + "event_id=" + event_ID;
         return register(postData, "participate_event/");
     }
+    public String place_auth_info(String user_ID, int event_ID)
+    {
+        postData = "user_id=" + user_ID + "&" + "event_id=" + event_ID;
+        return register(postData, "place_auth_info/");
+    }
+
+    public String finish_auth_check(String user_ID, int event_ID){
+        String result;
+        postData = "user_id=" + user_ID + "&" + "event_id=" + event_ID;
+        return register(postData, "finish_auth_check/");
+    }
     public void registerUser(String user_id, String user_information)
     {
 
