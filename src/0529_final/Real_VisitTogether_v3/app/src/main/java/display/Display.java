@@ -39,6 +39,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     String id;
     private Intent intent;
     private NetworkTask networkTask;
+    private long time  =0;
     private Vector<Button> btn = new Vector<Button>();
     private FloatingActionButton actionButton;
     LinearLayout display_layout;
@@ -61,6 +62,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         networkTask.execute();
 
     }
+
     public void onClick(View view) {
 
         if(view.getId() == R.id.actionButton){
@@ -70,6 +72,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
 
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -276,6 +279,16 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
         }
     }
-}
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - time >= 2000) {
+            time = System.currentTimeMillis();
+            Toast.makeText(getApplicationContext(), "뒤로 버튼을 한번 더 누르면 종료합니다.", Toast.LENGTH_SHORT).show();
+        } else if (System.currentTimeMillis() - time < 2000) {
+            finishAffinity();
+
+        }
+    }
+    }
 
 

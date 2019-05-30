@@ -1,5 +1,6 @@
 package authentication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.media.ExifInterface;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import event.Event1;
 import login.Register;
 
 
@@ -29,12 +31,12 @@ public class SelectImage extends AppCompatActivity {
     private Register Reg;
     private int auth_num;
     private String user_id;
-
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_image);
-
+        mContext = this;
         Intent intent = getIntent();
         place_id = intent.getIntExtra("place_id", 0);
         user_id = getIntent().getStringExtra("user_id");
@@ -97,7 +99,10 @@ public class SelectImage extends AppCompatActivity {
                     if("error".equals(save))
                     {Toast.makeText(getApplicationContext(),"인증실패하셨습니다." , Toast.LENGTH_SHORT).show();}
                     else
-                    {Toast.makeText(getApplicationContext(),"인증성공! " , Toast.LENGTH_SHORT).show();}
+                    {Toast.makeText(getApplicationContext(),"인증성공! " , Toast.LENGTH_SHORT).show();
+                        Intent event = new Intent(mContext,Event1.class);
+                        startActivity(event);
+                    }
                     //{Toast.makeText(getApplicationContext(), save.toString(), Toast.LENGTH_LONG).show();}
 
                 }

@@ -48,7 +48,7 @@ import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 import org.json.JSONObject;
 
 public class login extends AppCompatActivity {
-
+    private long time= 0;
     private static final String TAG = "OAuthSampleActivity";
     final private String strURL = "http://ec2-13-209-22-178.ap-northeast-2.compute.amazonaws.com:8888/";
     private String postData;
@@ -147,6 +147,8 @@ public class login extends AppCompatActivity {
         });
 
     }
+
+
     //여기서부터 페이스북 로그인
     private void init(){
         callbackManager = CallbackManager.Factory.create();//페이스북의 로그인 콜백을 담당하는 클래스.
@@ -206,6 +208,7 @@ public class login extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -301,6 +304,7 @@ public class login extends AppCompatActivity {
 
     private class RequestApiTask extends AsyncTask<Void, Void, String> {
         private Gson gson;
+        int result;
         JsonParser parser;
         @Override
         protected void onPreExecute() {
@@ -313,24 +317,35 @@ public class login extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Void... params) {
-            String url = "https://openapi.naver.com/v1/nid/me";
-            String at = mOAuthLoginInstance.getAccessToken(mContext);
-            Object ob2 = mOAuthLoginInstance.requestApi(mContext, at, url);
-            JsonElement rootObejct = parser.parse(ob2.toString())
-                    .getAsJsonObject().get("response").getAsJsonObject().get("id");
+            try {
+                String url = "https://openapi.naver.com/v1/nid/me";
+                String at = mOAuthLoginInstance.getAccessToken(mContext);
+                Object ob2 = mOAuthLoginInstance.requestApi(mContext, at, url);
+                JsonElement rootObejct = parser.parse(ob2.toString())
+                        .getAsJsonObject().get("response").getAsJsonObject().get("id");
 
-            Log.v("success",rootObejct.toString());//프로필 정보
-            email = parser.parse(ob2.toString())
-                    .getAsJsonObject().get("response").getAsJsonObject().get("email").toString();
-            id = rootObejct.toString();
-            id = id.replaceAll("\"","");
-            information = "naver";
-            new NetworkTask().execute();
-            return mOAuthLoginInstance.requestApi(mContext, at, url);
+                Log.v("success", rootObejct.toString());//프로필 정보
+                email = parser.parse(ob2.toString())
+                        .getAsJsonObject().get("response").getAsJsonObject().get("email").toString();
+                id = rootObejct.toString();
+                id = id.replaceAll("\"", "");
+                information = "naver";
+                new NetworkTask().execute();
+                result = 1;
+                return mOAuthLoginInstance.requestApi(mContext, at, url);
+            }catch(Exception e){result = -1;}
+            return "ok";
         }
 
         protected void onPostExecute(String content) {
-
+            if(result == -1) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext,"서버가 불안정합니다. 다른 방법으로 로그인하세요",Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
         }
     }
 
@@ -369,6 +384,15 @@ public class login extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if(System.currentTimeMillis()-time>=2000){
+            time=System.currentTimeMillis();
+            Toast.makeText(getApplicationContext(),"뒤로 버튼을 한번 더 누르면 종료합니다.",Toast.LENGTH_SHORT).show();
+        }else if(System.currentTimeMillis()-time<2000){
+            finish();
+        }
+
+
+
         //super.onBackPressed();
     }
 

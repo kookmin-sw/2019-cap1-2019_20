@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
@@ -18,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
 import android.os.Environment;
@@ -31,15 +34,16 @@ import java.util.Date;
 
 import com.capstone.real_visittogether.R;
 
+import event.Event1;
 import login.Register;
 
 
 public class Auth_Exif extends AppCompatActivity {
 
     private static final String TAG = "VisiTogether";
-
+    private double longitude,latitude;
     private Boolean isPermission = true;
-
+    private Context mContext;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int PICK_FROM_CAMERA = 2;
     private static final int ID_JPGDIALOG = 0;
@@ -50,7 +54,7 @@ public class Auth_Exif extends AppCompatActivity {
     private int place_id;
     private Register Reg;
     private int auth_num;
-
+    private  int event_id;
     private  String user_id;
     private Boolean isCamera = false;
     private File tempFile;
@@ -60,20 +64,13 @@ public class Auth_Exif extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exif);
         user_id = getIntent().getStringExtra("user_id");
+        place_id = getIntent().getIntExtra("place_id",-1);
+        event_id = getIntent().getIntExtra("event_id",-1);
         ImageView jpgView = (ImageView) findViewById(R.id.exif_image);
-
+        mContext = this;
         tedPermission();
 
-        findViewById(R.id.btnGallery).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
-                if (isPermission) goToAlbum();
-                else
-                    Toast.makeText(view.getContext(), getResources().getString(R.string.permission_2), Toast.LENGTH_LONG).show();
 
-            }
-        });
 
         findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,17 +83,6 @@ public class Auth_Exif extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.exif_image).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = getIntent();
-                int place_id = intent.getIntExtra("place_id", 0);
-                intent = new Intent(Auth_Exif.this, SelectImage.class);
-                intent.putExtra("place_id", place_id);
-                startActivity(intent);
-                System.out.printf("\n<Auth_Exif>\nplace_id = %d\nauthenticated = %b\n", place_id, true);
-            }
-        });
 
 
 
@@ -156,8 +142,19 @@ public class Auth_Exif extends AppCompatActivity {
             setImage();
 
         } else if (requestCode == PICK_FROM_CAMERA) {
+            try {
+                currentPhotoPath = tempFile.getAbsolutePath();
+                ExifInterface exif = new ExifInterface(currentPhotoPath);
+                Geodegree geoDegree = new Geodegree(exif);
+                longitude = geoDegree.getLongitude();
+                latitude = geoDegree.getLatitude();
 
-            setImage();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
+            }
+             new gps_check().execute();
+            //setImage();
 
         }
     }
@@ -245,7 +242,7 @@ public class Auth_Exif extends AppCompatActivity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         Log.d(TAG, "setImage : " + tempFile.getAbsolutePath());
-        currentPhotoPath = tempFile.getAbsolutePath();
+
         context = Auth_Exif.this;
 
         imageView.setImageBitmap(originalBm);
@@ -282,15 +279,71 @@ public class Auth_Exif extends AppCompatActivity {
 
     }
 
-    public void onClickAuth(View view) {
-        if (view.getId() == R.id.exif_image) {
-            intent = getIntent();
-            int place_id = intent.getIntExtra("place_id", 0);
-            intent = new Intent(Auth_Exif.this, SelectImage.class);
-            intent.putExtra("place_id", place_id);
-            startActivity(intent);
-            System.out.printf("\n<Auth_Exif>\nplace_id = %d\nauthenticated = %b\n", place_id, true);
+
+    public class tranlate_exif extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            new gps_check().execute();
         }
     }
+    public class gps_check extends AsyncTask<Void, Void, Void> {
 
+        String save;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            Register r = new Register();
+            double x,y;
+            x = latitude;
+            y = longitude;
+            auth_num = 3;
+            System.out.println("place_id              "+place_id);
+            save = r.auth_info(place_id,3,x,y,user_id,place_id);
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("pictrue :   "+save);
+                    if("error".equals(save) || latitude ==0 || longitude ==0) {
+                        {
+                            Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                            Intent select_auth = new Intent(mContext, SelectAuth.class);
+                            select_auth.putExtra("user_id",user_id);
+                            select_auth.putExtra("event_id",event_id);
+                            select_auth.putExtra("place_id",place_id);
+                            startActivity(select_auth);
+                        }
+                    }
+                    else
+                    {Toast.makeText(getApplicationContext(),"인증성공! " , Toast.LENGTH_SHORT).show();
+                        Intent event = new Intent(mContext, Event1.class);
+                        event.putExtra("user_id",user_id);
+                        event.putExtra("event_id",event_id);
+                        startActivity(event);
+                    }
+                    //{Toast.makeText(getApplicationContext(), save.toString(), Toast.LENGTH_LONG).show();}
+
+                }
+            });
+        }
+
+
+    }
 }
