@@ -36,6 +36,9 @@ public class placeAdd extends AppCompatActivity {
     private int check_exif =0 ,check_gps =0, check_beacon =0 , check_qr =0;
     private double final_latitude , final_longitude;
 
+    private SharedPreferences placeInfo_pref;
+    private SharedPreferences.Editor placeInfo_editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,11 +70,12 @@ public class placeAdd extends AppCompatActivity {
 //        if(address.length() == 0)
 //            {addressText.setHint("[주소찾기]버튼을 클릭하면 자동으로 입력됩니다.");}
 //        else
-            addressText.setText(address);
+        addressText.setText(address);
 
-
-
-
+        placeInfo_pref = getSharedPreferences("place_info", MODE_PRIVATE);
+        placeInfo_editor = placeInfo_pref.edit();
+        placeName.setText(placeInfo_pref.getString("place_name", ""));
+        information.setText(placeInfo_pref.getString("information", ""));
 
         arrayList = new ArrayList<>();
         arrayList.add("사진촬영(Exif)");
@@ -159,6 +163,11 @@ public class placeAdd extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                placeInfo_editor.putString("place_name", placeName.getText().toString());
+                placeInfo_editor.putString("information", information.getText().toString());
+                placeInfo_editor.commit();
+
                 intent = new Intent(getApplicationContext(), MapsActivity.class);
                 //startActivity(mapAddress); // 다음 화면으로 넘어간다
 
@@ -209,6 +218,13 @@ public class placeAdd extends AppCompatActivity {
             Intent eventRegisteration = new Intent(getApplicationContext(), Eventregistration.class);
             startActivity(eventRegisteration);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        placeInfo_editor.clear();
+        placeInfo_editor.commit();
     }
 }
 

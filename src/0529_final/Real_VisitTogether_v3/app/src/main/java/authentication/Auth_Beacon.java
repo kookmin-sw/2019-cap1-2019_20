@@ -56,7 +56,7 @@ public class Auth_Beacon extends AppCompatActivity {
                     rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
                 }
 
-                if(distance <15)
+                if(distance <15 && distance >0)
                     distance_check =1;
                 else
                     distance_check = -1;
@@ -119,6 +119,7 @@ public class Auth_Beacon extends AppCompatActivity {
                     try {
                         if (distance_check ==1) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+
                         } else {
                             Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
                         }
