@@ -1,69 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_9"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="authentication.SelectAuth">
 
     <Button
         android:id="@+id/auth_exif"
-        android:layout_width="256dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="81dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:background="@drawable/buttoncolor_4"
         android:onClick="Select_Auth"
-
         android:text="사진으로 인증"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/auth_qr"
-        android:layout_width="264dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:background="@drawable/buttoncolor_2"
         android:onClick="Select_Auth"
         android:text="QR코드로 인증"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/auth_bicorn"
-        android:layout_width="256dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="327dp"
-        android:layout_marginEnd="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:background="@drawable/buttoncolor_4"
         android:onClick="Select_Auth"
         android:text="비콘으로 인증"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/auth_gps"
-        android:layout_width="260dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="463dp"
-        android:layout_marginEnd="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:background="@drawable/buttoncolor_2"
         android:onClick="Select_Auth"
         android:text="GPS로 인증"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"/>
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

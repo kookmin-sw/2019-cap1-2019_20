@@ -51,7 +51,7 @@ public class SelectAuth extends AppCompatActivity {
         } else if (v.getId() == R.id.auth_bicorn) {
             //임의로 99로 해놓은거고 비콘 사용하는 곳에서만
 
-            if(place_id == 1) {
+            if(place_id != 0) {
 
                 Intent intent = new Intent(SelectAuth.this, Auth_Beacon.class);
                 intent.putExtra("place_id", place_id);
@@ -173,16 +173,17 @@ public class SelectAuth extends AppCompatActivity {
             {
 
                 if(i ==0 &&result.charAt(i) == '1'){
-                    System.out.println("qr");
+
+                    System.out.println("##################################################qr");
                 }
                 else if(i ==1 &&result.charAt(i) == '1'){
-                    System.out.println("becoan");
+                    System.out.println("##################################################becoan");
                 }
                 else if(i ==2 &&result.charAt(i) == '1'){
-                    System.out.println("exif");
+                    System.out.println("##################################################exif");
                 }
                 else if(i ==3 &&result.charAt(i) == '1'){
-                    System.out.println("gps");
+                    System.out.println("##################################################gps");
                 }
             }
 

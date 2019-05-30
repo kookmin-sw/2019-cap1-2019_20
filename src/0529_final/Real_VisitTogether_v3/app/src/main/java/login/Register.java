@@ -81,7 +81,7 @@ public class Register {
         return register(postData,"auth/");
     }
 
-    public String auth_info(int place_id, int auth_num, double beacon_distance, String user_id, int event_id)
+    public String auth_info(int place_id, int auth_num, int beacon_distance, String user_id, int event_id)
     {
         postData = "place_id="+place_id+"&auth_num="+auth_num+"&beacon_distance="+beacon_distance+"&user_id="+user_id+"&event_id="+event_id;
         return register(postData,"auth/");

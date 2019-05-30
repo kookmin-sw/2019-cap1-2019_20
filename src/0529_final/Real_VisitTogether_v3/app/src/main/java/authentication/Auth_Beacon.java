@@ -28,6 +28,7 @@ public class Auth_Beacon extends AppCompatActivity {
     private int auth_num;
     private String user_id;
     private int event_id;
+    private int distance_check;
 
 
     @Override
@@ -55,6 +56,10 @@ public class Auth_Beacon extends AppCompatActivity {
                     rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
                 }
 
+                if(distance <15)
+                    distance_check =1;
+                else
+                    distance_check = -1;
             }
         });
 
@@ -98,7 +103,9 @@ public class Auth_Beacon extends AppCompatActivity {
             Register r = new Register();
 
             auth_num = 2;
-            save = r.auth_info(place_id,2,distance,user_id,event_id);
+            save = r.auth_info(place_id,2,distance_check,user_id,event_id);
+
+
             return null;
         }
 
@@ -110,7 +117,7 @@ public class Auth_Beacon extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        if (save.equals("ok")) {
+                        if (distance_check ==1) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
