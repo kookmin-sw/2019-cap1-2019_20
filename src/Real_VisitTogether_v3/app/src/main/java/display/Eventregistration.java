@@ -26,6 +26,8 @@ public class Eventregistration extends AppCompatActivity {
     private Intent intent;
     private SharedPreferences places_pref;
     private SharedPreferences event_pref;
+    private SharedPreferences placeInfo_pref;
+    private SharedPreferences.Editor placeInfo_editor;
     private SharedPreferences.Editor place_editor;
     private SharedPreferences.Editor event_editor;
     private int temp_places_size;
@@ -102,6 +104,10 @@ public class Eventregistration extends AppCompatActivity {
                 }
             }
         });
+        placeInfo_pref = getSharedPreferences("place_info", MODE_PRIVATE);
+        placeInfo_editor = placeInfo_pref.edit();
+        placeInfo_editor.clear();
+        placeInfo_editor.commit();
     }
 
     @Override
