@@ -9,6 +9,8 @@
 
 ## 2. 팀 소개
 
+![Alt text](/pic/단체사진.jpeg)
+
 ![Alt text](/pic/이민석교수님.jpg)
 
 ### 지도교수 
