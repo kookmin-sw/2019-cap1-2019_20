@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
+import authentication.SelectAuth;
 import data_fetcher.RequestHttpConnection;
 import login.Register;
 import toolbar_menu.mypage.Ranking;
@@ -705,6 +706,8 @@ public class Event1 extends AppCompatActivity
             return null;
         }
 
+
+
         // 백그라운드 작업 결과 반영
         // doin 메소드로 파라미터를 받는다
         @Override
@@ -927,6 +930,13 @@ public class Event1 extends AppCompatActivity
                 participate_button.setBackgroundColor(Color.rgb(100,100,100));
         }
     }
+
+    @Override public void onBackPressed()
+    {
+        Intent intent1 = new Intent(Event1.this, display.Display.class);
+        startActivity(intent1);
+    }
+
     public class Participate_check extends AsyncTask<Void,Void,Void>{
         @Override
         protected Void doInBackground(Void... voids) {
@@ -949,4 +959,6 @@ public class Event1 extends AppCompatActivity
             });
         }
     }
+
+
 }

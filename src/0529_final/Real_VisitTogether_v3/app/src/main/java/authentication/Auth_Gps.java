@@ -26,6 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import event.Event1;
 import login.Register;
 
 //public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
@@ -134,12 +135,27 @@ public class Auth_Gps extends FragmentActivity implements OnMapReadyCallback {
                     try {
                         if (save.equals("ok")) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Auth_Gps.this, Event1.class);
+                            intent.putExtra("place_id", place_id);
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Auth_Gps.this, SelectAuth.class);
+                            intent.putExtra("place_id", place_id);
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
+                            startActivity(intent);
                         }
                     }
                     catch (Exception e){System.out.println(e);
                         Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Auth_Gps.this, SelectAuth.class);
+                        intent.putExtra("place_id", place_id);
+                        intent.putExtra("user_id",user_id);
+                        intent.putExtra("event_id",event_id);
+                        startActivity(intent);
                     }
                 }
             });

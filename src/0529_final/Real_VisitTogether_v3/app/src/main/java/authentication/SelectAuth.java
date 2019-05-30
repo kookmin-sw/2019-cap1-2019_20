@@ -14,6 +14,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import display.Eventregistration;
+import event.Event1;
 import login.Register;
 
 public class SelectAuth extends AppCompatActivity {
@@ -40,9 +41,18 @@ public class SelectAuth extends AppCompatActivity {
         //place_id = intent.getIntExtra().getInt("place_id");
         new NetworkTask().execute();
 
-
-
     }
+
+    @Override public void onBackPressed()
+    {
+        Intent intent = new Intent(SelectAuth.this, Event1.class);
+        intent.putExtra("place_id", place_id);
+        intent.putExtra("user_id",user_id);
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
+    }
+
+
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
         String result;
         String auth_info[];
@@ -171,8 +181,11 @@ public class SelectAuth extends AppCompatActivity {
                         if (save.equals("ok")) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
 
-                          //  Intent event1 = new Intent(getApplicationContext(), event1.class);
-                           // startActivity(event1);
+                            Intent intent = new Intent(SelectAuth.this, Event1.class);
+                            intent.putExtra("place_id", place_id);
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
+                            startActivity(intent);
 
                         } else {
                             Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
@@ -185,6 +198,8 @@ public class SelectAuth extends AppCompatActivity {
                 }
             });
         }
+
+
     }
 
 
@@ -213,6 +228,7 @@ public class SelectAuth extends AppCompatActivity {
                 }
             }
         }
+
 
 
 
