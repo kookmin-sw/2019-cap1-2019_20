@@ -31,6 +31,8 @@ public class Eventregistration extends AppCompatActivity {
     private int temp_places_size;
     private String address;
     private double latitude , longitude;
+    private SharedPreferences placeInfo_pref;
+    private SharedPreferences.Editor placeInfo_editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +112,10 @@ public class Eventregistration extends AppCompatActivity {
             }
         });
 
+        placeInfo_pref = getSharedPreferences("place_info", MODE_PRIVATE);
+        placeInfo_editor = placeInfo_pref.edit();
+        placeInfo_editor.clear();
+        placeInfo_editor.commit();
     }
 
     @Override
