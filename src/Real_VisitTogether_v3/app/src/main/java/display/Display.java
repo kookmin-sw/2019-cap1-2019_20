@@ -2,6 +2,7 @@ package display;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +41,11 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
     LinearLayout layout1, layout2;
     String email ;
     String password;
+    private SharedPreferences places_pref;
+    private SharedPreferences event_pref;
+    private SharedPreferences.Editor place_editor;
+    private SharedPreferences.Editor event_editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("같이가자!");
@@ -54,6 +60,17 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         networkTask = new NetworkTask(this);
         networkTask.execute();
 
+
+        event_pref = getSharedPreferences("event_info", MODE_PRIVATE);
+        places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
+
+        place_editor = places_pref.edit();
+        place_editor.clear();
+        place_editor.commit();
+
+        event_editor = event_pref.edit();
+        event_editor.clear();
+        event_editor.commit();
     }
     public void onClick(View view) {
 
