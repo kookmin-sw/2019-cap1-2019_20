@@ -219,8 +219,8 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
             }
             for(int i = 1; i < event_dict.length; i+=2) {
 
-                btn.addElement(new event_btn(mContext));
                 event = gson.fromJson(event_dict[i], Event.class);
+                btn.addElement(new event_btn(mContext));
                 btn.lastElement().setText(event.getName());
                 btn.lastElement().setBackgroundColor(mContext.getResources().getColor(android.R.color.white));
                 btn.lastElement().setTextSize(20);
