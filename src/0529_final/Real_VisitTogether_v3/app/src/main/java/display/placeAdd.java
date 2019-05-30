@@ -33,7 +33,7 @@ public class placeAdd extends AppCompatActivity {
     private double latitude,longitude;
     private String address ;
     private int lat_int, long_int, lat_dec, long_dec;
-    private int check_exif =0 ,check_gps =0, check_beacon =0 , check_qr =0;
+    private int check_exif =0 ,check_gps =1, check_beacon =0 , check_qr =0;
     private double final_latitude , final_longitude;
 
     private SharedPreferences placeInfo_pref;
@@ -95,6 +95,7 @@ public class placeAdd extends AppCompatActivity {
         //각 버튼 눌렀을때 쿼리 수정해야됨
         CheckBox checkBox1 = (CheckBox) findViewById(R.id.exif) ;
         CheckBox checkBox2 = (CheckBox) findViewById(R.id.gps) ;
+        checkBox2.setChecked(true);
         CheckBox checkBox3 = (CheckBox) findViewById(R.id.beacon) ;
         CheckBox checkBox4 = (CheckBox) findViewById(R.id.qr_code) ;
 
@@ -106,8 +107,10 @@ public class placeAdd extends AppCompatActivity {
 
                 if (((CheckBox)v).isChecked()) {
                     check_exif =1;
+                    System.out.println("exif체크됨");
                     //이거 체크되면 DB place테이블의 auth_exif 값 1로 해줌.
                 } else {
+                    System.out.println("exif체크 안됨");
                     check_exif =0;
                     //이거 체크되지 않으면 DB place 테이블의 auth_exif 값 건드리지 않아야해.
                 }
@@ -117,9 +120,11 @@ public class placeAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (((CheckBox)v).isChecked()) {
+                    System.out.println("GPS체크됨");
                     check_gps =1;
                     //이거 체크되면 DB place테이블의 auth_gps 값 1로 해줌.
                 } else {
+                    System.out.println("GPS체크 안됨");
                     check_gps =0;
                     //이거 체크되지 않으면 DB place 테이블의 auth_gps 값 건드리지 않아야해.
                 }
