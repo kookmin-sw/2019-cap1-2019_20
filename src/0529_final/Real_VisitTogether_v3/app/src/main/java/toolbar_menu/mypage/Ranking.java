@@ -1,10 +1,15 @@
 package toolbar_menu.mypage;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import login.Register;
@@ -100,8 +105,8 @@ public class Ranking extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    TextView textView = (TextView) findViewById(R.id.rank);
-                    textView.setText(parse);
+                    //TextView textView = (TextView) findViewById(R.id.rank);
+                    //textView.setText(parse);
 
                 }
             });
@@ -114,6 +119,62 @@ public class Ranking extends AppCompatActivity {
 
     public void makeRank()
     {
+
+
+        LinearLayout rank = (LinearLayout) findViewById(R.id.rank);
+
+        int idx = 1;
+
+        for(UserRanking k : userRanking)
+        {
+            LinearLayout RANK = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 150);
+            RANK.setOrientation(LinearLayout.HORIZONTAL);
+            RANK.setLayoutParams(layoutParams);
+
+            TextView placeText = new TextView(getApplicationContext());
+            //placeText.setText("    "+ places.elementAt(i).getName());
+            placeText.setText(idx + ". " + k.getUser_id() + " : " + k.getNumber_of_visits() + "\n");
+            //////////////////////////////////////////////////////////
+            if(idx ==1) {
+                placeText.setBackgroundColor(Color.rgb(255, 0, 0));
+                placeText.setTextSize(24);
+            }
+            else if(idx ==2){
+                placeText.setBackgroundColor(Color.rgb(255, 165, 0));
+                placeText.setTextSize(23);
+            }else if(idx ==3){
+                placeText.setBackgroundColor(Color.rgb(255, 215, 0));
+                placeText.setTextSize(22);
+            }else if(idx ==4){
+                placeText.setBackgroundColor(Color.rgb(154, 205, 50));
+                placeText.setTextSize(21);
+            }else if(idx ==5){
+                placeText.setBackgroundColor(Color.rgb(135, 206, 250));
+                placeText.setTextSize(20);
+            }else if(idx ==6){
+                placeText.setBackgroundColor(Color.rgb(65, 105, 225));
+                placeText.setTextSize(19);
+            }else if(idx ==7){
+                placeText.setBackgroundColor(Color.rgb(106, 90, 205));
+                placeText.setTextSize(18);
+            }
+            else {
+                placeText.setBackgroundColor(Color.rgb(255, 255, 255));
+                placeText.setTextSize(15);
+            }
+            placeText.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
+            // placeText.setBackgroundColor(#0);
+            //placeText.setTextSize(15);
+            placeText.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/dogimayu_ttf.ttf"));
+
+            RANK.addView(placeText);
+
+            rank.addView(RANK);
+
+            idx++;
+        }
+        /*
         int idx = 1;
 
         for(UserRanking k : userRanking)
@@ -129,6 +190,7 @@ public class Ranking extends AppCompatActivity {
 
             idx++;
         }
+        */
     }
 
 

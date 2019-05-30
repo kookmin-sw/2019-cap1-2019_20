@@ -24,14 +24,14 @@ public class Register {
         register(postData, "insert_event/");
     }
 
-    public void registerPlace(String place_name, String address, String information, double latitude, double longitude){
+    public String registerPlace(String place_name, String address, String information, double latitude, double longitude){
 
         postData =  "place_name=" + place_name + "&" +
                 "address=" + address + "&" +
                 "explanation=" + information + "&" +
                 "latitude=" + latitude + "&" +
                 "longitude=" + longitude;
-        register(postData, "insert_place/");
+        return register(postData, "insert_place/");
     }
 
     public String participate(String user_ID, int event_ID){

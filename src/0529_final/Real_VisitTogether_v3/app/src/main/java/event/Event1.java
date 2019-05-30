@@ -755,6 +755,7 @@ public class Event1 extends AppCompatActivity
 
                     ImageView placeImage = new ImageView(getApplicationContext());
                     LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
+
                     //일단 기본장소들같은경우 drawble에 넣어놓자
                     //일단은 서울의4대문부터
 
@@ -865,6 +866,9 @@ public class Event1 extends AppCompatActivity
                     TextView placeText = new TextView(getApplicationContext());
                     //placeText.setText("    "+ places.elementAt(i).getName());
                     placeText.setText("< "+ places.elementAt(i).getName()+" >\n"+"주소 : "+places.elementAt(i).getAddress()+"\n설명 : "+places.elementAt(i).getExplanation());
+                    //////////////////////////////////////////////////////////
+                    //
+                    placeText.setBackgroundColor(Color.rgb(255,255,255));
                     placeText.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
                    // placeText.setBackgroundColor(#0);
                     placeText.setTextSize(15);
