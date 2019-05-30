@@ -84,7 +84,7 @@ readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://
 [![Video Label](/pic/표지.png)](https://youtu.be/PR_88WqhLVE)
 
 ## 3. 팀 소개
-<img src =./pic/단체사진.jpg>
+<img src =./pic/단체사진.jpeg>
 
 <img src =./pic/이민석교수님.jpg width="20%" height="20%">
 
