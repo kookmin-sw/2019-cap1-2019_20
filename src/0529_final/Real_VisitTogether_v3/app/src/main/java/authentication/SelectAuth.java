@@ -7,13 +7,22 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.capstone.real_visittogether.R;
+import com.estimote.sdk.Beacon;
+import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.Region;
+import com.estimote.sdk.SystemRequirementsChecker;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.List;
+import java.util.UUID;
+
 import display.Eventregistration;
+import event.Event1;
 import login.Register;
 
 public class SelectAuth extends AppCompatActivity {
@@ -27,6 +36,13 @@ public class SelectAuth extends AppCompatActivity {
     private int event_id;
     static String QR_Info;
     private int poss_exif, poss_qr, poss_gps, poss_beacon;
+    private BeaconManager beaconManager;
+    private Region region;
+    private TextView rssi;
+    private Intent intent;
+    private int beacon_rssi, beacon_power;
+    private double ratio,distance;
+    private int distance_check;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +55,94 @@ public class SelectAuth extends AppCompatActivity {
         event_id = getIntent().getIntExtra("event_id", -1);
         //place_id = intent.getIntExtra().getInt("place_id");
         new NetworkTask().execute();
+
+        ///////////////////////////////////////
+        rssi = (TextView) findViewById(R.id.rssi);
+
+        beaconManager = new BeaconManager(this);
+
+        beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+            @Override
+            public void onBeaconsDiscovered(Region region, List list) {
+                if (!list.isEmpty()) {
+                    Beacon nearestBeacon = (Beacon) list.get(0);
+                    beacon_rssi = nearestBeacon.getRssi();
+                    beacon_power = nearestBeacon.getMeasuredPower();
+                    ratio = beacon_rssi*1.0/beacon_power;
+                    distance = (0.3)*Math.pow(ratio,6);
+                    //rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
+                }
+
+                if(distance <15)
+                    distance_check =1;
+                else
+                    distance_check = -1;
+            }
+        });
+
+        region = new Region("ranged region", UUID.fromString("74278BDA-B644-4520-8f0C-720EAF059935"), 40001, 25627);
+
+
+
+        ////////////////////////
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume(); // 블루투스 권한 및 활성화 코드
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager.startRanging(region);
+            }
+        });
+    }
+
+    public class beacon_check extends AsyncTask<Void, Void, Void> {
+
+        String save;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Register r = new Register();
+
+            auth_num = 2;
+            save = r.auth_info(place_id,2,distance_check,user_id,event_id);
+
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        if (distance_check ==1) {
+                            Intent intent = new Intent(SelectAuth.this, Event1.class);
+                            intent.putExtra("place_id", place_id);
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
+                            startActivity(intent);
+
+                            Toast.makeText(getApplicationContext(), "비콘과의 거리" +distance + "\n인증성공! ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "비콘과의 거리" +distance +"인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e){System.out.println(e);
+                        Toast.makeText(getApplicationContext(), "비콘과의 거리" +distance +"인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
 
     }
@@ -106,8 +210,11 @@ public class SelectAuth extends AppCompatActivity {
             new IntentIntegrator(SelectAuth.this).initiateScan();
 
         } else if (v.getId() == R.id.auth_bicorn) {
+            beacon_check check = new beacon_check();
+            check.execute();
             //임의로 99로 해놓은거고 비콘 사용하는 곳에서만
 
+            /*
             if (place_id != 0) {
 
                 Intent intent = new Intent(SelectAuth.this, Auth_Beacon.class);
@@ -120,6 +227,8 @@ public class SelectAuth extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "해당 장소는 비콘인증이 등록되어있지 않습니다.", Toast.LENGTH_SHORT).show();
             }
+            */
+
 
         } else if (v.getId() == R.id.auth_gps) {
             Intent intent = new Intent(SelectAuth.this, Auth_Gps.class);
@@ -195,5 +304,15 @@ public class SelectAuth extends AppCompatActivity {
 
             }
         }
+    }
+
+
+    @Override public void onBackPressed()
+    {
+        Intent intent = new Intent(SelectAuth.this, Event1.class);
+        intent.putExtra("place_id", place_id);
+        intent.putExtra("user_id",user_id);
+        intent.putExtra("event_id",event_id);
+        startActivity(intent);
     }
 }

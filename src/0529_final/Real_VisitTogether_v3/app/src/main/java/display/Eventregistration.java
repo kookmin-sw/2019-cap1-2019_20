@@ -123,4 +123,5 @@ public class Eventregistration extends AppCompatActivity {
         intent = new Intent(Eventregistration.this, Display.class);
         startActivity(intent);
     }
+
 }
