@@ -17,6 +17,7 @@ import login.Register;
 
 public class Eventregistration extends AppCompatActivity {
 
+    private String user_id;
     private Button addPlaceButton;
     private EditText nameText;
     private EditText rewardText;
@@ -38,10 +39,11 @@ public class Eventregistration extends AppCompatActivity {
         rewardText = (EditText) findViewById(R.id.inputReward);
         LinearLayout placesLayout = (LinearLayout) findViewById(R.id.placesLayout);
 
+        user_id = getIntent().getStringExtra("user_id");
+
         event_pref = getSharedPreferences("event_info", MODE_PRIVATE);
         nameText.setText(event_pref.getString("event_name", ""));
         rewardText.setText(event_pref.getString("event_reward", ""));
-
 
         places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
         temp_places_size = places_pref.getInt("temp_places_size", 0);
@@ -100,7 +102,7 @@ public class Eventregistration extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             Register connection = new Register();
-            connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), "testID2");
+            connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), user_id);
 
             for(int i = 0; i < temp_places_size; i++) {
                 connection.registerPlace(places_pref.getString("temp_places_name" + i, ""), places_pref.getString("temp_places_address" + i, ""), places_pref.getString("temp_places_information" + i, ""));
