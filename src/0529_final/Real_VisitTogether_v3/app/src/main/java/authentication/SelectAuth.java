@@ -13,6 +13,7 @@ import com.capstone.real_visittogether.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import display.Eventregistration;
 import login.Register;
 
 public class SelectAuth extends AppCompatActivity {
@@ -169,6 +170,10 @@ public class SelectAuth extends AppCompatActivity {
                     try {
                         if (save.equals("ok")) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+
+                          //  Intent event1 = new Intent(getApplicationContext(), event1.class);
+                           // startActivity(event1);
+
                         } else {
                             Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
                         }

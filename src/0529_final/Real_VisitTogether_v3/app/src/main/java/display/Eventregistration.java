@@ -26,12 +26,19 @@ public class Eventregistration extends AppCompatActivity {
     private SharedPreferences.Editor place_editor;
     private SharedPreferences.Editor event_editor;
     private int temp_places_size;
+    private String address;
+    private double latitude , longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("이벤트 등록");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventregistration);
+
+        System.out.println("이벤트 등록으로 넘겨진 장소의주소입니다."+address);
+        System.out.println("이벤트 등록으로 넘겨진 장소의위도입니다."+latitude);
+        System.out.println("이벤트 등록으로 넘겨진 장소의경도입니다."+longitude);
+        ///////////////////////////////////////////////////////////////////
 
         addPlaceButton = (Button)findViewById(R.id.place);
         nameText = (EditText) findViewById(R.id.inputevent);
@@ -80,6 +87,7 @@ public class Eventregistration extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -108,5 +116,11 @@ public class Eventregistration extends AppCompatActivity {
 
             return null;
         }
+    }
+
+    @Override public void onBackPressed()
+    {
+        intent = new Intent(Eventregistration.this, Display.class);
+        startActivity(intent);
     }
 }

@@ -33,6 +33,7 @@ public class placeAdd extends AppCompatActivity {
     private double latitude,longitude;
     private String address ;
     private int check_exif =0 ,check_gps =0, check_beacon =0 , check_qr =0;
+    private double final_latitude , final_longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class placeAdd extends AppCompatActivity {
         address =getIntent().getStringExtra("address");
         latitude = getIntent().getDoubleExtra("latitude", 0);
         longitude = getIntent().getDoubleExtra("longitude", 0);
+        System.out.println("%%%%%%%%%%%%%%%%%%%%placeadd로 intent한 위도 경도 주소\n");
+
         //////////////////////////////////////////////////////////////////////////////
 
 
@@ -149,7 +152,23 @@ public class placeAdd extends AppCompatActivity {
     }
 
 
+    //뒤로가기 버튼 누를경우
+    @Override public void onBackPressed()
+    {
+        /*
+        SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
+        SharedPreferences.Editor editor = places_pref.edit();
 
+        int temp_places_size = places_pref.getInt("temp_places_size",0);
+        editor.putString("temp_places_name" + temp_places_size, placeName.getText().toString());
+        //editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
+        editor.putString("temp_places_information" + temp_places_size, information.getText().toString());
+        editor.putInt("temp_places_size", temp_places_size + 1);
+        editor.commit();
+        */
+        Intent eventRegisteration = new Intent(getApplicationContext(), Eventregistration.class);
+        startActivity(eventRegisteration);
+    }
 
     public void onClick(View v){
 
@@ -170,3 +189,6 @@ public class placeAdd extends AppCompatActivity {
         }
     }
 }
+
+
+

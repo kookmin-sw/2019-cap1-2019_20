@@ -146,6 +146,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
         //등록버튼 클릭시 이전 화면으로 이동하면서 주소와 위도 경도를 넘겨준다.
+
         regist.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -227,5 +228,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(KMU, 14);
         mMap.moveCamera(cameraUpdate);
     }
+
+    @Override public void onBackPressed()
+    {
+        Intent placeAdd = new Intent(getApplicationContext(), placeAdd.class);
+        startActivity(placeAdd);
+    }
+
 
 }
