@@ -91,7 +91,11 @@ public class Register {
         postData = "user_id="+user_id;
         return register(postData,"participating/");
     }
-
+    public String select_auth_method(int place_id)
+    {
+        postData = "place_id="+place_id;
+        return register(postData,"select_auth_method/");
+    }
 
     private String register(String postData, String _url) {
 

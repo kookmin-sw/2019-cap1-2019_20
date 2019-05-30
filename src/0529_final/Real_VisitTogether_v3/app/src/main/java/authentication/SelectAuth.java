@@ -35,7 +35,7 @@ public class SelectAuth extends AppCompatActivity {
         user_id = getIntent().getStringExtra("user_id");
         event_id = getIntent().getIntExtra("event_id",-1);
         //place_id = intent.getIntExtra().getInt("place_id");
-
+        new NetworkTask().execute();
     }
 
     public void Select_Auth(View v) {
@@ -154,5 +154,39 @@ public class SelectAuth extends AppCompatActivity {
                 }
             }
         }
+    public class NetworkTask extends AsyncTask<Void, Void, Void> {
+        String result;
+        String auth_info[];
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Register r = new Register();
+            result = r.select_auth_method(place_id);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            result = result.replaceAll("[^0-9]", "");
+
+            for(int i =0; i<result.length(); i++)
+            {
+
+                if(i ==0 &&result.charAt(i) == '1'){
+                    System.out.println("qr");
+                }
+                else if(i ==1 &&result.charAt(i) == '1'){
+                    System.out.println("becoan");
+                }
+                else if(i ==2 &&result.charAt(i) == '1'){
+                    System.out.println("exif");
+                }
+                else if(i ==3 &&result.charAt(i) == '1'){
+                    System.out.println("gps");
+                }
+            }
+
+        }
+    }
     }
 
