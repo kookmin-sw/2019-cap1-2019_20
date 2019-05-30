@@ -942,10 +942,7 @@ public class Event1 extends AppCompatActivity
 
     @Override public void onBackPressed()
     {
-
         Intent intent1 = new Intent(Event1.this, display.Display.class);
-        intent1.putExtra("user_id",user_id);
-        intent1.putExtra("event_id",event_id);
         startActivity(intent1);
     }
 
