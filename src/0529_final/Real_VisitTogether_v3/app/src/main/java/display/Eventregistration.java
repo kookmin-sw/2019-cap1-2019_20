@@ -135,6 +135,14 @@ public class Eventregistration extends AppCompatActivity {
             for(int i = 0; i < temp_places_size; i++) {
                 double latitude = places_pref.getInt("temp_places_lat_int" + i, 0) + (double) places_pref.getInt("temp_places_lat_dec" + i, 0) / 10000000;
                 double longitude = places_pref.getInt("temp_places_long_int" + i, 0) + (double) places_pref.getInt("temp_places_long_dec" + i, 0) / 10000000;
+               //효준아 이부분 수정했는데 맞는지 모르겠다 서버에서 쿼리문으로 처리해야하는건데
+                int check_qr = places_pref.getInt("temp_places_check_qr" + i, 0);
+                int check_beacon = places_pref.getInt("temp_places_check_beacon" + i, 0);
+                int check_gps = places_pref.getInt("temp_places_check_gps" + i, 0);
+                int check_exif = places_pref.getInt("temp_places_check_exif" + i, 0);
+
+
+
                 System.out.println("EventRegistration.doinbackground.latitude= " + latitude);
                 System.out.println("EventRegistration.doinbackground.longitude= " + longitude);
                 String registerPlaceResult = connection.registerPlace(
@@ -142,7 +150,11 @@ public class Eventregistration extends AppCompatActivity {
                         places_pref.getString("temp_places_address" + i, ""),
                         places_pref.getString("temp_places_information" + i, ""),
                         latitude,
-                        longitude
+                        longitude,
+                        check_qr,
+                        check_beacon,
+                        check_gps,
+                        check_exif
                 );
                 System.out.println("EventRegistration.doinbackground.registerPlaceResult= " + registerPlaceResult);
             }

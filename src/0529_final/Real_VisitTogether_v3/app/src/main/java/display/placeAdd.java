@@ -93,13 +93,19 @@ public class placeAdd extends AppCompatActivity {
         CheckBox checkBox2 = (CheckBox) findViewById(R.id.gps) ;
         CheckBox checkBox3 = (CheckBox) findViewById(R.id.beacon) ;
         CheckBox checkBox4 = (CheckBox) findViewById(R.id.qr_code) ;
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        /////////////효준 여기야 여기 여길 고쳐줘야됨///////////////////////
         checkBox1.setOnClickListener(new CheckBox.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (((CheckBox)v).isChecked()) {
                     check_exif =1;
+                    //이거 체크되면 DB place테이블의 auth_exif 값 1로 해줌.
                 } else {
                     check_exif =0;
+                    //이거 체크되지 않으면 DB place 테이블의 auth_exif 값 건드리지 않아야해.
                 }
             }
         });
@@ -108,8 +114,10 @@ public class placeAdd extends AppCompatActivity {
             public void onClick(View v) {
                 if (((CheckBox)v).isChecked()) {
                     check_gps =1;
+                    //이거 체크되면 DB place테이블의 auth_gps 값 1로 해줌.
                 } else {
                     check_gps =0;
+                    //이거 체크되지 않으면 DB place 테이블의 auth_gps 값 건드리지 않아야해.
                 }
             }
         });
@@ -119,8 +127,10 @@ public class placeAdd extends AppCompatActivity {
                 if (((CheckBox)v).isChecked()) {
                     Toast.makeText(getApplicationContext(), "비콘의정보를 입력해주세요!", 2000).show();
                     check_beacon =1;
+                    //이거 체크되면 DB place테이블의 beacon_distance 값 1로 해줌.
                 } else {
                     check_beacon =0;
+                    //이거 체크되지 않으면 DB place 테이블의 beacon_distance 값 건드리지 않아야해.
                 }
 
             }
@@ -131,8 +141,10 @@ public class placeAdd extends AppCompatActivity {
                 if (((CheckBox)v).isChecked()) {
                     Toast.makeText(getApplicationContext(), "qr메세지를 입력해주세요!", 2000).show();
                     check_qr =1;
+                    //이거 체크되면 DB place테이블의 auth_qr 값 1로 해줌.
                 } else {
                     check_qr =0;
+                    //이거 체크되지 않으면 DB place 테이블의 auth_qr 값 건드리지 않아야해.
                 }
 
             }
@@ -161,17 +173,6 @@ public class placeAdd extends AppCompatActivity {
     //뒤로가기 버튼 누를경우
     @Override public void onBackPressed()
     {
-        /*
-        SharedPreferences places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
-        SharedPreferences.Editor editor = places_pref.edit();
-
-        int temp_places_size = places_pref.getInt("temp_places_size",0);
-        editor.putString("temp_places_name" + temp_places_size, placeName.getText().toString());
-        //editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
-        editor.putString("temp_places_information" + temp_places_size, information.getText().toString());
-        editor.putInt("temp_places_size", temp_places_size + 1);
-        editor.commit();
-        */
         Intent eventRegisteration = new Intent(getApplicationContext(), Eventregistration.class);
         startActivity(eventRegisteration);
     }
@@ -192,6 +193,15 @@ public class placeAdd extends AppCompatActivity {
             editor.putInt("temp_places_lat_dec" + temp_places_size, lat_dec);
             editor.putInt("temp_places_long_int" + temp_places_size, long_int);
             editor.putInt("temp_places_long_dec" + temp_places_size, long_dec);
+            editor.putInt("temp_places_check_exif" + temp_places_size, check_exif);
+            //이거 체크되면 DB place테이블의 auth_exif 값 1로 해줌.
+            editor.putInt("temp_places_check_gps" + temp_places_size, check_gps);
+            //이거 체크되면 DB place테이블의 auth_gps 값 1로 해줌.
+            editor.putInt("temp_places_check_beacon" + temp_places_size, check_beacon);
+            //이거 체크되면 DB place테이블의 beacon_distance 값 1로 해줌.
+            editor.putInt("temp_places_check_qr" + temp_places_size, check_qr);
+            //이거 체크되면 DB place테이블의 auth_qr 값 1로 해줌.
+
 
             editor.putInt("temp_places_size", temp_places_size + 1);
             editor.commit();

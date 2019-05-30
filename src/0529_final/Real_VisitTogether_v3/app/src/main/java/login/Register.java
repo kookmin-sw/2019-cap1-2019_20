@@ -24,13 +24,21 @@ public class Register {
         register(postData, "insert_event/");
     }
 
-    public String registerPlace(String place_name, String address, String information, double latitude, double longitude){
+    public String registerPlace(String place_name, String address, String information, double latitude, double longitude , int auth_qr , int beacon_distance, int auth_gps , int auth_exif){
 
         postData =  "place_name=" + place_name + "&" +
                 "address=" + address + "&" +
                 "explanation=" + information + "&" +
                 "latitude=" + latitude + "&" +
-                "longitude=" + longitude;
+                "longitude=" + longitude + "&" +
+                "check_qr=" + auth_qr + "&" +
+                "check_beacon=" + beacon_distance + "&" +
+                "check_gps=" + auth_gps + "&" +
+                "check_exif" + auth_exif ;
+        //효준아 저거 auth_qr값이 1이면 DB place 테이블에서 auth_qr 값 1로 해주고 아니면 그냥 그대로 null값 뜨게하고
+        //beacon_distance값이 1이면 DB place 테이블에서 beacon_distance 값 1로 해주고 아니면 그냥 그대로 null값 뜨게하고
+        //auth_gps 값이 1이면 DB place 테이블에서 auth_gps 값 1로 해주고 아니면 그냥 그대로 null값 뜨게하고
+        //auth_exif값이 1이면 DB place 테이블에서 auth_exif 값 1로 해주고 아니면 그냥 그대로 null값 뜨게하려는데 쿼리문 짜는것만 해주라 placeAdd랑 Eventregistration은 내가 짜놨음
         return register(postData, "insert_place/");
     }
 
