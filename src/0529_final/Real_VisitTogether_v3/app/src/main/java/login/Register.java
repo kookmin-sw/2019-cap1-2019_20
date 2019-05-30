@@ -24,9 +24,13 @@ public class Register {
         register(postData, "insert_event/");
     }
 
-    public void registerPlace(String place_name, String address, String information){
+    public void registerPlace(String place_name, String address, String information, double latitude, double longitude){
 
-        postData = "place_name=" + place_name + "&" + "address=" + address + "&" + "explanation=" + information;
+        postData =  "place_name=" + place_name + "&" +
+                "address=" + address + "&" +
+                "explanation=" + information + "&" +
+                "latitude=" + latitude + "&" +
+                "longitude=" + longitude;
         register(postData, "insert_place/");
     }
 

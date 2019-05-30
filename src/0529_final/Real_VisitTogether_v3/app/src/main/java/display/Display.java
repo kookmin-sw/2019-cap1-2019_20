@@ -67,6 +67,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
         if(view.getId() == R.id.actionButton){
             intent = new Intent(getApplicationContext(), Eventregistration.class);
+            intent.putExtra("user_id", id);
             startActivity(intent);
         }
 

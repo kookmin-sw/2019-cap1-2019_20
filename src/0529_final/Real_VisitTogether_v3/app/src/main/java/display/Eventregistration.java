@@ -2,12 +2,14 @@ package display;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import login.Register;
 
 public class Eventregistration extends AppCompatActivity {
 
+    private String user_id;
     private Button addPlaceButton;
     private EditText nameText;
     private EditText rewardText;
@@ -45,6 +48,8 @@ public class Eventregistration extends AppCompatActivity {
         rewardText = (EditText) findViewById(R.id.inputReward);
         LinearLayout placesLayout = (LinearLayout) findViewById(R.id.placesLayout);
 
+        user_id = getIntent().getStringExtra("user_id");
+
         event_pref = getSharedPreferences("event_info", MODE_PRIVATE);
         nameText.setText(event_pref.getString("event_name", ""));
         rewardText.setText(event_pref.getString("event_reward", ""));
@@ -53,9 +58,26 @@ public class Eventregistration extends AppCompatActivity {
         places_pref = getSharedPreferences("temp_places", MODE_PRIVATE);
         temp_places_size = places_pref.getInt("temp_places_size", 0);
         for(int i = 0; i < temp_places_size; i++){
+
+            LinearLayout placeInfoLayout = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 300);
+            placeInfoLayout.setOrientation(LinearLayout.HORIZONTAL);
+            placeInfoLayout.setLayoutParams(layoutParams);
+
+            ImageView placeImage = new ImageView(getApplicationContext());
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(450, LinearLayout.LayoutParams.WRAP_CONTENT);
+            placeImage.setImageResource(R.drawable.plain);
+            placeImage.setLayoutParams(imageParams);
+
             TextView placeText = new TextView(this);
-            placeText.setText(places_pref.getString("temp_places_name" + i, ""));
-            placesLayout.addView(placeText);
+            placeText.setText("<" + places_pref.getString("temp_places_name" + i, "") + ">\n" + "주소 : " + places_pref.getString("temp_places_address" + i, "") + "\n설명 : " + places_pref.getString("temp_places_information" + i, ""));
+            placeText.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
+            placeText.setTextSize(15);
+            placeText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/dogimayu_ttf.ttf"));
+            placeInfoLayout.addView(placeImage);
+            placeInfoLayout.addView(placeText);
+
+            placesLayout.addView(placeInfoLayout);
         }
 
         event_editor = event_pref.edit();
@@ -108,11 +130,19 @@ public class Eventregistration extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             Register connection = new Register();
-            connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), "testID2");
+            connection.registerEvent(nameText.getText().toString(), rewardText.getText().toString(), user_id);
 
             for(int i = 0; i < temp_places_size; i++) {
-                connection.registerPlace(places_pref.getString("temp_places_name" + i, ""), places_pref.getString("temp_places_address" + i, ""), places_pref.getString("temp_places_information" + i, ""));
-            }
+                double latitude = places_pref.getInt("temp_places_lat_int" + i, 0) + (double) places_pref.getInt("temp_places_lat_dec" + i, 0) / 10000000;
+                double longitude = places_pref.getInt("temp_places_long_int" + i, 0) + (double) places_pref.getInt("temp_places_long_dec" + i, 0) / 10000000;
+
+                connection.registerPlace(
+                        places_pref.getString("temp_places_name" + i, ""),
+                        places_pref.getString("temp_places_address" + i, ""),
+                        places_pref.getString("temp_places_information" + i, ""),
+                        latitude,
+                        longitude
+                );            }
 
             return null;
         }
