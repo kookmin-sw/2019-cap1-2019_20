@@ -32,6 +32,9 @@ public class placeAdd extends AppCompatActivity {
     private int lat_int, long_int, lat_dec, long_dec;
     private String address ;
 
+    private SharedPreferences placeInfo_pref;
+    private SharedPreferences.Editor placeInfo_editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,6 @@ public class placeAdd extends AppCompatActivity {
         long_dec = (int) ((longitude - long_int) * 10000000);
         //////////////////////////////////////////////////////////////////////////////
 
-
         placeName = (EditText) findViewById(R.id.inputPlace);
         addressText = (TextView) findViewById(R.id.addressText);
         information = (EditText) findViewById(R.id.inputInformation);
@@ -64,9 +66,10 @@ public class placeAdd extends AppCompatActivity {
 //        else
         addressText.setText(address);
 
-
-
-
+        placeInfo_pref = getSharedPreferences("place_info", MODE_PRIVATE);
+        placeInfo_editor = placeInfo_pref.edit();
+        placeName.setText(placeInfo_pref.getString("place_name", ""));
+        information.setText(placeInfo_pref.getString("information", ""));
 
         arrayList = new ArrayList<>();
         arrayList.add("사진촬영(Exif)");
@@ -86,18 +89,18 @@ public class placeAdd extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                placeInfo_editor.putString("place_name", placeName.getText().toString());
+                placeInfo_editor.putString("information", information.getText().toString());
+                placeInfo_editor.commit();
+
                 intent = new Intent(getApplicationContext(), MapsActivity.class);
                 //startActivity(mapAddress); // 다음 화면으로 넘어간다
 
                 startActivity(intent);
             }
         });
-
-
     }
-
-
-
 
     public void onClick(View v){
 
@@ -122,5 +125,12 @@ public class placeAdd extends AppCompatActivity {
             Intent eventRegisteration = new Intent(getApplicationContext(), Eventregistration.class);
             startActivity(eventRegisteration);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        placeInfo_editor.clear();
+        placeInfo_editor.commit();
     }
 }
