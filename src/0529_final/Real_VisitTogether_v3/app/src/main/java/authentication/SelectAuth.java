@@ -129,10 +129,7 @@ public class SelectAuth extends AppCompatActivity {
                     //String QR_Info = null;
                     QR_Info = result.getContents();
 
-                    System.out.println("####################################QR_info:"+QR_Info +"\n");
-                    System.out.println("####################################place_id:"+place_id +"\n");
-                    System.out.println("####################################user_id:"+user_id +"\n");
-                    System.out.println("####################################event_id:"+event_id +"\n");
+
 
                     qr_check check = new qr_check();
                     check.execute();
@@ -174,16 +171,16 @@ public class SelectAuth extends AppCompatActivity {
 
                 if(i ==0 &&result.charAt(i) == '1'){
 
-                    System.out.println("##################################################qr");
+
                 }
                 else if(i ==1 &&result.charAt(i) == '1'){
-                    System.out.println("##################################################becoan");
+
                 }
                 else if(i ==2 &&result.charAt(i) == '1'){
-                    System.out.println("##################################################exif");
+
                 }
                 else if(i ==3 &&result.charAt(i) == '1'){
-                    System.out.println("##################################################gps");
+
                 }
             }
 
