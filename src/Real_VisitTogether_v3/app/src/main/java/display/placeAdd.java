@@ -29,6 +29,7 @@ public class placeAdd extends AppCompatActivity {
     private Intent intent;
     //DB로 넘기기위한 파라미터들
     private double latitude,longitude;
+    private int lat_int, long_int, lat_dec, long_dec;
     private String address ;
 
 
@@ -41,9 +42,14 @@ public class placeAdd extends AppCompatActivity {
 
         //////////////////////////////////////////////////////////////////////////////
         //효준아 이부분에 위도 경도 주소 넣어둘테니깐 DB로 넘길때 참고해서 해줘
-        address =getIntent().getStringExtra("address");
+        address = getIntent().getStringExtra("address");
         latitude = getIntent().getDoubleExtra("latitude", 0);
         longitude = getIntent().getDoubleExtra("longitude", 0);
+
+        lat_int = (int) latitude;
+        long_int = (int) longitude;
+        lat_dec = (int) ((latitude - lat_int) * 10000000);
+        long_dec = (int) ((longitude - long_int) * 10000000);
         //////////////////////////////////////////////////////////////////////////////
 
 
@@ -56,7 +62,7 @@ public class placeAdd extends AppCompatActivity {
 //        if(address.length() == 0)
 //            {addressText.setHint("[주소찾기]버튼을 클릭하면 자동으로 입력됩니다.");}
 //        else
-            addressText.setText(address);
+        addressText.setText(address);
 
 
 
@@ -102,8 +108,14 @@ public class placeAdd extends AppCompatActivity {
 
             int temp_places_size = places_pref.getInt("temp_places_size",0);
             editor.putString("temp_places_name" + temp_places_size, placeName.getText().toString());
-            //editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
+            editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
             editor.putString("temp_places_information" + temp_places_size, information.getText().toString());
+
+            editor.putInt("temp_places_lat_int" + temp_places_size, lat_int);
+            editor.putInt("temp_places_lat_dec" + temp_places_size, lat_dec);
+            editor.putInt("temp_places_long_int" + temp_places_size, long_int);
+            editor.putInt("temp_places_long_dec" + temp_places_size, long_dec);
+
             editor.putInt("temp_places_size", temp_places_size + 1);
             editor.commit();
 
