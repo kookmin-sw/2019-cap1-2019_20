@@ -876,7 +876,11 @@ public class Event1 extends AppCompatActivity
                     placeInfoLayout.addView(placeText);
                     for(int k=0; k<auth_place_id.length(); k++)
                     {
-
+                        System.out.println("######################places.elementAt(i).getId()" +places.elementAt(i).getId());
+                        System.out.println("#######################Character.getNumericValue(auth_place_id.charAt(k))" +Character.getNumericValue(auth_place_id.charAt(k)));
+                        System.out.println("############################## user_id" +user_id);
+                        System.out.println("############################## event_id"+event_id);
+                        System.out.println("##############################");
                         if(places.elementAt(i).getId() == Character.getNumericValue(auth_place_id.charAt(k))){
 
                            placeText.setBackgroundColor(Color.GRAY);
@@ -942,7 +946,10 @@ public class Event1 extends AppCompatActivity
 
     @Override public void onBackPressed()
     {
+
         Intent intent1 = new Intent(Event1.this, display.Display.class);
+        intent1.putExtra("user_id",user_id);
+        intent1.putExtra("event_id",event_id);
         startActivity(intent1);
     }
 
@@ -986,7 +993,7 @@ public class Event1 extends AppCompatActivity
                 @Override
                 public void run() {
                     if(result.equals("ok")){
-                        Toast.makeText(mActivity,"모든 장소에대한 인증 성공",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(mActivity,"모든 장소에대한 인증 성공",Toast.LENGTH_LONG).show();
                     }
                     else{
 

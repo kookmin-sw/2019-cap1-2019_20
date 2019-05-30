@@ -82,10 +82,16 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
 
     public void onClick(View view) {
 
+
         if(view.getId() == R.id.actionButton){
-            intent = new Intent(getApplicationContext(), Eventregistration.class);
-            intent.putExtra("user_id", id);
-            startActivity(intent);
+            if(id.equals("master")) {
+                intent = new Intent(getApplicationContext(), Eventregistration.class);
+                intent.putExtra("user_id", id);
+                startActivity(intent);
+            }
+            else
+                Toast.makeText(this, "현재버전에서는 관리자권한으로만 이벤트 등록이 가능합니다. 관리자에게 문의하세요", 2000).show();
+
         }
 
 

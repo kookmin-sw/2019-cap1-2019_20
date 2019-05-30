@@ -1,57 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_9"
-    >
+    android:orientation="vertical"
+    android:background="@drawable/background_9">
 
-    <Button
-        android:id="@+id/btnOK"
-        android:layout_width="288dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="208dp"
-        android:background="@drawable/buttoncolor_2"
-        android:onClick="onClickBack"
-        android:text="OK"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/db_gps" />
+    <TextView
+        android:id="@+id/rssi"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="30dp"
+
+        android:textSize="36sp" />
 
     <Button
         android:id="@+id/btnAuth"
-        android:layout_width="288dp"
-        android:layout_height="73dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="364dp"
         android:background="@drawable/buttoncolor_4"
         android:onClick="onClickAuth"
         android:text="인증"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/db_gps"
-        app:layout_constraintVertical_bias="0.32" />
+        android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/rssi"
-        android:layout_width="181dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginBottom="91dp"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAuth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

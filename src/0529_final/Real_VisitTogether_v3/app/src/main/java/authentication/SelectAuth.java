@@ -57,7 +57,9 @@ public class SelectAuth extends AppCompatActivity {
         new NetworkTask().execute();
 
         ///////////////////////////////////////
-        rssi = (TextView) findViewById(R.id.rssi);
+        //rssi = (TextView) findViewById(R.id.rssi);
+        /*
+        System.out.println("####################################place_id" + place_id);
 
         beaconManager = new BeaconManager(this);
 
@@ -70,27 +72,30 @@ public class SelectAuth extends AppCompatActivity {
                     beacon_power = nearestBeacon.getMeasuredPower();
                     ratio = beacon_rssi*1.0/beacon_power;
                     distance = (0.3)*Math.pow(ratio,6);
-                    //rssi.setText("비콘과의 거리 : 약 " + String.format("%, .3f", distance) + "m");
+
                 }
 
-                System.out.println("비콘거리####################################" + distance);
+               // System.out.println("비콘거리####################################" + distance);
                 ten_distance = distance *10;
                 if(0<ten_distance&& ten_distance <150)
                     distance_check =1;
                 else
                     distance_check = -1;
+               // System.out.println("distance_check####################################" + distance_check);
+
             }
         });
 
+
         region = new Region("ranged region", UUID.fromString("74278BDA-B644-4520-8f0C-720EAF059935"), 40001, 25627);
 
-
-
+*/
         ////////////////////////
 
 
     }
 
+    /*
     @Override
     protected void onResume() {
         super.onResume(); // 블루투스 권한 및 활성화 코드
@@ -104,6 +109,7 @@ public class SelectAuth extends AppCompatActivity {
         });
     }
 
+
     public class beacon_check extends AsyncTask<Void, Void, Void> {
 
         String save;
@@ -115,25 +121,18 @@ public class SelectAuth extends AppCompatActivity {
             auth_num = 2;
             save = r.auth_info(place_id,2,distance_check,user_id,event_id);
 
-
             return null;
         }
-
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             runOnUiThread(new Runnable() {
+
                 @Override
                 public void run() {
                     try {
                         if (distance_check ==1) {
-                            Intent intent = new Intent(SelectAuth.this, Event1.class);
-                            intent.putExtra("place_id", place_id);
-                            intent.putExtra("user_id",user_id);
-                            intent.putExtra("event_id",event_id);
-                            startActivity(intent);
-
                             Toast.makeText(getApplicationContext(), "비콘과의 거리" +distance + "\n인증성공! ", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "비콘과의 거리" +distance +"인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
@@ -148,6 +147,7 @@ public class SelectAuth extends AppCompatActivity {
 
 
     }
+    */
 
     public class NetworkTask extends AsyncTask<Void, Void, Void> {
         String result;
@@ -212,12 +212,19 @@ public class SelectAuth extends AppCompatActivity {
             new IntentIntegrator(SelectAuth.this).initiateScan();
 
         } else if (v.getId() == R.id.auth_bicorn) {
-            beacon_check check = new beacon_check();
-            check.execute();
+
+           // System.out.println("########################distance_check####################################" + distance_check);
+           // System.out.println("#############################비콘거리####################################" + distance);
+
+           // beacon_check check = new beacon_check();
+           // check.execute();
+
+
+
             //임의로 99로 해놓은거고 비콘 사용하는 곳에서만
 
-            /*
-            if (place_id != 0) {
+//            /*
+//            if (place_id != 0) {
 
                 Intent intent = new Intent(SelectAuth.this, Auth_Beacon.class);
                 intent.putExtra("place_id", place_id);
@@ -225,11 +232,11 @@ public class SelectAuth extends AppCompatActivity {
                 intent.putExtra("event_id", event_id);
                 startActivity(intent);
 
-                //Toast.makeText(getApplicationContext(), "인증완료! \n 비콘과의 거리 3.231782 m", 3000).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "해당 장소는 비콘인증이 등록되어있지 않습니다.", Toast.LENGTH_SHORT).show();
-            }
-            */
+//                //Toast.makeText(getApplicationContext(), "인증완료! \n 비콘과의 거리 3.231782 m", 3000).show();
+//            } else {
+//                Toast.makeText(getApplicationContext(), "해당 장소는 비콘인증이 등록되어있지 않습니다.", Toast.LENGTH_SHORT).show();
+//            }
+//            */
 
 
         } else if (v.getId() == R.id.auth_gps) {

@@ -12,6 +12,8 @@ import com.capstone.real_visittogether.R;
 import java.util.*;
 import com.estimote.sdk.SystemRequirementsChecker;
 import com.estimote.sdk.*;
+
+import event.Event1;
 import login.Register;
 
 
@@ -85,10 +87,7 @@ public class Auth_Beacon extends AppCompatActivity {
 
     public void onClickBack(View view) {
 
-        if (view.getId() == R.id.btnOK) {
-            intent = new Intent(Auth_Beacon.this, SelectAuth.class);
-            startActivity(intent);
-        }
+
 
     }
 
@@ -119,14 +118,30 @@ public class Auth_Beacon extends AppCompatActivity {
                     try {
                         if (distance_check ==1) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Auth_Beacon.this, Event1.class);
+                            intent.putExtra("place_id", place_id);
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
+                            startActivity(intent);
 
                         } else {
                             Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Auth_Beacon.this, SelectAuth.class);
+                            intent.putExtra("place_id", place_id);
+                            intent.putExtra("user_id",user_id);
+                            intent.putExtra("event_id",event_id);
+                            startActivity(intent);
                         }
                     }
                     catch (Exception e){System.out.println(e);
                         Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Auth_Beacon.this, SelectAuth.class);
+                        intent.putExtra("place_id", place_id);
+                        intent.putExtra("user_id",user_id);
+                        intent.putExtra("event_id",event_id);
+                        startActivity(intent);
                     }
+
                 }
             });
         }
@@ -140,6 +155,8 @@ public class Auth_Beacon extends AppCompatActivity {
 
         beacon_check check = new beacon_check();
         check.execute();
+
+
 
     }
 }
