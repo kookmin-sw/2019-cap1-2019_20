@@ -52,14 +52,14 @@ public class SelectAuth extends AppCompatActivity {
             //임의로 99로 해놓은거고 비콘 사용하는 곳에서만
 
             if(place_id == 1) {
-                /*
+
                 Intent intent = new Intent(SelectAuth.this, Auth_Beacon.class);
                 intent.putExtra("place_id", place_id);
                 intent.putExtra("user_id", user_id);
                 intent.putExtra("event_id", event_id);
                 startActivity(intent);
-                */
-                Toast.makeText(getApplicationContext(), "인증완료! \n 비콘과의 거리 3.231782 m", 3000).show();
+
+                //Toast.makeText(getApplicationContext(), "인증완료! \n 비콘과의 거리 3.231782 m", 3000).show();
             }
             else
             {Toast.makeText(getApplicationContext(), "해당 장소는 비콘인증이 등록되어있지 않습니다.", Toast.LENGTH_SHORT).show();}
