@@ -32,6 +32,7 @@ public class placeAdd extends AppCompatActivity {
     //DB로 넘기기위한 파라미터들
     private double latitude,longitude;
     private String address ;
+    private int lat_int, long_int, lat_dec, long_dec;
     private int check_exif =0 ,check_gps =0, check_beacon =0 , check_qr =0;
     private double final_latitude , final_longitude;
 
@@ -48,6 +49,11 @@ public class placeAdd extends AppCompatActivity {
         latitude = getIntent().getDoubleExtra("latitude", 0);
         longitude = getIntent().getDoubleExtra("longitude", 0);
         System.out.println("%%%%%%%%%%%%%%%%%%%%placeadd로 intent한 위도 경도 주소\n");
+
+        lat_int = (int) latitude;
+        long_int = (int) longitude;
+        lat_dec = (int) ((latitude - lat_int) * 10000000);
+        long_dec = (int) ((longitude - long_int) * 10000000);
 
         //////////////////////////////////////////////////////////////////////////////
 
@@ -179,8 +185,14 @@ public class placeAdd extends AppCompatActivity {
 
             int temp_places_size = places_pref.getInt("temp_places_size",0);
             editor.putString("temp_places_name" + temp_places_size, placeName.getText().toString());
-            //editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
+            editor.putString("temp_places_address" + temp_places_size, addressText.getText().toString());
             editor.putString("temp_places_information" + temp_places_size, information.getText().toString());
+
+            editor.putInt("temp_places_lat_int" + temp_places_size, lat_int);
+            editor.putInt("temp_places_lat_dec" + temp_places_size, lat_dec);
+            editor.putInt("temp_places_long_int" + temp_places_size, long_int);
+            editor.putInt("temp_places_long_dec" + temp_places_size, long_dec);
+
             editor.putInt("temp_places_size", temp_places_size + 1);
             editor.commit();
 
