@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
+import authentication.SelectAuth;
 import data_fetcher.RequestHttpConnection;
 import login.Register;
 import toolbar_menu.mypage.Ranking;
@@ -76,7 +77,7 @@ public class Event1 extends AppCompatActivity
     private TextView[] place_text;
     private String participate_check;
     private Button participate_button;
-
+    private String auth_place_id;
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
     private Marker currentMarker = null;
@@ -128,9 +129,9 @@ public class Event1 extends AppCompatActivity
                 .findFragmentById(R.id.mapView);
         mapFragment.getMapAsync(this);
 
-        fetchPlaces = new NetworkTask();
-        fetchPlaces.execute("fetchPlaces");
+        new place_auth_info().execute();
 
+        new finish_auth_check().execute();
     }
 
     public void onClickEvent1(View view) {
@@ -461,7 +462,6 @@ public class Event1 extends AppCompatActivity
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 .alpha(0.5f);
         mGoogleMap.addMarker(markerOptions);
-
         markerOptions
                 .position(Place2)
                 .title("송백식당")
@@ -469,14 +469,12 @@ public class Event1 extends AppCompatActivity
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 .alpha(0.5f);
         mGoogleMap.addMarker(markerOptions);
-
         markerOptions
                 .position(Place3)
                 .title("주당끼리")
                 .snippet("위도 : 37.607918 경도 :126.999681")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 .alpha(0.5f);
-
         mGoogleMap.addMarker(markerOptions);
         //여기까지 미션장소들
         */
@@ -705,6 +703,8 @@ public class Event1 extends AppCompatActivity
             return null;
         }
 
+
+
         // 백그라운드 작업 결과 반영
         // doin 메소드로 파라미터를 받는다
         @Override
@@ -863,14 +863,22 @@ public class Event1 extends AppCompatActivity
                     //placeText.setText("    "+ places.elementAt(i).getName());
                     placeText.setText("< "+ places.elementAt(i).getName()+" >\n"+"주소 : "+places.elementAt(i).getAddress()+"\n설명 : "+places.elementAt(i).getExplanation());
                     placeText.setTextAlignment(View.TEXT_ALIGNMENT_INHERIT);
-                   // placeText.setBackgroundColor(#0);
+                    // placeText.setBackgroundColor(#0);
                     placeText.setTextSize(15);
                     placeText.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/dogimayu_ttf.ttf"));
 
 
                     placeInfoLayout.addView(placeImage);
                     placeInfoLayout.addView(placeText);
+                    for(int k=0; k<auth_place_id.length(); k++)
+                    {
 
+                        if(places.elementAt(i).getId() == Character.getNumericValue(auth_place_id.charAt(k))){
+
+                           placeText.setBackgroundColor(Color.GRAY);
+                            placeInfoLayout.setBackgroundColor(Color.GRAY);
+                        }
+                    }
                     places_layout.addView(placeInfoLayout);
 
                     //5/20일 수정들어간부분
@@ -927,6 +935,13 @@ public class Event1 extends AppCompatActivity
                 participate_button.setBackgroundColor(Color.rgb(100,100,100));
         }
     }
+
+    @Override public void onBackPressed()
+    {
+        Intent intent1 = new Intent(Event1.this, display.Display.class);
+        startActivity(intent1);
+    }
+
     public class Participate_check extends AsyncTask<Void,Void,Void>{
         @Override
         protected Void doInBackground(Void... voids) {
@@ -949,4 +964,58 @@ public class Event1 extends AppCompatActivity
             });
         }
     }
+
+    public class finish_auth_check extends AsyncTask<Void,Void,Void>{
+        String result;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Register con = new Register();
+            result = con.finish_auth_check(user_id,event_id);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            System.out.println("auth_check: "+result);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(result.equals("ok")){
+                        Toast.makeText(mActivity,"모든 장소에대한 인증 성공",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+
+                    }
+                }
+            });
+        }
+
+    }
+    public class  place_auth_info extends AsyncTask<Void, Void, Void>{
+
+
+        private Gson gson;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            gson = new Gson();
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Register con = new Register();
+
+            auth_place_id = con.place_auth_info(user_id,event_id);
+            // 리턴된 "{..}\n{..} ... {..}" 값들을 split
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            auth_place_id = auth_place_id.replaceAll("[^0-9]", "");
+            new NetworkTask().execute("fetchPlaces");
+        }
+    }
+    
 }
