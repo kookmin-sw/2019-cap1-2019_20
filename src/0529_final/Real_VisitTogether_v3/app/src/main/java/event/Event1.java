@@ -114,7 +114,7 @@ public class Event1 extends AppCompatActivity
         user_id = getIntent().getStringExtra("user_id");
         event_id = getIntent().getIntExtra("event_id",-1);
         participate_button = (Button) findViewById(R.id.Participation);
-        new Participate_check().execute();
+        //new Participate_check().execute();
 
         auth_places = new Vector<>();
 
@@ -940,7 +940,8 @@ public class Event1 extends AppCompatActivity
                     });
                 }
             }else if(string == "participate")
-                participate_button.setBackgroundColor(Color.rgb(100,100,100));
+                if(participate_check.equals("duplicated"))
+                    participate_button.setBackgroundColor(Color.rgb(100,100,100));
         }
     }
 
