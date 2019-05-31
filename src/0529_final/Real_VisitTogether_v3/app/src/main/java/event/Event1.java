@@ -57,6 +57,8 @@ import authentication.SelectAuth;
 import data_fetcher.RequestHttpConnection;
 import login.Register;
 import toolbar_menu.mypage.Ranking;
+import vt_object.Auth_place;
+import vt_object.Event;
 import vt_object.Imply;
 import vt_object.Place;
 
@@ -68,7 +70,8 @@ public class Event1 extends AppCompatActivity
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
-
+    private String []auth_info;
+    private Vector<Auth_place> auth_places;
     private NetworkTask fetchPlaces;
     private NetworkTask registerParticipation;
     private String user_id;
@@ -112,9 +115,8 @@ public class Event1 extends AppCompatActivity
         event_id = getIntent().getIntExtra("event_id",-1);
         participate_button = (Button) findViewById(R.id.Participation);
         new Participate_check().execute();
-        // 출력 확인
-        System.out.println("user_id "+user_id);
-        System.out.println("event_id: "+event_id);
+
+        auth_places = new Vector<>();
 
         Log.d(TAG, "onCreate");
         mActivity = this;
@@ -718,7 +720,7 @@ public class Event1 extends AppCompatActivity
                     temp_imply = gson.fromJson(relation_dict[i], Imply.class);
                     if (temp_imply.getEvent_id() == event_id)
                         implyVector.add(temp_imply);
-                    System.out.println("###################event_id:"+ event_id);
+
                 }
 
 
@@ -874,19 +876,17 @@ public class Event1 extends AppCompatActivity
 
                     placeInfoLayout.addView(placeImage);
                     placeInfoLayout.addView(placeText);
-                    for(int k=0; k<auth_place_id.length(); k++)
-                    {
-                        System.out.println("######################places.elementAt(i).getId()" +places.elementAt(i).getId());
-                        System.out.println("#######################Character.getNumericValue(auth_place_id.charAt(k))" +Character.getNumericValue(auth_place_id.charAt(k)));
-                        System.out.println("############################## user_id" +user_id);
-                        System.out.println("############################## event_id"+event_id);
-                        System.out.println("##############################");
-                        if(places.elementAt(i).getId() == Character.getNumericValue(auth_place_id.charAt(k))){
 
-                           placeText.setBackgroundColor(Color.GRAY);
-                            placeInfoLayout.setBackgroundColor(Color.GRAY);
-                        }
+                    for(Auth_place t : auth_places)
+                    {
+                        try {
+                            if (t.getAuth_place_id() == places.elementAt(i).getId()) {
+                                placeText.setBackgroundColor(Color.GRAY);
+                                placeInfoLayout.setBackgroundColor(Color.GRAY);
+                            }
+                        } catch (Exception e){}
                     }
+
                     places_layout.addView(placeInfoLayout);
 
                     //5/20일 수정들어간부분
@@ -958,13 +958,15 @@ public class Event1 extends AppCompatActivity
         protected Void doInBackground(Void... voids) {
             Register con = new Register();
             participate_check = con.participate(user_id,event_id);
-            ;
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            System.out.println(user_id +"..............."+event_id);
+            System.out.println("participaton check : "+participate_check);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -1024,7 +1026,13 @@ public class Event1 extends AppCompatActivity
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            auth_place_id = auth_place_id.replaceAll("[^0-9]", "");
+            auth_info = auth_place_id.split("\n");
+
+            for (int i = 0; i < auth_info.length; i++){
+
+                auth_places.add(gson.fromJson(auth_info[i],Auth_place.class));
+            }
+
             new NetworkTask().execute("fetchPlaces");
         }
     }

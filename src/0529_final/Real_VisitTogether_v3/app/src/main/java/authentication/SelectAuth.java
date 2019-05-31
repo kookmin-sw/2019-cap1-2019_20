@@ -276,8 +276,11 @@ public class SelectAuth extends AppCompatActivity {
                         if (save.equals("ok")) {
                             Toast.makeText(getApplicationContext(), "인증성공! ", Toast.LENGTH_SHORT).show();
 
-                            //  Intent event1 = new Intent(getApplicationContext(), event1.class);
-                            // startActivity(event1);
+                             Intent event_ = new Intent(getApplicationContext(), Event1.class);
+                             event_.putExtra("user_id",user_id);
+                             event_.putExtra("event_id",event_id);
+                             event_.putExtra("place_id",place_id);
+                            startActivity(event_);
 
                         } else {
                             Toast.makeText(getApplicationContext(), "인증실패하셨습니다.", Toast.LENGTH_SHORT).show();
