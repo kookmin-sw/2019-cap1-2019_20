@@ -936,11 +936,7 @@ public class Event1 extends AppCompatActivity
         }
     }
 
-    @Override public void onBackPressed()
-    {
-        Intent intent1 = new Intent(Event1.this, display.Display.class);
-        startActivity(intent1);
-    }
+
 
     public class Participate_check extends AsyncTask<Void,Void,Void>{
         @Override
@@ -1017,5 +1013,4 @@ public class Event1 extends AppCompatActivity
             new NetworkTask().execute("fetchPlaces");
         }
     }
-    
 }
